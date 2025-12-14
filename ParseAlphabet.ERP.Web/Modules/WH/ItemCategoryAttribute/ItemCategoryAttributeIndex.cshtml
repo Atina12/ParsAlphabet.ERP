@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "صفات دسته بندی کالا/خدمات ";
+}
+
+
+<div class="content-page" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                @*<span id="showId" class="float-right"></span>*@
+                                <input id="itemCategoryId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+                                <button id="listCategory" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+                            </div>
+                        </div>
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <div class="float-right">
+                                    <lable>شناسه : </lable>
+                                    <span id="showId"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div style="overflow-y:scroll !important;overflow-x:auto!important;min-height:450px;max-height:730px" id="tableLine">
+                                        <table style="width:100% !important">
+                                            <thead id="tableLineTheadColumns">
+
+                                            </thead>
+                                            <thead id="tableLineTheadFields">
+
+                                            </thead>
+                                            <tbody id="tableLineTbodyLines">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<script src="/Modules/WH/ItemCategoryAttribute/ItemCategoryAttributeIndex.js"></script>

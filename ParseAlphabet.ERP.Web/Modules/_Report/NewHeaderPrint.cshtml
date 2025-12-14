@@ -1,0 +1,99 @@
+﻿<link rel="shortcut icon" href="/Content/images/favicon.ico">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @@font-face {
+            font-family: 'iransans';
+            src: url('/Content/fonts/ttf/IRANSansXFaNum-Regular.ttf')
+        }
+
+        @@media print {
+            body {
+                font-family: 'iransans';
+            }
+
+            img, div, table {
+                max-width: 100%;
+            }
+
+            @@font-face {
+                font-family: 'iransans';
+                src: url('/Content/fonts/ttf/IRANSansXFaNum-Regular.ttf')
+            }
+
+            @@font-face {
+                font-family: 'BTitr';
+                src: url('/Content/fonts/ttf/BTitr.ttf')
+            }
+
+            @@font-face {
+                font-family: 'BLotus';
+                src: url('/Content/fonts/ttf/BLotus.ttf')
+            }
+        }
+    </style>
+
+</head>
+<body dir="rtl">
+<div style="display: flex; flex-direction: column;border:1px solid black;padding:5px">
+    <div style="width: 100%;display:flex;justify-content:center;align-items:center;font-size: 1.9vw;font-weight: bold;">
+        <span style="padding:5px;">هوالشافی</span>
+    </div>
+    <div style="display: flex;font-size: 1.9vw;font-weight: bold;">
+        <div style="width: 31%;">
+            <div style="display: flex;flex-direction:column">
+                <div style="padding:5px;display:flex;justify-content:flex-start;width:100%">
+                    <span style="overflow: hidden;white-space: nowrap;">مراجعه کننده : @@patientFullName@@</span>
+                </div>
+                <div style="padding:5px">
+                    <span style="visibility: hidden;">a</span>
+                    <span style="visibility: hidden;">a</span>
+                </div>
+                <div style="padding:5px">
+                    <span>تاریخ چاپ :</span>
+                    <span style="visibility: hidden;">a</span>
+                    <span>@@craeteDate@@</span>
+                </div>
+            </div>
+        </div>
+        <div style="width: 38%;display:flex ;flex-direction: column;justify-content: center;">
+            <div style="display: flex;justify-content: center;align-items: center;padding:5px 5px 0px 5px">
+                <span>@@companyName@@</span>
+            </div>
+            <div style="display: flex;justify-content: center;align-items: center;padding:5px">
+                <span style="visibility: hidden;"></span>
+            </div>
+            <div style="display: flex;justify-content: center;align-items: center">
+                <img src="SRCIMAGE" style="font-size: 1.7vw !important;width:auto;border-width: 0px"/>
+            </div>
+        </div>
+        <div style="width: 31%;">
+            <div style="display: flex;flex-direction:column">
+                <div style="display: flex;justify-content: flex-end;padding:5px">
+                    <span style="width:60%;display:flex;justify-content:flex-end">تاریخ پذیرش :<span style="visibility: hidden;">a</span></span>
+                    <span style="width:40%;justify-content:flex-start">@@admissionDate@@</span>
+                </div>
+                <div style="display: flex;justify-content: flex-end;padding:5px">
+                    <span style="width:60%;display:flex;justify-content:flex-end">تاریخ نسخه :<span style="visibility: hidden;">a</span></span>
+                    <span style="width:40%;justify-content:flex-start">@@prescriptionDatePersian@@</span>
+                </div>
+                <div style="display: flex;justify-content: flex-end;padding:5px">
+                    <span style="width:60%;display:flex;justify-content:flex-end">شناسه پذیرش :<span style="visibility: hidden;">a</span></span>
+                    <span style="width:40%;display:flex;justify-content:flex-start">@@admissionId@@</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="width: 100%;display:flex;justify-content:flex-start;align-items:center;font-size: 1.9vw;font-weight: bold;margin-top:20px">
+    <span>همکار ارجمند آقای / خانم</span>
+    <span style="visibility: hidden;">a</span>
+    <span>@@referringDoctorName@@</span>
+</div>
+<div style="direction:rtl ; font-size:13px">
+    <div style="margin-top:10px;">@@content@@</div>
+</div>
+</body>

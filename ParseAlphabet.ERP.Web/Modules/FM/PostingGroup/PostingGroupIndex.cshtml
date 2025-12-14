@@ -1,0 +1,317 @@
+﻿@{
+    ViewBag.Title = "ارتباط با حسابداری";
+}
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<style>
+    #tabBoxGetPage #parentPageTableBody {
+        height: calc(100vh - 240px) !important;
+    }
+</style>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+                            <li class="nav-item waves-effect waves-light" id="postingType1" onclick="changeTabPostingGroup(1)">
+                                <a class="nav-link active" data-toggle="tab" id="subjectLink" href="#subjectBox" role="tab">
+                                    <span class="d-none d-md-block">موضوع دریافت / پرداخت</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-account h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light" id="postingType2" onclick="changeTabPostingGroup(2)">
+                                <a class="nav-link" data-toggle="tab" id="bankAccountLink" href="#bankAccountBox" role="tab">
+                                    <span class="d-none d-md-block">حساب بانکی</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-email h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light" id="postingType3" onclick="changeTabPostingGroup(3)">
+                                <a class="nav-link" data-toggle="tab" id="cashLink" href="#cashBox" role="tab">
+                                    <span class="d-none d-md-block">شعب</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-email h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item waves-effect waves-light" id="postingType4" onclick="changeTabPostingGroup(4)">
+                                <a class="nav-link" data-toggle="tab" id="admissionLink" href="#admissionBox" role="tab">
+                                    <span class="d-none d-md-block">پذیرش</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-email h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light" id="postingType7" onclick="changeTabPostingGroup(11)">
+                                <a class="nav-link" data-toggle="tab" id="warehouseLink" href="#warehouseBox" role="tab">
+                                    <span class="d-none d-md-block">انبار</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-email h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content group-box group-box-gray" id="tabBoxGetPage">
+
+                            <div class="tab-pane p-3 active" id="subjectBox" role="tabpanel">
+                                <div class="tabToggle1" id="subjectForm" data-parsley-validate>
+                                    <div class="card-body " id="subject_pagetable">
+                                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-3" id="bankAccountBox" role="tabpanel">
+                                <div class="tabToggle2" id="bankAccountForm" data-parsley-validate>
+                                    <div class="card-body " id="bankAccount_pagetable">
+                                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-3" id="cashBox" role="tabpanel">
+                                <div class="tabToggle3" id="cashForm" data-parsley-validate>
+                                    <div class="card-body " id="cash_pagetable">
+                                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane p-3" id="admissionBox" role="tabpanel">
+                                <div class="tabToggle4" id="admissionForm" data-parsley-validate>
+                                    <div class="card-body " id="admission_pagetable">
+                                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-3" id="warehouseBox" role="tabpanel">
+                                <div class="tabToggle7" id="warehouseForm" data-parsley-validate>
+                                    <div class="card-body " id="warehouse_pagetable">
+                                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<div id="postingGroupHeaderModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormHeaderTitle"></span></div>
+                </div>
+            </div>
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+                <div class="card-body " id="postingGroupHeaderDetails_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupHeaderModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postingGroupLinePurchaseBankAcountModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormLineBankAcountTitle"></span></div>
+                </div>
+            </div>
+
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+
+                <div class="card-body " id="postingGroupLineDetails_pagetableBankAcount" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupLinePurchaseBankAcountModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postingGroupLineTreasuryModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormLineTreasuryTitle"></span></div>
+                </div>
+            </div>
+
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+
+                <div class="card-body " id="postingGroupLineDetails_pagetableTreasury" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupLineTreasuryModals')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postingGroupLineModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormLineTitle"></span></div>
+                </div>
+            </div>
+
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+                <div class="card-body " id="postingGroupLineDetails_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupLineModals')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postingGroupLineWarehouseModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormLineBankAcountTitle"></span></div>
+                </div>
+            </div>
+
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+
+                <div class="card-body " id="postingGroupLineDetails_pagetableWarehouse" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupLineWarehouseModals')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postingGroupLinePurchaseModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormLinePurchaseTitle"></span></div>
+                </div>
+            </div>
+
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+
+                <div class="card-body " id="postingGroupLineDetails_pagetablePurchase" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupLinePurchaseModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postingGroupLineOrderSaleModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormLineTitle"></span></div>
+                </div>
+            </div>
+
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+                <div class="card-body " id="postingGroupLineDetailsForOrderSale_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupLineOrderSaleModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postingGroupLineAdmModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">ارتباط با حسابداری - <span id="postingGroupFormLineTitle"></span></div>
+                </div>
+            </div>
+
+            <div class="doctor-info text-right d-flex m-3" id="content">
+
+            </div>
+
+            <div class="modal-body text-right p-0 col-12" data-parsley-validate>
+                <div class="card-body " id="postingGroupLineAdmDetails_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('postingGroupLineAdmModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<script src="~/Modules/FM/PostingGroup/PostingGroupIndex.js"></script>

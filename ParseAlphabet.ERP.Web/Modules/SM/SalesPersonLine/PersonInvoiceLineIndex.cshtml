@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "سفارش فروش / برگشت";
+}
+
+<link href="~/lib/datePicker/kamadatepicker.min.css" rel="stylesheet"/>
+<link href="~/lib/chosen-select2/custom-select.css" rel="stylesheet"/>
+
+
+@await Html.PartialAsync("/Modules/FormPlateHeaderLine.cshtml")
+
+<input id="personInvoiceId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+<input id="routCurrencyId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["currencyId"]"/>
+@*<input id="invoiceId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["invoiceId"]" />*@
+@*<input id="invoiceTypeId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["invoiceTypeId"]" />*@
+<!--Modal-->
+@*<script src="~/js/formplate.js"></script>*@
+
+
+@await Html.PartialAsync("/Modules/SM/SalesPersonOrder/AllocatePersonOrderLine.cshtml")
+
+<script src="~/lib/inputmask/jquery.inputmask.min.js"></script>
+<script src="~/lib/datePicker/kamadatepicker.min.js"></script>
+<script src="~/Modules/SM/SalesPersonOrder/AllocatePersonOrder.js"></script>
+<script src="~/Modules/SM/PersonInvoiceLine/PersonInvoiceLineIndex.js"></script>

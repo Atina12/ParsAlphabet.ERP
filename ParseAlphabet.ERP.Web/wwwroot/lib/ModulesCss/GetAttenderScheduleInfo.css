@@ -1,0 +1,15 @@
+﻿.carousel-inner .time-slot ul li .btn-time {
+    cursor: no-drop;
+}
+
+    .carousel-inner .time-slot ul li .btn-time:hover {
+        background-color: #e9e9e9;
+    }
+
+.carousel-inner .time-slot ul .reserved-item .btn-time:hover {
+    background-color: #72b493;
+}
+
+.carousel-inner .time-slot ul .reserve-over-item .btn-time:hover {
+    background-color: #ffb68d;
+}

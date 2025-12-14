@@ -1,0 +1,130 @@
+﻿<script src="~/Content/js/jalali-moment.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+
+<div class="card-body m-2 bg-white dir-rtl text-right quickSearch-container" id="WarehouseTransactionQuickSearchContainer" data-parsley-validate>
+    <div>
+        <fieldset class="group-box group-box-gray">
+            <legend>فیلتر</legend>
+            <div class="col-12 row">
+
+
+                <div class="form-group col-lg-2">
+                    <label>انبار</label>
+                    <div>
+                        <select id="warehouseId" class="form-control select2 " tabindex="1">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group col-lg-2">
+                    <label>بخش</label>
+                    <div>
+                        <select id="zoneId" class="form-control select2" tabindex="2">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2">
+                    <label>پالت</label>
+                    <div>
+                        <select id="binId" class="form-control select2 " tabindex="3">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2">
+                    <label>نوع آیتم</label>
+                    <div>
+
+                        <select id="itemTypeId" class="form-control select2" tabindex="4" required data-parsley-errors-container="#itemTypeIdErrorContainers">
+                        </select>
+                        <div id="itemTypeIdErrorContainers"></div>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-4">
+                    <label>صفات</label>
+                    <div>
+                        <select id="atrributeId" class="form-control select2 " tabindex="5">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label>تاریخ ثبت</label>
+                    <div class="double-input-box">
+                        <div class="double-input">
+                            <input type="text" id="fromDate" class="form-control number persian-date" placeholder="____/__/__" value="@PersianDateTime.GetFirstDayOfCurrentMonth()" data-inputmask="'mask':'9999/99/99'" data-parsley-validate-if-empty="true" data-parsley-shamsidate data-parsley-compareshamsidateyear="toDate" data-parsley-compareshamsidate="toDate" data-parsley-errors-container="#fromDateErrorContainers" maxlength="10" tabindex="6"/>
+                        </div>
+                        <div class="double-input">
+                            <input type="text" id="toDate" class="form-control number persian-date" placeholder="____/__/__" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-errors-container="#toDateErrorContainer" maxlength="10" tabindex="7"/>
+                        </div>
+                    </div>
+                    <div class="double-input-box">
+                        <div class="double-input" id="fromDateErrorContainers"></div>
+                        <div class="double-input" id="toDateErrorContainer"></div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-5">
+                    <button id="searchWarehouseTransaction" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="8"><i class="fa fa-search ml-2"></i>جستجو</button>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="group-box group-box-green mt-3" id="boxQuickSearch">
+            <legend>پیش نمایش</legend>
+            <div class="card-body " id="quickSearchPageTable">
+                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+            </div>
+        </fieldset>
+
+        <fieldset class="group-box group-box-orange mt-3">
+            <legend>نمایش گردش</legend>
+            <div class="card-body " id="quickSearchTypePageTable">
+                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+            </div>
+        </fieldset>
+
+    </div>
+</div>
+
+<div id="displayItemRequestLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg">
+        <div class="modal-content" style="height: auto;">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayItemRequestLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayItemRequestLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="displayItemTransactionLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg">
+        <div class="modal-content" style="height: auto;">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayItemTransactionLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayItemTransactionLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["stageId"]"/>
+<script src="~/Modules/WH/WarehouseTransactionSearch/_WarehouseTransactionQuickSearchIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

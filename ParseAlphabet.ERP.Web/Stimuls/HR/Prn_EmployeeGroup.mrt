@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>4GB/oU8KQ/FsW7X0YUmkY9Xum89WFkvNaxWl8GSY5F7dwmELTAjTneEIJb1hDbGP83DLjFV+S4F6Qb2A6XGie8R4wctiSnttbAiN0E7s4GPUyNHgRlHTxW9NnGzKXKQTychxCcZWe81qTPXs8UzgbsNqU4PNa0GkYhOEzGKI9Q==</ConnectionStringEncrypted>
+        <Name>Connection</Name>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Spc_Tables_GetPage Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Spc_Tables_GetPage</Alias>
+        <Columns isList="true" count="3">
+          <value>TotalRecord,System.Int32</value>
+          <value>Id,System.Int32</value>
+          <value>Name,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Spc_Tables_GetPage</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="7">
+          <value>_x0040_PageNo,_x0030_,8,0</value>
+          <value>_x0040_PageRowsCount,_x0030_,8,0</value>
+          <value>_x0040_Id,_x0030_,8,0</value>
+          <value>_x0040_Name,_x0022__x0022_,12,100</value>
+          <value>_x0040_TableName,_x0022_hr.EmployeeGroup_x0022_,22,50</value>
+          <value>_x0040_IsSecondLang,_x0030_,2,0</value>
+          <value>_x0040_TotalRecord,_x0030_,8,0</value>
+        </Parameters>
+        <SqlCommand>execute pb.Spc_Tables_GetPage  @IsSecondLang,@TableName,@PageNo,@PageRowsCount,@Id,@Name,@TotalRecord</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Spc_Tables_GetPage>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="3">
+      <value>,CorpName,CorpName,System.String,شرکت_x0020_گسترش_x0020_شرق_x0020_مشهد,False,False</value>
+      <value>,CorpLogo,CorpLogo,System.Drawing.Image,,False,False</value>
+      <value>,ReportDate,ReportDate,System.String,,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="5">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,7.49,0.7</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text5 Ref="6" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.84,0.1,0.46,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>70c068f494e7412e8eee613420baacd8</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>تاریخ:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text7 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.84,0.39,0.46,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>b728a931602c435f827242c74fd94b8b</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>صفحه:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.09,0.1,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>6b34772c2d6b4e878329342f9deea91e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{ReportDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text10 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.1,0.39,0.69,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>55db6988e2974e94b69739f5688bbf24</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{PageNumber.ToString()} از {TotalPageCount.ToString()}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="10" type="CustomFormat" isKey="true">
+                <StringFormat>##</StringFormat>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text27 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1.5,0.3,4.6,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Titr,12,Bold</Font>
+              <Guid>4402b74f357f4cd198ef411c0672ecc2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>لیست گروه پرسنل</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text4 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.5,0.11,4.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9.75</Font>
+              <Guid>3e0841bfd73f452d9aaf7701c7dfc445</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{CorpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text4>
+            <Image1 Ref="13" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.9,0.1,0.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Guid>f73ea11c97f94b68b436abff2fa042e7</Guid>
+              <ImageData>{CorpLogo}</ImageData>
+              <Name>Image1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Stretch>True</Stretch>
+            </Image1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>3f1c68207fff4c1c95bc5a76056e1a5a</Guid>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand1>
+        <PageHeaderBand2 Ref="14" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.3,7.49,0.6</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text15 Ref="15" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>0,0.2,5.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>6cb932c99d7f48ae8980c3619abb1129</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4" />
+              <Parent isRef="14" />
+              <Text>نام گروه پرسنل</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text18 Ref="16" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>6.7,0.2,0.79,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>750b765423c54a52b2d269d542ef486b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4" />
+              <Parent isRef="14" />
+              <Text>ردیف</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text21 Ref="17" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>5.3,0.2,1.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>f0380971ecde4921913414c71b9af416</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4" />
+              <Parent isRef="14" />
+              <Text>شناسه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>e5214177b93c4c3499e1e2f3abce25cd</Guid>
+          <Name>PageHeaderBand2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand2>
+        <PageFooterBand1 Ref="18" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,10.91,7.49,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageFooterBand1>
+        <DataBand1 Ref="19" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,2.3,7.49,0.3</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text14 Ref="20" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,5.3,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>507b2b20c4444972a0fd906c9c3cbd91</Guid>
+              <Margins>0,3,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{Spc_Tables_GetPage.Name}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text28 Ref="21" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.3,0,1.4,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>04f7c47c8d6b41a39da254b6274fec64</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{Spc_Tables_GetPage.Id}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="22" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <UseGroupSeparator>False</UseGroupSeparator>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text17 Ref="23" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.7,0,0.79,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>c9af574274c44e26a1dec7ee3fab2b9a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4" />
+              <Parent isRef="19" />
+              <Text>{Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="24" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>1</NegativePattern>
+                <UseGroupSeparator>False</UseGroupSeparator>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Spc_Tables_GetPage</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <FooterBand1 Ref="25" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,3,7.49,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </FooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>ccd6a642c2bc4898ae052c10e3f6c2da</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11.69</PageHeight>
+      <PageWidth>8.27</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+      <Watermark Ref="26" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="27" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>12/6/2020 1:00:17 PM</ReportChanged>
+  <ReportCreated>2/1/2015 2:00:37 PM</ReportCreated>
+  <ReportFile>C:\Users\shabani.DEVELOPER2\Desktop\Prn_EmployeeGroup.mrt</ReportFile>
+  <ReportGuid>c2165dd993d2433195345df51d9a4822</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.2.1612</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

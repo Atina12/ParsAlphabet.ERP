@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "سفارش فروش / برگشت";
+}
+
+<link href="~/lib/datePicker/kamadatepicker.min.css" rel="stylesheet"/>
+<link href="~/lib/chosen-select2/custom-select.css" rel="stylesheet"/>
+
+
+@await Html.PartialAsync("/Modules/FormPlateHeaderLine.cshtml")
+
+<input id="personOrderId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+<input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["stageId"]"/>
+<input id="routCurrencyId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["currencyId"]"/>
+<!--Modal-->
+@*<script src="~/js/formplate.js"></script>*@
+<script src="~/lib/inputmask/jquery.inputmask.min.js"></script>
+<script src="~/lib/datePicker/kamadatepicker.min.js"></script>
+<script src="~/Modules/SM/SalesPersonOrderLine/SalesPersonOrderLine.js"></script>

@@ -1,0 +1,27 @@
+﻿@using System.Security.Claims
+<link href="~/Content/css/bundle.min.css" rel="stylesheet" media="screen"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
+@{
+    var rtl = User.FindFirstValue("LayoutIsRtl");
+    if (rtl == "True")
+    {
+        <link href="/Content/scss/rtl/style-rtl.css" rel="stylesheet" type="text/css"/>
+    }
+    else
+    {
+        <link href="/Content/scss/ltr/style.min.css" rel="stylesheet" type="text/css"/>
+    }
+}
+
+
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/site.bundle.min.js"></script>
+<script src="~/Content/js/bootstrap4-toggle.min.js"></script>
+<script src="~/lib/library-bundle/libbundle.js"></script>
+<script src="~/js/layout.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/lib/library-bundle/web.bundle.js"></script>
+
+
+@await Html.PartialAsync("/Modules/MC/Attender/_AdmissionAttenderSchedulePage.cshtml")

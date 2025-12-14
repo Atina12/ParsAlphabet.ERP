@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "پالت های انبار";
+}
+
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>نام پالت</label>
+                        <div>
+                            <input id="name" type="text" class="form-control atoz0t9-valid" maxlength="50" title="" required tabindex="1">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>انبار</label>
+                        <select id="warehouseId" class="form-control select2 number" required data-parsley-selectvalzero tabindex="2" data-parsley-errors-container="#warehouseIdError"></select>
+                        <span id="warehouseIdError"></span>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>بخش‌های انبار</label>
+                        <select id="zoneId" class="form-control number select2" disabled required data-parsley-selectvalzero tabindex="3" data-parsley-errors-container="#zoneIdError">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                        <span id="zoneIdError"></span>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>دسته‌بندی</label>
+                        <select id="categoryId" class="form-control number select2" required data-parsley-selectvalzero tabindex="4" data-parsley-errors-container="#categoryIdError">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                        <span id="categoryIdError"></span>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>شناسه پالت</label>
+                        <input id="binRankId" type="text" class="form-control  atoz-en-valid" required maxlength="50" data-parsley-binrankexit tabindex="5">
+                    </div>
+                    <div class="form-group col-sm-6 goods">
+                        <label> محدودیت موجودی منفی</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'negativeInventory');" tabindex="6">
+                            <input id="negativeInventory" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="دارد,ندارد"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="7">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" tabindex="8" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<script src="/Modules/WH/WBin/BinIndex.js"></script>

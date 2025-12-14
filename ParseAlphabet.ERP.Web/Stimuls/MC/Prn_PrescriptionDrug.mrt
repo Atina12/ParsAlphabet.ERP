@@ -1,0 +1,1180 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>4FR/oUsKw/FgSaX0YUmkY9Xum89WFkvNa0yl8GSY5F7ZwmELTAgxneEIJb1hDbGP83DLjFV+S4F6Qb2A6XGie8R4wctiSnttbAiN0Grs4GPUyNHgRlHTxW9NnGzKXKQTychxCUgWewlqWvXs8UzgbsNqU4Nea0GkYhOEzGIl9Q==</ConnectionStringEncrypted>
+        <Key>56e2209e05a4494396b8122eb5a33b3b</Key>
+        <Name>Connection</Name>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Spc_PrescreptionDrug_Print Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Spc_PrescreptionDrug_Print</Alias>
+        <Columns isList="true" count="34">
+          <value>ORIGINAL,Id,Id,Id,System.Int32,c165628095704fac9c18dd742590e78e</value>
+          <value>ORIGINAL,CompositionUID,CompositionUID,CompositionUID,System.String,_x0039_df6a25787e84c5c8325698989a8fef5</value>
+          <value>ORIGINAL,companyName,companyName,companyName,System.String,deed433a6549438898e5d96e479f6217</value>
+          <value>ORIGINAL,WebServiceGuid,WebServiceGuid,WebServiceGuid,System.String,b44a5df6e4f241909efe8fecea0515dc</value>
+          <value>ORIGINAL,ReportDate,ReportDate,ReportDate,System.String,_x0036_bd01722d56d44ceaa99b600b53794b4</value>
+          <value>ORIGINAL,PrescriptionHID,PrescriptionHID,PrescriptionHID,System.String,_x0034_371a537690047ebaa32052e3b779246</value>
+          <value>ORIGINAL,BirthDate,BirthDate,BirthDate,System.String,_x0035_98af021a36e4c82a58507f351573924</value>
+          <value>ORIGINAL,PatientFullName,PatientFullName,PatientFullName,System.String,_x0033_b245b97f77d42cf91f3bdb91cb7b316</value>
+          <value>ORIGINAL,PatientNationalCode,PatientNationalCode,PatientNationalCode,System.String,f89db2ae8c284930b6a68df891e12591</value>
+          <value>ORIGINAL,PatientBarcode,PatientBarcode,PatientBarcode,System.String,_x0039_5485ab052fc4ea68a743347058b056d</value>
+          <value>ORIGINAL,InsurerType,InsurerType,InsurerType,System.String,_x0036_5c34b0159884996b5941809586ea6e9</value>
+          <value>ORIGINAL,InsurerCode,InsurerCode,InsurerCode,System.String,bb34a646aeb84b55a899ba3dc71bb2c6</value>
+          <value>ORIGINAL,InsurerBox,InsurerBox,InsurerBox,System.String,_x0036_2785894d43443f8927e909413175ff5</value>
+          <value>ORIGINAL,InsuranceBoxCode,InsuranceBoxCode,InsuranceBoxCode,System.String,_x0031_0e5ff7c71b74ce39f3b30b7604120e7</value>
+          <value>ORIGINAL,InsurNo,InsurNo,InsurNo,System.String,acd9ff3a0dc74b7ea2ad2fa6337edb2d</value>
+          <value>ORIGINAL,InsurerBarcode,InsurerBarcode,InsurerBarcode,System.String,fd9ea6f8656a4789915d0db7d874ff37</value>
+          <value>ORIGINAL,AttenderName,AttenderName,AttenderName,System.String,_x0037_871c997f8994d499898f86f9055a49e</value>
+          <value>ORIGINAL,AttenderMSCId,AttenderMSCId,AttenderMSCId,System.String,cd7e2e0946104ca6846af45e007e5c59</value>
+          <value>ORIGINAL,AttenderMdNumber,AttenderMdNumber,AttenderMdNumber,System.String,_x0032_946e112459d4a6c8aa954f5ea7094d6</value>
+          <value>ORIGINAL,PrescriptionIssueDate,PrescriptionIssueDate,PrescriptionIssueDate,System.String,e37a6949cb154562ab78e7f4acb61681</value>
+          <value>ORIGINAL,RepeatCount,RepeatCount,RepeatCount,System.Byte,b3ad6cba2d0743b699204ec22d61c9ab</value>
+          <value>ORIGINAL,ExpiryDate,ExpiryDate,ExpiryDate,System.String,_x0035_e4b5e21c8f54414905181804c70ff15</value>
+          <value>ORIGINAL,erxCode,erxCode,erxCode,System.String,_x0038_25b799fee0440cdac229f9399488021</value>
+          <value>ORIGINAL,RouteName,RouteName,RouteName,System.String,_x0033_c3a27ec9347480ab195d1da7592c67d</value>
+          <value>ORIGINAL,RouteDescription,RouteDescription,RouteDescription,System.String,c535eb8e529c46a48547ee105368491b</value>
+          <value>ORIGINAL,routeCode,routeCode,routeCode,System.String,_x0032_c1aaf6da84243378eedfea5d4b09920</value>
+          <value>ORIGINAL,frequencyCode,frequencyCode,frequencyCode,System.String,_x0038_b6e8d31ad094bde977c1177b9b5d928</value>
+          <value>ORIGINAL,FrequencyName,FrequencyName,FrequencyName,System.String,_x0030_af3d67cca1d41dfb95c329b9ad894f5</value>
+          <value>ORIGINAL,FrequencyDescription,FrequencyDescription,FrequencyDescription,System.String,_x0037_45a633a0150432aaa3dfe04cc8d4541</value>
+          <value>ORIGINAL,Dosage,Dosage,Dosage,System.Decimal,_x0034_b4185e3cb7a4c61a064a05b30614f1b</value>
+          <value>ORIGINAL,DosageUnitName,DosageUnitName,DosageUnitName,System.String,d38dde92c8554f07944f0fce72842225</value>
+          <value>ORIGINAL,TotalNumber,TotalNumber,TotalNumber,System.Int16,d82f75911a014b8591c330aad0f445d6</value>
+          <value>ORIGINAL,Barcode,Barcode,Barcode,System.String,aa634e73b9fc4ab18c2c78d12777c369</value>
+          <value>ORIGINAL,ProductName,ProductName,ProductName,System.String,_x0033_89b20800e774680a471a89355ff750e</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>e7e968bd1e044241b1282a50c856095f</Key>
+        <Name>Spc_PrescreptionDrug_Print</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_Id,_x0031_221_x000D__x000A_,8,0,bc8f2ee42cac4e2c87198eb17159d5c9</value>
+        </Parameters>
+        <SqlCommand>[mc].[Spc_PrescreptionDrug_Print]</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Spc_PrescreptionDrug_Print>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="3">
+      <value>,CorpName,CorpName,,System.String,,False,False,False,False</value>
+      <value>,CorpLogo,CorpLogo,,System.Drawing.Image,,False,False,False,False</value>
+      <value>,ReportDate,ReportDate,,System.String,,False,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>edc59102b5ce4fdb82728b0beee27ab3</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="5">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,20.8,1.78</ClientRectangle>
+          <Components isList="true" count="6">
+            <Text5 Ref="6" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>18.53,0.65,1.17,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>1e432bca1056455184f2a89a4f7f968e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>تاریخ:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text7 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>2.13,0.59,1.17,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>870780b7f043475590d3d58086f21a7d</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>صفحه:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>16.63,0.65,1.78,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>ec20f7b4500f46a9ab7877311f1081ea</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Spc_PrescreptionDrug_Print.ReportDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text10 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.25,0.59,1.75,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>7460c000e4a9462c98407b5dffe00d7d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{PageNumber.ToString()} از {TotalPageCount.ToString()}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="10" type="CustomFormat" isKey="true">
+                <StringFormat>##</StringFormat>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text27 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>3.81,0.76,12.28,0.76</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>8d524dbabff84d1e8e67d6347c483623</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>گزارش نسخه نویسی</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text4 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3.81,0.28,12.28,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9.75</Font>
+              <Guid>4a2ed7b81ae648cda46486a5e91c8778</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{CorpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>cbb7445874374f51beb60bbdbf3261c6</Guid>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand1>
+        <GroupHeaderBand2 Ref="13" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2.98,20.8,10.4</ClientRectangle>
+          <Components isList="true" count="30">
+            <Text38 Ref="14" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,20.8,2.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>2eb8a3642fa94f29b2790703a1e95426</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <BarCode6 Ref="15" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="16" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>6.4,1.5,8,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionDrug_Print.PrescriptionHID}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>c695cc81d7de4ea3a9afb445aa2dac6c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode6</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode6>
+            <Text39 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0.7,3.5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>e583a834f49947ea90668460c224f445</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  شناسه نسخه الکترونیک</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text39>
+            <Text45 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,0.7,7,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>f63646518c9c4a718444684c832a39fb</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.PrescriptionHID}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text45>
+            <Text48 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,0,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>22fab06585ec4a59af66d923dd242424</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>شناسه نسخه الکترونیک</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text48>
+            <Text50 Ref="20" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,2.5,20.8,2.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>2ac4c07af0854087bdee656987cde11c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text50>
+            <Text51 Ref="21" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,5,20.8,2.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>593819e2d2504ade9662f5ad20dc7949</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text51>
+            <Text52 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,2.5,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>abcf37e6021b417ca4991ed09dc80264</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>مرکز درمانی</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text52>
+            <Text53 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,3.2,3.5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>a8abe86451ab4b7c8bc10bc9838657d5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  نام مرکز</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text53>
+            <Text54 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.4,3.2,7,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>838c7df1cc434068967d215ba3431200</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.companyName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text54>
+            <BarCode4 Ref="25" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="26" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>6.4,4,8,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionDrug_Print.WebServiceGuid}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>c307433f17f440729b7ec1368a78c73d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode4</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode4>
+            <Text55 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,5,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>bb28dec05dc4474ba0a55b487103fc74</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>مشخصات مراجعه کننده</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text55>
+            <Text57 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.5,5.7,5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>b7c7c59b3f51463596926fc072c3d5f6</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text57</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.PatientFullName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text57>
+            <Text58 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.5,5.7,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>bdae069566854477b3f5f5e5c57a6b57</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text58</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  نام و  تخلص </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text58>
+            <Text56 Ref="30" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.5,5.7,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>ebccc17cdca5456eab1d40d8ede965b9</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text56</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.BirthDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text56>
+            <Text59 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.5,5.7,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>cc402a597a894a8f829156a0d5174684</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  تاریخ تولد</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text59>
+            <Text60 Ref="32" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.5,5.7,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>921f6c7e163442e8be37907726e4849d</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.PatientNationalCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text60>
+            <Text61 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.5,5.7,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>c925db715a394905bfa08b4dd8d22cf6</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  شماره ملی</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text61>
+            <BarCode8 Ref="34" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="35" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>6.4,6.5,8,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionDrug_Print.PatientNationalCode}|{Replace(Spc_PrescreptionDrug_Print.BirthDate,"/","")}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>c056f07d47414663975a9262fffb065e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode8</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode8>
+            <Text62 Ref="36" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,7.5,20.8,2.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>4484e907af984c5b9e9e2d70b57945be</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text62</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text62>
+            <Text63 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,7.5,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>3f34559e74194d2ca8e0ee49aebde011</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text63</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>سازمان بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text63>
+            <Text64 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.5,8.2,5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>ac94419330fa4f7b8d0d8a61e5a42b38</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text64</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.InsurerType}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text64>
+            <Text65 Ref="39" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17.5,8.2,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>70103185e8ab4cfdb9275e88e0611f05</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text65</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  نوع بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text65>
+            <Text66 Ref="40" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.5,8.2,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>a055372aa20c4dc4badd0fad39c7c49e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text66</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.InsurerBox}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text66>
+            <Text67 Ref="41" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.5,8.2,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>60198d1acce84f10b9c40432e27316a5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text67</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  صندوق بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text67>
+            <Text68 Ref="42" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.5,8.2,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>7e4d38da881d4ff88bc8c606c5f46ff2</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text68</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionDrug_Print.InsurNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text68>
+            <Text69 Ref="43" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.5,8.2,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>5e92b3cd340f4857a777fc062ebfe9f2</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text69</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  شماره بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text69>
+            <BarCode9 Ref="44" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="45" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>6.4,9,8,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionDrug_Print.InsurerCode}|{Spc_PrescreptionDrug_Print.InsuranceBoxCode}|{Spc_PrescreptionDrug_Print.InsurNo}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>910eb53e6f914eb19df7590cc9d7de7f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode9</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode9>
+            <Text1 Ref="46" type="Text" isKey="true">
+              <Border>Top, Left, Right;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,10,20.8,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>e576b11859274bf3b8c56385459d2c77</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text2 Ref="47" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,10,6,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>c0bb67b905c14811b06441de92ee2774</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>دارو</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </Text2>
+          </Components>
+          <Condition>{Spc_PrescreptionDrug_Print.Id}</Condition>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>bc311bf77a014d5095cde19f8dd4e3e2</Guid>
+          <Name>GroupHeaderBand2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </GroupHeaderBand2>
+        <DataBand1 Ref="48" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,14.18,20.8,2</ClientRectangle>
+          <Components isList="true" count="5">
+            <Text17 Ref="49" type="Text" isKey="true">
+              <Border>Left, Right, Bottom;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,20.8,2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>c8bc4d01ea334bb0bfdf4cbb7143f841</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text19 Ref="50" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.2,1.48,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>2910d48eda5d459b85ead4c47844b394</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>{Line})</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text36 Ref="51" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.8,0.2,18.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>12572ab1dba74538806e75a7d029a8b7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>{Spc_PrescreptionDrug_Print.ProductName} {Spc_PrescreptionDrug_Print.Dosage} {Spc_PrescreptionDrug_Print.DosageUnitName} {Spc_PrescreptionDrug_Print.TotalNumber}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <BarCode1 Ref="52" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="53" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>6.4,1,8,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionDrug_Print.erxCode}|{Spc_PrescreptionDrug_Print.TotalNumber}|{Spc_PrescreptionDrug_Print.routeCode}|{Spc_PrescreptionDrug_Print.frequencyCode}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>1922ebd343c84cd786078f2c697e6668</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode1</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+            </BarCode1>
+            <Text3 Ref="54" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.8,0.6,18.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>bc804290e60f4ee890d9e5645f03879d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>{Spc_PrescreptionDrug_Print.RouteDescription} {Spc_PrescreptionDrug_Print.FrequencyDescription}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Spc_PrescreptionDrug_Print</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <GroupFooterBand1 Ref="55" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,16.98,20.8,3.5</ClientRectangle>
+          <Components isList="true" count="12">
+            <Text15 Ref="56" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,2.5,20.8,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>b733096db3344c09831c297e7cfada81</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text14 Ref="57" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.4,2.5,2.2,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10,Bold</Font>
+              <Guid>1a61cd6dc05e481a886bb73bfcc67d72</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>:   تعداد تکرار</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text6 Ref="58" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,20.8,2.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,11,Bold</Font>
+              <Guid>258114cfb2e348d28cfcc637a540dab0</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text11 Ref="59" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.4,0,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>6c786c5d2b4647d98e75808e096325c8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>مشخصات تجویزگر</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <BarCode2 Ref="60" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="61" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>6.4,1.6,8,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionDrug_Print.AttenderMdNumber}|{Replace(Spc_PrescreptionDrug_Print.ExpiryDate,"/","")}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>7b468ea9bd9a40b0984cfba2af8af1a3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode2</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+            </BarCode2>
+            <Text40 Ref="62" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,2.5,11.8,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>b9823cf35ae245bd8d67ce137a77f642</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>{Spc_PrescreptionDrug_Print.RepeatCount}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text21 Ref="63" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.3,1,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>c5709ae0e8414e41a570ca5b81cf06d2</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>{Spc_PrescreptionDrug_Print.AttenderMSCId}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text9 Ref="64" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.9,1,6.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>cdd63e52a1504e97bc2087321b8299c3</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>{Spc_PrescreptionDrug_Print.AttenderName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text12 Ref="65" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>18.5,1,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>227621f2d25c4fe08968ec10e2ffde06</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>:  نام داکتر</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text13 Ref="66" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.3,1,2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>75bd5f7427904d99adb0adce6fa1ea3f</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>:  نظام داکتری</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text16 Ref="67" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,1,3.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>e8ff9e1e1f6b481cb7dbed778167579d</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>{Spc_PrescreptionDrug_Print.ExpiryDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text18 Ref="68" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.8,1,3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>8578a33dd9774b82a61597ff62fcad6f</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4" />
+              <Parent isRef="55" />
+              <Text>:  تاریخ تجویز</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </GroupFooterBand1>
+        <HorizontalLinePrimitive1 Ref="69" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>100,18.4,18,0.0254</ClientRectangle>
+          <Color>0, 0, 39</Color>
+          <Conditions isList="true" count="0" />
+          <EndCap Ref="70" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Expressions isList="true" count="0" />
+          <Guid>8a5d89a93719401e96243b2ea34b511b</Guid>
+          <Name>HorizontalLinePrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="71" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>ccd6a642c2bc4898ae052c10e3f6c2da</Guid>
+      <Margins>0.1,0.1,0.1,0.1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>1/3/2022 12:27:38 PM</ReportChanged>
+  <ReportCreated>2/1/2015 2:00:37 PM</ReportCreated>
+  <ReportFile>C:\Users\Taji\source\Workspaces\CIS-Project\CIS\CIS.Web\Stimuls\MC\Prn_PrescriptionDrug.mrt</ReportFile>
+  <ReportGuid>1db902016abe4356b31377407f463697</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2021.1.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

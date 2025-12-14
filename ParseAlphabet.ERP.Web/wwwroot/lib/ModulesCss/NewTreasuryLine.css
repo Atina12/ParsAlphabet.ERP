@@ -1,0 +1,35 @@
+﻿.row-danger {
+    background-color: #ffe0e0 !important;
+    transition: .3ms ease;
+}
+
+#formHeaderLine #jsonTreasuryLineList .table-responsive thead,
+#formHeaderLine #jsonTreasuryLineList .table-responsive thead tr,
+#formHeaderLine #jsonTreasuryLineList .table-responsive tbody tr,
+#formHeaderLine #jsonTreasuryLineList .table-responsive tfoot,
+#formHeaderLine #jsonTreasuryLineList .table-responsive tfoot tr {
+    display: inline-flex !important;
+}
+
+#formHeaderLine #jsonTreasuryLineList .table-responsive thead,
+#formHeaderLine #jsonTreasuryLineList .table-responsive tbody,
+#formHeaderLine #jsonTreasuryLineList .table-responsive tfoot {
+    max-width: 150vw !important;
+}
+
+    #formHeaderLine #jsonTreasuryLineList .table-responsive thead tr th,
+    #formHeaderLine #jsonTreasuryLineList .table-responsive tfoot tr td {
+        display: flex;
+        align-items: center;
+    }
+
+        #formHeaderLine #jsonTreasuryLineList .table-responsive tfoot tr td.text-left {
+            justify-content: end;
+        }
+
+#previousStagePageTable #parentPageTableBody thead {
+    position: sticky;
+    top: -1px;
+}
+
+

@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "گزارش تعرفه خدمات داکتر";
+}
+
+<div class="content-page  displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <button id="getReport" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-1"></i>پیش نمایش</button>
+                                <button id="showReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-1"></i>تهیه گزارش</button>
+                                @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+                                <button type="button" id="exportCSV" onclick="export_serviceAttenderTariff_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+                            </div>
+                        </div>
+
+                        <div class="card-body" data-parsley-validate>
+                            <fieldset class="group-box group-box-gray">
+                                <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <legend>فیلتر</legend>
+                                <div class="slideToggle open">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-sm-4 mb-0">
+                                            <div class="form-group">
+                                                <label>داکتر</label>
+                                                <div class="col-sm-12 chosen-container-parent">
+                                                    <select data-placeholder="انتخاب کنید" id="attenderId" required data-parsley-selectvalzero class="select2 select2-quick-access" tabindex="1" data-parsley-errors-container="#attenderIdError">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="attenderIdError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>از شناسه خدمت</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="fromServiceId" class="select2 select2-quick-access" tabindex="2" data-parsley-greaterthanequal="#toServiceId" data-parsley-errors-container="#fromServiceIdError">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="fromServiceIdError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>تا شناسه خدمت</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="toServiceId" class="select2 select2-quick-access" tabindex="3">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                            <label>از نمبر تذکره خدمت</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="fromCode" class="select2 select2-quick-access" tabindex="4" data-parsley-greaterthanequal="#toCode" data-parsley-errors-container="#fromCodeError">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="fromCodeError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                            <label>تا نمبر تذکره خدمت</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="toCode" class="select2 select2-quick-access" tabindex="5">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                            <label>دپارتمان</label>
+                                            <div>
+                                                <select id="departmentId" class="form-control select2" tabindex="6">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>نوع خدمت</label>
+                                            <div>
+                                                <select id="serviceTypeId" class="form-control select2" title="" tabindex="7" data-parsley-errors-container="#serviceTypeIdErrorContainer">
+                                                    <option value="">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="serviceTypeIdErrorContainer"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                            <label>وضعیت خدمت</label>
+                                            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'serviceStatus');" tabindex="8">
+                                                <input id="serviceStatus" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="group-box group-box-gray mt-3">
+                                <legend>پیش نمایش</legend>
+                                <div class="pagetable-report" id="mainReport">
+                                    @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-6 col-sm-12 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="20">
+                            <option value="101" selected>صورت خلاصه</option>
+                            <option value="102">صورت ریز</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="21"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+
+<script type="text/javascript" src="/Modules/MC/Report/RepAdmissionServiceAttenderTariffForm.js"></script>

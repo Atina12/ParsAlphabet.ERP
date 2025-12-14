@@ -1,0 +1,566 @@
+﻿@{
+    ViewBag.Title = "‌شیفت کاری";
+}
+
+<link href="~/lib/ModulesCss/departmentTimeShiftIndex.css" rel="stylesheet"/>
+
+<style>
+    #departmentTimeShiftLineDaysModal #parentPageTableBody {
+        height:380px !important
+    }
+</style>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>سال مالی</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <select data-placeholder="انتخاب کنید" id="fiscalYearId" required class="form-control select2" tabindex="1">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>شعبه</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <select data-placeholder="انتخاب کنید" id="branchId" required class="form-control select2" tabindex="2">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>دپارتمان</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <select data-placeholder="انتخاب کنید" id="departmentId" required class="form-control select2" tabindex="3" data-parsley-selectvalzero data-parsley-errors-container="#departmentIdError">
+                            </select>
+                        </div>
+                        <div id="departmentIdError">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <input id="shiftName" type="text" class="form-control" maxlength="50" title="" required tabindex="4">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <lablel>توضیحات</lablel>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <input id="description" type="text" class="form-control" maxlength="100" title="" tabindex="5">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save('save')" class="btn btn-success waves-effect waves-light" tabindex="6" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره </button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="departmentTimeShiftLineDaysModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">نمایش روزهای کاری</h5>
+                </div>
+
+            </div>
+            <div class="modal-header" id="">
+                <div class="items-info text-right d-flex">
+                    <div class="services-info text-right d-flex">
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">شناسه :<span class="departmentTimeShiftIdModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12"> دپارتمان : <span class="departmentNameModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12"> شیفت : <span class="shiftNameModal"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="card-body " id="departmentTimeShiftLineDays_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('departmentTimeShiftLineDaysModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/AttenderTimeSheetMedicalShift/AttenderTimeSheetMedicalShiftDisplay.cshtml")
+
+<div id="DepartmentTimeShiftTransformModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-size-xxlg">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0" id="modal_title">انتقال شیفت کاری</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height text-right" data-parsley-validate>
+<div class="row">
+
+
+    <div class="form-group col-sm-3">
+        <label> سال مالی مبدا</label>
+        <div>
+            <select id="fromFiscalYearId" type="text" class="form-control select2" data-parsley-selectvalzero title="" tabindex="100001" data-parsley-errors-container="#fromFiscalYearIdErrorContainer">
+            </select>
+        </div>
+        <div id="fromFiscalYearIdErrorContainer"></div>
+    </div>
+    <div class="form-group col-sm-3">
+        <label>شعبه مبدا</label>
+        <div>
+            <select id="fromBranchId" type="text" class="form-control select2" title="" tabindex="100002" data-parsley-errors-container="#fromBranchIdErrorContainer">
+            </select>
+        </div>
+        <div id="fromBranchIdErrorContainer"></div>
+    </div>
+    <div class="form-group col-sm-3">
+        <label>دپارتمان مبدا </label>
+        <div>
+            <select id="fromDepartmentId" type="text" class="form-control select2" title="" tabindex="100003" data-parsley-errors-container="#fromDepartmentIdErrorContainer">
+            </select>
+        </div>
+        <div id="fromDepartmentIdErrorContainer"></div>
+    </div>
+
+    <div class="form-group col-sm-3">
+        <label>شیفت کاری مبدا</label>
+        <div>
+            <select id="fromShiftId" type="text" class="form-control select2" title="" tabindex="100004" data-parsley-errors-container="#fromShiftIdErrorContainer">
+            </select>
+        </div>
+        <div id="fromShiftIdErrorContainer"></div>
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="form-group col-sm-4">
+        <div>
+            <fieldset class="group-box group-box-gray mt-3">
+                <legend>نمایش روزهای کاری </legend>
+                <div style="height:355px">
+                    <table class="table table-styles border mb-0" style="margin-top:-7px !important;overflow:auto">
+                        <thead>
+                        <tr>
+                            <th style="width:14%">روز هفته</th>
+                            <th style="width:43%">زمان شروع</th>
+                            <th style="width:43%">زمان پایان</th>
+                        </tr>
+                        </thead>
+                        <tbody id="departmentShiftDays">
+                        <tr>
+                            <td>شنبه</td>
+                            <td>
+                                <input id="startTime7" type="text" class="form-control text" readonly>
+                            </td>
+                            <td>
+                                <input id="endTime7" type="text" class="form-control  text" readonly>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>یکشنبه</td>
+                            <td>
+                                <input id="startTime1" type="text" class="form-control text" readonly>
+                            </td>
+                            <td>
+                                <input id="endTime1" type="text" class="form-control  text" readonly>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>دوشنبه</td>
+                            <td>
+                                <input id="startTime2" type="text" class="form-control  text" readonly>
+                            </td>
+                            <td>
+                                <input id="endTime2" type="text" class="form-control    text" readonly>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>سه شنبه</td>
+                            <td>
+                                <input id="startTime3" type="text" class="form-control  text" readonly>
+                            </td>
+                            <td>
+                                <input id="endTime3" type="text" class="form-control    text" readonly>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>چهارشنبه</td>
+                            <td>
+                                <input id="startTime4" type="text" class="form-control  text" readonly>
+                            </td>
+                            <td>
+                                <input id="endTime4" type="text" class="form-control    text" readonly>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>پنج شنبه</td>
+                            <td>
+                                <input id="startTime5" type="text" class="form-control  text" readonly>
+                            </td>
+                            <td>
+                                <input id="endTime5" type="text" class="form-control    text" readonly>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>جمعه</td>
+                            <td>
+                                <input id="startTime6" type="text" class="form-control  text" readonly>
+                            </td>
+                            <td>
+                                <input id="endTime6" type="text" class="form-control    text" readonly>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="form-group col-sm-8">
+        <div>
+            <fieldset class="group-box group-box-gray mt-3">
+                <legend>شیفت های مقصد </legend>
+
+                <div style="overflow-y:scroll !important;overflow-x:auto!important;height:350px" id="tableLine">
+                    <table style="width:100% !important">
+                        <thead>
+                        <tr>
+                            <th style="width:4%">سطر</th>
+                            <th style="width:18%">سال مالی مقصد</th>
+                            <th style="width:18%">شعبه مقصد</th>
+                            <th style="width:32%">دپارتمان مقصد</th>
+                            <th style="width:20%">نام شیفت مقصد</th>
+                            <th style="width:8%">عملیات</th>
+                        </tr>
+                        </thead>
+                        <thead>
+                        <tr>
+
+                            <th style="width:4%" disabled>
+                                <input id="idNumber" type="text" class="form-control atoz-valid text-center" maxlength="50" title="" disabled>
+                            </th>
+                            <th style="width:18%">
+                                <div class="col-lg-12 chosen-container-parent">
+                                    <select id="toFiscalYearId" data-placeholder="سال مالی مقصد" type="text" class="form-control select2" title="" tabindex="100005" disabled>
+                                    </select>
+
+                                </div>
+                            </th>
+                            <th style="width:18%">
+                                <div class="col-lg-12 chosen-container-parent">
+                                    <select id="toBranchId" data-placeholder="شعبه مقصد" type="text" class="form-control select2" title="" tabindex="100006" disabled>
+                                    </select>
+
+                                </div>
+                            </th>
+                            <th style="width:32%">
+                                <div class="col-lg-12 chosen-container-parent">
+                                    <select id="toDepartmentId" data-placeholder="دپارتمان مقصد" type="text" class="form-control select2" title="" tabindex="100007" disabled>
+                                    </select>
+
+                                </div>
+                            </th>
+                            <th style="width:20%">
+                                <div class="col-lg-12 chosen-container-parent">
+
+                                    <input type="text" id="toShiftName" data-placeholder="شیفت مقصد" class="form-control" title="" tabindex="100008" disabled/>
+                                </div>
+                            </th>
+                            <th style="width:8%">
+                                <div style="display:flex;justify-content:center;width:100%">
+                                    <button id="saveRow" type="button" onclick="saveDepartmentTimeShiftUpdateRow(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="100009">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                    <button id="resetInputs" type="button" onclick="resetInputsRowDepartmentTimeShift(this)" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="100010">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="6" style="text-align:center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal-footer">
+    <button id="insertDepartmentTimeShiftTransform" class="btn btn-success waves-effect waves-light" tabindex="100011"><i class="fa fa-save"></i>ذخیره</button>
+
+    <button id="modal-close" onclick="modal_close(`DepartmentTimeShiftTransformModal`)" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="departmentTimeShiftModals" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">نمایش شیفت</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyIddisplay">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_captiondisplay"></lable>
+                            <span id="modal_keyid_valuedisplay"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>سال مالی</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <input id="fiscalYear" type="text" class="form-control" maxlength="50" title="" disabled>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>شعبه</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <input id="branch" type="text" class="form-control" maxlength="50" title="" disabled>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>دپارتمان</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <input id="department" type="text" class="form-control" maxlength="50" title="" disabled>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <input id="shift" type="text" class="form-control" maxlength="50" title="" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>وضعیت</label>
+                        <div class="funkyradio funkyradio-success">
+                            <input id="active" type="checkbox" checked switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <lablel>توضیحات</lablel>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <input id="descriptiondisplay" type="text" disabled class="form-control" maxlength="100" title="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <table class="table table-styles border mb-0" style="width:100% !important">
+                            <thead>
+                            <tr>
+                                <th style="width:14%">روز هفته</th>
+                                <th style="width:43%">زمان شروع</th>
+                                <th style="width:43%">زمان پایان</th>
+                            </tr>
+                            </thead>
+                            <tbody id="departmentTimeShiftLineDisplay">
+                            <tr>
+                                <td>شنبه</td>
+                                <td>
+                                    <input id="displaystartTime7" type="text" class="form-control text" readonly>
+                                </td>
+                                <td>
+                                    <input id="displayendTime7" type="text" class="form-control  text" readonly>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>یکشنبه</td>
+                                <td>
+                                    <input id="displaystartTime1" type="text" class="form-control text" readonly>
+                                </td>
+                                <td>
+                                    <input id="displayendTime1" type="text" class="form-control  text" readonly>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>دوشنبه</td>
+                                <td>
+                                    <input id="displaystartTime2" type="text" class="form-control  text" readonly>
+                                </td>
+                                <td>
+                                    <input id="displayendTime2" type="text" class="form-control    text" readonly>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>سه شنبه</td>
+                                <td>
+                                    <input id="displaystartTime3" type="text" class="form-control  text" readonly>
+                                </td>
+                                <td>
+                                    <input id="displayendTime3" type="text" class="form-control    text" readonly>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>چهارشنبه</td>
+                                <td>
+                                    <input id="displaystartTime4" type="text" class="form-control  text" readonly>
+                                </td>
+                                <td>
+                                    <input id="displayendTime4" type="text" class="form-control    text" readonly>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>پنج شنبه</td>
+                                <td>
+                                    <input id="displaystartTime5" type="text" class="form-control  text" readonly>
+                                </td>
+                                <td>
+                                    <input id="displayendTime5" type="text" class="form-control    text" readonly>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>جمعه</td>
+                                <td>
+                                    <input id="displaystartTime6" type="text" class="form-control  text" readonly>
+                                </td>
+                                <td>
+                                    <input id="displayendTime6" type="text" class="form-control    text" readonly>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('departmentTimeShiftModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div id="errorDeleteItemTimeList" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">لیست نوبت های دارای بیمار</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th style="width:15%;">شناسه</th>
+                                <th style="width:15%;">بیمار</th>
+                                <th style="width:15%;">نمبر تذکره</th>
+                                <th style="width:15%;">تاریخ</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempErrorDeleteItemTimeList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="" onclick="modal_close('errorDeleteItemTimeList')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorUpdateShiftNameList" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">وضعیت شیفت</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-100">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempErrorUpdateShiftNameList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="" onclick="modal_close('errorUpdateShiftNameList')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+
+<script src="/Modules/HR/DepartmentTimeShift/DepartmentTimeShiftIndex.js"></script>

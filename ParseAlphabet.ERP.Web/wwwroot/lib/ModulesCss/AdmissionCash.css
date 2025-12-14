@@ -1,0 +1,26 @@
+﻿.select2-result-selectable .select2-match, .select2-result-unselectable .select2-match {
+    text-decoration: none !important;
+}
+
+#admissionListForm > div {
+    min-height: 54px !important;
+    max-height: 151px !important;
+    width: 100% !important;
+    resize: vertical;
+    overflow: auto;
+}
+
+.admissionMasterBalance {
+    text-align: right !important;
+    padding: 10px !important;
+    background-color: #ebe8e8;
+    border-bottom: thin solid #999
+}
+
+#admissionCashInfoModal .table-responsive {
+    max-height: 300px
+}
+
+#cashFormDisplay #admissionCashDisplay {
+    width: 100% !important
+}

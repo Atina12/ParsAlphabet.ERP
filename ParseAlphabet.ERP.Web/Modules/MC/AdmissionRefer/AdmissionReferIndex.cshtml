@@ -1,0 +1,68 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "لیست نظام ارجاع";
+}
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                                @*<button type="button" id="formPlateListExportCSV" onclick="export_csv(`formPlateListExportCSV`)" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>*@
+                                <button type="button" id="formPlateListAddSend" onclick="AdmissionReferSendForm()" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>دریافت ارجاع / ارسال بازخورد</button>
+                                <button type="button" id="formPlateListAddGet" onclick="AdmissionReferGetForm()" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>ارسال ارجاع / دریافت بازخورد</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 displaynone" id="relationalBox">
+                                <div class="form-group d-flex">
+                                    <label class="relational-caption">کپشن فیلتر</label>
+                                    <div class="chosen-container-parent" style="float: right !important">
+                                        <select data-placeholder="انتخاب کنید..." id="form_keyvalue" class="select2">
+                                            <option value="0">انتخاب کنید...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<div id="displayFormModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayForm" data-parsley-validate="" style="height:calc(100vh - 120px)">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayFormModel')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var ipX = "@User.FindFirstValue("ipaddress")";
+</script>
+
+<script src="/js/formplate.js"></script>
+<script src="~/Modules/MC/AdmissionRefer/AdmissionReferIndex.js"></script>

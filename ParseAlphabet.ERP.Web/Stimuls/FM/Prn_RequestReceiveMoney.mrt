@@ -1,0 +1,1414 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>4KZxz8YIo0VDW0C9d0zkD9XutQtNTDH1alyl1GFc90q6bnEExVSrreJhoMxi/XV79PLZ68ZZSdliGc29Yeyxj8Ra4ShNEgFFYU6cGGE9sWfEqJXkS2irpGFEhMTDGGBu3xiBiM1L0+3ACNVYZyUyErryac/cA0vFa3ulzGMA4GfDqMFLTzVL8OI=</ConnectionStringEncrypted>
+        <Key>38846afa4f7c4cb1afa4f6ac72d3720b</Key>
+        <Name>Connection</Name>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <Spr_TreasuryReport_SelectFundingForm Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Spr_TreasuryReport_SelectFundingForm</Alias>
+        <Columns isList="true" count="37">
+          <value>TreasuryId,System.Int64</value>
+          <value>No,System.Int32</value>
+          <value>JournalId,System.Int32</value>
+          <value>TreasuryDate,System.String</value>
+          <value>AccountGLId,System.Int64</value>
+          <value>AccountGLName,System.String</value>
+          <value>AccountSGLId,System.Int64</value>
+          <value>AccountSGLName,System.String</value>
+          <value>FundTypeId,System.Int32</value>
+          <value>FundTypeName,System.String</value>
+          <value>TreasurySubjectId,System.Int64</value>
+          <value>TreasurySubjecName,System.String</value>
+          <value>DocumentTypeId,System.Int32</value>
+          <value>DocumentName,System.String</value>
+          <value>SumLcy,System.Decimal</value>
+          <value>SumLcyName,System.String</value>
+          <value>SumFcy,System.Decimal</value>
+          <value>LineInOut,System.Int32</value>
+          <value>SumFcyName,System.String</value>
+          <value>ExchangeRate,System.Int64</value>
+          <value>CurrencyId,System.Int64</value>
+          <value>CurrencyName,System.String</value>
+          <value>Type,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>BranchId,System.Int64</value>
+          <value>BranchName,System.String</value>
+          <value>StageName,System.String</value>
+          <value>StageInOut,System.Byte</value>
+          <value>StageClassId,System.Byte</value>
+          <value>AccountId,System.Int64</value>
+          <value>AccountName,System.String</value>
+          <value>Bankname,System.String</value>
+          <value>AccountDetailId,System.Int64</value>
+          <value>AccountDetailName,System.String</value>
+          <value>Note,System.String</value>
+          <value>DocumentNo,System.Int64</value>
+          <value>CheckDueDatePersian,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>cff98d5200d94bfea0b2f71f11de409e</Key>
+        <Name>Spr_TreasuryReport_SelectFundingForm</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>_x0040_TreasuryId,,0,0</value>
+          <value>_x0040_StageClassId,,8,0</value>
+        </Parameters>
+        <SqlCommand>fm.Spr_TreasuryReport_SelectFundingForm</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Spr_TreasuryReport_SelectFundingForm>
+      <NumberToWord Ref="4" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>NumberToWord</Alias>
+        <Columns isList="true" count="1">
+          <value>ORIGINAL,NumberTitle,NumberTitle,NumberTitle,System.String,d449b77d76c94b45a1b3b9a40cd986eb</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>1246b9d2acab4b80a013e6e7ae3c2b42</Key>
+        <Name>NumberToWord</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>NumberSum,,0,0,0653ab8cf729492c9960c5a9aeef5dce</value>
+        </Parameters>
+        <SqlCommand>select gn.NumberToWords(@NumberSum)NumberTitle</SqlCommand>
+      </NumberToWord>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="7">
+      <value>,CorpName,CorpName,,System.String,شرکت_x0020_گسترش_x0020_شرق_x0020_مشهد,False,False,False,False,,_x0035_ea16b53d4014cb2b5fc7b95c1594811</value>
+      <value>,CorpLogo,CorpLogo,,System.Drawing.Image,,False,False,False,False,,_x0038_83e1ff2f5b640b78efeaec69ca9fe2a</value>
+      <value>,ReportDate,ReportDate,,System.String,,False,False,False,False,,_x0034_b05b537acb44f0899026b955d9c1762</value>
+      <value>,CurrentUserFullName,CurrentUserFullName,,System.String,,False,False,False,False,,_x0034_1135f12345b459e99164d8d1a6ca8fa</value>
+      <value>,FromDatePersian,FromDatePersian,,System.String,,False,False,False,False,,dc89fba4743d4fcc9e660dfa206986da</value>
+      <value>,ToDatePersian,ToDatePersian,,System.String,,False,False,False,False,,_x0035_17118dbe96149b6b97e289f58107492</value>
+      <value>,SumVar,SumVar,,System.Int64,SumI_x0028_DataBand1_x002C_Spr_TreasuryReport_SelectFundingForm.SumLcy_x0029_,True,True,False,False,,d95caddb8a84426ea6839422adddecec,True</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>199e3545aab1438db7fc9eb4d93af5d5</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="8">
+        <PageHeaderBand3 Ref="6" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,7.2,0.7</ClientRectangle>
+          <Components isList="true" count="11">
+            <Text43 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>5.9,0.1,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <Guid>8cfaaacf60d4426aa13337b691b8b5ff</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>تاریخ تهیه:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text43>
+            <Text45 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>4.9,0.1,1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <Guid>d8d3b7d8f4ed45769f89515c38958450</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{ReportDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text45>
+            <Text46 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>2.4,0.4,2.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>2000ec5395064686aa4c5191fd8ac9de</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text46</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.StageName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text46>
+            <Text47 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.4,0.1,2.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>99fdcdddb6a649a888bde5a754935cdf</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.CompanyName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text47>
+            <Image2 Ref="11" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,0.1,0.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Guid>04928b930ea54b26ac247bd20e2dd0f7</Guid>
+              <IconColor>68, 114, 196</IconColor>
+              <ImageData>{CorpLogo}</ImageData>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image2</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Stretch>True</Stretch>
+            </Image2>
+            <Text53 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>5.7,0.4,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <Guid>8215f05533f9497f9773198a2f2758df</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text53</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>کاربر تهیه کننده:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text53>
+            <Text54 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>4.7,0.4,1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <Guid>6faf33db916c4a868a1047a2d586ee9c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text54</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{CurrentUserFullName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text54>
+            <Text7 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>1.1,0.4,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>530f5fac4d7e40b6a2b6cbda6e37d9c0</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>:تاریخ برگه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text23 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>0.2,0.4,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>4b87dbdef9ff4cd49e9665563291ae77</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.TreasuryDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text55 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1.1,0.1,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <Guid>2baf833f346944afbc8405ea60bb3c22</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text55</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>شناسه برگه:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text55>
+            <Text52 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.5,0.1,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <Guid>8c7340ecc895421096fd65bd80fbcd35</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text52</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.TreasuryId}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="18" type="CustomFormat" isKey="true">
+                <StringFormat>##</StringFormat>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text52>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>a09de51cc2bf41d08ed27ada70754ec6</Guid>
+          <Name>PageHeaderBand3</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand3>
+        <PageHeaderBand6 Ref="19" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.3,7.2,0.3</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageHeaderBand6</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand6>
+        <PageHeaderBand1 Ref="20" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2,7.2,1.7</ClientRectangle>
+          <Components isList="true" count="13">
+            <Text9 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.1,0.1,2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8,Bold</Font>
+              <Guid>4cc4ef3a69544de7a46f39cd11c21b9c</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>درخواست کننده</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.3,0.4,1.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>7ecc0f3f35454e54979933dd8105f231</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>بدینوسیله تقاضا می گردد مبلغ </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>4.1,0.4,1.2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10,Bold</Font>
+              <Guid>f144a771e37d42439e57c88032e303f2</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{Sum(IIF(Spr_TreasuryReport_SelectFundingForm.StageInOut==3 &amp;&amp; Spr_TreasuryReport_SelectFundingForm.StageClassId==1,IIF(Spr_TreasuryReport_SelectFundingForm.LineInOut==1,Spr_TreasuryReport_SelectFundingForm.SumLcy,0),Spr_TreasuryReport_SelectFundingForm.SumLcy)
+
+)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="24" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text19 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>6.4,1,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>1ccad55fab2d4d7b8e044a6faed4cca4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>:حساب کل</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text26 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>0,0.7,1.3,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>1481058c99ed49eb9031daf630b33afc</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>واحد درخواست</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text38 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>3.6,0.4,0.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>0939849853e44e7bb5efd779ced20c91</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>به حروف</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <Text40 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.4,0.4,2.2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <TextBrush>[255:0:0]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text16 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.4,0.6,1.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>26537e73631342248ecc718a320891a9</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>.پرداخت گردد</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text12 Ref="30" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>2.4,1,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>0bc55a6762f0487da7ca33ef0a0d1fd9</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>:حساب معین</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text22 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>6.2,1.3,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>f6cb0616473c47748645707051e51afb</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>:حساب تفصیل </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text25 Ref="32" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>1.3,1.3,4.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>3fb28cf52a70461ebb05349639c2d87e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text> {Spr_TreasuryReport_SelectFundingForm.AccountDetailId} - {Spr_TreasuryReport_SelectFundingForm.AccountDetailName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text13 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>0.3,1,2.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>5348a9bfdeb34ce6b75a758bcb580c5b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text> {Spr_TreasuryReport_SelectFundingForm.AccountSGLId} - {Spr_TreasuryReport_SelectFundingForm.AccountSGLName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text21 Ref="34" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>3.6,1,2.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>803fc04afca948299c78b7ddd660e32d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text> {Spr_TreasuryReport_SelectFundingForm.AccountGLId} - {Spr_TreasuryReport_SelectFundingForm.AccountGLName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand1>
+        <PageHeaderBand4 Ref="35" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4.1,7.2,1</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text27 Ref="36" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.1,0.1,2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8,Bold</Font>
+              <Guid>8b445070a1454eb6b854dc64dcc06be5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="5" />
+              <Parent isRef="35" />
+              <Text>موضوع پرداخت</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text29 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>6.3,0.4,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>fc09b3d91af54d26a4e6246cf43576dc</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="5" />
+              <Parent isRef="35" />
+              <Text>:کد موضوع</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text32 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>4.6,0.4,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>909e2c672ba14eb2876d4b65f3083eca</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="5" />
+              <Parent isRef="35" />
+              <Text>:نام موضوع</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <Text36 Ref="39" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>6.4,0.7,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>eccc9a97f2754f98abfd22f51798fa15</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="5" />
+              <Parent isRef="35" />
+              <Text>:توضیحات</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <Text37 Ref="40" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>1.8,0.7,4.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>ecdd865bfced496689022510082bf3b9</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="5" />
+              <Parent isRef="35" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.Note}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text37>
+            <Text61 Ref="41" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.4,0.4,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>78247c07a9e640d58f167e6ace13a5e5</Guid>
+              <HideZeros>True</HideZeros>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text61</Name>
+              <Page isRef="5" />
+              <Parent isRef="35" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.TreasurySubjectId}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text61>
+            <Text30 Ref="42" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>0.1,0.4,4.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>eec861274be043968d0dc26c43e60942</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="5" />
+              <Parent isRef="35" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.TreasurySubjecName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text30>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageHeaderBand4</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand4>
+        <PageHeaderBand5 Ref="43" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5.5,7.2,0.8</ClientRectangle>
+          <Components isList="true" count="5">
+            <Text42 Ref="44" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.1,0.1,2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8,Bold</Font>
+              <Guid>e829fa09ad374c6ea669a13e603ccb17</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="5" />
+              <Parent isRef="43" />
+              <Text>مدیریت محترم عامل</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text42>
+            <Text44 Ref="45" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>4.4,0.4,2.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>f6b54b6ed242423cbe3f88d60d66ade2</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="5" />
+              <Parent isRef="43" />
+              <Text>خواهشمند است دستور فرمائید مبلغ / مبالغ جمعا </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text44>
+            <Text49 Ref="46" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>1.7,0.4,1.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>fac019112e73400380226cbaa0ec331a</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text49</Name>
+              <Page isRef="5" />
+              <Parent isRef="43" />
+              <Text>.ریال پرداخت نمایند</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text49>
+            <Text31 Ref="47" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>3.4,0.4,1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>414c6c3dac7f4df494395bbda173de58</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="5" />
+              <Parent isRef="43" />
+              <Text>{Sum(IIF(Spr_TreasuryReport_SelectFundingForm.StageInOut==3 &amp;&amp; Spr_TreasuryReport_SelectFundingForm.StageClassId==1,IIF(Spr_TreasuryReport_SelectFundingForm.LineInOut==1,Spr_TreasuryReport_SelectFundingForm.SumLcy,0),Spr_TreasuryReport_SelectFundingForm.SumLcy)
+
+)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="48" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+            <Text41 Ref="49" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>0,0.2,1.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>b6f52ac5ce2f4c0d8b6b70a93d8a6e7c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="5" />
+              <Parent isRef="43" />
+              <Text>مدیر عامل</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageHeaderBand5</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand5>
+        <PageHeaderBand2 Ref="50" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,6.7,7.2,1.1</ClientRectangle>
+          <Components isList="true" count="12">
+            <Text18 Ref="51" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>5.6,0.9,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>b7fd7a109c984b3f90c51e43535e4991</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>نوع وجه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text14 Ref="52" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>6.5,0.9,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>2289f20646954a96aaeffba26f7dbc74</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>ردیف</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text20 Ref="53" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>0,0.9,1.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>a29c429df71649ef93693dc7e3483041</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>مبلغ</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text24 Ref="54" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>3.1,0.9,1.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>03989995e55949a3bf775795504a7837</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>تاریخ سر رسید</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text33 Ref="55" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.1,0.1,2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>4fac125043f849b8ae5874e7791a10ca</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>امور مالی</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text33>
+            <Text34 Ref="56" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>5.5,0.4,1.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>39d7b938d94e453dbf40661369db5490</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>پرداخت مبلغ / مبالغ جمعا</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text35 Ref="57" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>2.2,0.4,2.3,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>626128fd9829440c852493c064152c06</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>.ریال به شرح جدول فوق بلامانع می باشد</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+            <Text48 Ref="58" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>4.5,0.4,1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10,Bold</Font>
+              <Guid>ce8873d764e347b996a62920de0777ab</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>{Sum(IIF(Spr_TreasuryReport_SelectFundingForm.StageInOut==3 &amp;&amp; Spr_TreasuryReport_SelectFundingForm.StageClassId==1,IIF(Spr_TreasuryReport_SelectFundingForm.LineInOut==1,Spr_TreasuryReport_SelectFundingForm.SumLcy,0),Spr_TreasuryReport_SelectFundingForm.SumLcy)
+
+)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="59" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text48>
+            <Text50 Ref="60" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>4.5,0.9,1.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>499b883b2ea642d38ded45aa2f7ab882</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>شماره سند</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text50>
+            <Text3 Ref="61" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>2.4,0.9,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>7ed7646400184d4b9c36a70574150401</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>ارز</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text17 Ref="62" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>1.5,0.9,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>a4fd1a92522143368f3ef75a0dfcd023</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>نرخ تسعیر ارز</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text60 Ref="63" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>[0:0:0:0]</Brush>
+              <ClientRectangle>0,0.3,1.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>e5e00d460c2c4f95817bbdd66d25f617</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text60</Name>
+              <Page isRef="5" />
+              <Parent isRef="50" />
+              <Text>مدیر مالی</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text60>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>ffeb19a88c4d41b68cd80d3dbea67d09</Guid>
+          <Name>PageHeaderBand2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand2>
+        <DataBand1 Ref="64" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,8.2,7.2,0.2</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text28 Ref="65" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.6,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>04f7c47c8d6b41a39da254b6274fec64</Guid>
+              <HideZeros>True</HideZeros>
+              <Margins>0,3,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="5" />
+              <Parent isRef="64" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.FundTypeId} - {Spr_TreasuryReport_SelectFundingForm.FundTypeName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="66" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text15 Ref="67" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.5,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>b8ee1f9b6de94e68ab01b58ad2543303</Guid>
+              <HideZeros>True</HideZeros>
+              <Margins>0,3,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="5" />
+              <Parent isRef="64" />
+              <ProcessingDuplicates>Merge</ProcessingDuplicates>
+              <Text>{Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>SystemVariables</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text6 Ref="68" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,1.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>8c9008f0080144a9961dc29982843501</Guid>
+              <HideZeros>True</HideZeros>
+              <Margins>0,3,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="5" />
+              <Parent isRef="64" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.SumLcy}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="69" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <State>NegativeInRed</State>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text8 Ref="70" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.1,0,1.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>add25e1898834f10b4ee58dfbab836d7</Guid>
+              <HideZeros>True</HideZeros>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="5" />
+              <Parent isRef="64" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.CheckDueDatePersian}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="71" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text51 Ref="72" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.5,0,1.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>430841f4b805487ab56df5dc670cd38c</Guid>
+              <HideZeros>True</HideZeros>
+              <Margins>0,3,0,0</Margins>
+              <Name>Text51</Name>
+              <Page isRef="5" />
+              <Parent isRef="64" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.DocumentNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="73" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text51>
+            <Text4 Ref="74" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.4,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>4c7e7309642645bca955b2fa035006b1</Guid>
+              <HideZeros>True</HideZeros>
+              <Margins>0,3,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="5" />
+              <Parent isRef="64" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.CurrencyId} - {Spr_TreasuryReport_SelectFundingForm.CurrencyName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="75" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 Ref="76" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.5,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>9f2395430d7644eb92517137150fb497</Guid>
+              <HideZeros>True</HideZeros>
+              <Margins>0,3,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="5" />
+              <Parent isRef="64" />
+              <Text>{Spr_TreasuryReport_SelectFundingForm.ExchangeRate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="77" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Spr_TreasuryReport_SelectFundingForm</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <FooterBand1 Ref="78" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,8.8,7.2,0.2</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text1 Ref="79" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>1.5,0,5.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8,Bold</Font>
+              <Guid>c6111967efc74d07b5868782d88fd253</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="5" />
+              <Parent isRef="78" />
+              <Text>جمع</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text2 Ref="80" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,1.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>9c29ee501bd84276b68efa1025f942f5</Guid>
+              <Margins>0,5,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="78" />
+              <Text>{Sum(Spr_TreasuryReport_SelectFundingForm.SumLcy)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="81" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <NegativePattern>0</NegativePattern>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>FooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <PrintIfEmpty>True</PrintIfEmpty>
+        </FooterBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>ccd6a642c2bc4898ae052c10e3f6c2da</Guid>
+      <Margins>0.4,0.4,0.4,0.4</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11.4</PageHeight>
+      <PageWidth>8</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>5/7/2022 4:22:24 PM</ReportChanged>
+  <ReportCreated>2/1/2015 2:00:37 PM</ReportCreated>
+  <ReportFile>C:\Users\Taji\source\Workspaces\CIS-Project\CIS\CIS.Web\Stimuls\FM\Prn_RequestReceiveMoney.mrt</ReportFile>
+  <ReportGuid>00bb2149f7b84441be6523357365542f</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2021.1.1.0</ReportVersion>
+  <Script>
+		using System;
+		using System.Drawing;
+		using System.Windows.Forms;
+		using System.Data;
+		using Stimulsoft.Controls;
+		using Stimulsoft.Base.Drawing;
+		using Stimulsoft.Report;
+		using Stimulsoft.Report.Dialogs;
+		using Stimulsoft.Report.Components;
+
+		namespace Reports
+		{
+		public class Report : Stimulsoft.Report.StiReport
+		{
+		public Report()        {
+		this.InitializeComponent();
+		}
+
+		#region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+		}
+		}
+	</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

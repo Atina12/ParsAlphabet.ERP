@@ -1,0 +1,72 @@
+﻿#getPatientInfoWS {
+    border-radius: 0px !important;
+}
+
+#getPersobByBirthWS {
+    border-right: thin solid #ffffff;
+}
+
+.tooltip-inner {
+    max-width: 600px;
+    width: auto;
+    font-family: iransans
+}
+
+.carousel-inner .day-slot .nav-pills .nav-link.active {
+    background-color: #fff !important;
+    color: #112233 !important;
+}
+
+.main-steps .step-content {
+    overflow: auto;
+}
+
+.disabled-header {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+caption.caption-prs {
+    font-size: 11px;
+    text-align: right;
+}
+
+.time-slot-newadmission {
+    max-height: calc(100vh - 540px) !important;
+}
+
+button#getHID:focus, button#getAttenderHID:focus, button#getrefferingHID:focus, button#getPatientInfoWS:focus, button#getPersobByBirthWS:focus, button#getDeserveInfo:focus {
+    background-color: #fff !important;
+    color: #616f80 !important;
+}
+
+button#tryGetPrescription:focus {
+    background-color: #fff !important;
+    color: #d1004d !important;
+}
+
+#expandAdmissionBtn {
+    margin-top: 1px
+}
+
+.admissionMasterBalance {
+    text-align: right !important;
+    padding: 10px !important;
+    background-color: #e1e1e1;
+    border-bottom: thin solid #999
+}
+
+
+#admissionListForm > div{
+    min-height: 54px !important;
+    width: 100% !important;
+    resize: vertical;
+    overflow: auto;
+}
+
+#admissionCashPayInfoBox > div {
+    min-height: 128px !important;
+    width: 100% !important;
+    resize: vertical;
+    overflow: auto;
+}

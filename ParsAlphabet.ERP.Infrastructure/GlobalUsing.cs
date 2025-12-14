@@ -1,0 +1,15 @@
+﻿global using ParsAlphabet.ERP.Infrastructure.Implantation;
+global using ParsAlphabet.ERP.Application.Interfaces;
+global using static ParsAlphabet.ERP.Application.Dtos.FormPlate1;
+global using ParsAlphabet.ERP.Application.Dtos;
+global using static ParsAlphabet.ERP.Application.Enums.Enum;
+global using ParsAlphabet.ERP.Application.Enums;
+global using ParsAlphabet.ERP.Application.Dtos;
+global using Microsoft.Data.SqlClient;
+global using AutoMapper;
+global using ParsAlphabet.ERP.Application.Dtos.FM.TreasuryRequestLine;
+global using static ParsAlphabet.ERP.Application.Common.Extensions;
+global using ParsAlphabet.ERP.Application.Common;
+global using ParsAlphabet.ERP.Application.Dtos.WF.StageAction;
+global using ParsAlphabet.ERP.Application.Dtos.WF.StageActionLog;
+global using ParsAlphabet.ERP.Application.Dtos._Login;

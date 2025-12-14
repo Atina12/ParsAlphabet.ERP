@@ -1,0 +1,228 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title id="title_page"></title>
+    <meta content="سیستم مدیریت اطلاعات سازمانی" name="description"/>
+    <meta content="Websla" name="author"/>
+    <link rel="shortcut icon" href="Content/images/favicon.ico">
+
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
+    <link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+
+    <!--Morris Chart CSS -->
+    @*<link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="../plugins/morris/morris.css">
+
+        <link href="/Content/css/metismenu.min.css" rel="stylesheet" type="text/css">
+        <link href="/plugins/alertifyjs/css/alertify.rtl.css" rel="stylesheet" type="text/css">
+        <link href="/plugins/alertifyjs/css/themes/default.rtl.min.css" rel="stylesheet" type="text/css">
+        <link href="/Content/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="/Content/icons/myicon/css/myicon.css" rel="stylesheet" />       
+        <link href="/Content/css/loader.css" rel="stylesheet" />
+        *@
+
+    <link href="~/Content/css/bundle.min.css" rel="stylesheet" media="screen"/>
+    <link href="~/Content/css/printstyle.css" rel="stylesheet" media="print"/>
+    @{
+        var rtl = User.FindFirstValue("LayoutIsRtl");
+        if (rtl == "True")
+        {
+            <link href="/Content/scss/rtl/style-rtl.css" rel="stylesheet" type="text/css"/>
+        }
+        else
+        {
+            <link href="/Content/scss/ltr/style.min.css" rel="stylesheet" type="text/css"/>
+        }
+    }
+
+
+    @await RenderSectionAsync("PageStyles", false)
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+
+    <div class="topbar">
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a href="/" class="logo">
+                <span class="logo-light" id="corpinfo">
+                    <img src="" height="45" alt=""/>
+                    <label>شرکت</label>
+                </span>
+                <span id="corpinfo-sm" class="logo-sm">
+                    <img src="" height="45"/>
+                </span>
+            </a>
+        </div>
+        <nav class="navbar-custom">
+            <ul class="navbar-right list-inline float-left mb-0">
+                <!-- language-->
+                <!--<li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
+                <a class="nav-link dropdown-toggle waves-effect" id="activelanguage" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">-->
+                @*<img src="/Content/images/flags/iran_flag.jpg" class="mr-2" height="12" alt="" /> فارسی <span class="mdi mdi-chevron-down"></span>*@
+                <!--</a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated language-switch" id="languages">-->
+                @*<a class="dropdown-item" href="#"><img src="/Content/images/flags/us_flag.jpg" alt="" height="16" /><span> English </span></a>*@
+                <!--</div>
+                </li>-->
+                <!--  Notification -->
+                @*<li class="dropdown notification-list list-inline-item">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="mdi mdi-bell-outline noti-icon"></i>
+                                <span class="badge badge-pill badge-danger noti-icon-badge font-11" id="conterNotify">0</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-menu-lg px-1" id="resultMessage">
+
+                            </div>
+                        </li>*@
+                <!-- full screen -->
+                <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
+                    <a class="nav-link waves-effect" href="#" id="btn-fullscreen">
+                        <i class="mdi mdi-arrow-expand-all noti-icon"></i>
+                    </a>
+                </li>
+                <li class="dropdown notification-list list-inline-item">
+                    <div class="dropdown notification-list nav-pro-img">
+                        <a class="dropdown-toggle nav-link arrow-none nav-user" id="userimage" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            @*<img src="/Content/images/users/user-4.jpg" alt="user" class="rounded-circle">*@
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+                            <a class="dropdown-item" id="profileSection"><i class="mdi mdi-account-circle"></i>پروفایل</a>
+                            <a class="dropdown-item d-block" href="#"><i class="mdi mdi-settings"></i>تنظیمات</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="/Home/Logout"><i class="mdi mdi-power text-danger"></i>خروج</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="list-inline menu-left mb-0">
+                <li class="float-right">
+                    <button class="button-menu-mobile open-left waves-effect">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="apiLoader d-none"></div>
+        </nav>
+    </div>
+    <!-- Top Bar End -->
+    <div class="left side-menu">
+        <div class="slimscroll-menu" id="remove-scroll">
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <!-- Left Menu Start -->
+                <ul class="metismenu displaynone" id="menu"></ul>
+            </div>
+            <!-- Sidebar -->
+            <div class="clearfix"></div>
+        </div>
+        <!-- Sidebar -left -->
+    </div>
+    <div class="box displaynone" id="loader">
+        <img src="/Content/images/heart.png" id="heartbeat"/>
+    </div>
+    <div id="content">
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        @*<span class="d-none d-sm-inline-block">  ستاره هوشمند پارس <i class="mdi mdi-hospital text-danger"> </i>سیستم مدیریت اطلاعات درمانگاه </span>*@
+        <span class="ml-2">وبسلا</span><img class="ml-2" src="Content/images/favicon.ico" alt="Girl in a jacket" width="15"><span>سیستم برنامه ریزی منابع سازمانی</span>
+    </footer>
+    <div class="clearfix mt-2 mb-1" style="height:1px"></div>
+
+</div>
+
+<iframe id="frmDirectPrint" style="display:none"></iframe>
+
+<div id="navigationModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+    <div id="modal-dialog" class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title"></h5>
+                </div>
+            </div>
+            <div id="navigationModalContent" class="modal-body modal-max-height text-right" data-parsley-validate>
+            </div>
+            <div class="modal-footer">
+                <button id="navigation_modal_close" onclick="navigation_modal_close()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="messageModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="keyDownModalMessage(event,this)">
+    <div id="modal-dialog" class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id=""></h5>
+                </div>
+            </div>
+            <div id="" class="modal-body modal-max-height text-right" data-parsley-validate>
+            </div>
+            <div class="modal-footer">
+                <button id="navigation_modal_close" onclick="closeMessageModal($('#messageModal'))" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert-content"></div>
+
+<script src="~/Content/js/jquery.min.js"></script>
+@*<script src="~/js/LocalStorage.js"></script>*@
+
+@*<script src="~/Content/js/jquery-ui.js"></script>
+        <script src="~/Content/js/popper.min.js"></script>
+        <script src="~/Content/js/bootstrap.bundle.min.js"></script>
+
+        <script src="~/Content/js/metismenu.min.js"></script>
+        <script src="~/Content/js/jquery.slimscroll.js"></script>
+        <script src="~/Content/js/waves.min.js"></script>*@
+
+@*<script src="~/plugins/alertifyjs/js/alertify.min.js"></script>
+        <script src="~/plugins/parsleyjs/parsley-rtl.min.js"></script>
+
+        <script src="~/js/messages.js"></script>
+        <script src="~/js/constants.js"></script>
+
+
+        
+        *@
+@*<script src="~/lib/ColumnResizeable/ColumnResizable.js"></script>*@
+<script src="~/Content/js/site.bundle.min.js"></script>
+<script src="~/Content/js/bootstrap4-toggle.min.js"></script>
+<script src="~/lib/library-bundle/libbundle.js"></script>
+<script src="~/plugins/Lodash/Lodash.js"></script>
+<script src="~/js/layout.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/lib/library-bundle/web.bundle.js"></script>
+<script src="~/Content/js/jalali-moment.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script>
+        jQuery('#menu').metisMenu().show();
+        $("#profileSection").on("click", function () {
+            navigation_item_click("/profile", "پروفایل کاربر");
+        });
+    </script>
+@RenderSection("Scripts", false)
+<script src="/Content/js/app.js"></script>
+@*    <script language="JavaScript" type="text/javascript">
+            $(window).bind("beforeunload", function (e) {
+                loginApp(false);
+            });
+        </script>*@
+
+<script src="~/js/JsonSinitizer.js"></script>
+@*<script src="~/js/Notification.js"></script>*@
+
+</body>
+</html>

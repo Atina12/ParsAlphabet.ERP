@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "کارتابل مغایرت";
+}
+<link href="~/lib/ModulesCss/AdmissionCartable.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="header-title d-flex">
+                    <div id="bcTarget" style="display : none"></div>
+                    <span>@ViewBag.Title</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <fieldset id="filterInputBox" class="group-box group-box-gray" data-parsley-validate>
+                                <legend>فیلتر</legend>
+                            </fieldset>
+                            <div id="attenderSchedulePage" style="font-size:9px">
+                                @await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

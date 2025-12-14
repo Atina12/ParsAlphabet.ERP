@@ -1,0 +1,8 @@
+  var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+
+            config.HasHeaderRecord = false;
+            //config.LeaveOpen = false;
+
+            ***************************************************
+             image = MediaTypeNames.Image.FromStream(ms);
+             ***************************************************

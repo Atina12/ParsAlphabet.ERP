@@ -1,0 +1,7 @@
+﻿#pagetableAdd .table-responsive-table {
+    height: calc(100vh - 390px) !important;
+}
+
+#pagetableAdd .filterBox {
+    display: none;
+}

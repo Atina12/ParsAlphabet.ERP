@@ -1,0 +1,102 @@
+﻿<div id="stepLogModalPurchasePersonOrders" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست گام های ثبت شده</h5>
+                </div>
+            </div>
+
+            <div class="modal-body  modal-max-height-lg text-right " data-parsley-validate>
+                <div class="card-body" id="itemPageTable">
+                    <div class="row mb-3">
+                        <div class="form-group col-sm-4">
+                            <select class="form-control" id="actionPurchasePersonOrders"></select>
+                        </div>
+                        <div class="form-group col-sm-2 pr-0">
+                            <button onclick="update_actionPurchasePersonOrders()" id="update_action_btn" type="button" class="btn btn-success ml-2 pa waves-effect" value="">
+                                <i class="fa fa-check-circle"></i>
+                                <span>ثبت گام</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">گام</th>
+                                <th class="col-width-percent-10">کاربر</th>
+                                <th class="col-width-percent-10">تاریخ</th>
+                            </tr>
+                            </thead>
+                            <tbody id="stepLogRowsPurchasePersonOrders">
+                            <tr id="emptyRow">
+                                <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <fieldset class="group-box mt-3 group-box-blue displaynone" id="itemUpdateStepPageTablefieldset">
+                    <legend>لیست صورتحساب های متصل به درخواست جاری</legend>
+
+                    <div class="table-responsive">
+                        <div class="table-responsive  overflow-y:scroll !important;overflow-x:auto!important">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" id="exportCSV" onclick="export_csvLastConfirmHeader()" class="btn btn-excel waves-effect" style=" margin :0px 0px 2px 9px"><i class="fa fa-file-excel"></i>اکسل</button>
+                            </div>
+                            <table class="table table-styles border mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-10">شناسه صورتحساب</th>
+                                    <th class="col-width-percent-10">مرحله</th>
+                                    <th class="col-width-percent-10">جریان کار</th>
+                                    <th class="col-width-percent-10">گام جاری</th>
+                                    <th class="col-width-percent-10">تاریخ برگه</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempErrorUpdateStepResultLines">
+                                <tr id="emptyRow">
+                                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="group-box mt-3 group-box-blue displaynone" id="purchaseOrderCheckisAllocatedListfieldset">
+                    <legend>مرحله/دسته بندی های فاقد مبانی بهای خرید</legend>
+
+                    <div class="table-responsive">
+                        <div class="table-responsive  overflow-y:scroll !important;overflow-x:auto!important">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+
+                                <tr>
+                                    <th class="col-width-percent-10">مرحله</th>
+                                    <th class="col-width-percent-10">دسته بندی</th>
+                                </tr>
+                                </thead>
+                                <tbody id="temperrorPurchaseOrderCheckisAllocatedList">
+                                <tr id="emptyRow">
+                                    <td colspan="2" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('stepLogModalPurchasePersonOrders')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Modules/PU/PurchaseOrderCartable/PurchaseOrdersActionIndex.js"></script>

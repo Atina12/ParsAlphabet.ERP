@@ -1,0 +1,526 @@
+﻿
+#treeViewPage #treeviewTreeBtn {
+    margin: 10px 17px 10px 17px;
+    border-bottom: 1px solid #a2a5b5;
+    display: flex;
+    justify-content: space-between
+}
+
+#treeViewPage #treeViewCopyLine,
+#treeViewPage #treeViewPathBox {
+    border: 1px solid #e3e5ef;
+    border-radius: 5px
+}
+
+#treeViewPage #treeViewSearchFieldBtn {
+    font-size: 10px;
+    border-radius: 3px 0px 0px 3px;
+    width: 27px;
+    height: 27px;
+    padding-top: 4px;
+    padding-left: 7px;
+}
+
+    #treeViewPage #treeViewSearchFieldBtn:focus {
+        border: 1px solid #517397
+    }
+
+    #treeViewPage #treeViewSearchFieldBtn i {
+        font-size: 11px;
+    }
+
+#treeViewPage #treeViewSearchFieldBox {
+    border: 2px solid #517397;
+    font-size: 15px !important;
+    border-radius: 0px 3px 3px 0px !important;
+    float: right;
+    height: 27px;
+    width: 200px;
+}
+
+    #treeViewPage #treeViewSearchFieldBox #treeViewSearchField {
+        width: 100%;
+        font-size: 12px;
+        outline: none !important;
+        border: none !important;
+        padding: 0.2rem 0.75rem;
+        height: 22px;
+    }
+
+        #treeViewPage #treeViewSearchFieldBox #treeViewSearchField::-webkit-input-placeholder {
+            font: 11px
+        }
+
+#treeViewPage #treeViewDemonstrationMode {
+    font-size: 10px;
+}
+
+#treeViewPage #treeViewShowAllChildren,
+#treeViewPage #treeViewHideAllChildren {
+    float: right;
+    font-size: 12px;
+    padding-top: 4px;
+    padding-bottom: 3px;
+}
+
+#treeViewPage #treeViewReset {
+    font-size: 12px;
+    padding-top: 4px;
+    padding-bottom: 3px;
+}
+
+#treeViewPage ul {
+    list-style: none;
+}
+
+    #treeViewPage ul li {
+        position: relative;
+    }
+
+        #treeViewPage ul li::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            right: -19px;
+            border-right: 1px dashed #a2a5b5;
+            width: 1px;
+            height: 100%;
+        }
+
+        #treeViewPage ul li:hover::before {
+            /*      border-right: 1px dashed red;*/
+        }
+
+    #treeViewPage ul:hover > li::before {
+        /*  border-right: 1px dashed red;*/
+    }
+
+    #treeViewPage ul li:hover ~ li::before {
+        /*    border-right: 1px dashed #a2a5b5;*/
+    }
+
+    #treeViewPage ul li::after {
+        content: "";
+        position: absolute;
+        border-top: 1px dashed #a2a5b5;
+        top: 15px;
+        right: -17px;
+        width: 17px;
+    }
+
+    #treeViewPage ul li:hover::after {
+           border-top: 1px dashed red;
+    }
+
+#treeViewPage .treeViewLi {
+    margin-right: 25px
+}
+
+#treeViewPage #treeViewRootContent {
+    position: relative;
+    overflow-y: auto;
+    margin: 10px 3px 10px 17px;
+    min-height: 100px;
+    height: 250px;
+    padding: 1px 10px 20px 10px;
+    scroll-behavior: smooth;
+    resize: vertical
+}
+
+#treeViewPage .treeViewContent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#treeViewPage .treeViewContentPlusMinus {
+    margin-left: 2px;
+    border: 1px solid #e3e5ef;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #a2a5b5;
+    z-index: 10
+}
+
+    #treeViewPage .treeViewContentPlusMinus i {
+        font-size: 9px !important
+    }
+
+#treeViewPage .treeViewContentTextAndBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    padding: 1px 10px 1px 10px;
+    margin: 2px 0px 2px 2px;
+    border: 1px solid #e3e5ef;
+    position: relative;
+    height: 27px;
+}
+
+    #treeViewPage .treeViewContentTextAndBtn:hover {
+        background-color: #EEEEEE;
+    }
+
+#treeViewPage .treeViewContentTextAndBtnBtn {
+    position: relative;
+    width: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    margin-right: 20px
+}
+
+#treeViewPage .treeViewContentTextAndBtnBtnEdit {
+    font-size: 9px;
+    cursor: pointer;
+    padding: 3px 4px 2px 4px;
+    margin: 0px;
+    border-color: #008024;
+    color: #008024;
+    border-radius: 4px;
+    width: 24px !important;
+}
+
+#treeViewPage .treeViewContentTextAndBtnBtnDelete {
+    font-size: 10px;
+    margin: 0px;
+    border-radius: 4px;
+    border-color: maroon;
+    color: maroon;
+    width: 24px !important;
+}
+
+#treeViewPage .treeViewContentTextAndBtnBtnBuildChild {
+    font-size: 9px;
+    cursor: pointer;
+    padding: 3px 7px 2px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    border-color: #42A5F5;
+    color: #42A5F5;
+    width: 24px !important;
+}
+
+#treeViewPage .treeViewContentTextAndBtnBtnCopy {
+    font-size: 9px;
+    cursor: pointer;
+    padding: 3px 7px 2px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    border-color: #6D4C41;
+    color: #6D4C41;
+    width: 24px !important;
+    color: #42A5F5
+}
+
+    #treeViewPage .treeViewContentTextAndBtnBtnCopy i {
+        color: #6D4C41
+    }
+
+    #treeViewPage .treeViewContentTextAndBtnBtnCopy:hover {
+        background-color: #6D4C41;
+        color: white;
+    }
+
+        #treeViewPage .treeViewContentTextAndBtnBtnCopy:hover i {
+            color: white;
+        }
+
+#treeViewPage .treeViewContentTextAndBtnBtnEdit:hover {
+    background-color: #008024;
+    color: white;
+}
+
+#treeViewPage .treeViewContentTextAndBtnBtnDelete:hover {
+    border-radius: 4px;
+    background-color: maroon;
+    color: white;
+}
+
+#treeViewPage .treeViewContentTextAndBtnBtnBuildChild:hover {
+    border-radius: 4px;
+    background-color: #42A5F5;
+    color: white;
+}
+
+#treeViewPage .treeViewContentTextAndBtnText {
+    font-size: 11px;
+    cursor: pointer;
+    color: #616161;
+}
+
+#treeViewPage .treeviewBuildChild,
+#treeViewPage .treeViewEditElement {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    padding: 5px 8px 5px 8px;
+    margin: 5px 0px 5px;
+    border: 1px solid #e3e5ef;
+    top: -19px;
+    right: 14px;
+    height: 27px;
+    width: 0px;
+    overflow: hidden;
+}
+
+#treeViewPage .treeViewPasteElement {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 5px 0px 5px;
+    border: 1px solid #e3e5ef;
+    top: -19px;
+    right: 14px;
+    height: 27px;
+    width: 0px;
+    overflow: hidden;
+}
+
+#treeViewPage .treeviewBuildChild > input,
+#treeViewPage .treeViewEditElement > input {
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e3e5ef;
+    border-radius: 0px 4px 4px 0px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    height: 21px;
+    margin-left: 3px;
+    font-size: 11px
+}
+
+#treeViewPage .treeviewBuildChild > input {
+    border: 1px solid #42A5F5
+}
+
+#treeViewPage .treeViewEditElement > input {
+    border: 1px solid #008024
+}
+
+#treeViewPage .treeviewBuildChild > input:focus {
+    outline: none;
+    border: 1px solid #42A5F5;
+}
+
+#treeViewPage .treeViewEditElement > input:focus {
+    outline: none;
+    border: 1px solid #008024;
+}
+
+#treeViewPage .treeviewBuildChildInsert {
+    font-size: 9px;
+    cursor: pointer;
+    padding: 3px 7px 2px 7px;
+    margin: 0px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: #42A5F5;
+    color: #42A5F5;
+    width: 24px !important;
+    margin-right: -4px;
+    height: 21px
+}
+
+    #treeViewPage .treeviewBuildChildInsert:hover {
+        border: 1px solid #42A5F5;
+        background-color: #42A5F5;
+        color: white;
+    }
+
+    #treeViewPage .treeviewBuildChildInsert:focus {
+        border: 1px solid #42A5F5;
+    }
+
+#treeViewPage .treeViewEditElementEdit {
+    font-size: 9px;
+    cursor: pointer;
+    padding: 3px 6px 2px 7px;
+    margin: 0px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: #008024;
+    color: #008024;
+    width: 24px !important;
+    margin-right: -4px;
+    height: 21px
+}
+
+    #treeViewPage .treeViewEditElementEdit:hover {
+        border: 1px solid #008024;
+        background-color: #008024;
+        color: white;
+    }
+
+    #treeViewPage .treeViewEditElementEdit:focus {
+        border: 1px solid #008024;
+    }
+
+#treeViewPage .treeViewPasteElementBtn,
+#treeViewPage .treeViewPasteElementBtnCancel {
+    height: 21px;
+    font-size: 9px;
+    cursor: pointer;
+    padding: 3px 7px 2px 7px;
+    margin: 0px;
+    border-radius: 4px;
+    border-color: #6D4C41;
+    color: #6D4C41;
+    width: 24px !important;
+    color: #42A5F5
+}
+
+    #treeViewPage .treeViewPasteElementBtn:hover,
+    #treeViewPage .treeViewPasteElementBtnCancel:hover {
+        border: 1px solid #6D4C41;
+        background-color: #6D4C41;
+        color: white;
+    }
+
+        #treeViewPage .treeViewPasteElementBtn:hover i,
+        #treeViewPage .treeViewPasteElementBtnCancel:hover i {
+            color: white;
+        }
+
+    #treeViewPage .treeViewPasteElementBtn i,
+    #treeViewPage .treeViewPasteElementBtnCancel i {
+        color: #6D4C41
+    }
+
+
+#treeViewPage .treeviewBuildChildPosition,
+#treeViewPage .treeViewEditElementPositon,
+#treeViewPage .treeViewCopyChildPosition {
+    position: relative;
+}
+
+#treeViewPage .treeViewCopyLineTitle,
+#treeViewPage .treeViewPathTitle {
+    font-size: 12px;
+    padding: 2px 5px 2px 5px !important;
+    color: red;
+}
+
+#treeViewPage #treeViewCopyLineContent,
+#treeViewPage #treeViewPathContent {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 27px
+}
+
+    #treeViewPage #treeViewCopyLineContent .treeviewPathLine,
+    #treeViewPage #treeViewPathContent .treeviewPathLine {
+        font-size: 12px;
+        padding: 2px 5px 2px 5px !important;
+        color: #616161;
+        cursor: pointer
+    }
+
+#treeViewPage .treeViewSearchList .treeviewPathLine {
+    font-size: 11px;
+    padding: 0px 5px 0px 5px !important;
+    color: #616161;
+    cursor: pointer
+}
+
+#treeViewPage #treeViewPathContent .treeviewPathLine:hover {
+    color: red
+}
+
+#treeViewPage #treeViewCopyLineContent .treeview-path-seperate,
+#treeViewPage .treeViewSearchList .treeview-path-seperate,
+#treeViewPage #treeViewPathContent .treeview-path-seperate {
+    color: red;
+    padding: 0px 2px 0px 0px;
+}
+
+#treeViewPage #treeviewLoading {
+    top: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 1000
+}
+
+    #treeViewPage #treeviewLoading > i {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 45px;
+        animation: treeviewSpinner 1s linear infinite
+    }
+
+@keyframes treeviewSpinner {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+#treeViewPage .treeViewSearchList {
+    width: 100%;
+    list-style: none;
+    margin: 10px 20px 10px 20px;
+    min-height: 500px;
+    overflow: auto;
+    height: 560px
+}
+
+    #treeViewPage .treeViewSearchList li {
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+        border-radius: 5px;
+        padding: 3px;
+        position: relative;
+        display: flex;
+        white-space: nowrap;
+        box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+        margin: 4px;
+        width: fit-content;
+    }
+
+        #treeViewPage .treeViewSearchList li:hover {
+            background-color: #EEEEEE;
+        }
+
+    #treeViewPage .treeViewSearchList .treeViewModalNumberOfBox {
+        font-size: 11px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 30px;
+        height: 27px;
+        background-color: rgba(255, 99, 71, 0.8);
+        border-radius: 0px 5px 5px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #treeViewPage .treeViewSearchList .treeViewModalBox {
+        width: 100%;
+        display: flex;
+        padding: 2px 37px 2px 10px;
+    }
+
+#treeViewPage #treeViewContent {
+    position: relative
+}
+
+#treeViewPage #treeViewPaths {
+    border-bottom: 1px solid #a2a5b5;
+    margin: 0px 19px 0px 17px;
+}

@@ -1,0 +1,439 @@
+﻿/* ==============
+  Tables
+===================*/
+span.td-detailspan {
+    width: 100%;
+    display: inline-block;
+    min-height: 35px;
+    padding: 5px 5px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.td-hasdetail .td-detailspan:last-child {
+    border: none;
+}
+
+.table-styles tbody tr td.td-hasdetail {
+    padding: 0px !important;
+}
+
+.table {
+    margin-bottom: 10px;
+}
+
+/*.modal {
+
+    thead tr th {
+        padding: 4px;
+    }
+}*/
+
+.table {
+    word-break: break-word;
+
+    td, th {
+        vertical-align: middle;
+    }
+
+    td button::after {
+        margin-right: 5px !important
+    }
+
+    td .dropdown-menu .dropdown-item {
+        color: #212529
+    }
+
+    td .mt-neg-5 {
+        margin-top: -5px
+    }
+}
+
+.highlight {
+    background-color: rgb(255, 213, 120) !important;
+}
+
+.highlight-danger {
+    color: #f00 !important;
+}
+
+.highlight-success {
+    color: #1f7244 !important;
+}
+
+
+.td-red-light {
+    background-color: #ff5757b0;
+    color: white;
+}
+
+.td-success1-light {
+    background-color: rgba(57,178,124,0.59);
+    color: white;
+}
+
+.td-success2-light {
+    background-color: rgba(0,150,136,0.59);
+    color: white;
+}
+
+.td-success3-light {
+    background-color: rgba(89,198,251,0.59);
+    color: white;
+}
+
+.td-success4-light {
+    background-color: rgba(255,146,84,0.59);
+    color: white;
+}
+
+.td-success5-light {
+    background-color: rgba(2, 197, 141, 0.59);
+    color: white;
+}
+
+.td-success6-light {
+    background-color: rgba(89, 198, 251, 0.59);
+    color: white;
+}
+
+.td-success7-light {
+    background-color: rgba(89,198,251,0.59);
+    color: white;
+}
+/* ==============
+  My Tables hover
+===================*/
+.scroll {
+    tr {
+        display: table;
+        width: 100%;
+    }
+
+    thead {
+        display: table;
+        width: 100%;
+
+        tr {
+            width: 98%;
+            width: -webkit-calc(100% - 17px) !important;
+            width: -moz-calc(100% - 16px);
+            width: calc(100% - 17px);
+        }
+    }
+
+    tbody {
+        display: block;
+        height: calc(100vh - 322px);
+        overflow: scroll;
+        overflow-x: hidden !important;
+        scroll-snap-type: mandatory;
+        scroll-snap-points-y: repeat(3rem);
+        scroll-snap-type: y mandatory;
+    }
+}
+
+@media (min-width:280px) and (max-width:800px) {
+    .scroll {
+        min-width: 1000px;
+
+        tbody {
+            height: calc(100vh - 360px);
+        }
+    }
+}
+
+@media (min-height:280px) and (max-height:414px) {
+    .scroll {
+        tbody {
+            height: calc(100vh - 200px);
+        }
+    }
+}
+
+@media (hover: none) and (pointer:coarse) {
+    .scroll {
+        thead {
+            tr {
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+.table-styles {
+    thead, tfoot {
+        background: #dad9d9;
+
+        tr {
+            border-bottom: 1px solid #f1f1f1;
+            min-height: 30px;
+
+            th {
+                border-right: 1px solid #dee2e6;
+                border-top: 0;
+                border-bottom: none;
+                color: #444;
+                font-weight: bold;
+                vertical-align: middle;
+                padding: 2px 3px;
+                height: auto;
+                word-break: normal;
+
+                &:first-child {
+                    border-right: 1px solid #dee2e6;
+                }
+
+                .bd-table {
+                    thead {
+                        display: block;
+                        width: auto;
+                        background: #555;
+                        color: #fff;
+
+                        tr {
+                            width: 100% !important;
+                            min-height: inherit;
+                            border: none;
+
+                            th {
+                                padding: unset;
+                                vertical-align: middle;
+                                border: none;
+                                color: #fff;
+                                font-weight: normal;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        height: auto !important;
+                        overflow: hidden;
+                        display: inherit;
+
+                        tr {
+                            border: none;
+                            min-height: inherit;
+                            width: 100% !important;
+                            display: block;
+
+                            td {
+                                padding: 0 !important;
+
+                                button {
+                                    margin: 0 !important;
+                                    padding: 0 !important;
+                                    border-radius: unset;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            th {
+                border-left: 1px solid #dee2e6;
+                padding: 10px;
+            }
+
+            td {
+                border-left: 1px solid #dee2e6;
+                padding: 5px !important;
+
+                button {
+                    border-radius: 3px;
+                    line-height: 1.428571429;
+                    padding: 2px 5px 3px !important;
+                    font-size: 10px;
+
+                    &:last-child {
+                        margin-left: 0;
+                    }
+
+                    &:hover {
+                        color: #fff;
+                    }
+
+                    i {
+                        width: 10px;
+                        margin: 0;
+                    }
+                }
+
+                button:not(.dropdown-item) {
+                    i {
+                        width: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .table-hover tbody tr td a {
+        display: block;
+        margin-top: 5px;
+        margin-left: 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+/*== Table Width Column ==*/
+.col-width-percent-1 {
+    width: 1% !important;
+}
+
+.col-width-percent-2 {
+    width: 2% !important;
+}
+
+.col-width-percent-3 {
+    width: 3% !important;
+}
+
+.col-width-percent-4 {
+    width: 4% !important;
+}
+
+.col-width-percent-5 {
+    width: 5% !important;
+}
+
+.col-width-percent-6 {
+    width: 6% !important;
+}
+
+.col-width-percent-7 {
+    width: 7% !important;
+}
+
+.col-width-percent-8 {
+    width: 8% !important;
+}
+
+.col-width-percent-9 {
+    width: 9% !important;
+}
+
+.col-width-percent-10 {
+    width: 10% !important;
+}
+
+.col-width-percent-11 {
+    width: 11% !important;
+}
+
+.col-width-percent-12 {
+    width: 12% !important;
+}
+
+.col-width-percent-13 {
+    width: 13% !important;
+}
+
+.col-width-percent-14 {
+    width: 14% !important;
+}
+
+.col-width-percent-15 {
+    width: 15% !important;
+}
+
+.col-width-percent-16 {
+    width: 16% !important;
+}
+
+.col-width-percent-17 {
+    width: 17% !important;
+}
+
+.col-width-percent-18 {
+    width: 18% !important;
+}
+
+.col-width-percent-19 {
+    width: 19% !important;
+}
+
+.col-width-percent-20 {
+    width: 20% !important;
+}
+
+.col-width-percent-25 {
+    width: 25% !important;
+}
+
+.col-width-percent-30 {
+    width: 30% !important;
+}
+
+.col-width-percent-35 {
+    width: 35% !important;
+}
+
+.col-width-percent-40 {
+    width: 40% !important;
+}
+
+.col-width-percent-45 {
+    width: 45% !important;
+}
+
+.col-width-percent-50 {
+    width: 50% !important;
+}
+
+.col-width-percent-55 {
+    width: 55% !important;
+}
+
+.col-width-percent-60 {
+    width: 60% !important;
+}
+
+.col-width-percent-65 {
+    width: 65% !important;
+}
+
+.col-width-percent-70 {
+    width: 70% !important;
+}
+
+.col-width-percent-75 {
+    width: 75% !important;
+}
+
+.col-width-percent-80 {
+    width: 80% !important;
+}
+
+.col-width-percent-85 {
+    width: 85% !important;
+}
+
+.col-width-percent-90 {
+    width: 90% !important;
+}
+
+.col-width-percent-95 {
+    width: 95% !important;
+}
+
+.col-width-percent-100 {
+    width: 100% !important;
+}
+
+span.td-detailspan {
+    width: 100%;
+    display: inline-block;
+    min-height: 35px;
+    padding: 5px 5px;
+    border-bottom: 1px solid #dee2e6;
+}

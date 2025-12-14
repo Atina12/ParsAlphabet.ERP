@@ -1,0 +1,11 @@
+﻿a.nav-link.active {
+    background-color: #566271 !important;
+    color: #fff !important;
+}
+
+.list-max-height {
+    max-height: 300px;
+    overflow: auto;
+    margin: 10px 0 0 0;
+    padding: 0;
+}

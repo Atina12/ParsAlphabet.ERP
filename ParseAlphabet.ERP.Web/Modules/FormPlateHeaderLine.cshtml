@@ -1,0 +1,70 @@
+﻿<link href="~/Content/css/FormPlateHeaderLine.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet"/>
+<link href="~/Content/css/checkbox-button.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15" id="formHeaderLine" tabindex="-2">
+                        <div id="header-div" tabindex="-2">
+                            <div class="button-items mt-2">
+
+                            </div>
+                            <div id="header-div-content" style="opacity:0" tabindex="-2">
+
+                            </div>
+                        </div>
+                        <div id="header-lines-div" class="displaynone" tabindex="-2">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="detLineModal" class="modal fade p-5" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="close_modal_det()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="headeUpdateModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="header_updateValidtion();" class="btn btn-success waves-effect waves-light" tabindex="11"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="headeUpdateModal_close()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/SearchModal.cshtml")
+<script src="~/js/formplate.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/js/formplateHeaderLine.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/js/jquery.numeric.js"></script>

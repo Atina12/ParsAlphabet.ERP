@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "صندوق ها";
+}
+
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+
+            <div class="modal-body modal-max-height text-right">
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+                        <a class="active nav-link" id="firstTab" data-toggle="tab" href="#formBox" role="tab">
+                            <span>اطلاعات پایه</span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+                        <a class="nav-link" data-toggle="tab" href="#posBox" role="tab">
+                            <span>تخصیص خودپرداز ها</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content group-box group-box-gray">
+                    <div class="tab-pane active p-3" id="formBox" role="tabpanel">
+                        <div class="tabToggle1" id="cashierForm" data-parsley-validate>
+                            <div class="row" id="rowKeyId">
+                                <div class="d-block w-100 text-right mb-2 pr-3">
+                                    <div class="key_id">
+                                        <lable id="modal_keyid_caption"></lable>
+                                        <span id="modal_keyid_value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label>نام</label>
+                                    <div>
+                                        <input id="name" type="text" class="form-control atoz-valid" title="" required tabindex="1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>شعبه</label>
+                                    <div>
+                                        <select id="branchId" type="text" class="form-control select2" title="" required data-parsley-selectvalzero tabindex="2" data-parsley-errors-container="#branchIdErrorContainer">
+                                            <option value="0">انتخاب کنید</option>
+                                        </select>
+                                    </div>
+                                    <div id="branchIdErrorContainer"></div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label> وضعیت</label>
+                                    <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="3">
+                                        <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>کیوسک</label>
+                                    <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isStand');" tabindex="4">
+                                        <input id="isStand" type="checkbox" onchange="standChange(this)" switch-value="بلی,خیر"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>آی پی</label>
+                                    <div class="input-group">
+                                        <input id="ipAddress" type="text" class="form-control " data-parsley-existposip data-parsley-errors-container="#iPErrorContainer" maxlength="23" title="" required data-parsley-ipv4 data-inputmask="'mask':'9{1,3}.9{1,3}.9{1,3}.9{1,3}','radixPoint':'.'" tabindex="5">
+                                        <div class="input-group-prepend">
+                                            <button id="getReplayIpCashier" onclick="getPingStand($('#ipAddress').val())" style="width:3rem" type="button" data-ping="" class="btn btn-secondary" tabindex="-1">
+                                                <i class="fa fa-network-wired"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="iPErrorContainer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane p-3" id="posBox" role="tabpanel">
+                        <div class="card-body " id="posForm" data-parsley-validate>
+                            <div class="tabToggle2">
+                                <div class="row justify-content-end" id="posFormMain">
+                                    <div class="form-group col-sm-4">
+                                        <label>نام دستگاه</label>
+                                        <div>
+                                            <input id="name_pos" type="text" class="form-control atoz-valid" title="" required tabindex="21">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>بانک</label>
+                                        <div>
+                                            <select id="bankId" class="form-control  select2" title="" required data-prasley-selectvalzero data-parsley-validate-if-empty="true" tabindex="22" data-parsley-errors-container="#bankIdErrorContainer">
+                                            </select>
+                                        </div>
+                                        <div id="bankIdErrorContainer"></div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label>حساب بانکی</label>
+                                        <div>
+                                            <select id="bankAccountId" class="form-control  select2" title="" data-prasley-insertrequired required data-prasley-selectvalzero tabindex="23" data-parsley-errors-container="#bankAccountIdErrorContainer">
+                                            </select>
+                                        </div>
+                                        <div id="bankAccountIdErrorContainer"></div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>تامین کننده</label>
+                                        <div>
+                                            <select id="posProviderId" class="form-control select2" title="" data-parsley-errors-container="#posProviderIdErrorContainer" required tabindex="24">
+                                            </select>
+                                        </div>
+                                        <div id="posProviderIdErrorContainer"></div>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label> PcPos</label>
+                                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isPcPos');" tabindex="25">
+                                            <input id="isPcPos" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group col-sm-4">
+                                            <label>شماره پایانه دستگاه</label>
+                                            <div>
+                                                <input id="terminalNo" type="text" class="form-control str-number" data-parsley-existterminalno="" data-parsley-existterminalnoarr="" maxlength="10" required title="" tabindex="26">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label>آی پی پوز</label>
+                                            <div class="input-group">
+                                                <input id="cashier_IpAddress" type="text" class="form-control " maxlength="23" title="" required data-parsley-ipv4 data-parsley-hasping data-parsley-haseroerrping data-parsley-existposip data-parsley-existposiparr data-parsley-errors-container="#ipErrorContainer" data-inputmask="'mask':'9{1,3}.9{1,3}.9{1,3}.9{1,3}','radixPoint':'.'" tabindex="27">
+                                                <div class="input-group-prepend">
+                                                    <button id="getReplayIp" onclick="getPing($('#cashier_IpAddress').val())" style="width:3rem" type="button" data-ping="" class="btn btn-secondary" tabindex="-1"><i class="fa fa-network-wired"></i></button>
+                                                </div>
+                                            </div>
+                                            <div id="ipErrorContainer"></div>
+                                        </div>*@
+                                    <div class="form-group col-sm-4">
+                                        <label> وضعیت</label>
+                                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive_Pos');" tabindex="26">
+                                            <input id="isActive_Pos" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-4 text-left">
+                                        <button id="addPos" type="button" class="btn btn-light border-blue" tabindex="27"><i class="fa fa-arrow-down"></i>ثبت</button>
+                                        <button id="canceledPos" type="button" class="btn btn-light border-green" tabindex="28"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-styles border min-width-0-table" style="width:100%!important" id="tempPosList">
+                                        <thead class="table-thead-fixed">
+                                        <tr>
+                                            <th class="col-width-percent-3 ">شناسه</th>
+                                            <th class="col-width-percent-8 ">نام</th>
+                                            <th class="col-width-percent-7 ">بانک</th>
+                                            <th class="col-width-percent-15 ">حساب بانکی</th>
+                                            <th class="col-width-percent-5 ">PCPos</th>
+                                            <th class="col-width-percent-15 ">شماره پابانه دستگاه</th>
+                                            @*<th class="col-width-percent-12 ">آی پی پوز</th>
+                                                    <th class="col-width-percent-15 ">تامین کننده</th>*@
+                                            <th class="col-width-percent-10 ">وضعیت</th>
+                                            <th class="col-width-percent-10 ">عملیات</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tempPos">
+                                        <tr id="emptyRow">
+                                            <td colspan="10" style="text-align:center">سطری وجود ندارد</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="saveCashier();" class="btn btn-success waves-effect waves-light" tabindex="6" title="Ctrl + S"><i class="fa fa-check-circle"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Modules/FM/Cashier/CashierIndex.js"></script>

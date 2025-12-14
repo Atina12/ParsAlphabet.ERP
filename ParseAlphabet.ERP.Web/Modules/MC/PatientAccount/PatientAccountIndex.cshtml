@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "حساب بانکی مراجعین";
+}
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <select data-placeholder="انتخاب کنید" id="patientId" titleId="fullName" class="select2 select2-quick-access" tabindex="1">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>بانک</label>
+                        <div>
+                            <select id="bankId" type="text" class="form-control select2 number" title="" data-parsley-selectvalzero tabindex="2" data-parsley-errors-container="#bankIdErrorContainer"></select>
+                        </div>
+                        <div id="bankIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <lablel>شماره حساب</lablel>
+                        <div>
+                            <input id="bankAccountNo" type="text" class="form-control number" title="" tabindex="3" maxlength="20" required data-parsley-accontno data-parsley-errors-container="#accountNoErrorContainer"/>
+                        </div>
+                        <div id="accountNoErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <lablel>شماره شبا</lablel>
+                        <input id="bankShebaNo" type="text" class="form-control shabano" title="" tabindex="4" data-parsley-shebano data-inputmask="'mask':'IR-9999-9999-9999-9999-9999-9999'"/>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <lablel>شماره کارت</lablel>
+                        <input id="bankCardNo" type="text" class="form-control" title="" tabindex="5" data-parsley-cardno data-inputmask="'mask':'9999-9999-9999-9999'"/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="savePatientAccount();" class="btn btn-success waves-effect waves-light" tabindex="6" title="Ctrl + S"><i class="fa fa-check-circle"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/Modules/MC/PatientAccount/PatientAccountIndex.js"></script>

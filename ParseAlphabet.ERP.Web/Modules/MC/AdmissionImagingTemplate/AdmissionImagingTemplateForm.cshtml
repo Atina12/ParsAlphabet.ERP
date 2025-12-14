@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "قالب تصویر برداری";
+}
+
+<link href="~/lib/ModulesCss/Navigate.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<style>
+    .preloader {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+    }
+
+    .hidePreloader {
+        display: none !important;
+    }
+</style>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content" id="admissionImagingTemplateForm">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="preloader d-flex justify-content-center align-items-center">صفحه در حال بارگذاری است، لطفا چند لحظه صبر کنید.</div>
+                            <div class="button-items">
+                                <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+                                <button id="saveForm" type="button" onclick="saveAdmissionImagingForm()" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                                <button id="newForm" type="button" onclick="resetFormAdmissionImaging()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+                            </div>
+                        </div>
+                        <div class="card-body" data-parsley-validate id="admissionImagingTemplate">
+
+                            <div class="row col-12 ">
+                                <div class="col-6 d-flex displaynone" id="admissionImagingTemplateBox">
+                                    <div class="form-group col-lg-4">
+                                        <label>شناسه</label>
+                                        <div>
+                                            <input id="admissionImagingId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset class="tab-content group-box group-box-gray mt-3">
+                                <div class="row col-12">
+                                    <div class="col-lg-2 col-sm-4 mb-0">
+                                        <div class="form-group">
+                                            <label>رادیولوژیست</label>
+                                            <div>
+                                                <select id="attenderId" class="form-control select2" tabindex="1" required data-parsley-errors-container="#attenderIdErrorContainer"></select>
+                                            </div>
+                                            <div id="attenderIdErrorContainer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label>نام</label>
+                                        <div>
+                                            <input id="subject" type="text" class="form-control" tabindex="2" required/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-2 col-sm-3">
+                                        <label>کد</label>
+                                        <div>
+                                            <input id="code" type="text" class="form-control" tabindex="3" maxlength="50" oninput="admissionImagingTemplateCodeRegex(this)" required data-parsley-errors-container="#templateCodeErrorContainer"/>
+                                        </div>
+                                        <div id="templateCodeErrorContainer"></div>
+                                    </div>
+                                </div>
+
+                                <div class="app-text-countiner">
+                                    <textarea id="attenderInstructionTemplate"></textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<div id="addPictureModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-lg-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن عکس</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="">
+                    <fieldset class="group-box group-box-green">
+                        <legend>انتخاب عکس</legend>
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-sm-4">
+                                <div class="form-group col-lg-6 col-sm-4">
+                                    <input type="file" id="fileTest" multiple/>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="displaynone group-box group-box-green">
+                        <legend>مشاهده عکس</legend>
+                        <div class="row">
+                            <div class="form-group col-lg-12 col-sm-4">
+                                <div id="imageholder"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" tabindex="106"><i class="fa fa-save"></i>ذخیره</button>
+                        <button id="modal-close" onclick="modal_close('addPictureModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="/js/tiny.js"></script>
+<script type="text/javascript" src="/Modules/MC/AdmissionImagingTemplate/AdmissionImagingTemplateForm.js"></script>

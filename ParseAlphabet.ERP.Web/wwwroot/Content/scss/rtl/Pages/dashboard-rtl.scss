@@ -1,0 +1,348 @@
+@import "../_variables.scss";
+@import "dashboard-rtl.css";
+.card-border {
+    border: 1px solid #ddd;
+    border-radius: .25rem;
+}
+/*----- Profile -----*/
+
+.profile-image {
+    img {
+        border-radius: 500px;
+        border: 5px solid #f7f7f7;
+    }
+}
+/*----- Calendar -----*/
+.calendar-dashboard {
+    .calendar-title {
+        min-height: 20px;
+        padding: 10px;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        margin-bottom: 0px;
+    }
+
+    .table-style {
+        margin-bottom: 0px;
+
+        .today {
+            background: #4F5B69;
+            color: #ffffff;
+        }
+
+        .holiday {
+            color: red;
+        }
+
+        tr {
+            border-bottom: 1px solid #ddd;
+
+            &:first-child {
+                th {
+                    text-align: center !important;
+                    font-size: 12px;
+
+                    a {
+                        color: #30419b;
+
+                        span {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+
+            th {
+                padding: 3px;
+                text-align: center !important;
+                border-right: 1px solid #ddd;
+                border-bottom: none;
+
+                &:first-child {
+                    border-right: none;
+                }
+            }
+
+            td {
+                padding: 3px;
+                text-align: center !important;
+                border-right: 1px solid #ddd;
+                border-bottom: none;
+
+                &:first-child {
+                    border-right: none;
+                }
+            }
+        }
+    }
+    /*----- Weather -----*/
+    .forecast-header {
+        padding: 10px 0;
+        text-align: center;
+        font-weight: 400;
+
+        .day {
+            text-align: right;
+        }
+    }
+
+    .forecast-content {
+        padding: 5px;
+
+        .location {
+            width: 33.3%;
+
+            p {
+                font-size: 12px;
+                font-weight: 400;
+                margin: 0;
+                text-align: center;
+                line-height: 20px;
+
+                &:first-child {
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-top: 5px;
+                }
+            }
+        }
+
+        .forecast-icon {
+            width: 33.3%;
+            text-align: center;
+
+            img {
+                margin-top: 2%;
+            }
+        }
+
+        .degree {
+            color: #30419b;
+            font-weight: 600;
+            margin-top: 5px;
+            text-align: center;
+            line-height: 20px;
+            width: 33.3%;
+
+            .num {
+                font-size: 20px;
+                text-align: center;
+                margin-top: 5px;
+            }
+
+            p {
+                font-size: 12px;
+                font-weight: 300;
+                margin: 0;
+            }
+        }
+    }
+
+    .forecast-footer {
+        margin-top: 30px;
+        font-size: 13px;
+
+        .num {
+            span {
+                cursor: default;
+                font-size: 13px;
+                font-family: "iransans";
+            }
+        }
+    }
+
+    .tooltip {
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .ti-arrow-up:before {
+        font-family: 'themify';
+    }
+
+    .ti-arrow-down:before {
+        font-family: 'themify';
+    }
+    /*----- Kpi -----*/
+    .cash-desk {
+        .cash-item {
+            flex-basis: 20%;
+
+            span {
+                font-size: 30px;
+            }
+        }
+    }
+
+    .card {
+        .card-heading {
+            .mini-stat-icon {
+                i {
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    font-size: 25px;
+                }
+            }
+
+            > div {
+                h5 {
+                    position: relative;
+                    right: 15px;
+                    top: 5px;
+                }
+            }
+        }
+    }
+
+    .green {
+        background: #39B27C;
+    }
+
+    .blue {
+        background: #1a7bb9;
+    }
+
+    .yellow {
+        background: #f8d347;
+    }
+
+    .header-title {
+        i {
+            margin-left: 5px;
+        }
+    }
+}
+/*----- Weather -----*/
+.forecast-header {
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 400;
+
+    .day {
+        text-align: right;
+    }
+}
+
+.forecast-content {
+    padding: 5px;
+
+    .location {
+        width: 33.3%;
+
+        p {
+            font-size: 12px;
+            font-weight: 400;
+            margin: 0;
+            text-align: center;
+            line-height: 20px;
+
+            &:first-child {
+                font-size: 16px;
+                font-weight: 600;
+                margin-top: 5px;
+            }
+        }
+    }
+
+    .forecast-icon {
+        width: 33.3%;
+        text-align: center;
+
+        img {
+            margin-top: 2%;
+        }
+    }
+
+    .degree {
+        color: #30419b;
+        font-weight: 600;
+        margin-top: 5px;
+        text-align: center;
+        line-height: 20px;
+        width: 33.3%;
+
+        .num {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        p {
+            font-size: 12px;
+            font-weight: 300;
+            margin: 0;
+        }
+    }
+}
+
+.forecast-footer {
+    margin-top: 30px;
+    font-size: 13px;
+
+    .num {
+        span {
+            cursor: default;
+            font-size: 13px;
+            font-family: "iransans";
+        }
+    }
+}
+
+.tooltip {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.ti-arrow-up:before {
+    font-family: 'themify';
+}
+
+.ti-arrow-down:before {
+    font-family: 'themify';
+}
+/*----- Kpi -----*/
+.chart-guid {
+    padding: 15px 22px 0;
+    position: relative;
+    top: 25px;
+
+    ul {
+        list-style: none;
+
+        li {
+            display: inline-block;
+            margin-left: 15px;
+
+            span {
+                float: right;
+                width: 40px;
+                height: 15px;
+                margin-left: 5px;
+                position: relative;
+                top: 1px;
+            }
+        }
+    }
+}
+.chartWrapper {
+    position: relative;
+}
+
+.chartWrapperCharts {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    font-weight: bolder;
+    transition: all 0.15s linear;
+    border: 0.5px solid #d3d3d3;
+    border-width: 0px 1px 1px 0px;
+    padding-right: 3px;
+    max-width: 65px;
+}
+
+.chartAreaWrapper {
+    overflow-x: scroll;
+    direction: ltr;
+}

@@ -1,0 +1,480 @@
+/*----- General -----*/
+.paint_id {
+    width: 85px;
+}
+
+.phone_number {
+    width: 135px;
+}
+
+.balance {
+    width: 102px;
+}
+
+.option_5 {
+    width: 450px !important;
+}
+
+.option_4 {
+    width: 360px !important;
+}
+
+.option_3 {
+    width: 265px !important;
+}
+
+.option_2 {
+    width: 110px !important;
+}
+
+.option_1 {
+    width: 130px !important;
+}
+
+.green_1 {
+    background-color: #008024;
+    color: #fff;
+}
+
+.green_2 {
+    background-color: #41cac0;
+    border-color: #41cac0;
+    color: #fff;
+}
+
+.green_4 {
+    background-color: #39b27c;
+    border-color: #39b27c;
+    color: #fff;
+
+    &:hover{
+        color:#fff !important
+    }
+}
+
+.blue_1 {
+    background-color: #517397;
+    color: #fff;
+
+    &:hover {
+        background-color: #517397;
+    }
+}
+
+.green_3 {
+    background-color: #5A9599;
+    color: #fff;
+}
+
+.maroon {
+    background-color: maroon;
+    color: #fff;
+}
+
+.green_outline_1 {
+    border-color: #008024;
+    color: #008024;
+
+    &:hover {
+        background-color: #008024;
+        color: #fff;
+    }
+}
+
+.green_outline_2 {
+    border-color: #41cac0;
+    color: #41cac0;
+
+    &:hover {
+        background-color: #41cac0;
+        color: #fff;
+    }
+}
+
+.blue_outline_1 {
+    border-color: #517397;
+    color: #517397;
+
+    &:hover {
+        background-color: #517397;
+        color: #fff;
+    }
+}
+
+.green_outline_3 {
+    border-color: #5A9599;
+    color: #5A9599;
+
+    &:hover {
+        background-color: #5A9599;
+        color: #fff;
+    }
+}
+
+.green_outline_4 {
+    border-color: #39b27c;
+    color: #39b27c;
+
+    &:hover {
+        background-color: #39b27c;
+        color: #fff;
+    }
+}
+
+.maroon_outline {
+    border-color: maroon;
+    color: maroon;
+
+    &:hover {
+        background-color: maroon;
+        color: #fff;
+    }
+}
+
+.btn-excel {
+    background-color: #1f7244;
+    border-color: #1f7244;
+    color: #fff;
+
+    &:hover {
+        background-color: #fff;
+        color: #1f7244;
+    }
+}
+
+.btn-pdf {
+    background-color: #b00;
+    border-color: #b00;
+    color: #fff;
+
+    &:hover {
+        background-color: #fff;
+        color: #b00;
+    }
+}
+
+.btn-print {
+    background-color: #566271;
+    color: #fff;
+    border-color: #566271;
+
+    &:hover {
+        background-color: #fff;
+        color: #566271;
+    }
+}
+
+.btn:hover, .btn:focus, .btn:active {
+    box-shadow: none;
+}
+
+.bg-default {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.min-width-140 {
+    min-width: 140px;
+}
+
+@media (max-width:768px) {
+    .option_1, .option_2, .option_3, .option_4, .option_5 {
+        width: 150px !important;
+    }
+}
+/*----- Modal -----*/
+.modal-md {
+    max-width: 600px;
+}
+
+.modal-dialog {
+    padding-top: 5%;
+
+    .modal-content {
+        .modal-header {
+            padding: 10px;
+
+            .close {
+                padding: 10px;
+                top: 10px;
+                position: relative;
+                right: 5px;
+            }
+        }
+
+        .bg-header {
+            background-color: rgba(2,197,141,0.12);
+        }
+
+        .modal-body {
+            .form-group {
+                label {
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: #777;
+                }
+
+                .input-group-text {
+                    line-height: 0.5;
+                    top: 0;
+                }
+
+                .image_info {
+                    margin-bottom: 10px;
+                }
+
+                label.text-gray-info {
+                    color: #777;
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
+        .modal-footer {
+            > :not(:first-child) {
+                margin-right: .25rem;
+                margin-left: 0;
+            }
+
+            a {
+                color: #fff;
+
+                i {
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        .modal-open {
+            padding-right: 0 !important;
+        }
+
+        .key_id {
+            position: relative;
+            top: 4px;
+            font-size: 16px;
+            color: #354558;
+        }
+    }
+}
+
+@media (min-width: 1900px) {
+    .modal-dialog {
+        padding-top: 10% !important;
+    }
+}
+
+/*----- Card -----*/
+.header-title {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eff2f7;
+
+    span {
+        color: #555;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    a {
+        float: right;
+        margin-right: 10px;
+
+        &:hover {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        i {
+            margin-right: 5px;
+        }
+    }
+}
+
+.footer-card {
+    padding: 0px 20px;
+
+    .dataTables_info {
+        padding-top: 7px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-card .dataTables_info {
+        padding-top: 0;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+}
+/*----- App Search -----*/
+.app-search {
+    position: relative;
+    bottom: 2px;
+
+    .form-control,
+    .form-control:focus {
+        border: 1px solid $topbar-search-background;
+        font-size: 13px;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-left: 10px;
+        background: $topbar-search-background;
+        box-shadow: none;
+        border-radius: 5px;
+        border: none;
+    }
+
+    a {
+        position: absolute;
+        top: 10px;
+        right: 0px;
+        display: block;
+        color: $muted;
+        font-size: 11px;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+    }
+}
+
+/*----- Dropdown Number -----*/
+.btn-group {
+    height: 30px;
+
+    .btn-default {
+        border: 1px solid #f1f1f1;
+    }
+
+    .dropdown-menu {
+        line-height: 15px;
+        width: auto;
+    }
+}
+
+.button-items {
+    text-align: end;
+    position: relative;
+    bottom: 8px;
+
+    .btn {
+        margin-bottom: 0.2rem;
+        i {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .button-items {
+        text-align: center;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .button-items .btn {
+        padding: 5px 6px;
+    }
+
+    .button-items .btn i {
+        font-size: 12px;
+    }
+}
+
+/*-----History Page-----*/
+.history_tab_panel {
+    padding: 0 10px;
+
+    ul.nav-pills {
+        border-bottom: 1px solid #eff2f7;
+    }
+
+    .tab-content {
+        a {
+            &:hover {
+                color: #fff;
+                font-weight: bold;
+            }
+
+            i {
+                margin-left: 5px;
+                position: relative;
+                top: 2px;
+            }
+        }
+    }
+}
+
+.list-group {
+    .list-group-item {
+        color: #777;
+        font-size: 12px;
+        text-align: left;
+        padding-right: 1rem;
+        padding-left: 1rem;
+
+        span {
+            float: right;
+            color: #555;
+            font-weight: 500;
+        }
+    }
+}
+/*----- Payment -----*/
+.date_range_btn {
+    width: 100px;
+    margin-left: 10px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+}
+
+.card-heading {
+    color: #777;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.patient-payment-detail {
+    p {
+        margin-bottom: 0;
+        color: #000;
+    }
+
+    h4 {
+        color: #39b5aa;
+        font-size: 18px;
+        margin-top: 0;
+        font-weight: 400;
+    }
+
+    h6 {
+        color: #777;
+        margin-top: 0;
+        padding-top: 5px;
+    }
+}
+
+.patient-payment-info {
+    p {
+        text-align: right;
+        margin: 0;
+        padding: 10px 5px;
+
+        &:hover {
+            background-color: #f7f8fc;
+
+            i {
+                color: #39b5aa;
+            }
+        }
+
+        i {
+            color: #777;
+            font-size: 20px;
+        }
+
+        span {
+            float: left;
+        }
+    }
+}

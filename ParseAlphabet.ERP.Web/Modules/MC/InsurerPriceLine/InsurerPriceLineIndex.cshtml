@@ -1,0 +1,69 @@
+﻿<div id="insurerPriceLineModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">صندوق ها</h5>
+                </div>
+            </div>
+            <div class="modal-header" id="">
+                <div class="insurerPrice-info text-right d-flex">
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">شناسه : <span class="insurerPriceIdModal"></span></p>
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">کالا / خدمت : <span class="insurerPriceItemTypeModal"></span></p>
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">نوع بیمه : <span class="insurerPriceInsurerTypeModal"></span></p>
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">
+                        <span class="insurerPricePricingModeName"></span>
+                        <span class="insurerPricePricingModePrice"></span>
+                    </p>
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">آیتم : <span class="insurerItemModal"></span></p>
+                    <p class="d-inline-block pl-2 m-1 font-12 displaynone">تعرفه دوم : <span class="insurerPriceEndPrice"></span></p>
+                </div>
+                <div id="insurerPriceLineCsv"></div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="card-body " id="insurerPriceLine_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('insurerPriceLineModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sendModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0"> تعرفه بیمه</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="items-info text-right d-flex">
+                    <div class="services-info text-right d-flex">
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">کد خدمت : <span class="serviceCodeSendModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12"> خدمت : <span class="serviceNameSendModal"></span></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="carousel-inner">
+                    <div class="carousel-item-box">
+                        <div class="card-body " id="sendtoCentral_pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="sendBtn" onclick="sendInsurerToCentral();" class="btn btn-success waves-effect waves-light" tabindex="10"><i class="fa fa-save"></i>ارسال</button>
+
+                <button id="modal-close" onclick="modal_close('sendModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/Modules/MC/InsurerPriceLine/InsurerPriceLineIndex.js"></script>

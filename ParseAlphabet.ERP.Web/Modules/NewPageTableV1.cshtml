@@ -1,0 +1,37 @@
+﻿<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+<div class="all">
+    <div class="loadin-div displaynone">
+        <button data-pageno="0" data-pagerowscount="0" class="displaynone btn btn-primary " onclick="refreshBackbuttonV1(this)">
+            <i class="fa fa-undo fa-2x">
+            </i>
+        </button>
+    </div>
+    <div class="table-responsive table-responsive-table" style="overflow-y:scroll !important;overflow-x:auto!important" id="parentPageTableBody">
+        <table class="table table-styles border mb-0 pagetablebody new-page-tableV1">
+            @**@
+        </table>
+    </div>
+    <div id="footerPageing" class="row mt-2">
+        <div class="col-sm-12 col-md-9 ">
+            <div class="pagetablefooterinfo row col-md-12 ">
+                <div class="dataTables_info text-right">
+                    نمایش <span id="firstRow">0</span><span> تا </span><span id="lastRow">0</span><span> - صفحه </span><span id="currentPage">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div id="countRowButton" class="btn-group pagerowscount dropup float-left">
+                <button type="button" class="btn btn-default" data-toggle="dropdown" id="dropCounteresPageTableName"></button>
+                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">-</span>
+                </button>
+                <div class="dropdown-menu" id="dropCounteresPageTable"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/js/NewPagetableV1.js"></script>

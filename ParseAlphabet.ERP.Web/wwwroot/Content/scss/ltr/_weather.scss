@@ -1,0 +1,79 @@
+.forecast-header {
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 400;
+
+    .day {
+        text-align: right;
+    }
+}
+
+.forecast-content {
+    padding: 5px;
+    font-size:12px;
+
+    .location {
+        width: 33.3%;
+
+        p {
+            font-size: 12px;
+            font-weight: 400;
+            margin: 0;
+            text-align: center;
+            line-height: 17px;
+
+            &:first-child {
+                font-size: 14px;
+                font-weight: 600;
+                margin-top: 5px;
+            }
+        }
+    }
+
+    .forecast-icon {
+        width: 33.3%;
+        text-align: center;
+
+        img {
+            margin-top: 2%;
+        }
+    }
+
+    .degree {
+        color: #30419b;
+        font-weight: 600;
+        margin-top: 5px;
+        text-align: center;
+        line-height: 20px;
+        width: 33.3%;
+
+        .num {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        p {
+            font-size: 12px;
+            font-weight: 300;
+            margin: 0;
+        }
+    }
+}
+
+.forecast-footer {
+    margin-top: 30px;
+    font-size: 14px;
+}
+.tooltip {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.ti-arrow-up:before {
+    font-family: 'themify';
+}
+
+.ti-arrow-down:before {
+    font-family: 'themify';
+}

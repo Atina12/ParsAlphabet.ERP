@@ -1,0 +1,35 @@
+﻿.modal .table-responsive-table {
+    white-space: normal;
+    overflow: auto;
+    height: calc(100vh - 350px) !important;
+    border-collapse: collapse;
+}
+
+.modal .filterBox {
+    display: none !important;
+}
+
+
+#admissionListForm > div {
+    min-height: 54px !important;
+    max-height: 151px !important;
+    width: 100% !important;
+    resize: vertical;
+    overflow : auto;
+
+}
+
+.admissionMasterBalance {
+    text-align: right !important;
+    padding: 10px !important;
+    background-color: #e1e1e1;
+    border-bottom: thin solid #999
+}
+
+#admissionCashInfoModal .table-responsive {
+    max-height : 300px
+}
+
+#cashFormDisplay #admissionCashDisplay{
+    width : 100% !important
+}

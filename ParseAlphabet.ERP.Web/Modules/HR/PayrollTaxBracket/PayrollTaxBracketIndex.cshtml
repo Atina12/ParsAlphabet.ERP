@@ -1,0 +1,140 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "کسورات مالیات تکلیفی ";
+}
+
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName") " data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+
+<div id="AddEditModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>سال مالی</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <select id="fiscalYearId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-selectvalzero tabindex="1" data-parsley-errors-container="#fiscalYearIdErrorContainer">
+                                <option value="0" selected>انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="fiscalYearIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <input type="text" id="name" class="form-control " required data-parsley-errors-container="#nameErrorContainer" tabindex="2"/>
+                        </div>
+                        <div id="nameErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6 ">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="3">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" tabindex="4" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close(`AddEditModal`)" class="btn btn-secondary waves-effect" data-dismiss="modal" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="AddEditModalItems" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption_item"></lable>
+                            <span id="modal_keyid_value_item"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:300px" id="tableLine">
+                            <table style="width:100% !important">
+                                <thead>
+                                <tr>
+                                    <th style="width:8%">سطر</th>
+                                    <th style="width:8%">شناسه</th>
+                                    <th style="width:26%">مبلغ شروع</th>
+                                    <th style="width:26%">مبلغ پایان</th>
+                                    <th style="width:20%">درصد مالیات</th>
+                                    <th style="width:12%">عملیات</th>
+                                </tr>
+                                </thead>
+                                <thead>
+                                <tr>
+                                    <th style="width:8%" disabled>
+                                        <input id="rowNumber" type="text" class="form-control atoz-valid" maxlength="50" title="" disabled>
+                                    </th>
+                                    <th style="width:8%" disabled>
+                                        <input id="itemId" type="text" class="form-control atoz-valid" maxlength="50" title="" disabled>
+                                    </th>
+                                    <th style="width:26%">
+                                        <input id="startAmount" type="text" class="form-control money" maxlength="11" tabindex="1" disabled/>
+                                    </th>
+                                    <th style="width:26%">
+                                        <input id="endAmount" type="text" class="form-control money" maxlength="15" tabindex="2"/>
+                                    </th>
+                                    <th style="width:20%">
+                                        <input id="taxPercentage" type="text" class="form-control number" data-parsley-min="0" data-parsley-max="99" maxlength="3" title="" tabindex="3">
+                                    </th>
+                                    <th style="width:12%">
+                                        <div style="display:flex;justify-content:center;width:100%">
+                                            <button id="saveRow" type="button" onclick="saveUpdateRowPayrollTaxBracketLine(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="4">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button id="resetInputs" type="button" onclick="resetInputsRowPayrollTaxBracketLine(this)" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="5">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="6" style="text-align:center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('AddEditModalItems')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+<script src="~/Modules/HR/PayrollTaxBracket/PayrollTaxBracketIndex.js"></script>

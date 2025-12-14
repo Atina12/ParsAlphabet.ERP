@@ -1,0 +1,6 @@
+﻿@await Html.PartialAsync("/Modules/FormPlate2.cshtml")
+
+<input id="warehouseId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+<input id="warehouseName" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["name"]"/>
+
+<script src="~/Modules/WH/User_WarehouseLine/User_WarehouseLineIndex.js"></script>

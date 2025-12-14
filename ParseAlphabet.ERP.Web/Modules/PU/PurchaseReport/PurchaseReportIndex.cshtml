@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "گزارش خرید";
+}
+
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+
+<input type="hidden" id="nowDate" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"/>
+<input type="hidden" id="yearDate" value="@PersianDateTime.GetCurrentYear()/01/01"/>
+<div class="content-page  displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <button id="getReport" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-1"></i>پیش نمایش</button>
+                                <button id="showReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-1"></i>تهیه گزارش</button>
+                                @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+                                <button type="button" id="exportCSV" onclick="export_purchase_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="purchaseForm" data-parsley-validate>
+                            <div class="tab-content group-box group-box-gray">
+                                <div class="tab-pane active p-3" id="" role="tabpanel">
+                                    <div class="row form-group tabToggle1">
+                                        <div class="form-group col-lg-2">
+                                            <label>سال مالی</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="fiscalId" class="form-control select2" tabindex="1">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label>شعبه</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="branchId" class="form-control select2 select2-quick-access" multiple="multiple" name="branchId[]" tabindex="2">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <label>جریان کار</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="workflowId" class="form-control select2 select2-quick-access" multiple="multiple" name="workflowI[]" tabindex="3">
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>مرحله</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="stageId" class="form-control select2 select2-quick-access" multiple="multiple" name="stage[]" tabindex="4">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>گام</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="actionId" class="form-control select2 select2-quick-access" multiple="multiple" name="action[]" tabindex="5">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label>ارز</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="currencyId" class="form-control select2 select2-quick-access" multiple="multiple" name="currency[]" tabindex="6">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>ایجاد کننده</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="createUserId" class="form-control select2 select2-quick-access" tabindex="7">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>نوع آیتم</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="itemTypeId" class="form-control select2 select2-quick-access" tabindex="8">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-4">
+                                            <label> آیتم</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="itemId" class="form-control select2 select2-quick-access" multiple="multiple" name="item[]" tabindex="9">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>صفات</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="attributeId" class="form-control select2 select2-quick-access" multiple="multiple" name="attribute[]" tabindex="10">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label>واحد شمارش</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="unitId" class="form-control select2 select2-quick-access" multiple="multiple" name="unit[]" tabindex="11">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label>گروه تفضیل</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="noSeriesId" class="form-control select2 select2-quick-access" tabindex="12">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label>گروه اشخاص</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="personGroupId" class="form-control select2 select2-quick-access" multiple="multiple" name="personGroup[]" tabindex="13">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label>اشخاص</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="accountDetailId" class="form-control select2 select2-quick-access" multiple="multiple" name="personGroup[]" tabindex="14">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-3">
+                                            <label>تاریخ ثبت</label>
+                                            <div class="double-input-box">
+                                                <div class="double-input">
+                                                    <input type="text" id="fromCreateDate"
+                                                           class="form-control number persian-date persian-datepicker"
+                                                           placeholder="____/__/__"
+                                                           value="@PersianDateTime.GetCurrentYear()/@PersianDateTime.GetCurrentMonth()/01"
+                                                           data-inputmask="'mask':'9999/99/99'"
+                                                           data-parsley-compareshamsidateyear="toCreateDate"
+                                                           data-parsley-shamsidate
+                                                           data-parsley-errors-container="#fromCreateDateErrorContainer"
+                                                           data-parsley-comparedate="toCreateDate"
+                                                           maxlength="10"
+                                                           tabindex="15"/>
+                                                </div>
+                                                <div class="double-input">
+                                                    <input type="text" id="toCreateDate"
+                                                           class="form-control number persian-date persian-datepicker"
+                                                           placeholder="____/__/__"
+                                                           value="@PersianDateTime.GetToday()"
+                                                           data-inputmask="'mask':'9999/99/99'"
+                                                           data-parsley-shamsidate
+                                                           data-parsley-errors-container="#toCreateDateErrorContainer"
+                                                           maxlength="10" tabindex="16"/>
+                                                </div>
+                                            </div>
+                                            <div class="double-input-box">
+                                                <div class="double-input" id="fromCreateDateErrorContainer"></div>
+                                                <div class="double-input" id="toCreateDateErrorContainer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <fieldset class="group-box group-box-gray mt-3">
+                                <legend>پیش نمایش</legend>
+                                <div class="pagetable-report" id="mainReport">
+                                    @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-8 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="100">
+                            <option value="101" selected>گزارش صورت ریز خرید به تفکیک تامین کننده - مرحله - گام</option>
+                            <option value="102">گزارش صورت خلاصه خرید به تفکیک تامین کننده - مرحله - گام</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="101"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<script src="~/js/formplate.js"></script>
+
+
+<script type="text/javascript" src="/Modules/_Report/_SettingReport.js"></script>
+<script src="~/lib/shortcut/shortcut.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Modules/PU/PurchaseReport/PurchaseReportIndex.js"></script>

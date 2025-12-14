@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "سطر های اسناد انبار";
+}
+
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+<style>
+    #previousStagePageTable #parentPageTableBody thead {
+        position: sticky;
+        top: -1px;
+    }
+</style>
+
+<div id="itemTransactionLinePage">
+    @await Html.PartialAsync("/Modules/FormPlateHeaderLine.cshtml")
+
+    <input id="id" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+    <input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="workFlowId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="isDefaultCurrency" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["isDefaultCurrency"]"/>
+
+    @await Html.PartialAsync("/Modules/WH/ItemTransactionCartable/ItemTransactionActionIndex.cshtml")
+
+    <div id="previousStageItemTransactionLines" class="modal fade" style="overflow:hidden" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-full">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="modal_title">لیست درخواستها</h5>
+                    </div>
+                </div>
+                <div class="modal-body  text-right" data-parsley-validate>
+                    <div class="card-body " id="previousStagePageTable">
+                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="insertPreviousStageLine" class="btn btn-success waves-effect waves-light" tabindex="11"><i class="fa fa-save"></i>ذخیره</button>
+                    <button id="modal-close" onclick="close_modal_previousStageRequests()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorPreviousStageLinesResult" class="modal" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-md">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="">کالاها</h5>
+                    </div>
+                </div>
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-100">پیغام</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempPreviousStageLines">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="" onclick="modal_close('errorPreviousStageLinesResult')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="/Modules/WH/Warehouse.js"></script>
+<script src="/Modules/WF/WorkFlow.js"></script>
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+<script src="~/Modules/WH/WarehouseTransaction/WarehouseTransactionIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/WH/ItemTransactionLine/ItemTransactionLineIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

@@ -1,0 +1,63 @@
+﻿#peracraptionFilset #prescriptionForm .nav #prescriptionForm .nav-link#prescriptionForm .active {
+    font-weight: bold
+}
+
+#prescriptionForm .plus {
+    float: left;
+    margin: -27px 0 0 15px;
+    padding: 1px 5px 0 5px;
+}
+
+#prescriptionForm .table-responsive {
+    white-space: nowrap;
+    overflow: auto;
+    max-height: calc(100vh - 500px);
+}
+
+#prescriptionForm .table-responsive {
+    border-collapse: collapse;
+}
+
+#peracraptionFilset .group-box table {
+    width: 99% !important;
+    margin: 0 auto !important;
+    overflow: auto;
+}
+
+#prescriptionForm .table-styles thead th {
+    position: sticky;
+    top: -1px;
+    height: 36px;
+    background-color: #bfbfbf;
+}
+
+#prescriptionForm .table tbody td {
+    overflow: hidden;
+    padding: 0 1px 0 1px
+}
+
+#prescriptionForm .green_4:hover {
+    color: #fff !important
+}
+
+#prescriptionForm .nav {
+    margin-top: 10px;
+    border-bottom: 2px solid #566271 !important;
+}
+
+#prescriptionForm .nav-link {
+    border-bottom: none;
+    border-width: 1px;
+    padding: 9px 0 9px 0;
+}
+
+#prescriptionForm .tab-content {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top: none;
+}
+
+#prescriptionForm .fieldset-lab {
+    border: 0.5px dashed;
+    padding: 6px 10px;
+}

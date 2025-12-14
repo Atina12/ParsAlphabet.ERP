@@ -1,0 +1,114 @@
+﻿<div class="card-body m-2 bg-white dir-rtl text-right quickSearch-container" id="TreasuryQuickSearchContainer" data-parsley-validate>
+    <div>
+        <fieldset class="group-box group-box-gray">
+            <legend>فیلتر</legend>
+            <div class="col-12 row">
+                <div class="form-group col-sm-2">
+                    <label>نوع وجه</label>
+                    <div>
+                        <select id="fundTypeId" class="form-control select2" tabindex="1" required data-parsley-errors-container="#fundTypeIdErrorContainers">
+                            @*<option value="0">انتخاب کنید</option>*@
+                        </select>
+                        <div id="fundTypeIdErrorContainers"></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label>شماره سند</label>
+                    <div>
+                        <input id="serial" type="text" class="form-control number" tabindex="2" maxlength="17"/>
+                    </div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label>بانک</label>
+                    <div>
+                        <select id="bankId" class="form-control select2" tabindex="3" data-parsley-errors-container="#bankIdErrorContainers">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                        <div id="bankIdErrorContainers"></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label>مبلغ</label>
+                    <div class="col-sm-12 chosen-container-parent double-input-box">
+                        <input id="fromPrice" type="text" class="form-control money double-input" data-parsley-greaterthanequal="#toPrice" data-parsley-errors-container="#fromPriceError" tabindex="4" placeholder="از :" maxlength="13"/>
+                        <input id="toPrice" type="text" class="form-control money double-input" tabindex="5" placeholder="تا :" maxlength="13"/>
+                    </div>
+                    <div id="fromPriceError"></div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label>تاریخ ثبت</label>
+                    <div class="double-input-box">
+                        <div class="double-input">
+                            <input type="text" id="fromDate" class="form-control number persian-date"
+                                   placeholder="____/__/__" value="@PersianDateTime.GetFirstDayOfCurrentMonth()"
+                                   data-inputmask="'mask':'9999/99/99'" data-parsley-validate-if-empty="true"
+                                   required data-parsley-shamsidate data-parsley-comparedate="toDate"
+                                   data-parsley-errors-container="#fromDateErrorContainers" maxlength="10" tabindex="6"/>
+                        </div>
+                        <div class="double-input">
+                            <input type="text" id="toDate" class="form-control number persian-date" placeholder="____/__/__" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")" data-inputmask="'mask':'9999/99/99'" data-parsley-validate-if-empty="true" required data-parsley-shamsidate data-parsley-errors-container="#toDateErrorContainer" maxlength="10" tabindex="7"/>
+                        </div>
+                    </div>
+                    <div class="double-input-box">
+                        <div class="double-input" id="fromDateErrorContainers"></div>
+                        <div class="double-input" id="toDateErrorContainer"></div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <button id="searchTreasury" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="8"><i class="fa fa-search ml-2"></i>جستجو</button>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="group-box group-box-green mt-3" id="boxQuickSearch">
+            <legend>پیش نمایش</legend>
+            <div class="card-body " id="quickSearchPageTable">
+                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+            </div>
+        </fieldset>
+
+        <fieldset class="group-box group-box-orange mt-3">
+            <legend>نمایش گردش</legend>
+            <div class="card-body " id="quickSearchTypePageTable">
+                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div id="displayTreasuryLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" style="height:auto">
+        <div class="modal-content" style="height: auto;">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayTreasuryLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayTreasuryLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="displayTreasuryRequestLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" style="height:auto">
+        <div class="modal-content" style="height: auto;">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayTreasuryRequestLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayTreasuryRequestLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/jalali-moment.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/FM/TreasurySearch/_TreasuryQuickSearchIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

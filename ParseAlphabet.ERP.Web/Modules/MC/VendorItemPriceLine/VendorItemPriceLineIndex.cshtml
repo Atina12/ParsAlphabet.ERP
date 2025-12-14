@@ -1,0 +1,88 @@
+﻿<link href="~/Content/css/jquery-uicss.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card mb-2" id="formplate2HeaderInfo1">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="col-md-2 form-group mb-0" id="head-title">
+                            <select class="form-control select2" id="form_keyvalue"></select>
+                        </div>
+                        <div class="col-md-6" id="head-info">
+                            <button onclick="backToList()" type="button" class="btn btn-info waves-effect waves-light float-left"><i class="fa fa-list-ul" style="margin-left:5px"></i>لیست</button>
+                            <button onclick="export_csv()" type="button" class="btn btn-excel waves-effect waves-light float-left ml-3"><i class="fa fa-list-ul" style="margin-left:5px"></i>اکسل</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-2" id="formplate2HeaderInfo2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2 form-group mb-0">
+                            <label>نوع قرارداد</label>
+                            <select class="form-control select2" id="contractTypeId" tabindex="1">
+                                <option value="2">2 - امانی</option>
+                                <option value="3">3 - کمیسیونی</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group mb-0">
+                            <label>کمیسیون</label>
+                            <select class="form-control select2" id="priceTypeId" tabindex="2">
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 form-group mb-0">
+                            <label id="commisionValueLabel"></label>
+                            <input type="text" id="commisionValue" class="form-control money" autocomplete="off" tabindex="3"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formplate-main">
+                <div class="formplate-item" id="formplate2">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <label></label>
+                            <span class="assigned-title">تخصیص داده شده</span>
+                        </div>
+                        <div class="card-body" id="pagetable2">
+                            @await Html.PartialAsync("/Modules/AllocationPageTable.cshtml")
+                        </div>
+                    </div>
+                    <div class="assigment-controls">
+                        <button class="btn btn-info" onclick="assign_ins()" id="segment_line_ins">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn btn-info" onclick="assign_del()" id="segment_line_del">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="formplate-item" id="formplate1">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <label class="formPlate2_Title"></label>
+                            <span class="assigned-title">تخصیص داده نشده</span>
+                        </div>
+                        <div class="card-body" id="pagetable1">
+                            @await Html.PartialAsync("/Modules/AllocationPageTable.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<input id="vendorId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["vendorId"]"/>
+<input id="vendorFullName" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["vendorFullName"]"/>
+
+
+<script src="~/js/formplate.js"></script>
+<script src="/js/formplate2.js"></script>
+
+<script src="~/Modules/MC/VendorItemPriceLine/VendorItemPriceLineIndex.js"></script>

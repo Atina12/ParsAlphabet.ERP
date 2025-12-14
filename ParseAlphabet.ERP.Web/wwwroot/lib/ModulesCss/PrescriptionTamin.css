@@ -1,0 +1,21 @@
+﻿.color-box-green {
+    background-color: #5cb85c;
+}
+
+.color-box-red {
+    background-color: #df1712;
+}
+
+.color-element-green {
+    color: #5cb85c;
+}
+
+.color-element-red {
+    color: #df1712;
+}
+
+.table-styles thead th {
+    position: sticky;
+    top: -1px;
+    background-color: #bfbfbf;
+}

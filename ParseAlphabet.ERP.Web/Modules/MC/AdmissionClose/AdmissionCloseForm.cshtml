@@ -1,0 +1,266 @@
+﻿@{
+    ViewBag.Title = "بستن صندوق ها";
+}
+
+<link href="~/Content/css/FormPlateHeaderLine.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/AdmissionCloseForm.css" rel="stylesheet"/>
+
+<style>
+    .ajs-message, .ajs-error, .ajs-visible {
+        word-wrap: break-word !important;
+    }
+</style>
+
+
+<div class="content-page displaynone" id="content-page">
+<div class="content">
+    <div class="container-fluid m-b-40">
+        <input id="routBranchId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["branchId"]"/>
+        <input id="tempCloseId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+        <div class="card">
+            <div class="header-title d-flex">
+                <div class="row col-md-5">
+                    <span>@ViewBag.Title</span>
+                </div>
+                <div class="button-items">
+                    <button title="اولین" id="headerFirst" onclick="display_pagination('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                        <i class="mdi mdi-skip-next"></i>
+                    </button>
+                    <button title="قبلی" id="headerPrevious" onclick="display_pagination('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                        <i class="mdi mdi-play"></i>
+                    </button>
+                    <input id="headerIndex" onkeydown="headerindexChoose(event)" type="text" autocomplete="off" class="form-control number col-2 d-inline mr-2 ml-1" placeholder="شناسه برگه"/>
+                    <button title="بعدی" id="headerNext" onclick="display_pagination('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                        <i class="mdi mdi-play fa-rotate-180"></i>
+                    </button>
+                    <button title="آخرین" id="headerLast" onclick="display_pagination('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                        <i class="mdi mdi-skip-previous"></i>
+                    </button>
+                    <button id="calculate" class="btn green_3 waves-effect waves-light" tabindex="3">
+                        <i class="fas fa-calculator ml-1"></i>
+                        محاسبه مجدد
+                        <div class="spinner-border text-muted displaynone" style="float:left;margin-right:5px;color:#fff !important"></div>
+                    </button>
+                    <button id="confirm" class="btn btn-success waves-effect waves-light " tabindex="3">
+                        <i class="fas fa-check"></i>
+                        تایید
+                    </button>
+                    <button type="button" id="exportCSV" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                    <button id="printForm" type="button" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                    <button id="list" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+                </div>
+            </div>
+            <div class="card-body pb-0">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="row m-3">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>شناسه</th>
+                                    <th>شناسه برگه خزانه</th>
+                                    <th>شناسه سند حسابداری</th>
+                                    <th>شعبه</th>
+                                    <th>تاریخ/زمان بستن</th>
+                                    <th>تاریخ روز کاری</th>
+                                    <th>تاریخ/زمان محاسبه</th>
+                                    <th>کاربر ثبت کننده</th>
+                                    <th>وضعیت</th>
+                                </tr>
+                                </thead>
+                                <tbody id="admissionClose">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" id="admcloseline">
+            <fieldset id="cashForm" class="group-box group-box-orange mt-3">
+                <div class="table-responsive" style="height:150px;min-height:100px;resize:vertical">
+                    <table class="table table-styles border mr-0 mb-0" id="pagetable" style="overflow:auto">
+                        <thead style="position:sticky;top:-1px">
+                        <tr>
+                            <th class="col-width-percent-5">ردیف</th>
+                            <th class="col-width-percent-5">شناسه</th>
+                            <th class="col-width-percent-60">صندوقدار</th>
+                            <th class="col-width-percent-30">وضعیت</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempAdmCloseLine">
+                        <tr id="emptyRow">
+                            <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+
+            <fieldset id="cashForm" class="group-box group-box-blue mt-3">
+                <legend>اظهاری</legend>
+                <div class="row ml-0">
+                    <div class="table-responsive table-responsive-report" style="height:200px !important;resize:vertical">
+                        <table class="table table-styles border mr-0 mb-0" id="pagetable" style="overflow:auto">
+                            <thead class="table-thead-fixed">
+                            <tr>
+                                <th class="col-width-percent-4">ردیف</th>
+                                <th class="col-width-percent-4">شناسه</th>
+                                <th class="col-width-percent-7 displaynone">detailAccountTypeId</th>
+                                <th class="col-width-percent-5">نوع</th>
+                                <th class="col-width-percent-5">وجه</th>
+                                <th class="col-width-percent-5">ارز</th>
+                                <th class="col-width-percent-13">تفصیل</th>
+                                <th class="col-width-percent-8">مبلغ</th>
+                                <th class="col-width-percent-6">نرخ تسعیر ارز</th>
+                                <th class="col-width-percent-7">مبلغ دریافتی</th>
+                                <th class="col-width-percent-7">وضعیت</th>
+                                <th class="col-width-percent-3" id="announcementActionCol">عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody id="announcementLine">
+                            <tr id="emptyRow">
+                                <td colspan="11" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                            <tbody id="sumRowAnnouncement" class="displaynone">
+                            <tr>
+                                <td class="text-left" colspan="8">جمع</td>
+                                <td id="sumAnnouncement" class="col-width-percent-10 money total-amount">0</td>
+                                <td class="col-width-percent-10"></td>
+                                <td class="col-width-percent-10"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="cashForm" class="group-box group-box-green mt-3">
+                <legend>واقعی</legend>
+                <div class="row m-0">
+                    <div class="table-responsive table-responsive-report" style="height:200px !important;min-height:100px;resize:vertical">
+                        <table class="table table-styles border mr-0 mb-0" id="realDataPagetable" style="overflow: auto">
+                            <thead class="table-thead-fixed">
+                            <tr>
+                                <th class="col-width-percent-4">ردیف</th>
+                                <th class="col-width-percent-5">شناسه</th>
+                                <th class="col-width-percent-11">نوع</th>
+                                <th class="col-width-percent-14">وجه</th>
+                                <th class="col-width-percent-5">ارز</th>
+                                <th class="col-width-percent-14">تفصیل</th>
+                                <th class="col-width-percent-8">مبلغ</th>
+                                <th class="col-width-percent-5">نرخ تسعیر ارز</th>
+                                <th class="col-width-percent-8">مبلغ دریافتی</th>
+                                <th class="col-width-percent-7">عملیات</th>
+                            </tr>
+                            <tr id="realRowElement" style="position:sticky;top:21px;z-index: 1">
+                                <th>
+                                    <input type="text" class="form-control font-15" id="rowNumber" disabled/>
+                                </th>
+                                <th>
+                                    <input type="text" class="form-control font-15" id="realId" disabled/>
+                                </th>
+                                <th>
+                                    <select data-placeholder="دریافت/پرداخت" id="inOut" class="form-control" tabindex="3">
+                                        <option value="1" selected>دریافت</option>
+                                        <option value="2">پرداخت</option>
+                                    </select>
+                                </th>
+                                <th>
+                                    <select data-placeholder="وجه" id="fundTypeId" class="form-control select2" tabindex="4"></select>
+                                </th>
+                                <th>
+                                    <select data-placeholder="ارز" id="currencyId" class="form-control" tabindex="5" data-parsley-errors-container="#currencyIdError"></select>
+                                </th>
+                                <th>
+                                    <select data-placeholder="انتخاب کنید" id="detailAccountId" class="select2 font-weight-light form-control" tabindex="6"></select>
+                                </th>
+                                <th>
+                                    <input type="text" class="form-control money" id="amount" tabindex="7" required data-parsley-min="1"/>
+                                </th>
+                                <th>
+                                    <input type="text" class="form-control money" id="exchangeRate" tabindex="8" disabled/>
+                                </th>
+                                <th>
+                                    <input type="text" class="form-control money" id="amountExchangeRate" tabindex="-1" disabled/>
+                                </th>
+                                <th>
+                                    <button id="addToReal" type="button" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial;" tabindex="9">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                    <button id="cancelReal" type="button" class="btn btn-outline-danger pa mr-2 float-sm-right">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="realLine">
+                            <tr id="emptyRow">
+                                <td colspan="10" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                            <tbody id="sumRowReal" class="displaynone table-summarybody-fixed">
+                            <tr>
+                                <td class="text-left" colspan="8">جمع</td>
+                                <td id="sumReal" class="money total-amount">0</td>
+                                <td class=""></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+</div>
+<div id="displayTreasuryLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayTreasuryLine" data-parsley-validate="">
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayTreasuryLineModel')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="documentInsertErrorResultModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">خطا ها</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-100" colspan="2">لیست خطاها</th>
+                            </tr>
+                            </thead>
+                            <tbody id="documentInsertErrror">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="" onclick="modal_close('documentInsertErrorResultModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>
+
+<script src="~/Modules/MC/AdmissionClose/AdmissionCloseForm.js"></script>

@@ -1,0 +1,99 @@
+﻿<div id="AddEditModalItems" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption_item"></lable>
+                            <span id="modal_keyid_value_item"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:500px" id="tableLine">
+                            <table style="width:100% !important">
+                                <thead>
+                                <tr>
+                                    <th style="width:3%">سطر</th>
+                                    <th style="width:3%">شناسه</th>
+                                    <th style="width:20%">دسته بندی آیتم</th>
+                                    <th style="width:20%">نوع آیتم</th>
+                                    <th style="width:29%">موضوع هزینه</th>
+                                    <th style="width:15%">نوع تسهیم</th>
+                                    <th style="width:10%">عملیات</th>
+
+                                </tr>
+                                </thead>
+                                <thead>
+                                <tr>
+                                    <th style="width:3%" disabled>
+                                        <input id="rowNumber" type="text" class="form-control atoz-valid text-center" title="" disabled>
+                                    </th>
+                                    <th style="width:10%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <input id="costOfGoodsTemplateLineId" type="text" class="form-control atoz-valid text-center" title="" disabled>
+                                        </div>
+                                    </th>
+                                    <th style="width:18%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="itemCategory" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="1">
+                                            </select>
+                                        </div>
+                                    </th>
+                                    <th style="width:18%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="itemTypeId" class="form-control select2" disabled tabindex="2">
+                                                <option value="0"></option>
+                                            </select>
+                                        </div>
+                                    </th>
+                                    <th style="width:25%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="costRelationId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="3">
+                                            </select>
+                                        </div>
+                                    </th>
+                                    <th style="width:16%">
+                                        <div class="col-lg-12 chosen-container-parent">
+
+                                            <input id="allocate" type="text" class="form-control atoz-valid text-center" title="" disabled tabindex="4">
+                                        </div>
+                                    </th>
+
+                                    <th style="width:10%">
+                                        <div style="display:flex;justify-content:center;width:100%">
+                                            <button id="saveRow" type="button" onclick="saveUpdateRow(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="5">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button id="resetInputs" type="button" onclick="resetInputs(this)" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="6">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="7" style="text-align:center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('AddEditModalItems')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/Modules/FM/CostOfGoodsTemplateLine/CostOfGoodsTemplateLineIndex.js"></script>

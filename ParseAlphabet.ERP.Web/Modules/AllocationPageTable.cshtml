@@ -1,0 +1,67 @@
+﻿<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+
+<style>
+    .table-responsive {
+        overflow-y: scroll;
+        overflow-x: auto;
+        height: calc(100vh - 328px);
+    }
+    .table-responsive thead{
+        position : sticky;
+        top : -1px
+    }
+</style>
+<div class="row">
+    <div class="col-lg-3 col-md-3 displaynone relationalbox mr-1">
+        <div class="form-group">
+            <label class="relational-caption">کپشن فیلتر</label>
+            <div class="chosen-container-parent form_keyvalue" style="float: right !important ">
+                <select data-placeholder="انتخاب کنید..." class="select2" id="form_keyvalue">
+                    <option value="0">انتخاب کنید..</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-md-7 filterBox">
+        <div class="btn-group float-right mb-2">
+            <button type="button" class="btn btn-default btnfilter" data-id="" data-type="8" data-size="0" data-toggle="dropdown">
+                مورد فیلتر
+            </button>
+            <button type="button" id="btnOpenFilter" class="btn btn-secondary dropdown-toggle dropdown-toggle-split btnOpenFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <button type="button" id="btnRemoveFilter" class="btn btn-secondary remove-filter d-none btnRemoveFilter" onclick="remove_filter(this)"></button>
+            <div class="dropdown-menu min-width-140 filteritems">
+            </div>
+        </div>
+        <div class="form-group mt-0 float-right mb-2 app-search">
+            <input type="text" class="form-control filtervalue" onkeypress="filter_value_onkeypress(event, this)" title="" placeholder="عبارت فیلتر">
+            <a onclick="filtervalue_onsearchclick(this);">
+                <i class="fa fa-search"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-styles border mb-0 pagetablebody new-page-table">
+        @**@
+    </table>
+</div>
+<div id="footerPageing" class="row mt-2">
+    <div class="col-sm-12 col-md-8">
+        <div class="pagetablefooterinfo row col-md-12 ">
+            <div class="dataTables_info text-right">
+                نمایش <span id="firstRow">0</span> تا <span id="lastRow">0</span> - صفحه <span id="currentPage">0</span>
+            </div>
+            <label class="selected-list">تعداد انتخاب شده: 0</label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div id="countRowButton" class="btn-group pagerowscount dropup float-left">
+            <button type="button" class="btn btn-default" data-toggle="dropdown" id="dropCounteresPageTableName"></button>
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">-</span>
+            </button>
+            <div class="dropdown-menu" id="dropCounteresPageTable"></div>
+        </div>
+    </div>
+</div>

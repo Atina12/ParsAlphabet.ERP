@@ -1,0 +1,79 @@
+﻿<style>
+    #searchAdmissionModal_pagetable .table-responsive-table {
+        height: calc(100vh - 400px) !important;
+    }
+</style>
+
+<div id="searchAdmissionModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-lg-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتخاب پذیرش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right">
+                <fieldset class="group-box group-box-green">
+                    <legend>جستجو</legend>
+                    <div class="row">
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>شناسه پذیرش</label>
+                            <div>
+                                <input id="admissionId" type="text" class="form-control" maxlength="10" tabindex="110">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>نمبر تذکره مراجعه کننده</label>
+                            <div>
+                                <input id="patientNationalCode" type="text" class="form-control" maxlength="50" tabindex="111">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>مراجعه کننده</label>
+                            <div>
+                                <input id="patientFullName" type="text" class="form-control" maxlength="50" tabindex="112">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4 mb-0">
+                            <label>جریان کار</label>
+                            <select id="workflowId" class="form-control select2" tabindex="113"></select>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4 mb-0">
+                            <label>مرحله</label>
+                            <select id="stageId" class="form-control select2" tabindex="114"></select>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4 mb-0" id="diveAction">
+                            <label>گام</label>
+                            <select id="actionId" class="form-control select2" tabindex="115"></select>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>داکتر</label>
+                            <div>
+                                <select class="form-control select2" id="attenderId" tabindex="116"></select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>تاریخ ثبت</label>
+                            <div>
+                                <input id="createDatePersian" type="text" class="form-control" maxlength="10" placeholder="__/__/____" data-inputmask="'mask':'9999/99/99'" tabindex="117">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <button id="searchAdmission" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="118"><i class="fa fa-search"></i>جستجو</button>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="card" id="searchAdmissionModal_pagetable">
+                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('searchAdmissionModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script type="text/javascript" src="/Modules/MC/SearchAdmissionModal/SearchAdmissionModal.js"></script>

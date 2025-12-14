@@ -1,0 +1,399 @@
+﻿@{
+    ViewBag.Title = "گزارش بیمه گرها";
+}
+
+<link href="~/lib/ModulesCss//RepAdmissionInsurerForm.css" rel="stylesheet"/>
+
+
+<div class="content-page displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title">
+    <div class="button-items col-md-12 ">
+        <span class="float-right">@ViewBag.Title</span>
+        <span id="filterItemsContent" style="position:relative"></span>
+        <span id="filterItemsBox" style="position:relative"></span>
+        <input id="reportTypeFile" type="checkbox" checked data-toggle="toggle" data-on="گزارش بیمه" data-off="فایل بیمه" data-onstyle="success" data-offstyle="info" data-width="140" data-height="27">
+        <button id="getReport" type="button" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-1"></i>پیش نمایش</button>
+        <button id="previewReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-1"></i>تهیه گزارش</button>
+        <button id="exportFileInsuranceSeparation" type="button" class="btn blue_1 waves-effect" disabled><i class="fas fa-envelope-open-text ml-1"></i>خروجی فایل بیمه تفکیک</button>
+        <button id="exportFileInsuranceAggregation" type="button" class="btn blue_1 waves-effect" disabled><i class="fas fa-envelope-open-text ml-1"></i>خروجی فایل بیمه تجمیع</button>
+        @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+        <button id="exportCSV" type="button" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+    </div>
+</div>
+
+<div class="card-body" data-parsley-validate>
+
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" href="#InsurerBox" role="tab">
+            <span class="d-none d-md-block">بیمه گر</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" href="#attenderBox" role="tab">
+            <span class="d-none d-md-block">داکتر</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" href="#serviceBox" role="tab">
+            <span class="d-none d-md-block">خدمت</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content group-box group-box-gray" id="tabContent">
+<div class="tab-pane active p-3" id="InsurerBox" role="tabpanel">
+    <div class="row tabToggle1">
+        <div class="form-group col-lg-3 col-sm-4 m-0">
+            <label>تاریخ رزرو</label>
+            <div class="double-input-box">
+                <div class="double-input">
+                    <input type="text" id="fromReserveDate" class="form-control number persian-date" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")" placeholder="____/__/__"
+                           data-inputmask="'mask':'9999/99/99'"
+                           data-parsley-shamsidate
+                           data-parsley-validate-if-empty="true"
+                           data-parsley-errors-container="#fromDateReserveErrorContainer"
+                           data-parsley-comparedate="toReserveDate"
+                           data-parsley-dateisonemonth="toReserveDate"
+                           maxlength="10" tabindex="1"/>
+                </div>
+                <div class="double-input">
+                    <input type="text" id="toReserveDate" class="form-control number persian-date" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")" placeholder="____/__/__"
+                           data-inputmask="'mask':'9999/99/99'"
+                           data-parsley-shamsidate
+                           data-parsley-validate-if-empty="true"
+                           data-parsley-errors-container="#toDateReserveErrorContainer"
+                           maxlength="10" tabindex="2"/>
+                </div>
+            </div>
+            <div class="double-input-box">
+                <div class="double-input" id="fromDateReserveErrorContainer"></div>
+                <div class="double-input" id="toDateReserveErrorContainer"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 mb-0">
+            <div class="form-group">
+                <label>جریان کار</label>
+                <div>
+                    <select id="workflowId" class="form-control select2" name="workflows" multiple tabindex="3" style="height:20px !important"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>مرحله</label>
+                <div>
+                    <select id="stageId" class="form-control select2" name="stages" multiple tabindex="4" style="height:20px !important"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>گام</label>
+                <div>
+                    <select id="actionId" class="form-control select2" name="actions" multiple tabindex="5" style="height:20px !important"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>بیمه اجباری</label>
+                <div>
+                    <select id="basicInsurerId" class="form-control select2" name="basicinsurers" multiple tabindex="6" style="height:20px !important"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>صندوق بیمه اجباری</label>
+                <div>
+                    <select id="basicInsurerLineId" class="form-control select2" name="basicinsurerlines[]" multiple="multiple" tabindex="7">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>بیمه تکمیلی</label>
+                <div>
+                    <select id="compInsurerId" class="form-control select2" name="compinsurers[]" multiple="multiple" tabindex="8"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>صندوق بیمه تکمیلی</label>
+                <div>
+                    <select id="compInsurerLineId" class="form-control select2" name="compinsurerlines[]" multiple="multiple" tabindex="9"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>طرف قرارداد</label>
+                <div>
+                    <select id="thirdPartyId" class="form-control select2" name="thirdParties[]" multiple="multiple" tabindex="10"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-3 mb-0">
+            <div class="form-group">
+                <label>تخفیف</label>
+                <div>
+                    <select id="discountId" class="form-control select2" name="discounts[]" multiple="multiple" tabindex="11"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 mb-0">
+            <label>کسور بیمه اجباری</label>
+            <select id="confirmedBasicSharePrice" class="form-control" tabindex="12">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">دارد</option>
+                <option value="0">ندارد</option>
+            </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 mb-0">
+            <label>کسور بیمه تکمیلی</label>
+            <select id="confirmedCompSharePrice" class="form-control" tabindex="13">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">دارد</option>
+                <option value="0">ندارد</option>
+            </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 mb-0">
+            <label>سهم بیمه اجباری</label>
+            <select id="isBasicSharePrice" class="form-control" tabindex="14">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">دارد</option>
+                <option value="2">ندارد</option>
+            </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 mb-0">
+            <label>سهم بیمه تکمیلی</label>
+            <select id="isCompSharePrice" class="form-control" tabindex="15">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">دارد</option>
+                <option value="2">ندارد</option>
+            </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 mb-0">
+            <label>سهم طرف قرارداد</label>
+            <select id="isThirdParty" class="form-control" tabindex="16">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">دارد</option>
+                <option value="2">ندارد</option>
+            </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 mb-0">
+            <label>سهم تخفیف</label>
+            <select id="isDiscount" class="form-control" tabindex="17">
+                <option value="-1">انتخاب کنید</option>
+                <option value="1">دارد</option>
+                <option value="2">ندارد</option>
+            </select>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 mb-0">
+            <label>وضعیت ارسال نسخ</label>
+            <select id="confirmedBySystem" class="form-control select2" name="confirmedBySystems[]" multiple="multiple" tabindex="18">
+                <option value="1">آفلاین</option>
+                <option value="2">آنلاین</option>
+                <option value="3">سیستمی</option>
+                <option value="0">ارسال نشده</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="attenderBox" role="tabpanel">
+    <div class="row tabToggle2">
+        <div class="col-lg-5 col-sm-6 mb-0 d-inline-flex">
+            <div class="col-lg-9 col-sm-8 pr-0 form-group">
+                <label>داکتر</label>
+                <div>
+                    <select id="attenderId" class="form-control select2 " name="attenders[]" multiple="multiple" tabindex="20"></select>
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-secondary search-attender button-selection-select2">انتخاب داکتر</button>
+        </div>
+        <div class="form-group col-lg-2 col-sm-6 mb-0">
+            <label>دپارتمان</label>
+            <div>
+                <select id="departmentId" class="form-control select2" name="departments[]" multiple="multiple" tabindex="21"></select>
+            </div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-6 mb-0">
+            <label>تخصص</label>
+            <div>
+                <select id="specialityId" class="form-control select2 " name="specialitys[]" multiple="multiple" tabindex="22"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5 col-sm-4 d-inline-flex">
+            <div class="col-lg-9 pr-0 form-group">
+                <label>داکتر ارجاع دهنده</label>
+                <div class="col-12 chosen-container-parent">
+                    <select id="referringDoctorId" class="form-control select2" multiple="multiple" tabindex="23">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="serviceBox" role="tabpanel">
+    <div class="row tabToggle3">
+        <div class="col-lg-3 col-sm-6 mb-0">
+            <div class="form-group">
+                <label>نوع خدمت</label>
+                <div>
+                    <select id="serviceTypeId" class="form-control select2" name="serviceTypes[]" multiple="multiple" tabindex="30"></select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 mb-0 d-inline-flex">
+            <div class="form-group col-lg-9 pr-0 col-sm-8">
+                <label>خدمت</label>
+                <div>
+                    <select id="serviceId" class="form-control select2" name="services[]" multiple="multiple" tabindex="32"></select>
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-secondary search-service button-selection-select2">انتخاب خدمت</button>
+
+        </div>
+    </div>
+</div>
+</div>
+<fieldset class="group-box group-box-gray mt-3">
+    <legend>پیش نمایش</legend>
+    <div class="pagetable-report" id="mainReport">
+        @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+    </div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-6 col-sm-12 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="1">
+                            <option value="101" selected>گزارش خلاصه بیمه</option>
+                            <option value="104">گزارش خلاصه بیمه به تفکیک بیمه گر</option>
+                            <option value="103">گزارش صورت خلاصه دپارتمان - بیمه</option>
+                            <option value="102">گزارش ریز بیمه</option>
+                            <option value="105">گزارش بیمه اجباری به تفکیک داکتر(تفکیکی)</option>
+                            <option value="108">گزارش بیمه اجباری(تجمیعی)</option>
+                            <option value="106">گزارش بیمه تکمیلی به تفکیک بیمه گر</option>
+                            <option value="107">گزارش طرف قرارداد به تفکیک داکتر</option>
+                            <option value="115">گزارش تخفیف به تفکیک داکتر</option>
+                            <option value="112">گزارش بیمه اجباری به تفکیک نوع خدمت</option>
+                            <option value="109">فرم شماره یک - بیمه تامین اجتماعی</option>
+                            <option value="110">فرم شماره دو - بیمه تامین اجتماعی</option>
+                            <option value="111">فرم شماره سه - بیمه تامین اجتماعی</option>
+                            <option value="113">روکش اسناد بیمه اجباری</option>
+                            <option value="114">روکش اسناد بیمه تکمیلی</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="2"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<!--Modal-->
+<div id="searchElementsModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">لیست <span id="nameModalSearch" class=""></span></div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right" data-parsley-validate>
+                <div class="col-lg-12 row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>شناسه</label>
+                            <div>
+                                <input id="idSearch" class="form-control number " tabindex="810001"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 namesSearchBox">
+                        <div class="form-group">
+                            <label class="namesSearch"></label>
+                            <div>
+                                <input id="nameSearch" class="form-control" tabindex="810002"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 codesSearchBox">
+                        <div class="form-group">
+                            <label class="codesSearch"></label>
+                            <div>
+                                <input id="codeSearch" class="form-control" tabindex="810003"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 p-0">
+                        <button id="buttonSearchElementsModal" type="button" tabindex="810004" class="btn btn-outline-secondary" style="margin-top: 22.5px;"><i class="fa fa-search"></i>جستجو</button>
+                    </div>
+                </div>
+                <div class="table-responsive table-responsive-thead-fixed" style="max-height: none !important;white-space: break-spaces;">
+                    <table class="table table-styles border mb-0">
+                        <thead class="table-thead-fixed">
+                        <tr>
+                            <th class="col-width-percent-5 text-center pt-2">
+                                <input type="checkbox" id="checkAllElements"/>
+                            </th>
+                            <th class="col-width-percent-10">شناسه</th>
+                            <th class="col-width-percent-75 namesSearch"></th>
+                            <th class="col-width-percent-15 codesSearch"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempSearchElements"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="SaveSearch" class="btn btn-success waves-effect"><i class="fa fa-check"></i>انتخاب</button>
+                <button id="modal-close" onclick='modal_close("searchElementsModal")' class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<script type="text/javascript" src="/Modules/MC/Report/RepAdmissionInsurerForm.js"></script>

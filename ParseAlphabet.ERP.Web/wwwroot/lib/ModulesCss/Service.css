@@ -1,0 +1,110 @@
+﻿input[type="radio"]:focus {
+    outline: 1px solid #808080 !important;
+    outline-offset: -1px !important;
+}
+
+.sharetype {
+    border: 1px solid #c5ccd3;
+    border-radius: 3px;
+}
+
+.sharetype-box {
+    margin-top: 7.5px;
+    padding: 3px 4px 3px;
+    margin-bottom: 1px;
+}
+
+.preview-box, .save-box {
+    text-align: right;
+    margin-left: 0 !important;
+}
+
+.preview-box-btn {
+    background-color: #fff;
+    color: #76879c !important;
+    border: 1px solid #76879c;
+    float: left;
+    text-align: end;
+    padding: 3px 10px 3px 3px !important;
+}
+
+.preview-box-Counter {
+    color: #76879c;
+}
+
+.preview-box-lable, .save-box-lable {
+    float: right;
+}
+
+.preview-box-btn-lable {
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 0 10px 0 0;
+    background-color: #76879c;
+    color: #fff;
+}
+
+    .preview-box-btn-lable:hover, .preview-box-btn-lable:focus {
+        background-color: #6e7e93;
+        color: #fff;
+    }
+
+.save-box-btn {
+    background-color: #fff !important;
+    color: #008912 !important;
+    float: left;
+    text-align: end;
+    padding: 3px 10px 3px 3px !important;
+}
+
+.save-box-Counter {
+    color: #008912;
+}
+
+.save-box-btn-lable {
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 0 10px 0 0;
+    background-color: #008912;
+    color: #fff;
+}
+
+    .save-box-btn-lable:hover, .save-box-btn-lable:focus {
+        background-color: #00700f;
+        color: #fff;
+    }
+
+.Insurance-details-box,
+.price-details-box {
+    margin: 10px 0 0 0;
+}
+
+.Insurance-details,
+.price-details {
+    font-size: 13px;
+    color: #35596c;
+}
+
+
+.delete-box-btn-lable {
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 0 10px 0 0;
+    background-color: #fc5454;
+    color: #fff;
+    float: left;
+    width: 62px;
+    text-align: center;
+}
+
+.delete-box-Counter {
+    color: #fc5454
+}
+
+.delete-box-btn {
+    background-color: #fff !important;
+    color: #fc5454 !important;
+    float: left;
+    text-align: end;
+    padding: 3px 10px 3px 3px !important;
+}

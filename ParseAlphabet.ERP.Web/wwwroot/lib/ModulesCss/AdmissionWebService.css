@@ -1,0 +1,7 @@
+﻿.green_4:hover {
+    color: #fff !important
+}
+
+#webSreviceFrom div.table-responsive-table {
+    height: calc(100vh - 281px) !important;
+}

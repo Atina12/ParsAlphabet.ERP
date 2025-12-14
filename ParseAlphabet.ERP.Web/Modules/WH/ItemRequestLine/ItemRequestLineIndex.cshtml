@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "سطر های درخواست انبار";
+}
+
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+
+<div id="itemRequestLinePage">
+    @await Html.PartialAsync("/Modules/FormPlateHeaderLine.cshtml")
+
+    <input id="id" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+    <input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="workFlowId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="isDefaultCurrency" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["isDefaultCurrency"]"/>
+
+
+    @await Html.PartialAsync("/Modules/WH/WarehouseTransaction/WarehouseTransactionActionIndex.cshtml")
+
+</div>
+
+
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+
+<script src="~/Modules/WH/WarehouseTransaction/WarehouseTransactionIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/WH/ItemRequestLine/ItemRequestLineIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

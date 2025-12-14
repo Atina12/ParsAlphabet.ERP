@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "سفارش خرید / برگشت";
+}
+
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+
+<div id="purchaseOrderLinePage">
+
+    @await Html.PartialAsync("/Modules/FormPlateHeaderLine.cshtml")
+
+    <div id="stepLogModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="modal_title">لیست گام های ثبت شده</h5>
+                    </div>
+                </div>
+
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body" id="itemPageTable">
+                        <div class="row">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-10">گام</th>
+                                    <th class="col-width-percent-10">کاربر</th>
+                                    <th class="col-width-percent-10">تاریخ</th>
+                                </tr>
+                                </thead>
+                                <tbody id="stepLogRows">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-close" onclick="close_modal_stepLogs()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorUpdateStepResult" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="">لیست صورتحساب های متصل به درخواست جاری</h5>
+                    </div>
+                </div>
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" id="exportCSV" onclick="export_csvLastConfirmHeader()" class="btn btn-excel waves-effect" style=" margin :0px 0px 2px 0px"><i class="fa fa-file-excel"></i>اکسل</button>
+                            </div>
+                            <table class="table table-styles border mb-0" id="tableUpdateStepResultLines">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-10">شناسه صورتحساب</th>
+                                    <th class="col-width-percent-10">مرحله</th>
+                                    <th class="col-width-percent-10">جریان کار</th>
+                                    <th class="col-width-percent-10">گام جاری</th>
+                                    <th class="col-width-percent-10">تاریخ برگه</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempErrorUpdateStepResultLines">
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="" onclick="modal_close('errorUpdateStepResult')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorPurchaseOrderCheckisAllocatedList" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-md">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="">مرحله/دسته بندی های فاقد مبانی بهای خرید</h5>
+                    </div>
+                </div>
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+
+                                <tr>
+                                    <th class="col-width-percent-10">مرحله</th>
+                                    <th class="col-width-percent-10">دسته بندی</th>
+                                </tr>
+                                </thead>
+                                <tbody id="temperrorPurchaseOrderCheckisAllocatedList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="" onclick="modal_close('errorPurchaseOrderCheckisAllocatedList')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="averagePricesModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="modal_title">لیست نرخ های میانگین</h5>
+                    </div>
+                </div>
+
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body" id="itemPageTable">
+                        <div class="row">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-10">نرخ میانگین ناخالص</th>
+                                    <th class="col-width-percent-10">نرخ میانگین تخفیف</th>
+                                    <th class="col-width-percent-10">نرخ میانگین خالص</th>
+                                    <th class="col-width-percent-10">نرخ میانگین مالیات</th>
+                                    <th class="col-width-percent-10">نرخ میانگین خالص با مالیات</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempAveragePricesRows">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-close" onclick="modal_close('averagePricesModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input id="personOrderId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+    <input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="workFlowId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="isDefaultCurrency" type="hidden" class="form-control number" readonly value="@ViewContext.RouteData.Values["isDefaultCurrency"]"/>
+</div>
+
+<script src="~/lib/inputmask/jquery.inputmask.min.js"></script>
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+<script src="/Modules/WF/WorkFlow.js"></script>
+<script src="~/Modules/PU/PurchaseOrderLine/PurchaseOrderLineIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

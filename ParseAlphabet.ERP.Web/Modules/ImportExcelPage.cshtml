@@ -1,0 +1,145 @@
+﻿<link href="~/lib/ImportExcel/ImportExcel.css" rel="stylesheet"/>
+<!--Modal-->
+<div id="importExcelModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-Excel" id="dilogImportExcel">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right d-inline-flex">
+                    <h5 class="modal-title mt-0">
+                        انتقال اطلاعات از فایل اکسل
+                    </h5>
+                    <h5 class="modal-title mt-0 mr-3" id="modal_titleExcle_details">
+                    </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-body-ex">
+                <div class="box displaynone" id="importExcelLoader">
+                    <img src="/Content/images/heart.png" id="heartbeat">
+                </div>
+                <div id="headerElmentsHeigth">
+                    <div class="col-12 text-left header-ex  row">
+                        <div id="captionTableExcel" class="caption-ex text-right col-5 p-0">
+                            <label class="text-right text-danger label-alerts">
+                                <input type="checkbox" id="errorRowsCheck" style="vertical-align: middle;" checked onchange="changeRowsChecks('tempimportExcelbody')" disabled>
+                                سطر های خطا دار :
+                                <span class="number-label-alerts" id="errorRows">
+                                    @**@
+                                </span>
+                            </label>
+                            <label class="text-right text-success label-alerts">
+                                <input type="checkbox" id="successRowsCheck" style="vertical-align: middle;" checked onchange="changeRowsChecks('tempimportExcelbody')" disabled>
+                                سطر های معتبر :
+                                <span class="number-label-alerts" id="successRows">
+                                    @**@
+                                </span>
+                            </label>
+                        </div>
+                        <div class="header-Box-button col-7 p-0">
+                            <div id="spinnerDiv"></div>
+                            <button class="btn btn-secondary" id="tempExcelFile">
+                                <i class=" ml-1 fas fa-file"></i>
+                                فایل نمونه
+                            </button>
+                            <label for="inputFile" class="btn   btnInput m-0 ">
+                                <i id="nameFileExcelIcon" class="fas fa fa-upload">
+                                    @**@
+                                </i>
+                                <span id="nameFileExcel">
+                                    بارگذاری
+                                </span>
+                            </label>
+                            @**@
+                            <input id="inputFile" style="visibility:hidden;display:none" type="file" accept=".xls,.xlsx,.csv">
+                            @**@
+                            <select id="sheetsFile" class="drop-ex btn" style="width:170px !important">
+                                @**@
+                            </select>
+                            <button id="btnCreate" class="btn btnInput-create">
+                                <i id="loaderExelPage" class="ml-1 fas fa-arrow-down"></i>
+                                نمایش
+                            </button>
+                            <button class="btn btn-success" id="verifyData" disabled>
+                                <i id="loaderVerifyData" class="ml-1 fas fa-eye"></i>
+                                اعتبار سنجی
+                            </button>
+                            <button class="btn btn-warning" id="cansleFunction" disabled>
+                                <i class="ml-1 fas fa-pause"></i>
+                                لغو عملیات
+                            </button>
+                            <button class="btn btn-danger" id="deleteRows" disabled>
+                                <i class="ml-1 fas fa-trash-alt"></i>
+                                حذف
+                            </button>
+                            <button class="btn btn-info" id="importData" disabled>
+                                <i id="loaderImportData" class="ml-1 fas fa-arrow-left"></i>
+                                انتقال
+                            </button>
+                        </div>
+                    </div>
+                    <div id="headerElm" data-parsley-validate class="col-12 row text-right">
+                        @**@
+                    </div>
+                </div>
+                <div class="card-body" id="tempimportExcelbody">
+                    @await Html.PartialAsync("/Modules/ExcelPageTable.cshtml")
+                </div>
+                <!--<div class="table-responsive" id="tableExcel">
+                <table class="table table-styles border mb-0" id="Exceltable">
+                <thead class="thead-ImportExcel" id="tempimportExcelhead">-->
+                @**@
+                <!--</thead>
+                <tbody id="tempimportExcelbody" data-parsley-validate>-->
+                @**@
+                <!--</tbody>
+                <tbody id="tempimportExcelsummery" class="displaynone table-summarybody-fixed">-->
+                @**@
+                <!--</tbody>
+                </table>
+                </div>-->
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="confirmForClose()" class="btn btn-secondary ">
+                    <i class="fa fa-times-circle"></i>
+                    انصراف
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorRowsModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">سطرهای خطا دار</h5>
+                </div>
+            </div>
+
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body" id="itemPageTable">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">شماره صفحه</th>
+                                <th class="col-width-percent-10">شماره سطر</th>
+                            </tr>
+                            </thead>
+                            <tbody id="errorRowInfo">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('errorRowsModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+@await Html.PartialAsync("/Modules/SearchModal.cshtml")
+
+<script src="~/js/xlsx.full.min.js"></script>
+<script src="~/lib/ImportExcel/ImportExcel.js"></script>

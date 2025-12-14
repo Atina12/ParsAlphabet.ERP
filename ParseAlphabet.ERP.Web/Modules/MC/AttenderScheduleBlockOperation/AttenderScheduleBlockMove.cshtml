@@ -1,0 +1,206 @@
+﻿<div class="modal-content">
+
+<div class="modal-body text-right">
+    <div class="row">
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>داکتر</label>
+            <div>
+                <select class="form-control select2" id="attenderIdMoveModal" tabindex="1001" required></select>
+            </div>
+
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-4">
+            <label> نوع نوبت</label>
+            <div>
+                <select id="typeOnLineMove" class="form-control select2" title="" tabindex="1002">
+                    <option value="0">انتخاب کنید</option>
+                    <option value="1">غیرحضوری</option>
+                    <option value="2">حضوری</option>
+
+                </select>
+            </div>
+
+        </div>
+        <div class="form-group col-lg-6 col-sm-4">
+
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-4">
+            <button id="displacementReserveMoveDate" onclick="displacementReserveMoveDate()" type="button" class="btn btn-light border-green" style="margin-top:25px; margin-right:115px" tabindex="1013">
+                <i class="fa fa-exchange"></i>جابه جایی نوبت
+            </button>
+
+
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-6" id="formMoveValidateForModalPatient1" data-parsley-validate>
+            <fieldset class="group-box group-box-green">
+                <legend>جستجو/مبدا</legend>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>مراجعه کننده</label>
+                        <div class="col-12 chosen-container-parent">
+                            <select data-placeholder="انتخاب کنید" id="patientIdMove" class="select2 select2-quick-access" tabindex="1003">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-sm-5 m-0">
+                        <label>تاریخ رزرو نوبت</label>
+                        <div class="double-input-box">
+                            <div class="double-input">
+                                <input type="text" id="fromReserveDateMove"
+                                       class="form-control number persian-date persian-datepicker"
+                                       placeholder="____/__/__"
+                                       value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                                       data-inputmask="'mask':'9999/99/99'"
+                                       data-parsley-validate-if-empty="true"
+                                       data-parsley-chekdate
+                                       data-parsley-shamsidate
+                                       data-parsley-compareshamsidate="toReserveDateMove"
+                                       data-parsley-errors-container="#fromReserveDateMoveErrorContainer"
+                                       data-parsley-comparedate="toReserveDateMove"
+                                       data-parsley-dateisonemonth="toReserveDateMove"
+                                       data-parsley-compareshamsidateyear="toReserveDateMove"
+                                       maxlength="10" tabindex="1004"/>
+                            </div>
+                            <div class="double-input">
+                                <input type="text" id="toReserveDateMove"
+                                       class="form-control number persian-date persian-datepicker"
+                                       placeholder="____/__/__"
+                                       value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                                       data-inputmask="'mask':'9999/99/99'"
+                                       data-parsley-validate-if-empty="true"
+                                       data-parsley-chekdate
+                                       data-parsley-shamsidate
+                                       data-parsley-errors-container="#toReserveDateMoveErrorContainer"
+                                       maxlength="10"
+                                       tabindex="1005"/>
+                            </div>
+                        </div>
+                        <div class="double-input-box">
+                            <div class="double-input" id="fromReserveDateMoveErrorContainer"></div>
+                            <div class="double-input" id="toReserveDateMoveErrorContainer"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <button id="searchReservedMoveListFrom" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="1006">
+                            <i class="fa fa-search"></i>جستجو
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="card-body" id="reservedMoveListFrom">
+                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+            </div>
+        </div>
+
+
+        <div class="col-md-6" id="formMoveValidateForModalPatient2" data-parsley-validate>
+            <fieldset class="group-box group-box-green">
+                <legend>جستجو/مقصد</legend>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>شعبه</label>
+                        <div class="col-12 chosen-container-parent">
+                            <select data-placeholder="انتخاب کنید" id="branchIdMove" class="select2 select2-quick-access" data-parsley-selectvalzero required tabindex="1007" data-parsley-errors-container="#branchIdMoveError">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div id="branchIdMoveError">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-sm-5 m-0">
+                        <label>تاریخ رزرو نوبت</label>
+                        <div class="double-input-box">
+                            <div class="double-input">
+                                <input type="text" id="fromAppointmentDateMove"
+                                       class="form-control number persian-date persian-datepicker"
+                                       placeholder="____/__/__"
+                                       value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                                       data-inputmask="'mask':'9999/99/99'"
+                                       data-parsley-validate-if-empty="true"
+                                       data-parsley-chekdate
+                                       data-parsley-shamsidate
+                                       data-parsley-compareshamsidate="toAppointmentDateMove"
+                                       data-parsley-errors-container="#fromAppointmentDateMoveErrorContainer"
+                                       data-parsley-comparedate="toAppointmentDateMove"
+                                       data-parsley-dateisonemonth="toAppointmentDateMove"
+                                       data-parsley-compareshamsidateyear="toAppointmentDateMove"
+                                       maxlength="10" tabindex="1008"/>
+                            </div>
+                            <div class="double-input">
+                                <input type="text" id="toAppointmentDateMove"
+                                       class="form-control number persian-date persian-datepicker"
+                                       placeholder="____/__/__"
+                                       value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                                       data-inputmask="'mask':'9999/99/99'"
+                                       data-parsley-validate-if-empty="true"
+                                       data-parsley-chekdate
+                                       data-parsley-shamsidate
+                                       data-parsley-errors-container="#toAppointmentDateMoveErrorContainer"
+                                       maxlength="10"
+                                       tabindex="1009"/>
+                            </div>
+                        </div>
+                        <div class="double-input-box">
+                            <div class="double-input" id="fromAppointmentDateMoveErrorContainer"></div>
+                            <div class="double-input" id="toAppointmentDateMoveErrorContainer"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3 m-0">
+                        <label>زمان</label>
+                        <div class="double-input-box">
+                            <div class="double-input">
+                                <input id="startTime" type="text" class="form-control timeMask" data-parsley-time data-parsley-comparetimeelm="endTime" placeholder="__:__" value="00:00" data-inputmask="'mask':'99:99'" maxlength="5" tabindex="1010" data-parsley-errors-container="#startTimeError">
+
+                            </div>
+                            <div class="double-input">
+                                <input id="endTime" type="text" class="form-control timeMask" data-parsley-time placeholder="__:__" value="23:59" data-inputmask="'mask':'99:99'" maxlength="5" tabindex="1011" data-parsley-errors-container="#endTimeError">
+
+                            </div>
+                        </div>
+                        <div class="double-input-box">
+                            <div class="double-input" id="startTimeError"></div>
+                            <div class="double-input" id="endTimeError"></div>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-sm-2 m-0">
+                        <label> روز هفته</label>
+                        <div>
+
+                            <select class="form-control select2" id="dayInWeek" tabindex="1012">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <button id="searchReservedMoveListTo" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="1013">
+                            <i class="fa fa-search"></i>جستجو
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="card-body" id="reservedMoveListTo">
+                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="~/Modules/MC/AttenderScheduleBlockOperation/AttenderScheduleBlockMove.js"></script>

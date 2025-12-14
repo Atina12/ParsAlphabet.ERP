@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "نمایش تقویم پرسنل";
+}
+
+<link href="~/lib/ModulesCss/StandardTimeSheetDisplay.css" rel="stylesheet"/>
+
+<div id="employeeStandardTimeSheetDisplay" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title_personnelCalendar">نمایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right pb-5 overflow-visible" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="col-md-4 d-flex justify-content-start align-items-center">
+                        <div class="d-flex align-items-center text-right mb-2 pr-3">
+                            <div class="key_id">
+                                <lable id="modal_keyid_caption_personnelCalendarDisplay"></lable>
+                                <span id="modal_keyid_value_personnelCalendarDisplay"></span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center text-right mb-2 pr-3 ">
+                            <div class="key_id d-none">
+                                <span style="background-color: unset">-</span>
+                                <lable id="">دپارتمان</lable>
+                                <span id="departmentIdShow"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 d-flex justify-content-end align-items-center">
+                        <div class="button-items">
+                            <button title="اولین" id="headerFirst" onclick="getYearMonthWeekByBtn('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                <i class="mdi mdi-skip-next"></i>
+                            </button>
+                            <button title="قبلی" id="headerPrevious" onclick="getYearMonthWeekByBtn('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                <i class="mdi mdi-play"></i>
+                            </button>
+                            <input id="headerIndex" onkeydown="getYearMonthWeekByInput(this,event)" type="text" autocomplete="off" class="form-control number col-3 d-inline mr-2 ml-1" maxlength="10" placeholder="شناسه">
+                            <button title="بعدی" id="headerNext" onclick="getYearMonthWeekByBtn('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                <i class="mdi mdi-play fa-rotate-180"></i>
+                            </button>
+                            <button title="آخرین" id="headerLast" onclick="getYearMonthWeekByBtn('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                <i class="mdi mdi-skip-previous"></i>
+                            </button>
+                        </div>
+                        <div class="d-flex justify-content-end getbackToMonthOrYear mr-3">
+                            <button type="button" id="getbackToMonthOrYear" onclick="getbackToMonthOrYear()" class="btn d-none">
+                                <span class="ml-2">نمایش سال</span>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <input id="checkBeInYearMonthDay" type="text" class="number d-none" disabled/>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-pills nav-justified mt-3" role="tablist">
+
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link active" data-toggle="tab" href="#standardTimeSheetDisplayLinkBox" role="tab" style="flex-direction:row">
+                            <span class="d-none d-md-block">تعطیلات</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                            <span style="margin-right:5px ; margin-left:5px"> - </span>
+                            <span id="fiscalYearDisplay"></span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item waves-effect waves-light">
+                        <a class="nav-link" data-toggle="tab" href="#standardTimeSheetPerMonthBox" role="tab" style="flex-direction:row">
+                            <span class="d-none d-md-block">ساعت کار موظف ماهانه</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-email h5"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content group-box group-box-gray" style="padding:0px">
+
+                    <div class="tab-pane p-3 active" id="standardTimeSheetDisplayLinkBox" role="tabpanel">
+                        <div class="tabToggle1">
+
+                            <div id="inYear">
+                                <div id="newShowMonthInYear" class="w-100 d-flex justify-content-center align-items-center mb-3">
+                                    <ul id="newShowMonthListInYear" class="d-flex w-100 flex-wrap justify-content-center align-items-center"></ul>
+                                </div>
+                            </div>
+
+                            <div id="inMonth" class="d-none">
+
+                                <fieldset id="newFieldsetMonth" class="group-box mt-3 group-box-orange">
+                                    <legend>
+                                        <span id="newYearOfCelender"></span>
+                                    </legend>
+
+                                    <div class="d-flex justify-content-between workDay_or_shiftAssignment mb-3">
+                                        <div class="d-flex justify-content-around align-items-center">
+                                            <span>روز غیر کاری</span>
+                                            <span class="nonWorkingDayColor"></span>
+
+                                        </div>
+                                    </div>
+                                    <div id="newShowDays" class="w-100">
+                                        <ul id="newShowDaysWeekHeader" class="d-flex w-100">
+                                            <li>
+                                                <div class="w-100">شنبه</div>
+                                            </li>
+                                            <li>
+                                                <div class="w-100">یکشنبه</div>
+                                            </li>
+                                            <li>
+                                                <div class="w-100">دوشنبه</div>
+                                            </li>
+                                            <li>
+                                                <div class="w-100">سه شنبه</div>
+                                            </li>
+                                            <li>
+                                                <div class="w-100">چهارشنبه</div>
+                                            </li>
+                                            <li>
+                                                <div class="w-100">پنجشنبه</div>
+                                            </li>
+                                            <li>
+                                                <div class="w-100 text-danger">جمعه</div>
+                                            </li>
+                                        </ul>
+                                        <ul id="newShowDaysWeekLine" class="d-flex flex-wrap w-100"></ul>
+                                    </div>
+                                </fieldset>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="tab-pane p-3" id="standardTimeSheetPerMonthBox" role="tabpanel">
+                        <div class="tabToggle2">
+                            <div class="table-responsive" id="standardTimeSheetPerMontDisplay">
+                                <table class="table table-styles border mb-0 pagetablebody new-page-table" style="width:auto !important">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('employeeStandardTimeSheetDisplay')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/HR/StandardTimeSheet/StandardTimeSheetDisplay.js"></script>

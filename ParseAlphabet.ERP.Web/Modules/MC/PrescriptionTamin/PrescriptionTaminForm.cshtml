@@ -1,0 +1,869 @@
+﻿@using ConvertDate = ParsAlphabet.Central.ObjectModel.HelperFunctions.ConvertDate
+
+@{
+    ViewBag.Title = "نسخه نویسی";
+}
+
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/PrescriptionTamin.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content" id="prescriptionForm">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button id="favoriteTamin" type="button" onclick="showfavoriteTamin()" class="btn btn-warning waves-effect"><i class="fa fa-plus-circle"></i>برچسب گذاری</button>
+        <button id="choiceOfAdmission" type="button" onclick="choiceAdmissionTaminForm()" class="btn btn-info waves-effect"><i class="fa fa-user-alt"></i>انتخاب پذیرش</button>
+        <button id="" onclick="navigation_item_click('/MC/PrescriptionTamin','نسخه نویسی')" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+        <button id="saveForm" type="button" onclick="savePrescriptionTaminForm()" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+        <button id="saveAndSendToWebService" type="button" onclick="saveAndSendPrescriptionTaminForm()" class="btn btn-success waves-effect"><i class="fa fa-save"></i>ذخیره و ارسال </button>
+        <button id="newForm" type="button" onclick="resetFormPrescriptionTamin()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+<div class="row displaynone" id="prescriptionBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>شناسه</label>
+            <div>
+                <input id="prescriptionTaminId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تاریخ ثبت</label>
+            <input id="creatDateTime" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-green">
+    <legend>نسخه نویسی</legend>
+    <div class="row" id="headerForm" data-parsley-validate>
+        <div class="form-group col-sm-2">
+            <label>تاریخ اعتبار نسخه</label>
+            <div>
+                <input id="expiryDatePersian" type="text" class="form-control" maxlength="10" data-parsley-shamsidate data-parsley-validdate placeholder="____/__/__" value="@PersianDateTime.GetToday()" data-inputmask="'mask':'9999/99/99'" value="@ConvertDate.ToPersianDateString(DateTime.Now.AddDays(15), "{0}/{1}/{2}")" tabindex="7"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>توضیحات تکمیلی داکتر</label>
+            <div>
+                <input id="note" type="text" class="form-control" tabindex="8"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label id="OTPLbl" class="displaynone">کد OTP</label>
+            <div>
+                <input id="OptCode" type="text" class="form-control displaynone" tabindex="9"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-2">
+            <label></label>
+            <div>
+                <button id="getOtpCode" type="button" onclick="getOtpCode() " class="btn btn-info waves-effect displaynone"><i class="fa fa-get-pocket"></i>دریافت کد OTP</button>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table" style="height:60px">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            <th>داکتر</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+
+<fieldset id="peracraptionFilset" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist" id="prescriptionTabNav">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(16)">
+        <a class="nav-link active" data-toggle="tab" id="prescriptionLink16" onclick="changeTabIdByClick(16)" href="#box_16" role="tab">
+            <div class="d-none d-md-block">
+                <span>ویزیت</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink1" onclick="changeTabIdByClick(1)" href="#box_1" role="tab">
+            <div class="d-none d-md-block">
+                <span>دارویی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(17)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink10" onclick="changeTabIdByClick(17)" href="#box_17" role="tab">
+            <div class="d-none d-md-block">
+                <span>خدمات جنبی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(12)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink12" onclick="changeTabIdByClick(12)" href="#box_12" role="tab">
+            <div class="d-none d-md-block">
+                <span>نسخه ارجاعی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink2" onclick="changeTabIdByClick(2)" href="#box_2" role="tab">
+            <div class="d-none d-md-block">
+                <span>آزمایشگاه</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink3" onclick="changeTabIdByClick(3)" href="#box_3" role="tab">
+            <div class="d-none d-md-block">
+                <span>رادیولوژی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(5)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink5" onclick="changeTabIdByClick(5)" href="#box_5" role="tab">
+            <div class="d-none d-md-block">
+                <span>سی تی اسکن</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(6)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink6" onclick="changeTabIdByClick(6)" href="#box_6" role="tab">
+            <div class="d-none d-md-block">
+                <span>ام آر آی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink4" onclick="changeTabIdByClick(4)" href="#box_4" role="tab">
+            <div class="d-none d-md-block">
+                <span>سونوگرافی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(8)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink8" onclick="changeTabIdByClick(13)" href="#box_13" role="tab">
+            <div class="d-none d-md-block">
+                <span>فیزیوتراپی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(7)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink7" onclick="changeTabIdByClick(7)" href="#box_7" role="tab">
+            <div class="d-none d-md-block">
+                <span>داکتری هسته ای</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(9)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink9" onclick="changeTabIdByClick(14)" href="#box_14" role="tab">
+            <div class="d-none d-md-block">
+                <span>سنجش تراکم استخوان</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+<div class="tab-pane active p-3" id="box_16" role="tabpanel">
+    <div class="row tabToggle16" id="from_16" data-parsley-validate>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>توضیحات</label>
+            <div class=" col-12 p-0" style="display:inline-grid">
+                <input id="description" type="text" class="form-control" required="" tabindex="120" autocomplete="off">
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_1" role="tabpanel">
+    <div class="row tabToggle1" id="from_1" data-parsley-validate>
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>برند</label>
+            <div class="funkyradio funkyradio-success col-12 p-0" style="display:inline-grid" onkeydown="funkyradio_keydown(event,'isBr');" tabindex="9">
+                <input id="isBr" type="checkbox" onchange="changeCheckBoxPrescriptionTamin(this)" switch-value="بلی,خیر"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>نام دارو <span id="Title_1">ژنریک</span></label>
+            <div>
+                <select id="serviceId_1" class="form-control select2" favoritecategory="13" tabindex="10" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_1Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_1Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تعداد</label>
+            <input id="quantity_1" type="text" class="form-control number" maxlength="10" tabindex="11" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>زمان مصرف</label>
+            <div>
+                <select id="drugInstruction" favoritecategory="14" class="form-control select2" tabindex="12" required data-parsley-selectvalzero data-parsley-errors-container="#drugInstructionContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="drugInstructionContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>مقادیر مصرف</label>
+            <div>
+                <select id="drugAmount" favoritecategory="15" class="form-control select2" tabindex="13" required data-parsley-selectvalzero data-parsley-errors-container="#drugAmountContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="drugAmountContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>طریقه مصرف</label>
+            <div>
+                <select id="drugUsage" favoritecategory="16" class="form-control select2" tabindex="14">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دوره تکرار </label>
+            <input id="repeat" type="text" class="form-control number" maxlength="10" tabindex="15"/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ موثر انجام</label>
+            <div id="datepicker-place">
+                <input id="doDatePersian" type="text" class="form-control " placeholder="@PersianDateTime.DateAddCurrentDate(5)" value="@PersianDateTime.DateAddCurrentDate(5)" data-inputmask="'mask':'9999/99/99'" maxlength="10" tabindex="16"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4 mt-5">
+            <i class="ml-3 pl-3 pr-3  color-box-green"></i>
+            داروهای بیمه ای یا معادل ژنریک
+            <i class="ml-3 mr-3 pl-3 pr-3 color-box-red"></i>
+            داروهای غیر بیمه ای
+        </div>
+        <div class="col-sm text-right  mt-5">
+            <div class="button-items">
+                <button onclick="addPrescriptionTaminLines(1)" type="button" class="btn btn-light border-blue" tabindex="17"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(1)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_1">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="40">نام دارو</th>
+                    <th width="6">تعداد</th>
+                    <th width="6">زمان مصرف</th>
+                    <th width="6">مقادیر مصرف</th>
+                    <th width="6">طریقه مصرف</th>
+                    <th width="6">دوره تکرار</th>
+                    <th width="6">تاریخ موثر انجام </th>
+                    <th width="8">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_1">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_12" role="tabpanel">
+    <div class="row tabToggle12" id="from_12" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_12" favoritecategory="17" class="form-control select2" tabindex="122" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_12Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_12Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_12" type="text" class="form-control number" maxlength="10" tabindex="123" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(12)" type="button" class="btn btn-light border-blue" tabindex="124"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(12)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_12">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_12">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_17" role="tabpanel">
+    <div class="row tabToggle17" id="from_17" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_17" favoritecategory="17" class="form-control select2" tabindex="21" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_17Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_17Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_17" type="text" class="form-control number" maxlength="10" tabindex="22" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(17)" type="button" class="btn btn-light border-blue" tabindex="23"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(17)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_17">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_17">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_2" role="tabpanel">
+    <div class="row tabToggle2" id="from_2" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_2" favoritecategory="19" class="form-control select2" tabindex="31" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_2Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_2Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_2" type="text" class="form-control number" maxlength="10" tabindex="32" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(2)" type="button" class="btn btn-light border-blue" tabindex="33"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(2)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_2">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_2">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_3" role="tabpanel">
+    <div class="row tabToggle3" id="from_3" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_3" favoritecategory="20" class="form-control select2" tabindex="41" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_3Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_3Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_3" type="text" class="form-control number" maxlength="10" tabindex="42" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(3)" type="button" class="btn btn-light border-blue" tabindex="43"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(3)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_3">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_3">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_4" role="tabpanel">
+    <div class="row tabToggle4" id="from_4" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_4" favoritecategory="23" class="form-control select2" tabindex="51" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_4Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_4Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_4" type="text" class="form-control number" maxlength="10" tabindex="52" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(4)" type="button" class="btn btn-light border-blue" tabindex="53"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(4)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_4">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_4">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_5" role="tabpanel">
+    <div class="row tabToggle5" id="from_5" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_5" favoritecategory="21" class="form-control select2" tabindex="61" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_5Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_5Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تعداد</label>
+            <input id="quantity_5" type="text" class="form-control number" maxlength="10" tabindex="62" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(5)" type="button" class="btn btn-light border-blue" tabindex="63"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(5)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_5">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_5">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_6" role="tabpanel">
+    <div class="row tabToggle6" id="from_6" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_6" favoritecategory="22" class="form-control select2" tabindex="71" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_6Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_6Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تعداد</label>
+            <input id="quantity_6" type="text" class="form-control number" maxlength="10" tabindex="72" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(6)" type="button" class="btn btn-light border-blue" tabindex="73"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(6)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_6">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_6">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_13" role="tabpanel">
+    <div class="row tabToggle8" id="from_13" data-parsley-validate>
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_13" favoritecategory="24" class="form-control select2" tabindex="80" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_13Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_13Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_13" type="text" class="form-control number" maxlength="10" tabindex="81" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>عنوان اندام</label>
+            <div>
+                <select id="parentOrganId" favoritecategory="25" class="form-control select2" tabindex="82" required data-parsley-selectvalzero data-parsley-errors-container="#organParentIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="organParentIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>اندامک</label>
+            <div>
+                <select id="organId" favoritecategory="26" class="form-control select2" tabindex="83" data-parsley-errors-container="#organName2Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="organName2Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نام بیماری</label>
+            <div>
+                <select id="illness" favoritecategory="27" class="form-control select2" tabindex="84">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>طرح درمان</label>
+            <div>
+                <select id="plan" favoritecategory="28" class="form-control select2" tabindex="85">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(13)" type="button" class="btn btn-light border-blue" tabindex="86"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(13)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_13">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="50">عنوان خدمت</th>
+                    <th width="6">تعداد</th>
+                    <th width="7">عنوان اندام</th>
+                    <th width="7">اندامک</th>
+                    <th width="7">نام بیماری</th>
+                    <th width="7">طرح درمان</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_13">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_7" role="tabpanel">
+    <div class="row tabToggle7" id="from_7" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_7" favoritecategory="29" class="form-control select2" tabindex="91" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_7Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_7Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_7" type="text" class="form-control number" maxlength="10" tabindex="92" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(7)" type="button" class="btn btn-light border-blue" tabindex="93"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(7)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_7">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_7">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_14" role="tabpanel">
+    <div class="row tabToggle9" id="from_14" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceId_14" favoritecategory="30" class="form-control select2" tabindex="101" required data-parsley-selectvalzero data-parsley-errors-container="#serviceId_14Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceId_14Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantity_14" type="text" class="form-control number" maxlength="10" tabindex="102" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="addPrescriptionTaminLines(14)" type="button" class="btn btn-light border-blue" tabindex="103"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetForm(14)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_14">
+                <thead>
+                <tr>
+                    <th width="10">ردیف</th>
+                    <th width="70">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                    <th width="10">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temp_14">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+<div id="ePrescriptionTamin_Modal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title"> عملیات</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="pagetableEPrescriptionTamin">
+                            <thead>
+                            <tr>
+                                <th style="width:5%">
+                                    <input id="chkAll" type="checkbox" onchange="ePrescriptionTaminSelectAll()"/>
+                                </th>
+                                <th width="10">شناسه</th>
+                                <th width="30">نام بیمار</th>
+                                <th width="15">نوع نسخه</th>
+                                <th width="15">شناسه الکترونیک</th>
+                                <th width="15">وضعیت</th>
+                                <th width="10">تاریخ</th>
+                            </tr>
+                            </thead>
+                            <tbody id="resultEPrescriptionTamin">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button id="sendToWebService" onclick="sendToWebService()" class="btn green_4 waves-effect"><i class="fa fa-paper-plane color-blue"></i>ارسال</button>
+                <button id="wcfprescriptiontamintmodal-tamin-close" onclick="wcfPrescriptionTamintModalClose()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wcf_prescription_tamin_error_result" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">نتیجه عملیات</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="pagetablePrescriptionTaminResult">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-20">شناسه نسخه الکترونیک</th>
+                                <th class="col-width-percent-80">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="result_prescription_tamin_row">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfprescriptiontaminresultmodal-tamin-close"onclick="wcfPrescriptionTaminResultModalClose()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/MC/SearchAdmissionModal/SearchAdmissionModal.cshtml")
+@await Html.PartialAsync("/Modules/MC/AdmissionDisplay/AdmissionDisplay.cshtml")
+@await Html.PartialAsync("/Modules/MC/FavoritePrescription/FavoriteTaminIndex.cshtml")
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script type="text/javascript" src="/Modules/MC/PrescriptionTamin/PrescriptionTaminForm.js"></script>

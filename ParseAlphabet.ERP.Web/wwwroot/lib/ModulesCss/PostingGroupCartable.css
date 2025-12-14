@@ -1,0 +1,5 @@
+﻿
+.tab-pane div.table-responsive.table-responsive-table {
+    height: calc(100vh - 300px) !important;
+}
+

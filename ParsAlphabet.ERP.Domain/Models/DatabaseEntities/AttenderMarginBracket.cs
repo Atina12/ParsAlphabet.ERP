@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ParsAlphabet.ERP.Domain.Models.DatabaseEntities;
+
+public partial class AttenderMarginBracket
+{
+    public int Id { get; set; }
+
+    /// <summary>
+    /// نام حق الزحمهطبیب مربوط به یک دپارتمان
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// نام لاتین حق الزحمهطبیب مربوط به یک دپارتمان
+    /// </summary>
+    public string NameEng { get; set; }
+
+    public int? CreateUserId { get; set; }
+
+    public DateTime? CreateDateTime { get; set; }
+
+    public int? CompanyId { get; set; }
+
+    public bool? IsActive { get; set; }
+}

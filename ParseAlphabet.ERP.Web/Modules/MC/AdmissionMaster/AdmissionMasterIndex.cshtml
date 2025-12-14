@@ -1,0 +1,43 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "لیست طرح درمان";
+}
+<link href="~/lib/ModalePrint/PrintCss.css" rel="stylesheet"/>
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                                <button type="button" id="admissionMasterForm" onclick="admissionMasterForm();" class="btn btn-info waves-effect waves-light" title="Ctrl + Insert"><i class="fa fa-plus-circle"></i>طرح درمان</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/MC/AdmissionMaster/AdmissionMasterPrintIndex.cshtml")
+
+@await Html.PartialAsync("/Modules/MC/AdmissionMaster/AdmissionMasterDisplay.cshtml")
+
+@await Html.PartialAsync("/Modules/MC/AdmissionMaster/AdmissionMasterActionIndex.cshtml")
+
+<script>
+    var uId = @User.FindFirstValue("UserId");
+</script>
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/WF/WorkFlow.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/MC/AdmissionMaster/AdmissionMasterIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

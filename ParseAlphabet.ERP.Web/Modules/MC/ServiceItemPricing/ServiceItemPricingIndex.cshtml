@@ -1,0 +1,547 @@
+﻿@{ ViewBag.Title = "قیمت گذاری کالا و خدمات"; }
+<link href="~/lib/ModulesCss/Service.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/serviceItemPricing.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul id="serviceItemPricingTabs" class="nav nav-pills nav-justified" role="tablist">
+                                <li class="nav-item waves-effect waves-light" onclick="changeTabInbound(1,'services_pagetable')">
+                                    <a class="nav-link active " data-toggle="tab" href="#services" role="tab">
+                                        <div class="d-flex justify-content-center align-items-center w-100" style="font-size: 11px!important;">
+                                            <div class="">خدمات</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" onclick="changeTabInbound(2,'items_pagetable')">
+                                    <a class="nav-link" data-toggle="tab" href="#items" role="tab">
+                                        <div class="d-flex justify-content-center align-items-center w-100" style="font-size: 11px!important;">
+                                            <div class="">کالا</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content group-box group-box-gray" @*style="display:none"*@>
+                                <div class="tab-pane active pr-3 pl-3 pb-3 pt-0" id="services" role="tabpanel">
+                                    <div class="row tabToggle1" data-parsley-validate>
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body" id="services_pagetable">
+                                                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="items" role="tabpanel">
+                                    <div class="row tabToggle2">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body" id="items_pagetable">
+                                                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="servicePricingModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">قیمت گذاری خدمت</h5>
+                </div>
+            </div>
+            <div class="modal-header" id="">
+                <div class="items-info text-right d-flex">
+                    <div class="services-info text-right d-flex">
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">
+                            <span class="serviceTypeOfpricing"></span>
+                        </p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">کد خدمت : <span class="serviceCodeModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">نام خدمت : <span class="serviceNameModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 font-12">نوع خدمت : <span class="serviceTypeModal"></span></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="card-body " id="servicePricing_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('servicePricingModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="itemPricingModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">قیمت گذاری کالا</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="items-info text-right d-flex">
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">
+                        <span class="itemTypeOfpricing"></span>
+                    </p>
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">شناسه کالا : <span class="itemIdModal"></span></p>
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">نام کالا : <span class="itemNameModal"></span></p>
+                    <p class="d-inline-block pl-2 m-1 border-left font-12">واحد شمارش : <span class="itemUnitModal"></span></p>
+                    <p class="d-inline-block pl-2 m-1 font-12">دسته بندی : <span class="itemCategoryModal"></span></p>
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="card-body " id="itemPricing_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('itemPricingModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="servicePriceAndItemPriceModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" data-backdrop="static" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-size-xl">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0">بروزرسانی تعرفه کالا وخدمات</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height text-right" id="servicePriceAndItemPriceForm">
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        <li class="nav-item waves-effect waves-light" onclick="changeTabUpdateServiceItem(1,2)">
+            <a class="nav-link active" data-toggle="tab" href="#servicesBox" data-no="1" role="tab" id="firstTab">
+                <span class="d-none d-md-block">خدمت</span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light" onclick="changeTabUpdateServiceItem(1,1)">
+            <a class="nav-link" data-toggle="tab" href="#itemBox" data-no="2" role="tab">
+                <span class="d-none d-md-block">کالا</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content group-box group-box-gray text-right">
+        <div class="tab-pane active p-3" id="servicesBox" role="tabpanel">
+            <div class="tabToggle1">
+                <div class="col-12" id="servicePricePriceForm" data-parsley-validate>
+                    <div class="row">
+                        <div class="form-group col-sm-4 serviceSections">
+                            <label>موضوع درمان</label>
+                            <div class="col-sm-12 chosen-container-parent">
+                                <select id="medicalSubjectIdPS" class="form-control select2" tabindex="10">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections">
+                            <label>نوع بیمه</label>
+                            <div class="col-sm-12 chosen-container-parent">
+                                <select id="insurerTypeIdPS" class="form-control select2" tabindex="11" data-parsley-selectvalzero data-parsley-errors-container="#insurerTypeIdPSErrorContainer">
+                                    <option value="0">انتخاب کنید</option>
+                                    <option value="1">1 - اجباری</option>
+                                    <option value="2">2 - تکمیلی</option>
+                                    <option value="4">4 - طرف قرارداد</option>
+                                    <option value="5">5 - تخفیف</option>
+                                </select>
+                            </div>
+                            <div id="insurerTypeIdPSErrorContainer"></div>
+                        </div>
+                        <div id="hasNationalCodePSDiv" class="form-group col-sm-4 serviceSections">
+                            <label>وضعیت نمبر تذکره</label>
+                            <div>
+                                <select id="hasNationalCodePS" class="form-control select2" tabindex="12">
+                                    <option value="0">دارد</option>
+                                    <option value="1">ندارد</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections">
+                            <label>نوع خدمت</label>
+                            <div>
+                                <select id="serviceTypeIdPS" class="form-control select2" tabindex="13">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="attributePSDiv">
+                            <label>نشانه</label>
+                            <div>
+                                <select id="attributePS" class="form-control select2" tabindex="14">
+                                    <option value="0">انتخاب کنید</option>
+                                    <option value="">ندارد</option>
+                                    <option value="*">*</option>
+                                    <option value="*+">*+</option>
+                                    <option value='"'>"</option>
+                                    <option value="+">+</option>
+                                    <option value="#*+">#*+</option>
+                                    <option value="#+">#+</option>
+                                    <option value="#">#</option>
+                                    <option value="#*">#*</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="fromServiceIdPSDiv">
+                            <label>از شناسه خدمت</label>
+                            <div>
+                                <input id="fromServiceIdPS" type="text" class="form-control number" maxlength="10" tabindex="15" data-parsley-rangeid data-parsley-max="32767"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="toServiceIdPSDiv">
+                            <label>تا شناسه خدمت</label>
+                            <div>
+                                <input id="toServiceIdPS" type="text" class="form-control number" maxlength="10" tabindex="16" data-parsley-rangeid data-parsley-max="32767"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="fromNationalCodeDiv">
+                            <label>از نمبر تذکره</label>
+                            <div>
+                                <input id="fromNationalCode" type="text" class="form-control number" maxlength="10" tabindex="17" data-parsley-nationalcoderange/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="toNationalCodeDiv">
+                            <label>تا نمبر تذکره</label>
+                            <div>
+                                <input id="toNationalCode" type="text" class="form-control number" maxlength="10" tabindex="18" data-parsley-nationalcoderange/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="priceProfessionalCodePSDiv">
+                            <label>تعرفه حرفه ای</label>
+                            <div>
+                                <input id="priceProfessionalCodePS" type="text" class="form-control money" required maxlength="10" tabindex="19"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="priceTechnicalCodePSDiv">
+                            <label>تعرفه فنی</label>
+                            <div>
+                                <input id="priceTechnicalCodePS" type="text" class="form-control money" required maxlength="10" tabindex="20"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="priceAnesthesiaBasePSDiv">
+                            <label>تعرفه بیهوشی</label>
+                            <div>
+                                <input id="priceAnesthesiaBasePS" type="text" class="form-control money" required maxlength="10" tabindex="21"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 serviceSections" id="compPricePSDiv">
+                            <label>تعرفه</label>
+                            <div>
+                                <input id="compPricePS" type="text" class="form-control money" maxlength="10" tabindex="22" data-parsley-min="0"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="itemBox" role="tabpanel">
+            <div class="tabToggle2">
+                <div class="col-12" id="itemPriceForm" data-parsley-validate>
+                    <div class="row">
+                        <div class="form-group col-sm-4 itemSections ">
+                            <label>موضوع درمان</label>
+                            <div class="col-sm-12 chosen-container-parent">
+                                <select id="medicalSubjectIdIT" class="form-control select2" tabindex="24">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 itemSections ">
+                            <label>نوع بیمه</label>
+                            <div class="col-sm-12 chosen-container-parent">
+                                <select id="insurerTypeIdIT" class="form-control select2" tabindex="25">
+                                    <option value="0">انتخاب کنید</option>
+                                    <option value="1">1 - اجباری</option>
+                                    <option value="2">2 - تکمیلی</option>
+                                    <option value="4">4 - طرف قرارداد</option>
+                                    <option value="5">5 - تخفیف</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 itemSections " id="fromItemIdITDiv">
+                            <label>از شناسه کالا</label>
+                            <div>
+                                <input id="fromItemIdIT" type="text" class="form-control number" maxlength="10" tabindex="26" data-parsley-rangeid data-parsley-max="32767"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 itemSections " id="toItemIdITDiv">
+                            <label>تا شناسه کالا</label>
+                            <div>
+                                <input id="toItemIdIT" type="text" class="form-control number" maxlength="10" tabindex="27" data-parsley-rangeid data-parsley-max="32767"/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 itemSections ">
+                            <label> دسته بندی</label>
+                            <div class="col-sm-12 chosen-container-parent">
+                                <select id="itemCategoryIdIT" class="form-control select2" tabindex="28">
+                                </select>
+                            </div>
+                        </div>
+                        <div id="priceTypeITDiv" class="form-group col-sm-4 itemSections ">
+                            <label>مبنای تعرفه</label>
+                            <div>
+                                <select id="priceTypeIT" class="form-control select2" tabindex="29" required data-parsley-errors-container="#priceTypeITErrorContainer">
+                                    <option value="1">نرخ ثابت</option>
+                                    <option value="2">محدوده نرخ</option>
+                                </select>
+                            </div>
+                            <div id="priceTypeITErrorContainer"></div>
+                        </div>
+                        <div id="beginPriceITDiv" class="form-group col-sm-4 itemSections ">
+                            <label>تعرفه اول</label>
+                            <div>
+                                <input id="beginPriceIT" type="text" class="form-control money" required maxlength="10" tabindex="30"/>
+                            </div>
+                        </div>
+                        <div id="endPriceITDiv" class="form-group col-sm-4 itemSections ">
+                            <label>تعرفه دوم</label>
+                            <div>
+                                <input id="endPriceIT" type="text" class="form-control money" required maxlength="10" tabindex="31"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div id="perviewServicePriceAndItemPriceBox" class="preview-box">
+        <button id="perviewServicePriceAndItemPrice" class="btn preview-box-btn">
+            <span class="preview-box-btn-lable" tabindex="32">
+                پیش نمایش
+            </span>
+            <span class="preview-box-lable">
+                پیش نمایش بروز رسانی :
+                <span id="perviewServicePriceAndItemPriceCounter" class="preview-box-Counter">0</span>
+            </span>
+        </button>
+    </div>
+    <div id="saveServicePriceAndItemPriceBox" class="save-box">
+        <button id="saveServicePriceAndItemPrice" class="btn btn-success save-box-btn" disabled>
+            <span id="saveServicePriceAndItemPriceLable" class="save-box-btn-lable" tabindex="33">
+                بروز رسانی
+            </span>
+            <span class="save-box-lable">
+                تعداد سطر بروز شده :
+                <span id="affectedRowsServiceAndItem" class="save-box-Counter">0</span>
+            </span>
+        </button>
+    </div>
+    <button id="enableFormPSAndIt" onclick="enableForm(this,'ps','#saveServicePriceAndItemPrice')" class="btn blue_1 waves-effect" disabled><i class="fa fa-file-alt"></i>فعال سازی</button>
+    <button id="modal-close" onclick="modal_close('servicePriceAndItemPriceModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="priceTransferServiceAndItemModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">انتقال قیمت کالا و خدمات</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height" id="priceTransferServiceAndItemForm" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <div class="form-group col-12">
+                                <label>کالا/خدمات</label>
+                                <div class="col-sm-12 chosen-container-parent">
+                                    <select id="serviceOrItem" class="form-control select2 itemtype-basic select2" tabindex="250">
+                                        <option value="1">1 - کالا</option>
+                                        <option value="2">2 - خدمت</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group col-12">
+                                <label>به روزرسانی / حذف</label>
+                                <div>
+                                    <select id="operationType" class="form-control select2" data-parsley-selectvalzero data-parsley-errors-container="#operationTypeError" tabindex="254">
+                                        <option value="1">1 - به روزرسانی</option>
+                                        <option value="2">2- حذف</option>
+                                    </select>
+                                </div>
+                                <div id="operationTypeError"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-12 mb-0">
+                                <div class="form-group">
+                                    <label>نوع بیمه مبدا</label>
+                                    <div>
+                                        <select id="fromInsurerTypeId" class="form-control select2" data-parsley-validationmodal data-parsley-selectvalzero="" data-parsley-errors-container="#fromInsurerTypeIdError" tabindex="251">
+                                            <option value="0">انتخاب کنید</option>
+                                            <option value="1">1 - اجباری</option>
+                                            <option value="2">2- تکمیلی</option>
+                                            <option value="4">4 - طرف قرارداد</option>
+                                            <option value="5">5 - تخفیف</option>
+                                        </select>
+                                    </div>
+                                    <div id="fromInsurerTypeIdError"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 mb-0">
+                                <div class="form-group">
+                                    <label>موضوع درمان مبدا</label>
+                                    <div>
+                                        <select id="fromMedicalSubjectId" class="form-control select2" tabindex="252" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#fromMedicalSubjectIdError">
+                                            <option value="0">انتخاب کنید</option>
+                                        </select>
+                                    </div>
+                                    <div id="fromMedicalSubjectIdError"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-0">
+                                <div class="form-group">
+                                    <label>خدمت</label>
+                                    <div>
+                                        <select id="fromItemId" class="form-control select2" tabindex="253" data-parsley-validationmodal="">
+                                            <option value="0">انتخاب کنید</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-12 mb-0">
+                                <div class="form-group">
+                                    <label>نوع بیمه مقصد</label>
+                                    <div>
+                                        <select id="toInsurerTypeId" class="form-control select2" data-parsley-validationmodal data-parsley-selectvalzero="" data-parsley-errors-container="#toInsurerTypeIdError" tabindex="255">
+                                            <option value="0">انتخاب کنید</option>
+                                            <option value="1">1 - اجباری</option>
+                                            <option value="2">2- تکمیلی</option>
+                                            <option value="4">4 - طرف قرارداد</option>
+                                            <option value="5">5 - تخفیف</option>
+                                        </select>
+                                    </div>
+                                    <div id="toInsurerTypeIdError"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-0">
+                                <div class="form-group">
+                                    <label>موضوع درمان مقصد</label>
+                                    <div>
+                                        <select id="toMedicalSubjectId" class="form-control select2" tabindex="256" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#toMedicalSubjectIdError">
+                                            <option value="0">انتخاب کنید</option>
+                                        </select>
+                                    </div>
+                                    <div id="toMedicalSubjectIdError"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="perviewTransformPriceBox" class="preview-box">
+                    <button onclick="saveCopyPrice(true)" id="previewTransformPrice" class="btn preview-box-btn">
+                        <span class="preview-box-btn-lable" tabindex="257">
+                            پیش نمایش
+                        </span>
+                        <span class="preview-box-lable">
+                            پیش نمایش بروز رسانی :
+                            <span id="perviewTransformPriceCounter" class="preview-box-Counter">0</span>
+                        </span>
+                    </button>
+                </div>
+                <div id="saveTransformPriceBox" class="save-box">
+                    <button onclick="saveCopyPrice(false,1)" id="saveTransformPrice" class="btn btn-success save-box-btn" disabled>
+                        <span id="saveTransformPriceLable" class="save-box-btn-lable" tabindex="258">
+                            بروز رسانی
+                        </span>
+                        <span class="save-box-lable">
+                            تعداد سطر بروز شده :
+                            <span id="saveTransformPriceCounter" class="save-box-Counter">0</span>
+                        </span>
+                    </button>
+                </div>
+                <div id="deleteTransformPriceBox" class="delete-box">
+                    <button onclick="saveCopyPrice(false,2)" id="deleteTransformPrice" class="btn btn-danger delete-box-btn" disabled>
+                        <span id="deleteTransformPriceLable" class="delete-box-btn-lable" tabindex="259">
+                            حذف
+                        </span>
+                        <span class="delete-box-lable">
+                            تعداد سطر حذف شده :
+                            <span id="deleteTransformPriceCounter" class="delete-box-Counter">0</span>
+                        </span>
+                    </button>
+                </div>
+                <button id="enableFormCopy" onclick="enableForm(this,'copy','#saveTransformPrice')" class="btn blue_1 waves-effect" disabled><i class="fa fa-file-alt"></i>فعال سازی</button>
+                <button id="modal-close" onclick="modal_close('priceTransferServiceAndItemModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sendModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0"> نرخ خدمات قابل ارسال</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="items-info text-right d-flex">
+                    <div class="services-info text-right d-flex">
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">کد خدمت : <span class="serviceCodeSendModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">نام خدمت : <span class="serviceNameSendModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 font-12">نوع خدمت : <span class="serviceTypeSendModal"></span></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="carousel-inner">
+                    <div class="carousel-item-box">
+                        <div class="card-body " id="sendtoCentral_pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="sendBtn" onclick="sendMedicalPriceToCentral();" class="btn btn-success waves-effect waves-light" tabindex="10"><i class="fa fa-save"></i>ارسال</button>
+
+                <button id="modal-close" onclick="modal_close('sendModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="/Modules/MC/ServiceItemPricing/ServiceItemPricingIndex.js"></script>

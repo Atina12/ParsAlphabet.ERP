@@ -1,0 +1,51 @@
+﻿#attenderSchedulePage table{
+    font-size:10px !important;
+}
+
+.content-page {
+    margin-right: 0px;
+}
+
+.atenderschedule-settting-box {
+    display: flex;
+    width: 268px;
+    float: right;
+    border: 1px solid #6f6f6f;
+    border-radius: 4px;
+}
+
+    .atenderschedule-settting-box .attenderDayBtn {
+        min-width: 78px;
+        margin-bottom:0 !important;
+    }
+
+        .atenderschedule-settting-box .attenderDayBtn:first-child {
+            margin-right: 0;
+            border-left: 1px solid #6f6f6f;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+
+        .atenderschedule-settting-box .attenderDayBtn:last-child {
+            margin-right: 0;
+            border-right: 1px solid #6f6f6f;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+
+form#attenderScheduleForm {
+    margin: 0;
+}
+
+
+.pagetablebody {
+    min-width: 1600px !important;
+}
+
+    .pagetablebody tbody {
+        overflow-x: scroll !important;
+    }
+
+.bd-table-days button, .bd-calendar, .bd-table thead tr th {
+    font-size: 12px;
+}

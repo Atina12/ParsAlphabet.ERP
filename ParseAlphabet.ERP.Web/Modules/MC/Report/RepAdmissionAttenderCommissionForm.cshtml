@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "گزارش دستمزد داکتران";
+}
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <button id="getReport" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-1"></i>پیش نمایش</button>
+                                <button id="showReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-1"></i>تهیه گزارش</button>
+                                @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+                                <button type="button" id="exportCSV" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>اکسل صورت ریز</button>
+                                <button type="button" id="exportSummaryCSV" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>صورت خلاصه اکسل</button>
+                            </div>
+                        </div>
+                        <div class="card-body" data-parsley-validate>
+                            <fieldset class="group-box group-box-gray">
+                                <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <legend>فیلتر</legend>
+                                <div class="slideToggle open">
+                                    <div class="row">
+
+                                        <div class="form-group col-lg-3  col-sm-3 ">
+                                            <label> تاریخ رزرو</label>
+                                            <div class="double-input-box">
+                                                <div class="double-input">
+                                                    <input type="text" id="dateFrom" class="form-control number persian-date persian-datepicker" placeholder="____/__/__" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")" data-parsley-validate-if-empty="true" data-inputmask="'mask':'9999/99/99'" required data-parsley-shamsidate data-parsley-errors-container="#dateFromErrorContainer" data-parsley-comparedate="dateTo" data-parsley-dateisonemonth="dateTo" maxlength="10" tabindex="1"/>
+                                                </div>
+                                                <div class="double-input">
+                                                    <input type="text" id="dateTo" class="form-control number persian-date persian-datepicker" placeholder="____/__/__" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")" data-parsley-validate-if-empty="true" data-inputmask="'mask':'9999/99/99'" required data-parsley-shamsidate data-parsley-errors-container="#dateToErrorContainer" maxlength="10" tabindex="2"/>
+                                                </div>
+                                            </div>
+                                            <div class="double-input-box">
+                                                <div class="double-input" id="dateFromErrorContainer"></div>
+                                                <div class="double-input" id="dateToErrorContainer"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                            <label>شعبه</label>
+                                            <select id="branchId" class="form-control select2" multiple="multiple" name="branch[]" tabindex="3"></select>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>جریان کار</label>
+                                            <select id="workflowId" class="form-control select2" multiple="multiple" name="workflow[]" tabindex="4"></select>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>مرحله</label>
+                                            <select id="stageId" class="form-control select2" multiple="multiple" name="stage[]" tabindex="5"></select>
+                                        </div>
+
+                                        <div class="form-group col-lg-2  col-sm-2 mb-0">
+                                            <div class="form-group">
+                                                <label>داکتر</label>
+                                                <div>
+                                                    <select class="select2 form-control" id="attenderId" tabindex="6">
+                                                        <option value="0">انتخاب کنید</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-sm-3 mb-0">
+                                            <div class="form-group">
+                                                <label>دپارتمان</label>
+                                                <div>
+                                                    <select id="departmentId" class="form-control select2" name="departments[]" multiple="multiple" tabindex="7"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-2 mb-0">
+                                            <div class="form-group">
+                                                <label>گام</label>
+                                                <div>
+                                                    <select class="form-control" id="actionId" name="action[]" multiple tabindex="8"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="group-box group-box-gray mt-3">
+                                <legend>پیش نمایش</legend>
+                                <div class="pagetable-report" id="mainReport">
+                                    @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-9 col-sm-12 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="1">
+                            <option value="101" selected>گزارش خلاصه دستمزد داکتران - به تفکیک گام و خدمت</option>
+                            <option value="102">گزارش ریز دستمزد داکتران - به تفکیک داکتر</option>
+                            <option value="104">گزارش پذیرش به تفکیک دپارتمان</option>
+                            <option value="105">گزارش روزانه خدمات داکتران - به تفکیک داکتر</option>
+                            <option value="106">گزارش روزانه خدمات داکتران - به تفکیک داکتر و تاریخ</option>
+                            <option value="108">گزارش خلاصه دستمزد داکتران</option>
+                            <option value="109">خلاصه گزارش دستمزد داکتران - به تفکیک بیمه</option>
+                            <option value="110">خلاصه گزارش دستمزد داکتران - به تفکیک کمیسیون</option>
+                        </select>
+                    </div>
+                </div>
+                @*<input type="button" name="name" value="--Report--" onclick="window.open('/Report/NewReport')"/>*@
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="2"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/Modules/MC/Report/RepAdmissionAttenderCommissionForm.js?ver=@Guid.NewGuid().ToString().Replace("-", "")" type="text/javascript"></script>

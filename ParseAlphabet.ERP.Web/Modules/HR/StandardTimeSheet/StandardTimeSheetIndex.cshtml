@@ -1,0 +1,163 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "تقویم استاندارد";
+}
+
+
+<link href="~/lib/ModulesCss/JournalIndex.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <button type="button" onclick="timeSheetTransfer()" class="btn blue_1 waves-effect"><i class="fa fa-file-import"></i>انتقال تقویم داکتران</button>
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="stimul_preview" onclick="stimul_previewNew()" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                                <button type="button" id="readyforadd" onclick="modal_ready_for_add();" class="btn btn-info waves-effect waves-light" title="Ctrl + Insert"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right  pb-5 overflow-visible" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>سال مالی</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <select data-placeholder="انتخاب کنید" id="fiscalYearId" required class="form-control select2" tabindex="1">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>دپارتمان</label>
+                        <div>
+                            <select id="departmentId" class="form-control select2" title="" required data-parsley-errors-container="#DepartmentIdError" tabindex="2"></select>
+                        </div>
+                        <div id="DepartmentIdError">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="3">
+                            <input id="isActive" type="checkbox" name="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <input id="name" type="text" required class="form-control" title="" tabindex="4">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label>توضیحات</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <input id="description" type="text" class="form-control" title="" tabindex="5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save();" class="btn btn-success waves-effect waves-light" tabindex="6" title="Ctrl + S"><i class="fa fa-check-circle"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/HR/StandardTimeSheet/StandardTimeSheetDisplay.cshtml")
+
+@await Html.PartialAsync("/Modules/HR/StandardTimeSheetHoliday/StandardTimeSheetHolidayIndex.cshtml")
+
+@await Html.PartialAsync("/Modules/HR/StandardTimeSheetPerMonth/StandardTimeSheetPerMonthIndex.cshtml")
+
+
+<div id="timeSheetTransferModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتقال تقویم داکتران</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height" id="timeSheetTransferForm" data-parsley-validate>
+                <div class="row text-right">
+                    <div class="form-group col-lg-6 col-width-percent-40">
+                        <label>تقویم مبدا</label>
+                        <div>
+                            <select id="fromTimeSheet" class="form-control select2" tabindex="101" required data-parsley-selectvalzero data-parsley-attenderchnage data-parsley-errors-container="#fromTimeSheetContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="fromTimeSheetContainer"></div>
+                        <label class="col-md-12 mt-3">سال مالی : <span id="fromFiscalYearName"></span></label>
+                        <label class="col-md-12 ">تاریخ شروع سال : <span id="fromStartDatePersian"></span></label>
+                        <label class="col-md-12 ">تاریخ پایان سال : <span id="fromEndDatePersian"></span></label>
+                        <label class="col-md-12 ">تعداد روزهای غیرکاری : <span id="fromHolidayCount"></span></label>
+                        <label class="col-md-12 ">تعداد شیفت های تخصیص داده شده : <span id="fromShiftCount"></span></label>
+                    </div>
+                    <div class="form-group col-lg-6 col-width-percent-40">
+                        <label>تقویم مقصد</label>
+                        <div>
+                            <select id="toTimeSheet" class="form-control select2" tabindex="102" required data-parsley-selectvalzero data-parsley-attenderchnage data-parsley-errors-container="#toTimeSheetContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+
+                        <div id="toTimeSheetContainer"></div>
+                        <label class="col-md-12 mt-3">سال مالی : <span id="toFiscalYearName"></span></label>
+                        <label class="col-md-12 ">تاریخ شروع سال : <span id="toStartDatePersian"></span></label>
+                        <label class="col-md-12 ">تاریخ پایان سال : <span id="toEndDatePersian"></span></label>
+                        <label class="col-md-12 ">تعداد روزهای غیرکاری : <span id="toHolidayCount"></span></label>
+                        <label class="col-md-12 ">تعداد شیفت های تخصیص داده شده : <span id="toShiftCount"></span></label>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="saveTransformTimeSheetBox" class="save-box">
+                    <button id="saveTransformTimeSheet" class="btn btn-success save-box-btn" tabindex="104">
+                        <span id="saveTransformTimeSheetLable" class="save-box-btn-lable">
+                            تخصیص
+                        </span>
+                    </button>
+                </div>
+                <button id="modal-close" onclick="modal_close('timeSheetTransferModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<script type="text/javascript" src="~/Modules/HR/StandardTimeSheet/StandardTimeSheetIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

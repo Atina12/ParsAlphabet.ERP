@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "کدینگ حسابداری معین";
+}
+
+
+<link href="~/lib/ModulesCss/AccountSGLIndex.css" rel="stylesheet"/>
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml");
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right" id="addEditModalForm" data-parsley-validate>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>کد کل</label>
+                        <div>
+                            <select id="glId" type="text" class="form-control select2" title="" required data-parsley-errors-container="#glIdError" tabindex="1">
+                            </select>
+                        </div>
+                        <div id="glIdError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>گروه حساب ها</label>
+                        <div>
+                            <input type="text" class="form-control" id="accountCategoryName" value="" disabled/>
+                        </div>
+                        <div id="accountCategoryIdError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>کد معین</label>
+                        <div>
+                            <input id="id" type="text" class="form-control number" title="" tabindex="2" data-parsley-max="999" data-parsley-min="1" maxlength="3" required>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام معین</label>
+                        <div>
+                            <input id="name" type="text" class="form-control atoz0t9-dash-underline-plus-valid" title="" required tabindex="3">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="4">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12 m-t-10">
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link active" data-toggle="tab" href="#accountDetail" role="tab">
+                                    <span class="d-none d-md-block">تنظیمات تفصیل</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-home-variant h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-toggle="tab" href="#carrency" role="tab">
+                                    <span class="d-none d-md-block">ارز</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-email h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content group-box group-box-gray">
+                            <div class="tab-pane active p-3" id="accountDetail" role="tabpanel">
+                                <div class="tabToggle1">
+                                    <select class="form-control col-md-4 m-b-10" tabindex="5" id="accountDetailRequired">
+                                        <option value="1">اجباری</option>
+                                        <option value="2">اختیاری</option>
+                                        <option value="3">ندارد</option>
+                                    </select>
+                                    <div class="row list-max-height" id="fillItem">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane  p-3" id="carrency" role="tabpanel">
+                                <div class="tabToggle3">
+                                    <div class="row list-max-height" id="currencyContainer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_operation()" class="btn btn-success waves-effect waves-light" tabindex="6"><i class="fa fa-check-circle" title="Ctrl + S"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate1.js"></script>
+<script src="~/Modules/FM/AccountSGL/AccountSGLIndex.js"></script>
+<link href="~/lib/ModulesCss/AccountSGLIndex.css" rel="stylesheet"/>

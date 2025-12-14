@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "گزارش سفارش کالا";
+}
+
+<div class="content-page  displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button id="getReport" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-2"></i>پیش نمایش</button>
+        <button id="showReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-2"></i>تهیه گزارش</button>
+        @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+        <button type="button" id="exportCSV" onclick="export_AdmissionSaleReport_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+    </div>
+</div>
+
+<div class="card-body">
+<fieldset class="group-box group-box-gray">
+    <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+        <i class="fas fa-minus"></i>
+    </button>
+    <legend>فیلتر</legend>
+    <div class="row slideToggle open">
+        <div class="row col-12" id="AdmissionSaleReport" data-parsley-validate>
+
+            <div class="form-group col-lg-3  col-sm-4">
+                <label>تاریخ ثبت</label>
+                <div class="double-input-box">
+                    <div class="double-input">
+                        <input type="text" id="fromCreateDateTimePersian"
+                               data-parsley-validate-if-empty="true"
+                               class="form-control number persian-date persian-datepicker"
+                               placeholder="____/__/__"
+                               value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                               data-inputmask="'mask':'9999/99/99'"
+                               data-parsley-shamsidateservice
+                               data-parsley-chekdoubledate
+                               data-parsley-errors-container="#fromDocumentDateErrorContainer"
+                               toDate
+                               data-parsley-comparedate="toCreateDateTimePersian"
+                               data-parsley-dateisonemonth="toCreateDateTimePersian"
+                               maxlength="10" tabindex="1"/>
+                    </div>
+                    <div class="double-input">
+                        <input type="text" id="toCreateDateTimePersian"
+                               data-parsley-validate-if-empty="true"
+                               class="form-control number persian-date persian-datepicker"
+                               placeholder="____/__/__"
+                               value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                               data-inputmask="'mask':'9999/99/99'"
+                               data-parsley-shamsidateservice
+                               data-parsley-errors-container="#toDocumentDateErrorContainer"
+                               maxlength="10" tabindex="2"/>
+                    </div>
+                </div>
+                <div id="fromDocumentDateErrorContainer"></div>
+                <div id="toDocumentDateErrorContainer"></div>
+            </div>
+
+            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                <label>شعبه</label>
+                <select id="branchId" class="form-control select2" multiple="multiple" name="branch[]" tabindex="3"></select>
+            </div>
+
+            <div class="form-group col-lg-3 col-sm-4 mb-0">
+                <label>جریان کار</label>
+                <select id="workflowId" class="form-control select2" multiple="multiple" name="workflow[]" tabindex="4"></select>
+            </div>
+            <div class="form-group col-lg-3 col-sm-4 mb-0">
+                <label>مرحله</label>
+                <select id="stageId" class="form-control select2" multiple="multiple" name="stage[]" tabindex="5"></select>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>دسته بندی</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="categoryId" multiple="multiple" class="select2 select2-quick-access" tabindex="6">
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>بیمه اجباری</label>
+                    <div>
+                        <select id="basicInsurerId" class="form-control select2" multiple="multiple" tabindex="7">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>صندوق اجباری</label>
+                    <div>
+                        <select id="basicInsurerLineId" class="form-control select2" multiple="multiple" tabindex="8">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>بیمه تکمیلی</label>
+                    <div>
+                        <select id="compInsurerId" multiple="multiple" class="form-control select2" tabindex="9">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>صندوق تکمیلی</label>
+                    <div>
+                        <select id="compInsurerLineId" multiple="multiple" class="form-control select2" tabindex="10">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>طرف قرارداد</label>
+                    <div>
+                        <select id="thirdPartyInsurerId" class="form-control select2" multiple="multiple" tabindex="11">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>تخفیف</label>
+                    <div>
+                        <select id="discountInsurerId" class="form-control select2" multiple="multiple" tabindex="12">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>مراجعه کننده</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="patientId" class="form-control select2" tabindex="13">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>نمبر تذکره </label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="patientNationalCode" class="form-control select2" tabindex="14">
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>شناسه سفارش</label>
+                    <div class="double-input-box">
+                        <input class="form-control number double-input" id="fromId" tabindex="15" data-parsley-greaterthanequal="#toId" data-parsley-errors-container="#fromIdError" placeholder="از :"/>
+                        <input class="form-control number double-input" id="toId" tabindex="16" placeholder="تا :"/>
+                    </div>
+                </div>
+                <div id="fromIdError"></div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>شناسه پرونده</label>
+                    <div class="double-input-box">
+                        <input class="form-control number double-input" id="fromAdmissionMasterId" tabindex="17" data-parsley-greaterthanequal="#toAdmissionMasterId" data-parsley-errors-container="#fromAdmissionMasterIdError" placeholder="از :"/>
+                        <input class="form-control number double-input" id="toAdmissionMasterId" tabindex="18" placeholder="تا :"/>
+                    </div>
+                    <div id="fromAdmissionMasterIdError"></div>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>کالا</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="itemId" class="select2 select2-quick-access" tabindex="19" multiple name="itemId[]" data-parsley-errors-container="#ItemIdError">
+                    </select>
+                </div>
+                <div id="ItemIdError"></div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>گام</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="actionId" multiple="multiple" class="select2 select2-quick-access" tabindex="20">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>کاربر ثبت کننده</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="userId" multiple="multiple" class="select2 select2-quick-access" tabindex="21">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>تامین کنندگان</label>
+                <div>
+                    <select id="vendorId" type="text" class="form-control select2" multiple="multiple" title="" data-parsley-errors-container="#vendorIdError" tabindex="22">
+                    </select>
+                </div>
+                <div id="vendorIdError"></div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>نوع قرار داد</label>
+                <div>
+                    <select id="contractTypeId" type="text" multiple="multiple" class="form-control select2" title="" tabindex="23">
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</fieldset>
+<fieldset class="group-box group-box-gray mt-3">
+    <legend>پیش نمایش</legend>
+    <div class="pagetable-report" id="mainReport">
+        @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+    </div>
+</fieldset>
+
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-6 col-sm-12 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="1">
+                            <option value="101" selected> صورت ریز کالا درمان</option>
+                            <option value="102"> صورت ریز سفارش کالا درمان - به تفکیک مراجعه کننده</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="2"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+
+<script type="text/javascript" src="/Modules/MC/Report/RepAdmissionSaleForm.js"></script>

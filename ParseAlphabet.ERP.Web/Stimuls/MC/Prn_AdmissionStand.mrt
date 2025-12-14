@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>9FZlC8h9o9lFRf2Ay0TsXtF8s4jGS8LtaEnomU8NsV7ZFssJ5kyb+cId/QhjdHdn78R9705ZqZBBScmZwyXgboFSyw3JeWmZwBHV8WQB43uFcE+v6FnT8OJs9WxqbG1ejXCP7VtUW5lDBNHMw0nhO9FwY0vlXw==</ConnectionStringEncrypted>
+        <Key>3442089a9be54e7596a34ef9581cda8c</Key>
+        <Name>Connection</Name>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Spc_Admission_Print_Stand Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Spc_Admission_Print_Stand</Alias>
+        <Columns isList="true" count="9">
+          <value>AdmissionMasterId,System.Int32</value>
+          <value>BranchId,System.Int16</value>
+          <value>BranchName,System.String</value>
+          <value>BranchAddress,System.String</value>
+          <value>BranchLineTypeId,System.Byte</value>
+          <value>BranchLineTypeName,System.String</value>
+          <value>BranchLineValue,System.String</value>
+          <value>AlterDate,System.String</value>
+          <value>PatientFullName,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>eca46941edfa4bf89fcc6e0cc64861e6</Key>
+        <Name>Spc_Admission_Print_Stand</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_AdmissionMasterId,,8,0</value>
+        </Parameters>
+        <SqlCommand>mc.Spc_Admission_Print_Stand</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Spc_Admission_Print_Stand>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="3">
+      <value>,CorpName,CorpName,,System.String,,False,False,False,False,,_x0038_9cd6b1d6cc64d59aabd824fc20221d6</value>
+      <value>,CorpLogo,CorpLogo,,System.Drawing.Image,,False,False,False,False,,bdc99a6b006440ab93736e207df73b40</value>
+      <value>,ReportDate,ReportDate,,System.String,,False,False,False,False,,ea52ee2ef0e44ac6944148c6cca91783</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>caf1147603184feab861476db1ead765</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <PageFooterBand1 Ref="5" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,28.7,6.6,0</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageFooterBand1>
+        <Text40 Ref="6" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>White</Brush>
+          <ClientRectangle>48.37,2.78,2.81,0.31</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>IRANSansWebFaNum,10</Font>
+          <Guid>a02c805ea2d048ec9479058138335ae7</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text40</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>صندوق بیمه اجباری:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text40>
+        <DataBand1 Ref="7" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <CanShrink>True</CanShrink>
+          <ClientRectangle>0,0.4,6.6,7.3</ClientRectangle>
+          <Components isList="true" count="11">
+            <Image2 Ref="8" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.05,0.01,1.17,1.02</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Guid>348ef1152d2c48fcb2700ee36dfab269</Guid>
+              <IconColor>68, 114, 196</IconColor>
+              <ImageData>{CorpLogo}</ImageData>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image2</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Stretch>True</Stretch>
+            </Image2>
+            <Text59 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.32,0.02,5.28,0.92</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>e2e68addc0fc415cbb0124c4bb950303</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <LineSpacing>1.5</LineSpacing>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text59</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>{CorpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Text59>
+            <Text8 Ref="10" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;None;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.1,3.97,3.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10,Bold</Font>
+              <Guid>59db3b0a7a644f7fbb8e6b2abf4c896e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>{Spc_Admission_Print_Stand.AlterDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text1 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>4.14,3.97,2.46,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>38c56b5929c84677875659e733945cc2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>تاریخ ثبت:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text6 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>4.16,5.12,2.44,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>6284b41bddf849819731b57dfbbd9adc</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>نام مراجعه کننده:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.1,5.12,3.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,12,Bold</Font>
+              <Guid>bbca5863c6504ff9b03535eac8bb0784</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>{Spc_Admission_Print_Stand.PatientFullName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <BarCode1 Ref="14" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <AutoScale>True</AutoScale>
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="15" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>0.1,1.45,6.5,1.2</ClientRectangle>
+              <Code>{Spc_Admission_Print_Stand.AdmissionMasterId}</Code>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Name>BarCode1</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <ShowLabelText>False</ShowLabelText>
+            </BarCode1>
+            <Text2 Ref="16" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;1;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.14,2.8,6.3,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10,Bold</Font>
+              <Guid>6f4ecf8de45c45818d517dac8f9bedd9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>شناسه پرونده : {Spc_Admission_Print_Stand.AdmissionMasterId}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="17" type="NumberFormat" isKey="true">
+                <DecimalDigits>0</DecimalDigits>
+                <GroupSeparator>,</GroupSeparator>
+                <GroupSize>9</GroupSize>
+                <NegativePattern>1</NegativePattern>
+                <UseGroupSeparator>False</UseGroupSeparator>
+                <UseLocalSetting>False</UseLocalSetting>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text3 Ref="18" type="Text" isKey="true">
+              <Border>Top;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,6.03,6.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>2c8971d2a35b404dae8c2c83f93e3981</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>{Spc_Admission_Print_Stand.BranchAddress}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text5 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,6.63,6.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,10</Font>
+              <Guid>9fa725dc2b88471b9250f3145efb258b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <Text>{Spc_Admission_Print_Stand.BranchLineValue}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <HorizontalLinePrimitive3 Ref="20" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,1.2,6.6,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="21" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Expressions isList="true" count="0" />
+              <Guid>556b6d0fc7ae45cfa554b013adb500ac</Guid>
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="4" />
+              <Parent isRef="7" />
+              <StartCap Ref="22" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+              <Style>Double</Style>
+            </HorizontalLinePrimitive3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Spc_Admission_Print_Stand</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Guid>6302ef3ce39e43029bdfa315a9dbea13</Guid>
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>ccd6a642c2bc4898ae052c10e3f6c2da</Guid>
+      <Margins>0.5,0.5,0.5,0.5</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>7.6</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>3/18/2024 1:58:37 PM</ReportChanged>
+  <ReportCreated>2/1/2015 2:00:37 PM</ReportCreated>
+  <ReportFile>E:\ParsAlphabet_Collection\ParsAlphabet_Collection_Default\ERP\CIS.Web\Stimuls\MC\Prn_AdmissionStand.mrt</ReportFile>
+  <ReportGuid>d7bce05cafe043baad84f5f8b4dafb00</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2021.1.1.0</ReportVersion>
+  <Script>
+		using System;
+		using System.Drawing;
+		using System.Windows.Forms;
+		using System.Data;
+		using Stimulsoft.Controls;
+		using Stimulsoft.Base.Drawing;
+		using Stimulsoft.Report;
+		using Stimulsoft.Report.Dialogs;
+		using Stimulsoft.Report.Components;
+
+		namespace Reports
+		{
+		public class Report : Stimulsoft.Report.StiReport
+		{
+		public Report()        {
+		this.InitializeComponent();
+		}
+
+		#region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+		}
+		}
+	</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

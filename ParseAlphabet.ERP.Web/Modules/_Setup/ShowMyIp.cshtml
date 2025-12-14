@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Client IP";
+}
+
+
+<link href="~/lib/ModulesCss/ShowMyIp.css" rel="stylesheet"/>
+
+<div class="content-page" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                        </div>
+                        <div class="card-body" data-parsley-validate>
+                            <div class="row">
+                                <div class="col-sm-1-5">
+                                    <div class="form-group">
+                                        <label>@ViewData["IpAddress"]</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>

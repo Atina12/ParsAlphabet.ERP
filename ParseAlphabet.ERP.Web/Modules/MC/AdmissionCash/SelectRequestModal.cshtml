@@ -1,0 +1,88 @@
+﻿<div id="admissionRequestModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتخاب درخواست</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right">
+                <div class="">
+                    <fieldset class="group-box group-box-green mb-3" id="admissionRequestModal" data-parsley-validate>
+                        <legend>جستجو</legend>
+                        <div class="row">
+                            <div class="col-lg-12 row">
+                                <div class="form-group col-lg-3 col-sm-5">
+                                    <label>جریان کار</label>
+                                    <div>
+                                        <div class="col-sm-12 chosen-container-parent">
+                                            <select data-placeholder="انتخاب کنید" id="workflowId" class="select2 select2-quick-access" tabindex="1"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3 col-sm-5">
+                                    <label>مرحله</label>
+                                    <div>
+                                        <div class="col-sm-12 chosen-container-parent">
+                                            <select data-placeholder="انتخاب کنید" id="stageId" class="select2 select2-quick-access" tabindex="2"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3 col-sm-5">
+                                    <label>شناسه پرونده</label>
+                                    <div>
+                                        <input id="admissionMasterIdRequest" type="text" class="form-control" maxlength="50" tabindex="3" data-parsley-max="2147483647"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3 col-sm-5">
+                                    <label>نمبر تذکره مراجعه کننده</label>
+                                    <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                                        <input id="nationalCode" type="text" name="nationalCode" class="form-control str-number" maxlength="12" tabindex="4" data-parsley-minlength="6" data-parsley-errors-container="#nationalCodeErrorContainer"/>
+                                    </div>
+                                    <div id="nationalCodeErrorContainer"></div>
+                                </div>
+                                <div class="form-group col-lg-3 col-sm-5">
+                                    <label>نام و  تخلص مراجعه کننده </label>
+                                    <div>
+                                        <input id="patientFullName" type="text" class="form-control atoz-valid" maxlength="50" tabindex="5" data-parsley-minlength="3"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-3 col-sm-5">
+                                    <button id="searchBtn" onclick="admissionCashRequestSearch()" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="6"><i class="fa fa-search"></i>جستجو</button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="card" id="admissionRequestModal_pagetable">
+                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                    </div>
+                    @*<div class="table-responsive table-responsive-thead-fixed" style="height: calc(100vh - 305px) !important">
+                        <div id="hasServiceError"></div>
+                        <table class="table table-styles border mb-0 min-width-0-table">
+                            <thead class="table-thead-fixed min-width-0">
+                                <tr>
+                                    <th class="col-width-percent-1 "></th>
+                                    <th class="col-width-percent-10 ">شناسه</th>
+                                    <th class="col-width-percent-10 ">تاریخ ثبت</th>
+                                    <th class="col-width-percent-7">کاربر ثبت کننده</th>
+                                    <th class="col-width-percent-12">نمبر تذکره مراجعه کننده</th>
+                                    <th class="col-width-percent-11">نام و  تخلص مراجعه کننده</th>
+                                    <th class="col-width-percent-10 ">نوع درخواست</th>
+                                    <th class="col-width-percent-10 ">نوع فروش</th>
+                                    <th class="col-width-percent-10 ">قابل دریافت</th>
+                                    <th class="col-width-percent-10 ">مرحله</th>
+                                    <th class="col-width-percent-10 "></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tempRequests">
+                            </tbody>
+                        </table>
+                    </div>*@
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="selectRequestCancel()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>

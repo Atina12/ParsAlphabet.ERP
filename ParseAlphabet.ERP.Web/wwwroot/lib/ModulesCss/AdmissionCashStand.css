@@ -1,0 +1,316 @@
+﻿.topbar .navbar-custom, .content-page {
+    margin-right: 0px;
+}
+
+.footer {
+    right: 0px;
+}
+
+.header-title {
+    display: none !important;
+}
+
+.table-responsive-table {
+    max-height: 536px !important;
+    overflow-x: hidden;
+    height: auto !important;
+}
+
+.btn_standselect {
+    width: 100px;
+    height: 30px;
+}
+
+.button-items {
+    float: right;
+    margin-top: 22px;
+}
+
+    .button-items button {
+        margin: 0;
+        width: 100px;
+    }
+
+tbody tr {
+    height: 50px;
+}
+
+select.form-control {
+    height: auto;
+}
+
+input.money, input.number, input.decimal, input.mask, input.str-number {
+    height: auto;
+}
+
+.font-24 {
+    font-size: 24px !important;
+}
+
+.font-26 {
+    font-size: 26px !important;
+}
+
+.font-22 {
+    font-size: 22px !important;
+}
+
+.height-60 {
+    height: 60px !important;
+}
+
+.height-100 {
+    height: 100px !important;
+}
+
+.filter-item-btn button {
+    height: 40px;
+    float: right;
+    width: 32%;
+    margin: 0 0 0 5px;
+}
+
+fieldset {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+.stand-filter-item-btn {
+    background-color: #517397;
+    color: #fff;
+}
+
+.footer {
+    font-size: 16px !important;
+}
+
+.image-arrow {
+    height: 120px;
+}
+
+.image-arrow-figure {
+    position: absolute;
+    top: 60%;
+    animation: arrow-move 1s linear infinite normal;
+}
+
+.image-arrow-label {
+    font-size: 17px;
+    top: -75px;
+    left: -70px;
+    position: relative;
+    color: #fff;
+}
+
+.payment-buttons-box {
+    height: 180px;
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+
+button.payment-button {
+    height: 100%;
+    font-size: 26px;
+    vertical-align: top;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+    button.payment-button.barcode-btn {
+        background-image: linear-gradient(#9cceff, #00a1ff );
+    }
+
+    button.payment-button.search-btn {
+        background-image: linear-gradient(#c3ff8c, #c0ff00 );
+    }
+
+@keyframes arrow-move {
+    0% {
+        right: 40px;
+    }
+
+    25% {
+        right: 30px;
+    }
+
+    50% {
+        right: 20px;
+    }
+
+    75% {
+        right: 30px;
+    }
+
+    100% {
+        right: 40px;
+    }
+}
+
+.content-page, .navbar-custom {
+    margin-right: 0px !important;
+}
+
+.payment-button-img {
+    height: 100px;
+    display: flex;
+    position: absolute;
+    top: 65px;
+}
+
+.barcode-pay, .searche-pay {
+    display: flex;
+    justify-content: center;
+}
+
+#btn_choose .fa:before {
+    content: "انتخاب";
+    font-family: 'iransans';
+    font-size: large;
+}
+
+#btn_choose .fa {
+    width: unset;
+    padding: 6px;
+}
+
+.table-styles thead tr th, .table-styles tbody tr td {
+    font-size: 18px !important;
+}
+
+.keyboard-wrapper .keyboard-row {
+    display: none;
+}
+
+.keyboard-wrapper {
+    display: flow-root;
+    text-align: center;
+    text-align: -webkit-center;
+    text-align: -moz-center;
+}
+
+.image-arrow-pay {
+    height: 80px;
+    transform: rotate(-90deg);
+}
+
+.image-arrow-figure-pay {
+    position: absolute;
+    top: 130%;
+    left: 25%;
+    animation: arrow-move-pay 1s linear infinite normal;
+}
+
+.image-arrow-label-pay {
+    font-size: 10px;
+    bottom: 30%;
+    left: 15%;
+    position: absolute;
+    color: #fff;
+    transform: rotate(-90deg);
+}
+
+.change-color-word {
+    animation: change-color 1s linear infinite normal;
+}
+
+@keyframes arrow-move-pay {
+    0% {
+        top: 130%;
+    }
+
+    25% {
+        top: 125%;
+    }
+
+    50% {
+        top: 120%;
+    }
+
+    75% {
+        top: 125%;
+    }
+
+    100% {
+        top: 130%;
+    }
+}
+
+@keyframes change-color {
+    0% {
+        color: black;
+    }
+
+    50% {
+        color: red;
+    }
+
+    100% {
+        color: black;
+    }
+}
+
+.footer {
+    right: 0px !important;
+}
+
+.timer-page {
+    position: absolute;
+    left: 15px;
+}
+
+.timer-modal {
+    text-align: left;
+}
+
+.ajs-content {
+    padding-left: 0 !important;
+}
+
+.alertify .ajs-header {
+    display: none !important;
+}
+
+.alertify .ajs-dialog {
+    max-width: 60vw;
+}
+
+.alertify .ajs-dialog, .alertify .ajs-buttons {
+    font-size: 20px !important;
+}
+
+#ipstand {
+    padding: 11px 19px 0 0;
+    display: block;
+    float: right;
+    color: red;
+    font-size: 18px;
+}
+
+.comments {
+    font-size: 30px;
+    display: contents;
+}
+
+    .comments span {
+        padding-right: 25px;
+        padding-bottom: 15px;
+    }
+
+.card-body {
+    padding: 0.5rem 0.5rem !important;
+}
+
+.waiting-card {
+    margin-top:50px;
+    width: 100% !important
+}
+
+img.logo-payment {
+    /*  position: relative;
+    top: -480px;
+    left: -30px;
+    width: 150px;*/
+}

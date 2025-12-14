@@ -1,0 +1,649 @@
+/******* Metis Menu css *******/
+
+.metismenu {
+    ul {
+        padding: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+}
+/******* Topbar *******/
+
+.topbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999;
+
+    .topbar-left {
+        background-color: $left-bar;
+        text-align: center;
+        height: 50px;
+        position: relative;
+        width: 240px;
+        z-index: 1;
+
+
+        .logo {
+            line-height: 50px;
+            color: $white;
+            font-size: 12px;
+            text-transform: uppercase;
+
+            .logo-sm {
+                display: none;
+            }
+        }
+    }
+
+    .navbar-custom {
+        background-color: $topbar-background;
+        border-radius: 0;
+        margin-bottom: 0;
+        padding: 0 0 0 10px;
+        margin-right: 240px;
+        min-height: 50px;
+        box-shadow: 1px 0 5px rgba(0, 0, 0, .05);
+
+        .navbar-right {
+            .dropdown-toggle {
+                &:after {
+                    content: initial;
+                }
+            }
+        }
+    }
+}
+
+.notification-list {
+    .dropdown-menu {
+        will-change: auto !important;
+    }
+
+    &.list-inline-item:not(:last-child) {
+        margin-right: 0;
+    }
+
+    .noti-icon {
+        font-size: 24px;
+        vertical-align: middle;
+    }
+
+    .nav-link {
+        padding: 0 15px;
+        line-height: 50px;
+        color: #495057;
+        max-height: 50px;
+    }
+
+    .noti-icon-badge {
+        display: inline-block;
+        position: absolute;
+        top: 16px;
+        right: 10px;
+    }
+
+    .language-switch {
+        a {
+            img {
+                float: left;
+                margin-top: 3px;
+            }
+        }
+    }
+
+    &.show {
+        .nav-link {
+            background-color: rgba($dark, 0.05);
+        }
+    }
+
+    .nav-user {
+        img {
+            height: 36px;
+            width: 36px;
+        }
+    }
+
+    .profile-dropdown {
+        width: 170px;
+
+        i {
+            font-size: 17px;
+            vertical-align: middle;
+            margin-left: 5px;
+            color: $gray-600;
+        }
+
+        span {
+            margin-top: 5px;
+        }
+    }
+}
+
+
+.button-menu-mobile {
+    border: none;
+    color: lighten($dark, 20%);
+    display: inline-block;
+    height: 50px;
+    width: 60px;
+    background-color: $topbar-background;
+    font-size: 24px;
+}
+
+
+/******* Sidemenu *******/
+
+.side-menu {
+    width: 240px;
+    z-index: 10;
+    background: #2e353d;
+    bottom: 0;
+    margin-top: 0;
+    padding-bottom: 30px;
+    position: fixed;
+    top: 50px;
+    z-index: 11;
+
+    .waves-effect {
+        .waves-ripple {
+            background-color: rgba($left-bar, 0.4);
+        }
+    }
+}
+
+#sidebar-menu {
+
+    > ul {
+        > li {
+            &.mm-active {
+                > a {
+                    border-right: 3px solid #d19b3d;
+                    background-color: #4f5b69;
+
+                    > span > .menu-arrow i {
+                        transform: rotate(90deg);
+                    }
+                }
+
+                .mm-show {
+                    &:before {
+                        width: 2px;
+                        bottom: 0;
+                        background: rgba(93, 102, 104, 0.5);
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        right: 28px;
+                    }
+                }
+            }
+
+            &:first-child {
+                > a {
+                    border: none;
+                }
+            }
+
+            > a {
+                color: $leftbar-menu-color;
+                display: block;
+                padding: 10px 16px;
+                font-size: 11px;
+                position: relative;
+                transition: border-right 0.15s linear;
+                border-right: 0px solid;
+                font-family: $font-family-secondary;
+                border-top: 1px solid #23282e;
+
+
+
+                &:hover,
+                &:focus,
+                &:active {
+                    color: #fff;
+                    text-decoration: none;
+                    border-right: 5px solid #dda84e;
+                    background-color: #4f5b69;
+                }
+
+                > span {
+                    margin-right: 7px;
+                }
+
+                .menu-arrow {
+                    margin-left: 0;
+                }
+
+                i {
+                    line-height: 1;
+                    width: 20px;
+                    display: inline-block;
+                    vertical-align: middle;
+
+                    &.mdi-chevron-right {
+                        &:before {
+                            content: "\F141";
+                        }
+                    }
+                }
+
+                .badge {
+                    margin-top: 3px;
+                }
+
+                &.mm-active {
+                    color: $leftbar-menu-active-color !important;
+                    background-color: lighten($left-bar, 2.5%);
+                }
+            }
+        }
+    }
+
+    .menu-title {
+        padding: 12px 20px !important;
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: lighten($leftbar-menu-color, 15%);
+    }
+
+    .submenu {
+        padding: 0 0 3px;
+        margin: 0;
+        padding-right: 27px;
+        position: relative;
+
+        li {
+            &.mm-active {
+                > a {
+                    color: #d19b3d;
+
+                    .menu-arrow {
+                        i {
+                            &:before {
+                                content: "\F140" !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            > a.nav-item-mm {
+                font-size: 1.15rem;
+            }
+
+            a {
+                padding: 8px 17px 5px 12px;
+                color: $leftbar-menu-color;
+                display: block;
+                transition: all 0.5s;
+                font-size: 12px;
+                cursor: pointer;
+
+                &:focus {
+                    color: #d19b3d;
+                }
+
+                &:hover {
+                    color: #d19b3d;
+                }
+
+                &:active {
+                    color: #d19b3d;
+                }
+
+                .menu-arrow {
+                    i {
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+
+        > li {
+            .submenu {
+                > li {
+                    > a {
+                    }
+                }
+            }
+        }
+    }
+}
+/******* Enlarged *******/
+.enlarged {
+
+    .slimScrollDiv {
+        overflow: inherit !important;
+    }
+
+    .slimScrollBar {
+        visibility: hidden;
+    }
+
+    #wrapper {
+        .topbar {
+            .topbar-left {
+                width: 70px !important;
+
+                .logo {
+                    .logo-light {
+                        display: none;
+                        opacity: 0;
+                    }
+
+                    .logo-sm {
+                        display: block;
+                        line-height: 70px;
+                        font-size: 28px;
+                    }
+                }
+            }
+        }
+
+        .navbar-custom {
+            margin-right: 70px;
+        }
+        // end topbar
+        #sidebar-menu {
+
+            .mm-collapse {
+                &.mm-show {
+                    display: none;
+                }
+            }
+
+            .nav {
+                &.mm-collapse {
+                    height: inherit !important;
+                }
+            }
+
+            ul {
+                ul {
+                    padding-bottom: 5px;
+                    padding-top: 5px;
+                    background-color: $left-bar;
+                }
+            }
+        }
+
+        .left {
+            &.side-menu {
+                position: absolute;
+                width: 70px;
+                z-index: 11;
+
+                #sidebar-menu {
+                    > ul {
+                        > li {
+                            position: relative;
+                            white-space: nowrap;
+
+                            &.mm-active {
+                                &.mm-show {
+                                    &:before {
+                                        display: none;
+                                    }
+                                }
+                            }
+
+
+                            &:hover {
+                                li {
+                                    a {
+                                        .menu-arrow {
+                                            display: block !important;
+                                            position: relative;
+                                            right: 50px;
+
+                                            .mdi-chevron-right {
+                                                &:before {
+                                                    content: "\F141";
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                > a {
+                                    position: relative;
+                                    width: 260px;
+                                    color: $leftbar-menu-active-color;
+                                    background-color: darken($left-bar, 2.5%);
+                                    z-index: 1;
+
+                                    &.open,
+                                    &.mm-active {
+                                        :after {
+                                            display: none;
+                                        }
+                                    }
+                                }
+
+                                > ul {
+                                    display: block;
+                                    right: 70px;
+                                    position: absolute;
+                                    width: 190px;
+                                    height: auto !important;
+
+                                    a {
+                                        box-shadow: none;
+                                        padding: 8px 20px;
+                                        position: relative;
+                                        width: 190px;
+                                        z-index: 6;
+                                        cursor: pointer;
+
+                                        &:hover {
+                                            color: $white;
+                                        }
+                                    }
+                                }
+
+                                a {
+                                    span {
+                                        display: inline-block;
+                                    }
+
+                                    .menu-arrow {
+                                        display: none !important;
+                                    }
+                                }
+                            }
+
+                            > a {
+                                padding: 15px 20px;
+                                transition: none;
+
+                                &:hover,
+                                &:active,
+                                &:focus {
+                                    color: $white;
+                                    background-color: darken($left-bar, 2.5%);
+                                }
+
+                                i {
+                                    font-size: 18px;
+                                    margin-right: 5px;
+                                    margin-left: 20px !important;
+
+                                    .mdi-chevron-right {
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                span {
+                                    display: none;
+                                    padding-right: 10px;
+                                }
+                            }
+                        }
+                    }
+
+                    ul {
+                        ul {
+                            li {
+                                &:hover {
+                                    > ul {
+                                        display: block;
+                                        right: 190px;
+                                        margin-top: -36px;
+                                        position: absolute;
+                                        width: 215px;
+                                        height: auto !important;
+                                    }
+                                }
+
+                                > a {
+                                    span {
+                                        &.float-right {
+                                            position: absolute;
+                                            right: 20px;
+                                            top: 12px;
+                                            transform: rotate(270deg);
+                                        }
+                                    }
+                                }
+
+                                &.mm-active {
+                                    a {
+                                        color: $white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // end left sidemenu
+        .content-page {
+            margin-right: 70px;
+        }
+
+        .footer {
+            right: 70px;
+        }
+    }
+}
+/******* Footer *******/
+.footer {
+    bottom: 0;
+    text-align: center !important;
+    padding: 7px 30px;
+    position: absolute;
+    background-color: $footer-background;
+    left: 0;
+    right: 240px;
+    font-family: $font-family-secondary;
+    font-size: 1rem;
+}
+/******* Responsive *******/
+@media (min-width: 769px) {
+    .enlarged {
+        .slimscroll-menu {
+            overflow: inherit !important;
+        }
+    }
+}
+
+@media (max-width: 419px) {
+
+    .content-page {
+        margin-right: 70px;
+    }
+
+    .enlarged {
+        .side-menu.left {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .side-menu {
+        z-index: 10 !important;
+    }
+
+    .button-menu-mobile {
+        display: block;
+    }
+
+    .navbar-custom {
+        margin-right: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .topbar {
+        .topbar-left {
+            width: 70px !important;
+            height: 50px;
+
+            .logo-light {
+                display: none !important;
+            }
+
+            .logo-sm {
+                display: block !important;
+                line-height: 50px !important;
+                font-size: 28px;
+            }
+        }
+    }
+
+    .navbar-custom {
+        margin-right: 70px !important;
+    }
+
+    .content-page {
+        margin-right: 0 !important;
+
+        .content {
+            padding: 0px;
+        }
+    }
+
+    .enlarged {
+        .left.side-menu {
+            margin-right: -70px;
+        }
+    }
+
+    .footer {
+        right: 0 !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .dasboard-content {
+        margin-right: 280px;
+    }
+}
+/******* Content Page *******/
+.content-page {
+    margin-right: 240px;
+    /*overflow: hidden;*/
+    .content {
+        margin-top: 56px;
+    }
+}
+
+@media (max-width: 420px) {
+    .notify-icon {
+        display: none;
+    }
+
+    .notify-details {
+        margin-right: 0px !important;
+    }
+}

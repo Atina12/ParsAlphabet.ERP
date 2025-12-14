@@ -1,0 +1,216 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "اسناد حسابداری";
+}
+@await Html.PartialAsync("/Modules/ImportExcelPage.cshtml")
+
+
+<link href="~/lib/ModalePrint/PrintCss.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/JournalIndex.css" rel="stylesheet"/>
+
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="addJournal" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<!--Modal-->
+@await Html.PartialAsync("/Modules/FM/Journal/JournalAddEdit.cshtml")
+
+<div id="JournalTransformDocumentModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتقال سند</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right  pb-5 overflow-visible" data-parsley-validate>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>سند مبدا</label>
+                        <div>
+                            <select id="fromJournal" class="form-control select2" tabindex="100001" onchange="changeJournalId(this)" required data-parsley-selectvalzero data-parsley-attenderchnage
+                                    data-parsley-errors-container="#fromJournalContainer">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>شعبه مقصد</label>
+                        <div>
+                            <select id="branchIdJournal" type="text" class="form-control select2" required data-parsley-selectvalzero title="" tabindex="100002" data-parsley-errors-container="#branchIdJournalErrorContainer">
+                            </select>
+                        </div>
+                        <div id="branchIdJournalErrorContainer"></div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>نوع سند مقصد</label>
+                        <div>
+                            <select id="documentTypeIdJournal" type="text" class="form-control select2" required data-parsley-selectvalzero title="" tabindex="100003" data-parsley-errors-container="#documentTypeIdJournalErrorContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="documentTypeIdJournalErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>تاریخ سند مقصد</label>
+                        <div class="position-relative">
+                            <input id="toDocumentDatePersianJo" type="text" notreset class="form-control mask persian-date" required placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate=""
+                                   value="@PersianDateTime.GetToday()" data-parsley-errors-container="#toDocumentDatePersianJoErrorContainer" maxlength="10" tabindex="100004"/>
+                        </div>
+                        <div id="toDocumentDatePersianJoErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div>
+                            <fieldset class="group-box group-box-blue mt-3">
+                                <legend>مشخصات سند مبدا </legend>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label class="col-md-12 attender-details-box">وضعیت سند : <span class="attender-details" id="fromJournalDocumentStatus"></span></label>
+                                        <label class="col-md-12 attender-details-box">تاریخ سند : <span class="attender-details" id="fromJournalDocumentDate"></span></label>
+                                        <label class="col-md-12 attender-details-box"> آخرین وضعیت سند: <span class="attender-details" id="fromJournalDocumentAction"></span></label>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="col-md-12 attender-details-box">نوع سند : <span class="attender-details" id="fromJournalDocumentType"></span></label>
+                                        <label class="col-md-12 attender-details-box">شعبه سند : <span class="attender-details" id="fromJournalBranchId"></span></label>
+                                        <label class="col-md-12 attender-details-box">تعداد سطر سند : <span class="attender-details" id="fromJournalDocumentQty"></span></label>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="insertJournalTransformDocument" class="btn btn-success waves-effect waves-light" tabindex="100005"><i class="fa fa-save"></i>ذخیره</button>
+
+                <button id="modal-close" onclick="modal_close(`JournalTransformDocumentModal`)" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modela Journal-->
+<div id="PrnJournal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="PrnModalId" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه : </lable> <span id="modal_keyid_journal_value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType1" onclick="clickModalJounal(1) " class="btn btn-default" style="font-weight:bolder;"> چاپ حسابداری مرتب سازی بر اساس تاریخ ثبت <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType2" onclick="clickModalJounal(2) " class="btn btn-default" style="font-weight:bolder;"> چاپ حسابداری مرتب سازی بر اساس کل - معین - تفصیل <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 2 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType3" onclick="clickModalJounal(3)" class="btn btn-default" style="font-weight:bolder;"> چاپ در سطح معین <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 3 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType4" onclick="clickModalJounal(4)" class="btn btn-default" style="font-weight:bolder;"> چاپ در سطح تفصیل <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnJournal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="journalErrorResult" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">ارسال سند</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-100">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempjournalError">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfresultmodal-close" onclick="modal_close('journalErrorResult')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="displayJournalLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" style="height:auto">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayJournalLine" data-parsley-validate="">
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayJournalLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/FM/Journal/JournalActionIndex.cshtml")
+
+
+<script src="~/Modules/FM/Finanace.js?ver=@Guid.NewGuid().ToString().Replace("-", "")" type="text/javascript"></script>
+
+<script src="~/Modules/FM/Journal/JournalIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")" type="text/javascript"></script>

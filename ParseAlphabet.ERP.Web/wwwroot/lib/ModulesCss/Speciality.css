@@ -1,0 +1,15 @@
+﻿input[type="radio"]:focus {
+    outline: 1px solid #808080 !important;
+    outline-offset: -1px !important;
+}
+
+.sharetype {
+    border: 1px solid #c5ccd3;
+    border-radius: 3px;
+}
+
+.sharetype-box {
+    margin-top: 7.5px;
+    padding: 3px 4px 3px;
+    margin-bottom: 1px;
+}

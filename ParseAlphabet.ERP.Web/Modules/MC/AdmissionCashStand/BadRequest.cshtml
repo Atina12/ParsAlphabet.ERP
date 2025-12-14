@@ -1,0 +1,77 @@
+﻿<style>
+    .card-pages {
+        background-image: url('/content/images/badrequest.jpg');
+        background-position: center;
+        width: 978px;
+        height: 610px;
+        display: block;
+        margin: calc(50vh - 305px) auto;
+    }
+    .wrapper-page {
+        margin: auto;
+        width: auto;
+        position: relative;
+    }
+
+    .boxmsg {
+        color: white;
+        font-size: 38px;
+        text-align: center !important;
+        width: 100%;
+        display: block;
+        padding-top: 50px;
+    }
+
+    #corpname {
+        padding: 9px 0px;
+        display: block;
+        text-align: right;
+    }
+
+    .logo-admin {
+        font-size: 18px;
+        color: white;
+    }
+</style>
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="wrapper-page">
+    <div class="card card-pages shadow-none">
+        <a id="modal-changepass-save" class="btn btn-success waves-effect waves-light float-left" style=" width: 117px; font-size: 18px; margin: 18px;" href="/admissionCashStand">بازگشت</a>
+        <span class="logo" id="corpname"></span>
+        <span class="text-center boxmsg">اطلاعات کیوسک مورد نظر تعریف نشده است</span>
+        <h1 id="ipstand" class="boxmsg">@ViewBag.StandIp</h1>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    get_companyinfo();
+    function get_companyinfo() {
+        var p_url = '/api/CompanyApi/getcompanyinfo';
+        $.ajax({
+            url: p_url,
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                fill_companyinfo(result);
+            },
+            error: function (xhr) {
+                error_handler(xhr, p_url)
+            }
+        });
+    }
+
+    function fill_companyinfo(item) {
+        if (item == null) return "";
+        $("#corpname").html("");
+        var str = "";
+        if (item.logo != null)
+            str += '<img src="data:image/png;base64, ' + item.logo + '" alt="" height="50">'
+        str += '<label class="logo-admin">' + item.name + '</label>'
+        $("#corpname").append(str);
+    }
+
+</script>}

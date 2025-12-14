@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "گزارش دریافت / پرداخت";
+}
+
+<div class="content-page  displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <button id="getReport" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-1"></i>پیش نمایش</button>
+                                <button id="showReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-1"></i>تهیه گزارش</button>
+                                @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+                                <button type="button" id="exportCSV" onclick="export_AdmissionCashReport_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <fieldset class="group-box group-box-gray">
+                                <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <legend>فیلتر</legend>
+                                <div class="row slideToggle open">
+                                    <div class="row col-12" id="admissionCashReport" data-parsley-validate>
+                                        <div class="col-lg-3 col-sm-4  mb-0">
+                                            <label>تاریخ ثبت پابرگ</label>
+                                            <div class="double-input-box">
+                                                <div class="double-input">
+                                                    <input type="text" id="fromCreateDateTimePersian"
+                                                           class="form-control number persian-date persian-datepicker"
+                                                           data-parsley-validate-if-empty="true"
+                                                           placeholder="____/__/__"
+                                                           value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                                                           data-inputmask="'mask':'9999/99/99'"
+                                                           data-parsley-shamsidate
+                                                           data-parsley-errors-container="#fromDocumentDateErrorContainer"
+                                                           data-parsley-comparedate="toCreateDateTimePersian"
+                                                           data-parsley-dateisonemonth="toCreateDateTimePersian"
+                                                           maxlength="10" tabindex="1"/>
+                                                </div>
+                                                <div class="double-input">
+                                                    <input type="text" id="toCreateDateTimePersian"
+                                                           class="form-control number persian-date persian-datepicker"
+                                                           data-parsley-validate-if-empty="true"
+                                                           placeholder="____/__/__"
+                                                           value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                                                           data-inputmask="'mask':'9999/99/99'"
+                                                           required
+                                                           data-parsley-shamsidate
+                                                           data-parsley-errors-container="#toDocumentDateErrorContainer"
+                                                           maxlength="10" tabindex="2"/>
+                                                </div>
+                                            </div>
+                                            <div class="double-input-box">
+                                                <div class="double-input" id="fromDocumentDateErrorContainer"></div>
+                                                <div class="double-input" id="toDocumentDateErrorContainer"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-4">
+                                            <label>شعبه</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="branchId" class="form-control select2" multiple="multiple" name="branch[]" tabindex="3"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>جریان کار</label>
+                                            <select id="workflowId" class="form-control select2" multiple="multiple" tabindex="4"></select>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>مرحله</label>
+                                            <select id="stageId" class="form-control select2" multiple="multiple" name="stage[]" tabindex="5"></select>
+                                        </div>
+
+                                        <div class="col-lg-2 col-sm-4">
+                                            <label>ارز</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="currencyId" class="select2 select2-quick-access" tabindex="6">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>نوع وجه</label>
+                                            <select id="fundTypeId" class="form-control select2" multiple="multiple" tabindex="7"></select>
+                                        </div>
+                                        <div class="form-group col-lg-3 ">
+                                            <label>پوز کارتخوان</label>
+                                            <select id="posId" class="form-control select2" multiple="multiple" tabindex="8" disabled></select>
+
+                                        </div>
+                                        <div class="col-lg-2 col-sm-4  mb-0">
+                                            <label>تفضیل</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="detailAccountId" class="select2 select2-quick-access" tabindex="9">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-4 mb-0">
+                                            <div class="form-group">
+                                                <label>شناسه درخواست</label>
+                                                <div class="double-input-box">
+                                                    <input class="form-control number double-input" id="fromAdmissionId" tabindex="10" data-parsley-greaterthanequal="#toAdmissionId" data-parsley-errors-container="#fromAdmissionIdError" placeholder="از :"/>
+                                                    <input class="form-control number double-input" id="toAdmissionId" tabindex="11" placeholder="تا :"/>
+                                                </div>
+                                                <div id="fromAdmissionIdError"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-4 mb-0">
+                                            <div class="form-group">
+                                                <label>شناسه صندوق</label>
+                                                <div class="double-input-box">
+                                                    <input class="form-control number double-input" id="fromCashId" tabindex="12" data-parsley-greaterthanequal="#toCashId" data-parsley-errors-container="#fromCashIdError" placeholder="از :"/>
+                                                    <input class="form-control number double-input" id="toCashId" tabindex="13" placeholder="تا :"/>
+                                                </div>
+                                                <div id="fromCashIdError"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-4 mb-0">
+                                            <div class="form-group">
+                                                <label>شناسه پرونده</label>
+                                                <div class="double-input-box">
+                                                    <input class="form-control number double-input" id="fromAdmissionMasterId" tabindex="14" data-parsley-greaterthanequal="#toAdmissionMasterId" data-parsley-errors-container="#fromAdmissionMasterIdError" placeholder="از :"/>
+                                                    <input class="form-control number double-input" id="toAdmissionMasterId" tabindex="15" placeholder="تا :"/>
+                                                </div>
+                                                <div id="fromAdmissionMasterIdError"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-sm-4  mb-0">
+                                            <label>زمان ثبت پابرگ</label>
+                                            <div class="double-input-box">
+                                                <div class="double-input">
+                                                    <input type="text" id="fromTime" class="form-control" data-parsley-time data-parsley-comparetimeelm="toTime" required placeholder="__:__" value="00:00" data-inputmask="'mask':'99:99'" maxlength="10" tabindex="16"/>
+                                                </div>
+                                                <div class="double-input">
+                                                    <input type="text" id="toTime" class="form-control" data-parsley-time required placeholder="__:__" value="23:59" data-inputmask="'mask':'99:99'" maxlength="10" tabindex="17"/>
+                                                </div>
+                                            </div>
+                                            <div class="double-input-box">
+                                                <div class="double-input" id="fromTimeErrorContainer"></div>
+                                                <div class="double-input" id="toTimeErrorContainer"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-2 mb-0">
+                                            <div class="form-group">
+                                                <label>گام</label>
+                                                <div>
+                                                    <select class="form-control select2" id="actionId" name="action[]" multiple tabindex="18"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-4">
+                                            <label>کاربر ثبت کننده پابرگ</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="userId" class="select2 select2-quick-access" tabindex="19">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="group-box group-box-gray mt-3">
+                                <legend>پیش نمایش</legend>
+                                <div class="pagetable-report" id="mainReport">
+                                    @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-6 col-sm-12 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="1">
+                            <option value="101" selected>گزارش صورت ریز به تفکیک کاربر</option>
+                            <option value="102">گزارش خلاصه دریافت و پرداخت کاربر</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="2"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/Modules/MC/Report/RepAdmissionCashReportForm.js"></script>

@@ -1,0 +1,106 @@
+[
+  {
+    "outputFileName": "wwwroot/Content/css/bundle.min.css",
+    "inputFiles": [
+      "wwwroot/Content/css/metismenu.min.css",
+      "wwwroot/plugins/alertifyjs/css/alertify.rtl.css",
+      "wwwroot/plugins/alertifyjs/css/themes/default.rtl.min.css",
+      "wwwroot/Content/css/icons.css",
+      "wwwroot/Content/icons/myicon/css/myicon.css",
+      "wwwroot/Content/css/checkbox-button.css",
+      "wwwroot/Content/css/loader.css",
+      "wwwroot/lib/datePicker/kamadatepicker.min.css",
+      "wwwroot/lib/chosen-select2/custom-select.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/js/site.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/Content/js/jquery-ui.js",
+      "wwwroot/Content/js/popper.min.js",
+      "wwwroot/Content/js/bootstrap.bundle.min.js",
+      "wwwroot/Content/js/metismenu.min.js",
+      "wwwroot/Content/js/jquery.slimscroll.js",
+      "wwwroot/Content/js/waves.min.js",
+      "wwwroot/lib/inputmask/jquery.inputmask.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/js/login.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/Content/js/jquery.min.js",
+      "wwwroot/Content/js/bootstrap.bundle.min.js",
+      "wwwroot/plugins/alertifyjs/js/alertify.min.js",
+      "wwwroot/js/messages.js",
+      "wwwroot/js/constants.js",
+      "wwwroot/lib/library-bundle/parsley-rtl.js",
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/library-bundle/web.bundle.js",
+    "inputFiles": [
+      "wwwroot/js/messages.js",
+      "wwwroot/js/constants.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/library-bundle/libbundle.js",
+    "inputFiles": [
+      "wwwroot/lib/library-bundle/alertify.min.js",
+      "wwwroot/lib/library-bundle/custom-select.min.js",
+      "wwwroot/lib/library-bundle/parsley-rtl.js",
+      "wwwroot/lib/library-bundle/kamadatepicker.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/SignalR/SignalR.min.js",
+    "inputFiles": [
+      "wwwroot/lib/SignalR/SignalR.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/chosen-select2/custom-select.min.css",
+    "inputFiles": [
+      "wwwroot/lib/chosen-select2/custom-select.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/QuickSearchBundle.min.js",
+    "inputFiles": [
+      "wwwroot/Content/js/jquery.min.js",
+      "wwwroot/Content/js/site.bundle.min.js",
+      "wwwroot/Content/js/bootstrap4-toggle.min.js",
+      "wwwroot/lib/library-bundle/libbundle.js",
+      "wwwroot/js/formplate.js",
+      "wwwroot/js/formplate1.js",
+      "wwwroot/lib/library-bundle/web.bundle.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/css/QuickSearchBundle.min.css",
+    "inputFiles": [
+      "wwwroot/Content/css/bundle.min.css",
+      "wwwroot/Content/css/bootstrap4-toggle.min.css",
+      "wwwroot/lib/ModulesCss/TreasuryQuickSearchIndex.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/plugins/SuggestBox/SuggestBox.min.js",
+    "inputFiles": [
+      "wwwroot/plugins/SuggestBox/SuggestBox.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/scss/rtl/style-rtl.min.css",
+    "inputFiles": [
+      "wwwroot/Content/scss/rtl/style-rtl.css"
+    ]
+  }
+]

@@ -1,0 +1,100 @@
+﻿span.node-type {
+    font-size: 12px !important;
+    margin-right: 0px !important;
+}
+
+.hummingbird-treeview {
+    border-top: 0px !important;
+}
+
+    .hummingbird-treeview .fa {
+        font-size: 10px !important;
+        margin-top: -1px !important;
+    }
+
+.select2-selection__rendered {
+    font-size: 12px !important;
+}
+
+.hummingbird-treeview ul li span:not(.node-type) {
+    margin-right: 20px !important;
+    font-size: 13px;
+}
+
+.hummingbird-treeview .fa {
+    position: absolute;
+}
+
+#treeview li {
+    position: relative;
+    padding: 3px 0;
+}
+
+.hummingbird-treeview ul li span:not(.treeSelected) {
+    font-weight: normal !important;
+}
+
+.treeSelected {
+    font-weight: 800;
+    color: orangered;
+}
+
+.hummingbird-treeview, .hummingbird-treeview * {
+    line-height: 23px !important;
+}
+
+ul#treeview {
+    padding-right: 0;
+    min-height: 200px;
+    height: 200px;
+    resize: vertical
+}
+
+#treeview li:before {
+    content: '';
+    position: absolute;
+    right: 5px;
+    top: -12px;
+    width: 1px;
+    height: 100%;
+    border-right: 1px dotted;
+}
+
+#treeview li:after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 15px;
+    width: 14px;
+    height: 1px;
+    border-top: 1px dotted;
+}
+
+#treeview li i {
+    z-index: 1;
+    background-color: #2e353d;
+    font-size: 9px !important;
+    height: 12px;
+    color: white;
+    display: block;
+    line-height: 0px !important;
+    padding: 5px 2px;
+    margin-top: 6px !important;
+}
+
+.none-border:before {
+    height: 26px !important;
+}
+
+.table-responsive-report {
+    white-space: nowrap;
+    overflow: auto;
+    height: 270px;
+    max-height: calc(100vh - 240px) !important;
+    border-collapse: collapse;
+}
+
+#mainReport #parentTableReport {
+    resize: vertical;
+    min-height: 270px;
+}

@@ -1,0 +1,20 @@
+﻿@using System.Security.Claims
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="~/Content/css/QuickSearchBundle.min.css" rel="stylesheet"/>
+@{
+    var rtl = User.FindFirstValue("LayoutIsRtl");
+    if (rtl == "True")
+    {
+        <link href="/Content/scss/rtl/style-rtl.css" rel="stylesheet" type="text/css"/>
+    }
+    else
+    {
+        <link href="/Content/scss/ltr/style.min.css" rel="stylesheet" type="text/css"/>
+    }
+}
+
+<script src="~/js/QuickSearchBundle.min.js"></script>
+<script src="~/js/layout.js"></script>
+<script src="~/js/site.js"></script>
+
+@await Html.PartialAsync("/Modules/WH/WarehouseTransactionSearch/_WarehouseTransactionQuickSearchIndex.cshtml")

@@ -1,0 +1,41 @@
+﻿<div id="assistantModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="attrName" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">دسترسی داکتر به کاربران</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                @await Html.PartialAsync("/Modules/MC/Attender/_AttenderInfo.cshtml")
+            </div>
+
+            <div class="modal-body text-right p-0">
+                <div class="carousel-inner">
+                    <div class="carousel-item-box">
+                        <div class="card-body " id="assistant_pagetable">
+                            <div class="float-right" style="width:35%">
+                                <div class="form-group d-flex">
+                                    <label class="relational-caption">نحوه نمایش</label>
+                                    <div class="chosen-container-parent float-right">
+                                        <select data-placeholder="نحوه نمایش" class="select2" id="selectedAttender">
+                                            <option value="1">موارد انتخاب شده </option>
+                                            <option value="0">همه موارد</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="assistant_close" onclick="modal_close('assistantModal');" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Modules/MC/Attender_Assistant/Attender_Assistant.js"></script>

@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "نمایش تصویر برداری";
+}
+
+<link href="~/lib/ModulesCss/Navigate.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<style>
+    font-face {
+        font-family: 'iran sans';
+        src: url('/fonts/ttf/IRANSansXFaNum-Regular.ttf')
+    }
+</style>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content" id="admissionImagingForm">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 p-0">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <button title="اولین" id="headerFirst" onclick="display_pagination('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-next"></i>
+                                </button>
+                                <button title="قبلی" id="headerPrevious" onclick="display_pagination('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play"></i>
+                                </button>
+                                <input id="headerIndex" onkeydown="headerindexChoose(event)" type="text" autocomplete="off" class="form-control number col-2 d-inline mr-2 ml-1" placeholder="شناسه نسخه"/>
+                                <button title="بعدی" id="headerNext" onclick="display_pagination('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play fa-rotate-180"></i>
+                                </button>
+                                <button title="آخرین" id="headerLast" onclick="display_pagination('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-previous"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" data-parsley-validate>
+
+                            <div class="row displaynone" id="admissionImagingBox">
+                                <div class="col-12 d-flex">
+                                    <div class="form-group col-lg-2 col-sm-2">
+                                        <label>شناسه</label>
+                                        <div>
+                                            <input id="admissionImagingId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-2 col-sm-2">
+                                        <label>ثبت کننده</label>
+                                        <div>
+                                            <input id="userFullName" type="text" class="form-control" maxlength="10" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-2 col-sm-2">
+                                        <label>تاریخ ثبت</label>
+                                        <div>
+                                            <input id="createDateTime" type="text" class="form-control" maxlength="10" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset class="group-box group-box-orange mt-3">
+                                <legend>مراجعه کننده</legend>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>شناسه</th>
+                                        <th>مراجعه کننده</th>
+                                        <th>جریان کار</th>
+                                        <th> مرحله</th>
+                                        <th>رادیولوژیست</th>
+                                        <th>داکتر ارجاع دهنده</th>
+                                        <th>تاریخ نسخه</th>
+                                        <th>کدملی</th>
+                                        <th>بیمه پایه</th>
+                                        <th>صندوق</th>
+                                        <th>بیمه تکمیلی</th>
+                                        <th>طرف قرارداد</th>
+                                        <th>شناسه شباد</th>
+                                        <th> گام</th>
+                                        <th>انقضاء دفترچه</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="admissionSelected">
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                            <fieldset class="tab-content group-box group-box-gray mt-3">
+                                <div class="app-text-countiner">
+                                    <textarea id="attenderInstruction"></textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="/js/tiny.js"></script>
+<script type="text/javascript" src="/Modules/MC/AdmissionImaging/AdmissionImagingDisplay.js"></script>

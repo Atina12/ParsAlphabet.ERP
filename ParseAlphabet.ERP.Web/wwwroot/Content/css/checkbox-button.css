@@ -1,0 +1,83 @@
+.funkyradio {
+    height: 29px !important
+}
+
+.pagetablebody .funkyradio {
+    width: 35px !important;
+    margin: 0 auto;
+}
+
+.funkyradio label {
+    width: 100%;
+    height: 29px;
+    border-radius: 3px;
+    border: 1px solid #D1D3D4;
+    font-weight: normal;
+}
+
+.pagetablebody .funkyradio label:focus {
+    border: thin solid #000;
+}
+
+.funkyradio input[type="checkbox"]:empty {
+    display: none;
+}
+
+    .funkyradio input[type="checkbox"]:empty ~ label {
+        position: relative;
+        line-height: 2.3em;
+        text-indent: 3.25em;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        min-height: 29px;
+        height: 29px;
+        font-size: 12px;
+    }
+
+.pagetablebody .funkyradio input[type="checkbox"]:empty ~ label {
+    width: 36px;
+    margin-bottom: 0;
+}
+
+.funkyradio input[type="checkbox"]:empty ~ label:focus {
+    border: thin solid #000;
+}
+
+.funkyradio input[type="checkbox"]:empty ~ label:before {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    content: '';
+    width: 2.5em;
+    background: #D1D3D4;
+    border-radius: 0 3px 3px 0;
+}
+
+.pagetablebody .funkyradio input[type="checkbox"]:empty ~ label:before {
+    width: 34px;
+}
+
+.funkyradio input[type="checkbox"]:checked ~ label:before {
+    content: '\2714';
+    text-indent: .9em;
+    color: #333;
+    background-color: #ccc;
+}
+
+.funkyradio-success input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #5cb85c;
+    min-width: inherit;
+}
+
+.pagetablebody .funkyradio-success input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #5cb85c;
+    width: 34px;
+    border-radius: inherit;
+}

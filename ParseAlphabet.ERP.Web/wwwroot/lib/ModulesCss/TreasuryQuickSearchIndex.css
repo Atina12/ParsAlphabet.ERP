@@ -1,0 +1,50 @@
+﻿.quickSearch-container .bd-calendar * {
+    font-size: 12px;
+}
+
+.quickSearch-container .group-box div#parentPageTableBody.table-responsive-table {
+    height: 250px !important;
+    min-height: 150px !important;
+    max-height: 400px !important;
+}
+
+.quickSearch-container .card-body {
+    padding: 0px !important;
+}
+
+
+#boxQuickSearch #footerPageing {
+    margin-bottom: -20px !important;
+}
+
+.resizer {
+    background-image: url(../../Content/images/resize-height.svg);
+    width: 15px;
+    height: 15px;
+    position: relative;
+    right: -5px;
+    top: 5px;
+    cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.filterBox {
+    display: none;
+}
+
+.quickSearch-container .table-styles tbody tr td button {
+    border-radius: 3px;
+    line-height: 1.428571429;
+    padding: 4.5px !important;
+    font-size: 10px;
+}
+
+.quickSearch-container .pagetablefooterinfo {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    margin: 0px -5px;
+    padding-bottom: 3px;
+    padding-right: 15px;
+}

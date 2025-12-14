@@ -1,0 +1,640 @@
+﻿@{
+    ViewBag.Title = "لیست اعتبار کسور بیمه";
+}
+<link href="~/lib/ModulesCss/AdmissionWebService.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+    <div class="col-12">
+        <div class="card m-b-30 m-t-15">
+            <div class="card-body" id="webSreviceFrom">
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(1,'reimbursment_pagetable')">
+                        <a class="nav-link active" data-toggle="tab" href="#admission" role="tab">
+                            <span class="d-none d-md-block">پذیرش</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-home-variant h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(2,'reimbursment_pagetable2')">
+                        <a class="nav-link" data-toggle="tab" href="#returnAdmission" role="tab">
+                            <span class="d-none d-md-block">مرجوع</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(3,'reimbursment_pagetable3')">
+                        <a class="nav-link" data-toggle="tab" href="#AdmissionRefer" role="tab">
+                            <span class="d-none d-md-block">ارجاع</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(4,'reimbursment_pagetable4')">
+                        <a class="nav-link" data-toggle="tab" href="#AdmissionFeedBack" role="tab">
+                            <span class="d-none d-md-block">بازخورد</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(5,'prescreption_pagetable')">
+                        <a class="nav-link" data-toggle="tab" href="#prescreption" role="tab">
+                            <span class="d-none d-md-block">نسخه نویسی</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(6,'dental_pagetable')">
+                        <a class="nav-link" data-toggle="tab" href="#dental" role="tab">
+                            <span class="d-none d-md-block">دندانداکتری</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(7,'death_pagetable')">
+                        <a class="nav-link" data-toggle="tab" href="#death" role="tab">
+                            <span class="d-none d-md-block">فوت</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light" onclick="focusInputWebSevice(8,'medicallaboratory_pagetable')">
+                        <a class="nav-link" data-toggle="tab" href="#medical" role="tab">
+                            <span class="d-none d-md-block">آزمایشگاه</span>
+                            <span class="d-block d-md-none">
+                                <i class="mdi mdi-account h5"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content group-box group-box-gray" style="display:none">
+                    <div class="tab-pane active pr-3 pl-3 pb-3 pt-0" id="admission" role="tabpanel">
+                        <div class="row tabToggle1" data-parsley-validate>
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست پذیرش</span>
+                                    <div class="button-items">
+                                        <button type="button" id="startTaskUpdateHID" class="btn green_4 waves-effect"><i id="updateHidBtnLoading" class="fa fa-save"></i>بروزرسانی شباد خودکار</button>
+                                        <button type="button" id="updateHidBtn" class="btn green_4 waves-effect"><i id="updateHidBtnLoading" class="fa fa-save"></i>بروز رسانی شباد</button>
+                                        <button type="button" id="savePatientBillBtn" class="btn btn_green_1 waves-effect"><i id="savePatientBillBtnLoading" class="fa fa-save"></i>ارسال روکش اسناد</button>
+                                        <button type="button" id="getInsurerReimbursementBtn" class="btn btn-info waves-effect waves-light"><i id="getInsurerReimbursementBtnLoading" class="fa fa-save"></i>استعلام کسورات بیمه</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="reimbursment_pagetable">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="returnAdmission" role="tabpanel">
+                        <div class="row tabToggle2">
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست مرجوعی</span>
+                                    <div class="button-items">
+                                        <button type="button" id="eliminateHidBtn" class="btn btn-orange waves-effect"><i class="fa fa-save"></i>ابطال پذیرش</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="reimbursment_pagetable2">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="AdmissionRefer" role="tabpanel">
+                        <div class="row tabToggle2">
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست ارجاع</span>
+                                    <div class="button-items">
+                                        <button type="button" id="sendReferallBtn" class="btn btn-success waves-effect"><i class="fa fa-save"></i>ارسال ارجاع</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="reimbursment_pagetable3" style="min-height: calc(100vh - 384px);">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="AdmissionFeedBack" role="tabpanel">
+                        <div class="row tabToggle4">
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست بازخورد</span>
+                                    <div class="button-items">
+                                        <button type="button" id="sendFeedBackBtn" class="btn btn-info waves-effect waves-light"><i class="fa fa-save"></i>ارسال بازخورد</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="reimbursment_pagetable4" style="min-height: calc(100vh - 384px);">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="prescreption" role="tabpanel">
+                        <div class="row tabToggle5">
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست نسخه نویسی</span>
+                                    <div class="button-items">
+                                        <button type="button" id="prescriptionGetHidBtn" class="btn green_4 waves-effect"><i id="prescriptionGetHidBtnLoading" class="fa fa-save"></i>دریافت شباد</button>
+                                        <button type="button" id="sendPrescriptionBtn" class="btn btn-info waves-effect waves-light"><i id="sendPrescriptionBtnLoading" class="fa fa-save"></i>ارسال به سپاس</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="prescreption_pagetable" style="min-height: calc(100vh - 384px);">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="dental" role="tabpanel">
+                        <div class="row tabToggle2">
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست دندانداکتری</span>
+                                    <div class="button-items">
+                                        <button type="button" id="sendDentalBtn" class="btn btn-success waves-effect"><i class="fa fa-save"></i>ارسال اطلاعات دندان</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="dental_pagetable" style="min-height: calc(100vh - 384px);">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="death" role="tabpanel">
+                        <div class="row tabToggle2">
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست فوتی</span>
+                                    <div class="button-items">
+                                        <button type="button" id="sendDeathBtn" class="btn btn-success waves-effect"><i class="fa fa-save"></i>ارسال اطلاعات فوتی</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="death_pagetable" style="min-height: calc(100vh - 384px);">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="medical" role="tabpanel">
+                        <div class="row tabToggle2">
+                            <div class="col-12">
+                                <div class="header-title d-flex pb-4">
+                                    <span>لیست آزمایش ها</span>
+                                    <div class="button-items">
+                                        <button type="button" id="sendMedicalLaboratoryBtn" class="btn btn-success waves-effect"><i class="fa fa-save"></i>ارسال اطلاعات آزمایشگاه</button>
+                                    </div>
+                                </div>
+                                <div class="card-body " id="medicallaboratory_pagetable" style="min-height: calc(100vh - 384px);">
+                                    @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div id="wcf_error_result" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">نتیجه عملیات</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-20">شناسه شباد</th>
+                                <th class="col-width-percent-80">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="result_row">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfresultmodal-close" onclick="modal_close('wcf_error_result')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="insurerreimbursementList" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست شناسه شباد بر اساس نمبر تذکره</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-50">شناسه شباد</th>
+                                <th class="col-width-percent-50">نوع</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempInsurerreimbursementList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('insurerreimbursementList')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="activeReferallIdList" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست شناسه ارجاع بر اساس نمبر تذکره</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-40">شرکت اختصاص دهنده</th>
+                                <th class="col-width-percent-30">شناسه شباد</th>
+                                <th class="col-width-percent-30">شرکت صادر کننده</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempActiveReferallIdList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('activeReferallIdList')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="serviceLine_modal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">جزییات سرویس ها</h5>
+                </div>
+                <div class="button-items">
+                    <button type="button" id="serviceLineExportCSV" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-5">ردیف</th>
+                                <th class="col-width-percent-8">شناسه خدمت</th>
+                                <th class="col-width-percent-8">نمبر تذکره خدمت</th>
+                                <th class="col-width-percent-26">نام خدمت</th>
+                                <th class="col-width-percent-5">تعداد</th>
+                                <th class="col-width-percent-10">سهم بیمه اجباری</th>
+                                <th class="col-width-percent-10">سهم بیمه تکمیلی</th>
+                                <th class="col-width-percent-8">سهم مراجعه کننده</th>
+                                <th class="col-width-percent-22">مبلغ تایید شده کسورات بیمه</th>
+                            </tr>
+                            </thead>
+                            <tbody id="serviceLine_row">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="serviceline-close" onclick="modal_close('serviceLine_modal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="newAdmFormModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" style="height:88%">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">ویرایش پذیرش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentNewAdmission" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close_newAdm()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="getInsurerReimbursementModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-size-xxlg">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-2" id="">استعلام کسورات بیمه</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height text-right" data-parsley-validate>
+<div class="card-body">
+@*compositionField*@
+<fieldset class="group-box group-box-gray">
+    <legend>اطلاعات پذیرش</legend>
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        <li class="nav-item waves-effect waves-light">
+            <a class="nav-link active" data-toggle="tab" href="#AdmissionFieldBox" role="tab">
+                <span class="d-none d-md-block">مراجعه کننده</span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light">
+            <a class="nav-link" data-toggle="tab" href="#diagnosisFieldBox" role="tab">
+                <span class="d-none d-md-block">اطلاعات تشخیص</span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light">
+            <a class="nav-link" data-toggle="tab" href="#dischargeFieldBox" role="tab">
+                <span class="d-none d-md-block">اطلاعات ترخیص</span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light">
+            <a class="nav-link" data-toggle="tab" href="#insuranceFieldBox" role="tab">
+                <span class="d-none d-md-block">اطلاعات بیمه</span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light">
+            <a class="nav-link" data-toggle="tab" href="#reimbursementSummaryFieldBox" role="tab">
+                <span class="d-none d-md-block">خلاصه کسورات</span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light">
+            <a class="nav-link" data-toggle="tab" href="#reimbursementServicesFieldBox" role="tab">
+                <span class="d-none d-md-block">جزئیات کسورات</span>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content group-box group-box-gray">
+        <div class="tab-pane active p-3" id="AdmissionFieldBox" role="tabpanel">
+            <div class="table-responsive table-responsive-report height-unset">
+                <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempAdmissionFieldList">
+                    <thead class="table-thead-fixed">
+                    <tr>
+                        <th>تاریخ پذیرش</th>
+                        <th>زمان پذیرش</th>
+                        <th>نوع پذیرش</th>
+                        <th>تخت</th>
+                        <th>داکتر ویزیت</th>
+                        <th>داکتر داکتر</th>
+                        <th>مرکز درمانی</th>
+                        <th>شماره پرونده</th>
+                        <th>علت مراجعه</th>
+                        <th>داکتر ارجاع دهنده</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempAdmissionField" class="table-body-report"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="diagnosisFieldBox" role="tabpanel">
+            <div class="table-responsive table-responsive-report height-unset">
+                <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempdiagnosisFieldList">
+                    <thead class="table-thead-fixed">
+                    <tr>
+                        <th>ردیف</th>
+                        <th>وضعیت تشخیص</th>
+                        <th>تشخیص</th>
+                        <th>میزان شدت بیماری </th>
+                        <th>توضیحات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempdiagnosisField"class="table-body-report"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="dischargeFieldBox" role="tabpanel">
+            <div class="table-responsive table-responsive-report height-unset">
+                <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempdischargeFieldList">
+                    <thead class="table-thead-fixed">
+                    <tr>
+                        <th>تاریخ ترخیص</th>
+                        <th>زمان ترخیص</th>
+                        <th>وضعیت ترخیص</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempdischargeField"class="table-body-report"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="insuranceFieldBox" role="tabpanel">
+            <div class="table-responsive table-responsive-report height-unset">
+                <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempinsuranceFieldList">
+                    <thead class="table-thead-fixed">
+                    <tr>
+                        <th>ردیف</th>
+                        <th>بیمه گر</th>
+                        <th>صندوق بیمه</th>
+                        <th>شماره صفحه دفترچه</th>
+                        <th>تاریخ انقضا</th>
+                        <th>شماره بیمه</th>
+                        <th>شباد</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempinsuranceField"class="table-body-report"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="reimbursementSummaryFieldBox" role="tabpanel">
+            <div class="table-responsive table-responsive-report height-unset">
+                <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempreimbursementSummaryFieldList">
+                    <thead class="table-thead-fixed">
+                    <tr>
+                        <th>خدمات تجمیعی</th>
+                        <th>کد اعتبار بیمارستان</th>
+                        <th>بیمه اجباری</th>
+                        <th>صندوق بیمه اجباری</th>
+                        <th>نوع پذیرش</th>
+                        <th>سهم بیمه اجباری</th>
+                        <th>خدمات</th>
+                        <th>کسورات</th>
+                        <th>هزینه جانبی</th>
+                        <th>سهم مراجعه کننده</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempreimbursementSummaryField"class="table-body-report"></tbody>
+                    <tfoot id="tempreimbursementSummaryFieldSum"></tfoot>
+                </table>
+            </div>
+            <div class="table-responsive table-responsive-report height-unset">
+                <table class="table table-styles border mb-0" style="table-layout:fixed" id="reimbursementServiceGroupRowFieldList">
+                    <caption>خلاصه کسورات به تفکیک نوع خدمت</caption>
+                    <thead class="table-thead-fixed">
+                    <tr>
+                        <th>ردیف</th>
+                        <th>نوع خدمت</th>
+                        <th>تعداد</th>
+                        <th>سهم بیمه اجباری</th>
+                        <th>کسورات</th>
+                        <th>هزینه جانبی</th>
+                        <th>سهم مراجعه کننده</th>
+                        <th>خدمات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="reimbursementServiceGroupRowField"class="table-body-report"></tbody>
+                    <tfoot id="reimbursementServiceGroupRowFieldSum"></tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="reimbursementServicesFieldBox" role="tabpanel">
+            <div class="table-responsive table-responsive-report height-unset">
+                <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempreimbursementServicesFieldList">
+                    <thead class="table-thead-fixed">
+                    <tr>
+                        <th>ردیف</th>
+                        <th>نوع بخش</th>
+                        <th>بخش</th>
+                        <th>اتاق</th>
+                        <th>تخت</th>
+                        <th>PKID</th>
+                        <th>تاریخ شروع</th>
+                        <th>زمان شروع</th>
+                        <th>تاریخ پایان</th>
+                        <th>زمان پایان</th>
+                        <th>خدمت</th>
+                        <th>تعداد</th>
+                        <th>ارائه دهنده خدمت</th>
+                        <th>نوع خدمت</th>
+                        <th>سهم بیمه اجباری</th>
+                        <th>کسورات</th>
+                        <th>هزینه جانبی</th>
+                        <th>سهم مراجعه کننده</th>
+                        <th>خدمات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempreimbursementServicesField"class="table-body-report"></tbody>
+                    <tfoot id="tempreimbursementServicesFieldSum"></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</fieldset>
+@*msgIDField*@
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>اطلاعات پکیج</legend>
+    <div class="table-responsive table-responsive-report height-unset">
+        <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempCommitterFieldList">
+            <thead class="table-thead-fixed">
+            <tr>
+                <th>کاربر تایید کننده</th>
+                <th>نمبر تذکره تایید کننده</th>
+            </tr>
+            </thead>
+            <tbody id="tempCommitterField"class="table-body-report"></tbody>
+        </table>
+    </div>
+</fieldset>
+@*personField*@
+<fieldset class="group-box group-box-blue mt-3">
+    <legend>اطلاعات شخصی</legend>
+    <div class="table-responsive table-responsive-report height-unset">
+        <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempPersonFieldList">
+            <thead class="table-thead-fixed">
+            <tr>
+                <th>نام</th>
+                <th>نام پدر</th>
+                <th>نمبر تذکره</th>
+                <th>تاریخ تولد</th>
+                <th>تحصیلات</th>
+                <th>جنسیت</th>
+                <th>تلفن</th>
+                <th>شماره شناسنامه</th>
+                <th>شغل</th>
+                <th>وضعیت تاهل</th>
+                <th>موبایل</th>
+                <th>ولایت</th>
+                <th>شهر</th>
+                <th>آدرس</th>
+            </tr>
+            </thead>
+            <tbody id="tempPersonField"class="table-body-report"></tbody>
+        </table>
+    </div>
+</fieldset>
+</div>
+</div>
+<div class="modal-footer">
+    <button id="" onclick="modal_close('getInsurerReimbursementModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="showMoneyModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش مبالغ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" data-parsley-validate="">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="tempMoneyFieldList">
+                            <thead class="table-thead-fixed">
+                            <tr>
+                                <th>شرح</th>
+                                <th>مبلغ</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempMoneyField"class="table-body-report"></tbody>
+                            <tfoot id="tempMoneyFieldSum"></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('showMoneyModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/formplate.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<script src="~/Modules/MC/AdmissionWebService/AdmissionWebServiceIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "حساب‌های پرسنل";
+}
+
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>پرسنل</label>
+                        <div>
+                            <select id="personId" titleId="personName" class="form-control select2" tabindex="1" data-parsley-selectvalzero data-parsley-errors-container="#personIdErrorContainer"></select>
+                            <input type="hidden" id="personTypeId" class="number" value="3"/>
+                        </div>
+                        <div id="personIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>بانک</label>
+                        <div>
+                            <select id="bankId" type="text" class="form-control select2" title="" data-parsley-selectvalzero tabindex="2" data-parsley-errors-container="#bankIdErrorContainer"></select>
+                        </div>
+                        <div id="bankIdErrorContainer"></div>
+
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <lablel>شماره حساب</lablel>
+
+                        <input id="accountNo" type="text" class="form-control" title="" tabindex="3" required data-parsley-accontno data-parsley-errors-container="#accountNoErrorContainer" maxlength="18"/>
+                        <div id="accountNoErrorContainer"></div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <lablel>شماره شبا</lablel>
+                        <input id="shebaNo" type="text" class="form-control shabano" title="" tabindex="4" data-parsley-shebano data-inputmask="'mask':'IR-9999-9999-9999-9999-9999-9999'"/>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <lablel>شماره کارت</lablel>
+                        <input id="cardNo" type="text" class="form-control" title="" tabindex="5" data-parsley-cardno data-inputmask="'mask':'9999-9999-9999-9999'"/>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>حساب اصلی</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isDefualt');" tabindex="6">
+                            <input id="isDefualt" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="هست,نیست"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="7">
+                            <input id="isActive" type="checkbox" checked onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save();" class="btn btn-success waves-effect waves-light" tabindex="8" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/Modules/HR/EmployeeAccount/EmployeeAccountIndex.js"></script>

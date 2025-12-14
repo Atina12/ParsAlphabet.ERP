@@ -1,0 +1,76 @@
+.card {
+    min-height: 220px;
+}
+.calendar_home {
+    float: left;
+    width: 100%;
+    min-height: 17em;
+    padding: 17px 10px;
+    text-align: center;
+
+    .month {
+        color: #02c58d;
+        font-weight: 700;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .weekday {
+        float: right;
+        width: 12%;
+        margin: 0.25em 1%;
+        line-height: 1.5em;
+        color: #e42355;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .day {
+        float: right;
+        width: 12%;
+        margin: 0.25em 1%;
+        line-height: 18px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #555555;
+
+        .now {
+            color: #e42355;
+        }
+    }
+
+    .now {
+        position: relative;
+        color: #e42355;
+
+        &:before {
+            content: "";
+            width: 1.75em;
+            height: 1.75em;
+            border: 0.2em solid #e42355;
+            position: absolute;
+            border-radius: 100%;
+            left: -1px;
+            top: -0.29em;
+        }
+    }
+
+    .mute {
+        color: rgba(0, 0, 0, 0.25);
+    }
+}
+@media screen and (min-width: 1900px) {
+    .calendar .day {
+        font-size: 16px;
+    }
+
+    .calendar .now::before {
+        left: 18%;
+    }
+}

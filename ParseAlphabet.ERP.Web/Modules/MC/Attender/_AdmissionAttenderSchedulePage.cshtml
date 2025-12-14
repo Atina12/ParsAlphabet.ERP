@@ -1,0 +1,9 @@
+﻿<input type="hidden" id="nowDate" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"/>
+<link href="~/Content/css/admissionAttenderScheduleStyle.css" rel="stylesheet"/>
+<div id="attenderSchedulePage" style="font-size:9px">
+    @await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+</div>
+<div id="viewer"></div>
+<script src="/Modules/MC/Attender/_AdmissionAttenderSchedulePage.js"></script>
+
+<script src="~/Content/js/jalali-moment.js"></script>

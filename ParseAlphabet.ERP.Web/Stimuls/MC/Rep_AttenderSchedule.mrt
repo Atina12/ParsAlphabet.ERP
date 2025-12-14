@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <jsonFile Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>jsonFile</Alias>
+        <Key />
+        <Name>jsonFile</Name>
+        <PathData>wwwroot/Content/jsonFile.json</PathData>
+      </jsonFile>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <Attenders Ref="3" type="DataTableSource" isKey="true">
+        <Alias>Attenders</Alias>
+        <Columns isList="true" count="7">
+          <value>ReserveDatePersian,System.DateTime</value>
+          <value>AttenderId,System.Double</value>
+          <value>AttenderName,System.String</value>
+          <value>SpecialityName,System.String</value>
+          <value>ServiceCenterName,System.String</value>
+          <value>ServiceLineList,System.String</value>
+          <value>Msc,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Attenders</Name>
+        <NameInSource>jsonFile.Attenders</NameInSource>
+      </Attenders>
+      <Attenders_ServiceLineList Ref="4" type="DataTableSource" isKey="true">
+        <Alias>Attenders_ServiceLineList</Alias>
+        <Columns isList="true" count="10">
+          <value>ShiftType,System.Double</value>
+          <value>relationId,System.String</value>
+          <value>StartTime,System.String</value>
+          <value>EndTime,System.String</value>
+          <value>ServiceCount,System.Double</value>
+          <value>ServiceCountOver,System.Double</value>
+          <value>NotSettlement,System.Double</value>
+          <value>Settlement,System.Double</value>
+          <value>EnterToRoom,System.Double</value>
+          <value>TotalRemainServiceCount,System.Double</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>Attenders_ServiceLineList</Name>
+        <NameInSource>jsonFile.Attenders_ServiceLineList</NameInSource>
+      </Attenders_ServiceLineList>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="3">
+      <value>,CorpName,CorpName,,System.String,شرکت_x0020_گسترش_x0020_شرق_x0020_مشهد,False,False,False,False</value>
+      <value>,CorpLogo,CorpLogo,,System.Drawing.Image,,False,False,False,False</value>
+      <value>,ReportDate,ReportDate,,System.String,,False,False,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <PageHeaderBand2 Ref="6" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,10.22,0.7</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text21 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.8,0.1,0.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>ab7e8c928ca04d9198fce94954a35ba8</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>تاریخ:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text22 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.8,0.4,0.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>402632e67e7e49738e7cfa9f99c9fdb1</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>صفحه:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text23 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.1,0.1,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>da9c230d5f1b4d1383051cbd98be2e4c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{ReportDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text24 Ref="10" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.1,0.4,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>f02a11e84a1d44faa00ffbf331dfc54c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{PageNumber.ToString()} از {TotalPageCount.ToString()}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="11" type="CustomFormat" isKey="true">
+                <StringFormat>##</StringFormat>
+              </TextFormat>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text27 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>2.5,0.3,5.4,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>a74e78347e554b4098a3fc8023de558b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>تقویم داکتر</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text25 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.5,0.1,5.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9</Font>
+              <Guid>111955fec17f4971916c8257169f4d43</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{CorpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text25>
+            <Image1 Ref="14" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.5,0.1,0.5,0.5</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Guid>ff45ce0c1bc74aad875d78c452ad6b72</Guid>
+              <ImageData>{CorpLogo}</ImageData>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image1</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Stretch>True</Stretch>
+            </Image1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>f5792d11a65747d6a203754cf671b8f5</Guid>
+          <Name>PageHeaderBand2</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand2>
+        <PageHeaderBand1 Ref="15" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.3,10.22,0.6</ClientRectangle>
+          <Components isList="true" count="12">
+            <Panel1 Ref="16" type="Panel" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.4,0.6,5.8,5.8</ClientRectangle>
+              <Components isList="true" count="1">
+                <DataBand2 Ref="17" type="DataBand" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <BusinessObjectGuid isNull="true" />
+                  <ClientRectangle>0,0.2,5.8,0.6</ClientRectangle>
+                  <Components isList="true" count="5">
+                    <Text3 Ref="18" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>5.2,0,0.6,0.6</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <DockStyle>Right</DockStyle>
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text3</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="17" />
+                      <Text>{Attenders.AttenderId}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text3>
+                    <Text6 Ref="19" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>3.8,0,1.4,0.6</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <DockStyle>Right</DockStyle>
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>203dc4792e654be99a480fbfe6fd292e</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text6</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="17" />
+                      <Text>{Attenders.AttenderName}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text6>
+                    <Text8 Ref="20" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>2.8,0,1,0.6</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <DockStyle>Right</DockStyle>
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>080b43fe9b0546618a5786f5860cc9d1</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text8</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="17" />
+                      <Text>{Attenders.Msc}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <Type>Expression</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text8>
+                    <Text9 Ref="21" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>1.2,0,1.6,0.6</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <DockStyle>Right</DockStyle>
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>11c7b1edb82f44b3bdc3f2528b9cf5d1</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text9</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="17" />
+                      <Text>{Attenders.SpecialityName}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text9>
+                    <Text20 Ref="22" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>0,0,1.2,0.6</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <DockStyle>Right</DockStyle>
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>66b9a49d820a48a9bb42c7ccaba835b7</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text20</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="17" />
+                      <Text>{Attenders.ServiceCenterName}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text20>
+                  </Components>
+                  <Conditions isList="true" count="0" />
+                  <DataRelationName isNull="true" />
+                  <DataSourceName>Attenders</DataSourceName>
+                  <Filters isList="true" count="0" />
+                  <Name>DataBand2</Name>
+                  <Page isRef="5" />
+                  <Parent isRef="16" />
+                  <Sort isList="true" count="0" />
+                </DataBand2>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Name>Panel1</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Printable>False</Printable>
+            </Panel1>
+            <Panel2 Ref="23" type="Panel" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.6,4.4,5.8</ClientRectangle>
+              <Components isList="true" count="1">
+                <DataBand3 Ref="24" type="DataBand" isKey="true">
+                  <Brush>Transparent</Brush>
+                  <BusinessObjectGuid isNull="true" />
+                  <ClientRectangle>0,0.2,4.4,0.3</ClientRectangle>
+                  <Components isList="true" count="5">
+                    <Text1 Ref="25" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>3.6,0,0.8,0.3</ClientRectangle>
+                      <Conditions isList="true" count="2">
+                        <value>Attenders_ServiceLineList.ShiftType,EqualTo,_x0031_,,Numeric,[0:0:0],[0:255:255:255],Arial_x002C_8,True,True,_x0022_صبح_x0022_,,All</value>
+                        <value>Attenders_ServiceLineList.ShiftType,EqualTo,_x0032_,,Numeric,[0:0:0],[0:255:255:255],Arial_x002C_8,True,True,_x0022_عصر_x0022_,,All</value>
+                      </Conditions>
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text1</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="24" />
+                      <Text>{Attenders_ServiceLineList.ShiftType}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text1>
+                    <Text2 Ref="26" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>2.9,0,0.7,0.3</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>e67b9f4ffcac4e188531e214c2411323</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text2</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="24" />
+                      <Text>{Attenders_ServiceLineList.StartTime}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <TextFormat Ref="27" type="TimeFormat" isKey="true">
+                        <StringFormat>HH:mm</StringFormat>
+                      </TextFormat>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text2>
+                    <Text4 Ref="28" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>2.2,0,0.7,0.3</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>3607d45f04fa48cb8bdbd0013545e1ef</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text4</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="24" />
+                      <Text>{Attenders_ServiceLineList.EndTime}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <TextFormat Ref="29" type="TimeFormat" isKey="true">
+                        <StringFormat>HH:mm</StringFormat>
+                      </TextFormat>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text4>
+                    <Text5 Ref="30" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>1.3,0,0.9,0.3</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>eb37f37a05a840838dd24a9354a778e1</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text5</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="24" />
+                      <Text>{Attenders_ServiceLineList.ServiceCount}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text5>
+                    <Text7 Ref="31" type="Text" isKey="true">
+                      <Border>All;Black;1;Solid;False;4;Black</Border>
+                      <Brush>Transparent</Brush>
+                      <ClientRectangle>0,0,1.3,0.3</ClientRectangle>
+                      <Conditions isList="true" count="0" />
+                      <Font>IRANSansWebFaNum,10</Font>
+                      <Guid>642c5b56356242b28e8134b2cedec64f</Guid>
+                      <HorAlignment>Center</HorAlignment>
+                      <Margins>0,0,0,0</Margins>
+                      <Name>Text7</Name>
+                      <Page isRef="5" />
+                      <Parent isRef="24" />
+                      <Text>{Attenders_ServiceLineList.ServiceCountOver}</Text>
+                      <TextBrush>Black</TextBrush>
+                      <Type>DataColumn</Type>
+                      <VertAlignment>Center</VertAlignment>
+                    </Text7>
+                  </Components>
+                  <Conditions isList="true" count="0" />
+                  <DataRelationName isNull="true" />
+                  <DataSourceName>Attenders_ServiceLineList</DataSourceName>
+                  <Filters isList="true" count="0" />
+                  <Guid>f791397759df4af1ac41b448deff7ebd</Guid>
+                  <Name>DataBand3</Name>
+                  <Page isRef="5" />
+                  <Parent isRef="23" />
+                  <Sort isList="true" count="0" />
+                </DataBand3>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Guid>5853dddc3a4c40608f37ecd497a70d3d</Guid>
+              <Name>Panel2</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Printable>False</Printable>
+            </Panel2>
+            <Text26 Ref="32" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>9.6,0.2,0.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>ad4391d7ab334008a87019641c01df47</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>شناسه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text10 Ref="33" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>8.2,0.2,1.4,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>ba21d4d0e3f547dcb86a06a85273e99d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>نام داکتر</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="34" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>7.2,0.2,1,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>e5dded4fab98411fb4c7ea2522256885</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>نظام داکتری</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 Ref="35" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>5.6,0.2,1.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>760ce3f7111048e7bfc98845a6ffeb51</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>تخصص</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text13 Ref="36" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>4.4,0.2,1.2,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>aac600bd634f4981999db68929a103d9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>بخش</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="37" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>3.6,0.2,0.8,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>4e1074583d8141a895b136a2afa1c25f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>شیفت</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 Ref="38" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>2.9,0.2,0.7,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>62e4a7d9c17442898bcfb9dc5e21f683</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>زمان شروع</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text16 Ref="39" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>2.2,0.2,0.7,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>b2de8939b1034b3ab910b293ba350b13</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>زمان پایان</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text17 Ref="40" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>1.3,0.2,0.9,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>907fe13d2e8b473b886a88e566afe817</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>تعداد پذیرش</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text18 Ref="41" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>[235:241:221]</Brush>
+              <ClientRectangle>0,0.2,1.3,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>IRANSansWebFaNum,9,Bold</Font>
+              <Guid>04409855487546e6ae6d100fb49a0315</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="5" />
+              <Parent isRef="15" />
+              <Text>تعداد پذیرش اضافه</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageHeaderBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>80d455a406e848698cb17c4d6bc1aa38</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>8.5</PageHeight>
+      <PageWidth>11</PageWidth>
+      <PaperSize>Letter</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="42" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="43" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>6/16/2021 6:47:09 PM</ReportChanged>
+  <ReportCreated>6/3/2021 5:13:08 PM</ReportCreated>
+  <ReportFile>C:\Users\Alagheband\Source\Workspaces\Workspace\CIS-Project\CIS\CIS.Web\Stimuls\MC\Rep_AttenderSchedule.mrt</ReportFile>
+  <ReportGuid>836159357a07433ab2318ab7b8b84bdf</ReportGuid>
+  <ReportImage isNull="true" />
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2018.1.2.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

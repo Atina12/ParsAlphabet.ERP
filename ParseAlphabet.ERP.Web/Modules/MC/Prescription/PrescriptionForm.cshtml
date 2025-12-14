@@ -1,0 +1,754 @@
+﻿@{
+    ViewBag.Title = "نسخه نویسی";
+}
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/Prescription.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content" id="prescriptionForm">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <input id="switchList" type="checkbox" checked data-toggle="toggle" data-on="تمام موارد" data-off="علاقه مندی ها" data-onstyle="success" data-offstyle="info" data-width="160" data-height="27">
+        <button id="choiceOfAdmission" type="button" onclick="modal_show('searchAdmissionModal');" class="btn btn-info waves-effect" title="Ctrl + F"><i class="fa fa-user-alt"></i>انتخاب پذیرش</button>
+        <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+        <button id="saveForm" type="button" onclick="savePrescriptionForm()" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+        <button id="newForm" type="button" onclick="resetFormPrescription()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+
+<div class="row displaynone" id="prescriptionBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>شناسه</label>
+            <div>
+                <input id="prescriptionId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تاریخ ثبت</label>
+            <input id="creatDateTime" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-green">
+    <legend>نسخه نویسی</legend>
+    <div class="row" id="headerForm" data-parsley-validate>
+        <div class="form-group col-sm-2">
+            <label>تاریخ اعتبار نسخه</label>
+            <div>
+                <input id="expiryDatePersian" type="text" class="form-control" maxlength="10" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" value="@DateTime.Now.AddDays(15).ToPersianDateString("{0}/{1}/{2}")" tabindex="5"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-2">
+            <label>تعداد تکرار نسخه</label>
+            <div>
+                <input id="repeatCount" type="text" class="form-control number" data-parsley-min="1" value="1" tabindex="6"/>
+            </div>
+        </div>
+        <div id="prescriptionTypeBox" class="form-group col-sm-2 d-none">
+            <label>نوع نسخه</label>
+            <div>
+                <input id="prescriptionTypeName" type="text" class="form-control" tabindex="7" disabled/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>اولویت</label>
+            <div>
+                <select id="priorityId" class="form-control select2" tabindex="8" required data-parsley-selectvalzero="" data-parsley-errors-container="#priorityIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="priorityIdContainer"></div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>دستور داکتر</label>
+            <div>
+                <input id="note" type="text" class="form-control" required tabindex="9"/>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            <th>شناسه شباد</th>
+            <th>انقضاء دفترچه</th>
+            <th>داکتر</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+<fieldset id="peracraptionFilset">
+<ul class="nav nav-pills nav-justified" role="tablist" id="prescriptionTabNav">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" id="prescriptionLink1" href="#drugBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    دارو
+                    @*<span id="drugRowCount">3سطر</span>*@
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link" data-toggle="tab" onclick="focusInput(2)" id="prescriptionLink3" href="#imageBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    تصویربرداری
+                    @*<span id="imageRowCount">2سطر</span>*@
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink2" href="#labBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    آزمایشگاه
+                    @*<span id="labRowCount">1سطر</span>*@
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" id="careActionLink" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="diagLink" href="#diagBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    تشخیص
+                    @*<span id="diagRowCount">1سطر</span>*@
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+<div class="tab-pane active p-3" id="drugBox" role="tabpanel">
+    <div class="row tabToggle1" id="drugForm" data-parsley-validate>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>دارو</label>
+            <div>
+                <select id="productId" class="form-control select2" favoritecategory="1" tabindex="10" required data-parsley-selectvalzero data-parsley-errors-container="#productIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="productIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>تعداد</label>
+            <input id="totalNumber" type="text" class="form-control number" maxlength="10" tabindex="11" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>واحد</label>
+            <div>
+                <select id="totalNumberUnitId" class="form-control select2" tabindex="12" required data-parsley-selectvalzero data-parsley-errors-container="#totalNumberUnitIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="totalNumberUnitIdContainer"></div>
+        </div>
+        @*<div class="form-group col-lg-1 col-sm-2">
+                                                    <label>حداکثر تعداد</label>
+                                                    <input id="maxNumber" type="text" class="form-control number" maxlength="10" tabindex="13" required data-parsley-min="1" data-parsley-max="32565" />
+                                                </div>*@
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>مقدار مصرف</label>
+            <input id="dosage" type="text" class="form-control decimal" maxlength="10" tabindex="13" data-parsley-min="1"/>
+        </div>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>واحد مصرف</label>
+            <div>
+                <select id="dosageUnitId" class="form-control select2" tabindex="14" favoritecategory="3" data-parsley-errors-container="#dosageUnitIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="dosageUnitIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تواتر مصرف</label>
+            <div>
+                <select id="frequencyId" class="form-control select2" required favoritecategory="4" data-parsley-selectvalzero tabindex="15" data-parsley-errors-container="#frequencyIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="frequencyIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>طریقه مصرف</label>
+            <div>
+                <select id="routeId" class="form-control select2" tabindex="16" favoritecategory="5" required data-parsley-selectvalzero data-parsley-errors-container="#routeIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="routeIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>شرط استفاده</label>
+            <div>
+                <select id="asNeedId" class="form-control select2" tabindex="-1" favoritecategory="2" data-parsley-errors-container="#asNeedIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="asNeedIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>روش مصرف</label>
+            <div>
+                <select id="methodId" class="form-control select2" tabindex="-1" favoritecategory="6" data-parsley-errors-container="#methodIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="methodIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>اولویت مصرف</label>
+            <div>
+                <select id="priorityId_drug" class="form-control select2" tabindex="-1" favoritecategory="7" data-parsley-errors-container="#priorityId_drugContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="priorityId_drugContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دلیل تجویز</label>
+            <div>
+                <select id="reasonId" class="form-control select2" tabindex="-1" favoritecategory="8" data-parsley-errors-container="#reasonIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="reasonIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>محل استفاده</label>
+            <div>
+                <select id="bodySiteId" class="form-control select2" tabindex="-1" favoritecategory="9" data-parsley-errors-container="#bodySiteIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="bodySiteIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دارو ترکیبی</label>
+            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isCompounded');" tabindex="17">
+                <input id="isCompounded" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="دارد,ندارد"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-5 col-sm-6">
+            <label>دستورالعمل</label>
+            <input id="patientInstruction_drug" type="text" class="form-control" maxlength="50" tabindex="18"/>
+        </div>
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>توضیحات</label>
+            <input id="description" type="text" class="form-control" maxlength="50" tabindex="20"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button id="addDrug" type="button" class="btn btn-light border-blue" tabindex="19"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledDrug" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempDrugList">
+                <thead>
+                <tr>
+                    <th width="50">ردیف</th>
+                    <th width="50">دارو</th>
+                    <th width="50">شرط استفاده</th>
+                    <th width="50">تعداد</th>
+                    <th width="50">واحد</th>
+                    @*<th width="50">حداکثر تعداد</th>*@
+                    <th width="50">مقدار مصرف</th>
+                    <th width="50">واحد مصرف</th>
+                    <th width="50">تواتر مصرف</th>
+                    <th width="50">طریقه مصرف</th>
+                    <th width="50">روش مصرف</th>
+                    <th width="50">اولویت مصرف</th>
+                    <th width="50">دلیل تجویز</th>
+                    <th width="50">محل استفاده</th>
+                    <th width="50">دارو ترکیبی</th>
+                    <th width="50">دستور العمل</th>
+                    <th width="50">توضیحات</th>
+                    <th width="50">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempDrug">
+                <tr id="emptyRow">
+                    <td colspan="15" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="imageBox" role="tabpanel">
+    <div id="imageForm" class="row tabToggle2" data-parsley-validate>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>خدمت</label>
+            <div>
+                <select id="imageServiceId" class="form-control select2" tabindex="30" favoritecategory="10" required data-parsley-selectvalzero data-parsley-errors-container="#imageServiceIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="imageServiceIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-5 col-sm-5">
+            <label>دستورعمل</label>
+            <input id="patientInstruction" class="form-control" tabindex="31" maxlength="50" required/>
+        </div>
+        <div class="form-group col-lg-3 col-sm-3">
+            <label>محل استفاده</label>
+            <div>
+                <select id="imageBodySiteId" class="form-control select2" tabindex="-1" favoritecategory="9" data-parsley-errors-container="#imageBodySiteIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="imageBodySiteIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-3">
+            <label>جهت بدن</label>
+            <div>
+                <select id="lateralityId" class="form-control select2" tabindex="32" required data-parsley-selectvalzero data-parsley-errors-container="#lateralityIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="lateralityIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-5 col-sm-5">
+            <label>توضیحات</label>
+            <input id="note_Image" class="form-control" tabindex="-1" maxlength="50"/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>جزئیات تصویربرداری</label>
+            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'imageCompounded');" tabindex="33">
+                <input id="imageCompounded" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="دارد,ندارد"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:23px">
+                <button id="addImage" type="button" class="btn btn-light border-blue" tabindex="34"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledImage" type="button" class="btn btn-light border-green" tabindex=""><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempImageList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>خدمت</th>
+                    <th>محل استفاده</th>
+                    <th>جهت بدن</th>
+                    <th>توضیحات</th>
+                    <th>دستورعمل</th>
+                    <th>جزئیات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempImage">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="labBox" role="tabpanel">
+    <div class="row tabToggle3 ml-1 mr-1">
+        <fieldset class="group-box group-box-gray fieldset-lab col-12">
+            <div class="row" id="labHeader" data-parsley-validate>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>هدف آزمایش</label>
+                    <div>
+                        <select id="intentId" class="form-control select2" tabindex="35" required data-parsley-selectvalzero data-parsley-errors-container="#intentIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="intentIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>کیفیت نمونه</label>
+                    <div>
+                        <select id="adequacyForTestingId" class="form-control select2" tabindex="36" required data-parsley-selectvalzero data-parsley-errors-container="#adequacyForTestingIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="adequacyForTestingIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>روش جمع آوری نمونه</label>
+                    <div>
+                        <select id="collectionProcedureId" class="form-control select2" tabindex="37" required data-parsley-selectvalzero data-parsley-errors-container="#collectionProcedureIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="collectionProcedureIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>تاریخ و زمان جمع آوری نمونه</label>
+                    <div>
+                        <input id="dateTimeCollection" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" data-parsley-errors-container="#dateTimeCollectionContainer" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="38">
+                    </div>
+                    <div id="dateTimeCollectionContainer"></div>
+                </div>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>کد نمونه آزمایشگاهی</label>
+                    <div>
+                        <input id="speciementIdentifier" type="text" class="form-control number" maxlength="10" tabindex="39" required/>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2 col-sm-4">
+                    <label>نوع نمونه جمع آوری شده</label>
+                    <div>
+                        <select id="speciementTissueTypeId" class="form-control select2" tabindex="40" required data-parsley-selectvalzero data-parsley-errors-container="#speciementTissueTypeIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="speciementTissueTypeIdContainer"></div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="group-box group-box-gray mt-2 fieldset-lab">
+            <div id="labForm" class="row" data-parsley-validate>
+                <div class="form-group col-lg-3 col-sm-4">
+                    <label>خدمت</label>
+                    <div>
+                        <select id="labServiceId" class="form-control select2" tabindex="41" favoritecategory="11" required data-parsley-selectvalzero data-parsley-errors-container="#labServiceIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="labServiceIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-3 col-sm-4">
+                    <label>دلیل تجویز</label>
+                    <div>
+                        <select id="labReasonId" class="form-control select2" tabindex="42" favoritecategory="8" required data-parsley-selectvalzero data-parsley-errors-container="#labReasonIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="labReasonIdContainer"></div>
+                </div>
+
+                <div class="form-group col-lg-3 col-sm-4">
+                    <label>شرط استفاده</label>
+                    <div>
+                        <select id="labAsNeedId" class="form-control select2" favoritecategory="2" tabindex="-1" data-parsley-errors-container="#labAsNeedIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="labAsNeedIdContainer"></div>
+                </div>
+
+                <div class="form-group col-lg-3 col-sm-4">
+                    <label>محل استفاده</label>
+                    <div>
+                        <select id="labBodySiteId" class="form-control select2" tabindex="-1" favoritecategory="9" data-parsley-errors-container="#labBodySiteIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="labBodySiteIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-4 col-sm-5">
+                    <label>توضیحات</label>
+                    <input id="labNote" class="form-control" tabindex="-1" maxlength="50"/>
+                </div>
+                <div class="form-group col-lg-4 col-sm-5">
+                    <label>دستورعمل</label>
+                    <input id="labPatientInstruction" class="form-control" tabindex="-1" maxlength="50"/>
+                </div>
+                <div class="form-group col-lg-2 col-sm-2">
+                    <label>عدم انجام</label>
+                    <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'doNotPerform');" tabindex="43">
+                        <input id="doNotPerform" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                    </div>
+                </div>
+                <div class="col-sm text-right">
+                    <div class="button-items" style="margin-top:23px">
+                        <button type="button" id="addLab" class="btn btn-light border-green my-2" tabindex="44"><i class="fa fa-arrow-down"></i>ثبت</button>
+                        <button id="canceledLab" type="button" class="btn btn-light border-green" tabindex=""><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="width:100%;height: 300px;">
+                    <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempLabList">
+                        <thead>
+                        <tr>
+                            <th width="40">ردیف</th>
+                            <th width="100">خدمت</th>
+                            <th width="100">شرایط استفاده</th>
+                            <th width="100">دلیل تجویز</th>
+                            <th width="100">محل استفاده</th>
+                            <th width="70">توضیحات</th>
+                            <th width="70">دستورعمل</th>
+                            <th width="50">عدم انجام</th>
+                            <th width="50">عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempLab">
+                        <tr id="emptyRow">
+                            <td colspan="9" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div class="tab-pane p-3" id="diagBox" role="tabpanel">
+    <div id="diagForm" class="row tabToggle4" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>وضعیت تشخیص</label>
+            <div>
+                <select id="statusId" class="form-control select2" tabindex="49" required data-parsley-selectvalzero data-parsley-errors-container="#statusIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="statusIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>تشخیص</label>
+            <div>
+                <select id="diagnosisResonId" class="form-control select2" tabindex="50" required data-parsley-selectvalzero data-parsley-errors-container="#diagnosisResonIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="diagnosisResonIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>میزان شدت بیماری</label>
+            <div>
+                <select id="serverityId" class="form-control select2" tabindex="51" required data-parsley-errors-container="#serverityIdContainer"></select>
+            </div>
+            <div id="serverityIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>توضیحات</label>
+            <input id="comment" class="form-control" tabindex="52" maxlength="200"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:0 0 14px 0">
+                <button type="button" id="addDiagnosis" class="btn btn-light border-green my-2" tabindex="53"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledDiagnosis" type="button" class="btn btn-light border-green" tabindex="54"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdiagList">
+                <thead>
+                <tr>
+                    <th width="40">ردیف</th>
+                    <th width="100">وضعیت تشخیص</th>
+                    <th width="100">تشخیص</th>
+                    <th width="100">میزان شدت بیماری </th>
+                    <th width="70">توضیحات</th>
+                    <th width="50">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempDiag">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+<div id="DrugModalC" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">ثبت داروی ترکیبی</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="row" id="drugBoxC" data-parsley-validate>
+                    <div class="form-group col-lg-6 col-sm-4">
+                        <label>دارو</label>
+                        <div>
+                            <select id="productIdC" class="form-control select2" tabindex="100" favoritecategory="1" required data-parsley-selectvalzero data-parsley-errors-container="#productIdCContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="productIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>واحد مصرف</label>
+                        <div>
+                            <select id="dosageUnitIdC" class="form-control select2" tabindex="101" favoritecategory="3" required data-parsley-selectvalzero data-parsley-errors-container="#dosageUnitIdCContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="dosageUnitIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>تعداد</label>
+                        <div>
+                            <input id="qtyC" type="text" class="form-control number" maxlength="15" title="" tabindex="102" required data-parsley-min="1" data-parsley-max="32565"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>حداکثر تعداد</label>
+                        <div>
+                            <input id="qtyMaxC" type="text" class="form-control number" maxlength="15" title="" tabindex="103" required data-parsley-min="1" data-parsley-max="32565"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>نقش دارو</label>
+                        <div>
+                            <select id="roleIdC" class="form-control select2" tabindex="104" required data-parsley-selectvalzero data-parsley-errors-container="#roleIdCContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="roleIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4" style="margin-top:5px">
+                        <label></label>
+                        <div class="chosen-container-parent">
+                            <button id="addDrugC" type="button" class="btn btn-light border-dark" tabindex="105">ثبت</button>
+                            <button id="canceledDrugC" type="button" class="btn btn-light border-green" tabindex="106"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:0 -7px 0 -7px">
+                    <fieldset class="group-box group-box-gray" style="overflow-x:hidden;overflow-y:scroll;height:auto;width:100%">
+                        <legend>داروهای ترکیبی</legend>
+                        <div class="table-responsive" style="margin:0 auto;padding-bottom:10px">
+                            <table class="table table-styles border mb-0" id="tempDrugListC" style="font-size:10px">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-5">ردیف</th>
+                                    <th class="col-width-percent-20">دارو</th>
+                                    <th class="col-width-percent-10">واحد مصرف</th>
+                                    <th class="col-width-percent-10">تعداد</th>
+                                    <th class="col-width-percent-10">حداکثر تعداد</th>
+                                    <th class="col-width-percent-10">نقش دارو</th>
+                                    <th class="col-width-percent-10">عملیات</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempDrugC">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseDrugC" class="btn btn-secondary waves-effect "><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImageModalC" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">ثبت جزئیات تصویربرداری</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="row" id="imageBoxC" data-parsley-validate>
+                    <div class="form-group col-lg-8 col-sm-8">
+                        <label>خدمت</label>
+                        <div>
+                            <select id="imageServiceIdC" class="form-control select2" tabindex="201" favoritecategory="2" required data-parsley-selectvalzero data-parsley-errors-container="#imageServiceIdCContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="imageServiceIdCContainer"></div>
+                    </div>
+                    <div class="col-sm text-right">
+                        <div class="button-items" style="margin-top:23px">
+                            <button id="addImageC" type="button" class="btn btn-light border-blue" tabindex="202"><i class="fa fa-arrow-down"></i>ثبت</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:0 -7px 0 -7px">
+                    <fieldset class="group-box group-box-gray" style="overflow-x:hidden;overflow-y:scroll;height:auto;width:100%">
+                        <legend>جزئیات تصویربرداری</legend>
+                        <div class="table-responsive" style="margin:0 auto;padding-bottom:10px">
+                            <table class="table table-styles border mb-0" id="tempImageListC" style="font-size:10px">
+                                <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>خدمت</th>
+                                    <th>عملیات</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempImageC">
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseImageC" class="btn btn-secondary waves-effect "><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/SearchAdmissionModal/SearchAdmissionModal.cshtml")
+
+@await Html.PartialAsync("/Modules/MC/AdmissionDisplay/AdmissionDisplay.cshtml")
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script type="text/javascript" src="/Modules/MC/Prescription/PrescriptionForm.js"></script>

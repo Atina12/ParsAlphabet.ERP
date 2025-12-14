@@ -1,0 +1,6 @@
+﻿@await Html.PartialAsync("/Modules/FormPlate2.cshtml")
+
+<input id="id" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+<input id="userFullName" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["userFullName"]"/>
+
+<script src="~/Modules/FM/AccountSGLUserLine/AccountSGLUserLineIndex.js"></script>

@@ -1,0 +1,162 @@
+﻿.thead-ImportExcel th {
+    position: sticky;
+    top: -1px;
+    left: unset !important;
+    background: #d2d1d1;
+    z-index: 9999;
+}
+
+.label-alerts {
+    font-size: inherit;
+    padding: 2px 15px 2px 0px;
+    margin-top: .15em;
+    width: 155px;
+}
+
+.modal-body-ex {
+    position: unset;
+    height: 80vh;
+    overflow: auto;
+}
+
+.btnInput {
+    cursor: pointer;
+    color: #00530b;
+    background-color: #fff;
+    border: 1px solid #00530b;
+}
+
+    .btnInput:hover {
+        color: #fff;
+        background-color: #00530b;
+        border: 1px solid #00530b;
+    }
+
+.btnInput-error {
+    cursor: pointer;
+    color: red;
+    background-color: #fff;
+    border: 1px solid red;
+}
+
+    .btnInput-error:hover {
+        color: #fff;
+        background-color: red;
+        border: 1px solid red;
+    }
+
+.btnInput-create {
+    cursor: pointer;
+    color: #fff;
+    background-color: #00530b;
+    border: 1px solid #00530b;
+}
+
+    .btnInput-create:hover {
+        color: #fff;
+        background-color: #037112;
+    }
+
+td.ex-ted {
+    padding: 0 !important;
+    vertical-align: top;
+}
+
+.rowNumberEx {
+    min-width: 50px !important;
+}
+
+.btnRowEx {
+    border-radius: 0 !important;
+    font-size: small !important;
+}
+
+.modal-Excel {
+    width: 95vw;
+    max-width: unset;
+}
+
+label.checkExcels {
+    width: 37px;
+    margin: auto;
+}
+
+.edited-row {
+    background-color: #ebffeb;
+}
+
+.number-label-alerts {
+    padding-right: 5px;
+}
+
+.loader-box {
+    text-align: end;
+    font-size: 1.5em;
+    float: right;
+    padding: 0;
+    color: #00530b;
+}
+
+.funkyradio input[type="checkbox"]:empty ~ label {
+    line-height: 2em;
+    font-size: 14px;
+}
+
+#headerElm .bd-main {
+    z-index: 9999999;
+}
+
+.text-error {
+    background-color: red;
+    color: white;
+}
+
+.caption-ex {
+    border: 1px solid #fbfbfb;
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-ex {
+    border-bottom: 0.5px solid #ced4da;
+    padding: 0px 0px 5px 0px;
+    justify-content: flex-end;
+}
+
+.header-Box-button {
+    align-items: flex-start;
+}
+
+.drop-ex {
+    border: 1px solid #000;
+    height: 25px;
+    width: 100px;
+}
+
+.header-ex .btn {
+    margin-right: 5px;
+    padding: 3px 7px;
+}
+
+.ajs-ok-ex {
+    color: #fc5454 !important;
+}
+
+
+.ajs-cancel-ex {
+    color: #59c6fb !important;
+}
+
+
+.alertify.ajs-closable .ajs-commands button.ajs-close {
+    display: none !important;
+}
+
+.parsley-errors-list.filled{
+    display:none!important;
+}

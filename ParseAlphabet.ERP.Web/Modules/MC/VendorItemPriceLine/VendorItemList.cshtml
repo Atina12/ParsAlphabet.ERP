@@ -1,0 +1,55 @@
+﻿<div id="vendorItemListModal" class="modal fade bs-example-modal-lg col-width-percent-85" data-keyboard="false" role="dialog" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">لیست آیتم</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+
+                <div class="row-info text-right d-flex">
+                    <h4 class="font-16 my-2">
+                        <span class="text-gray">شناسه : </span><span id="vendorIdTitle">0000</span>
+                    </h4>
+                    <div class="border-right mr-2" ondblclick="">
+                        <p class="d-inline-block pl-2 m-2 border-left">تامین کننده : <span id="vendorfullName">--</span></p>
+                        <p class="d-inline-block pl-2 m-2 ">تعداد آیتم : <span id="itemCount">--</span></p>
+                    </div>
+                </div>
+                <div class="row-info text-right d-flex">
+                    <button id="exportVendorItemcsv" onclick="export_vendorItemcsv()" type="button" class="btn btn-excel waves-effect waves-light float-left ml-3"><i class="fa fa-list-ul" style="margin-left:5px"></i>اکسل</button>
+                    <button onclick="print_vendorItem()" type="button" class="btn btn-print waves-effect float-left ml-1"><i class="fa fa-print" style="margin-left:5px"></i>چاپ</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="modal-body text-right " style="height:450px;">
+                    <fieldset class="group-box group-box-blue mb-3">
+                        <legend> خدمات </legend>
+                        <div class="table-responsive " style="height: 400px; min-height:100px; ">
+                            <table class="table table-styles border mb-0 " style="overflow:auto" id="tbVendorItem">
+                                <thead class="table-thead-fixed">
+                                <tr>
+                                    <th class="col-width-percent-7">سطر</th>
+                                    <th class="col-width-percent-53">کمیسیون</th>
+                                    <th class="col-width-percent-40"> آیتم</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbVendorItemList">
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="vendorItem_close" onclick="modal_close('vendorItemListModal');" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Modules/MC/VendorItemPriceLine/VendorItemList.js"></script>

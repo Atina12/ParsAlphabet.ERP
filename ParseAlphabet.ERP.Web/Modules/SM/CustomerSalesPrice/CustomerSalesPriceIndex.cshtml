@@ -1,0 +1,216 @@
+﻿@{
+    ViewBag.Title = "قیمت گذاری کالا";
+}
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                @*<button type="button" id="displaySimple" onclick="displaySimpleHeader()" class="btn  btn-info waves-effect"><i class="far fa-file-alt"></i>نمایش خزانه</button>*@
+                                <div id="quickSearchContainer" style="display: contents"></div>
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="stimul_preview" onclick="stimul_previewNew()" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                                <button type="button" id="readyforadd" onclick="modal_ready_for_add();" class="btn btn-info waves-effect waves-light" title="Ctrl + Insert"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div><!--Modal-->
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card-body" id="customerSalesPriceForm" data-parsley-validate>
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+                            <li class="nav-item waves-effect waves-light" id="firsTab">
+                                <a class="nav-link active" data-toggle="tab" href="#box1" role="tab" onclick="focusInput(1);">
+                                    <span class="d-none d-md-block">کالا / خدمت</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-home-variant h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light" id="customerGroupTab">
+                                <a class="nav-link" data-toggle="tab" href="#box2" role="tab" onclick="focusInput(2); eventclickRow(1);">
+                                    <span class="d-none d-md-block">تخفیف گروه مشتریان</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-account h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light" id="contractTab">
+                                <a class="nav-link" data-toggle="tab" href="#box3" role="tab" onclick="focusInput(3);">
+                                    <span class="d-none d-md-block">قرارداد</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-email h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content group-box group-box-gray">
+                            <div class="tab-pane active p-3" id="box1" role="tabpanel">
+                                <div class="row tabToggle1">
+                                    <div class="form-group col-sm-6">
+                                        <label>مدل قیمت گذاری</label>
+                                        <div>
+                                            <select id="pricingModelId" class="form-control" tabindex="1" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>نوع</label>
+                                        <div>
+                                            <select id="itemTypeId" class="form-control" tabindex="2" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <label>آیتم</label>
+                                        <div>
+                                            <select id="itemId" titleId="itemName" class="form-control select2" data-parsley-existitemid="" data-parsley-errors-container="#itemIdError" tabindex="3" data-parsley-selectvalzero="">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                            <div id="itemIdError">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-6" id="categoryNameDiv">
+                                        <label>دسته بندی</label>
+                                        <div>
+                                            <input id="categoryName" type="text" class="form-control" maxlength="100" title="" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>نوع ارز</label>
+                                        <div>
+                                            <select id="currencyId" type="text" class="form-control" title="" required tabindex="4"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label id="captionFixPrice">نرخ اول</label>
+                                        <input id="minPrice" type="text" class="form-control money" maxlength="11" title="" required tabindex="5"/>
+                                    </div>
+                                    <div class="form-group col-sm-6 displaynone" id="rangePrice">
+                                        <label id="captionRangePrice">نرخ دوم</label>
+                                        <input id="maxPrice" type="text" class="form-control money" maxlength="11" title="" tabindex="6"/>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>قیمت مصرف کننده</label>
+                                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'priceIncludingVAT');" tabindex="7">
+                                            <input id="priceIncludingVAT" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="دارد,ندارد"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>مجوز تخفیف فاکتور</label>
+                                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'allowInvoiceDisc');" tabindex="8">
+                                            <input id="allowInvoiceDisc" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="دارد,ندارد"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>وضعیت</label>
+                                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event, 'isActive'); focusSaveButton(event);" tabindex="9">
+                                            <input id="isActive" type="checkbox" name="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-3" id="box2" role="tabpanel">
+                                <div class="row tabToggle2">
+                                    <div class="card-body">
+                                        <div class="table-responsive" style="max-height:40rem;">
+                                            <table class="table table-styles border mb-0" id="pagetable_CustomersGroup">
+                                                <thead class="table-thead-fixed">
+                                                <tr>
+                                                    <th class="col-width-percent-5"></th>
+                                                    <th class="col-width-percent-5">شناسه</th>
+                                                    <th class="col-width-percent-30">گروه مشتریان</th>
+                                                    <th class="col-width-percent-12">حداقل تعداد</th>
+                                                    <th class="col-width-percent-15">حداقل تعداد فروش</th>
+                                                    <th class="col-width-percent-11">مبانی نرخ </th>
+                                                    <th class="col-width-percent-20">نرخ </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tempCustomersGroup">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-3" id="box3" role="tabpanel">
+                                <div class="row tabToggle3">
+                                    <div class="form-group col-sm-6">
+                                        <label>نوع قرار داد</label>
+                                        <div>
+                                            <select id="contractTypeId" type="text" class="form-control select2" title="" required data-parsley-selectvalzero="" tabindex="30">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>مبنای محاسبه</label>
+                                        <div>
+                                            <select id="priceTypeId" type="text" class="form-control select2" title="" data-parsley-errors-container="#priceTypeIdError" tabindex="31">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                        </div>
+                                        <div id="priceTypeIdError"></div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>(نرخ/درصد) کمیسیون</label>
+                                        <input id="comissionPrice" type="text" class="form-control money" data-parsley-percentage data-parsley-doublepricecheck data-parsley-singlepricecheck maxlength="11" title="" tabindex="32"/>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label>تامین کنندگان</label>
+                                        <div>
+                                            <select id="vendorId" type="text" class="form-control select2" title="" data-parsley-errors-container="#vendorIdError" tabindex="33">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                        </div>
+                                        <div id="vendorIdError"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="saveCustomerSalesPrice();" class="btn btn-success waves-effect waves-light" tabindex="34" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<script src="/Modules/SM/CustomerSalesPrice/CustomerSalesPriceIndex.js"></script>

@@ -1,0 +1,27 @@
+﻿<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="stimul_preview" onclick="stimul_previewNew()" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                                <button type="button" id="readyforadd" onclick="modal_ready_for_add();" class="btn btn-info waves-effect waves-light" title="Ctrl + Insert"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("/Modules/SearchModal.cshtml")
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>

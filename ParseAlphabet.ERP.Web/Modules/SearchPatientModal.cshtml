@@ -1,0 +1,108 @@
+﻿<div id="searchPatientModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" id="elementModal">
+        <div class="modal-content" id="addResizer">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">بیمه های ثبت شده</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-min-height text-right"data-parsley-validate>
+                <fieldset class="group-box group-box-green">
+                    <legend>جستجو</legend>
+                    <div class="row">
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>مراجعه کننده</label>
+                            <div>
+                                <input id="searchPatientFullName" type="text" class="form-control" maxlength="50" tabindex="200">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>نمبر تذکره مراجعه کننده</label>
+                            <div>
+                                <input id="searchPatientNationalCode" type="text" class="form-control str-number" maxlength="50" tabindex="201">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>شماره بیمه</label>
+                            <div>
+                                <input id="searchPatientBasicInsurerNo" type="text" class="form-control" maxlength="10" tabindex="202">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>موبایل</label>
+                            <div>
+                                <input id="searchPatientMobileNo" type="text" class="form-control" maxlength="11" tabindex="203">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-4">
+                            <label>بیمه اجباری / صندوق بیمه</label>
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="searchPatientBasicInsurerLineId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="204">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-4 compInsurer-section">
+                            <label>بیمه تکمیلی/طرف قرارداد</label>
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="searchPatientCompInsurerThirdPartyId" data-placeholder="انتخاب کنید" class="form-control" tabindex="205">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-3 thirdParty-section">
+                            <label>تخفیف</label>
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="searchPatientDiscountInsurerId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="206">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <button id="searchPatientAdmission" type="button" class="btn btn-light border-green" style="margin-top:22.5px">
+                                <i class="fa fa-search"></i>
+                                جستجو
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="table-responsive" style="height:70vh">
+                    <table class="table table-styles border mb-0" id="patientListPagetable">
+                        <thead class="table-thead-fixed">
+                        <tr>
+                            <th class="col-width-percent-3">ردیف</th>
+                            <th class="col-width-percent-8">نوع مراجعه</th>
+                            <th class="col-width-percent-4">شناسه</th>
+                            <th class="col-width-percent-5">کدملی</th>
+                            <th class="col-width-percent-6">نام</th>
+                            <th class="col-width-percent-6"> تخلص</th>
+                            <th class="col-width-percent-4">تاریخ تولد</th>
+                            <th class="col-width-percent-3">جنسیت</th>
+                            <th class="col-width-percent-6">ملیت</th>
+                            <th class="col-width-percent-9">بیمه اجباری</th>
+                            <th class="col-width-percent-7">صندوق بیمه</th>
+                            <th class="col-width-percent-4">شماره بیمه</th>
+                            <th class="col-width-percent-5">تاریخ انقضاء</th>
+                            <th class="col-width-percent-8">بیمه تکمیلی</th>
+                            <th class="col-width-percent-8">طرف قرارداد</th>
+                            <th class="col-width-percent-8">تخفیف</th>
+                            <th class="col-width-percent-6">موبایل</th>
+                            <th class="col-width-percent-3">انتخاب</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempPatient">
+                        <tr id="emptyRow">
+                            <td colspan="18" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modalRowCountBtn" class="btn btn-secondary" disabled>تعداد سطر : <span id="modalRowCount"> 0 </span></button>
+                <button id="modal-close" onclick="modal_closeAdmission('searchPatientModal', true)" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1306 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>4FR/oUsKw/FgSaX0YUmkY9Xum89WFkvNa0yl8GSY5F7ZwmELTAgxneEIJb1hDbGP83DLjFV+S4F6Qb2A6XGie8R4wctiSnttbAiN0Grs4GPUyNHgRlHTxW9NnGzKXKQTychxCUgWewlqWvXs8UzgbsNqU4Nea0GkYhOEzGIl9Q==</ConnectionStringEncrypted>
+        <Name>Connection</Name>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Spc_PrescreptionImage_Print Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Spc_PrescreptionImage_Print</Alias>
+        <Columns isList="true" count="22">
+          <value>Id,System.Int32</value>
+          <value>FullName,System.String</value>
+          <value>CompositionUID,System.String</value>
+          <value>companyName,System.String</value>
+          <value>WebServiceGuid,System.String</value>
+          <value>ReportDate,System.String</value>
+          <value>BirthDate,System.String</value>
+          <value>PatientBarcode,System.String</value>
+          <value>NationalCode,System.String</value>
+          <value>InsurerType,System.String</value>
+          <value>InsurerBox,System.String</value>
+          <value>InsurNo,System.String</value>
+          <value>InsurerBarcode,System.String</value>
+          <value>AttenderName,System.String</value>
+          <value>MSC,System.String</value>
+          <value>AttenderBarcode,System.String</value>
+          <value>RepeatCount,System.Byte</value>
+          <value>ExpiryDate,System.String</value>
+          <value>Barcode,System.String</value>
+          <value>Descript,System.String</value>
+          <value>Note,System.String</value>
+          <value>PatientInstruction,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>Spc_PrescreptionImage_Print</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_Id,,8,0</value>
+        </Parameters>
+        <SqlCommand>execute mc.Spc_PrescreptionImage_Print @Id</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Spc_PrescreptionImage_Print>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="3">
+      <value>,CorpName,CorpName,System.String,,False,False</value>
+      <value>,CorpLogo,CorpLogo,System.Drawing.Image,,False,False</value>
+      <value>,ReportDate,ReportDate,System.String,,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="15">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,20.8,1.78</ClientRectangle>
+          <Components isList="true" count="6">
+            <Text5 Ref="6" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>18.53,0.65,1.17,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>1e432bca1056455184f2a89a4f7f968e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>تاریخ:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text7 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>2.13,0.59,1.17,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>870780b7f043475590d3d58086f21a7d</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>صفحه:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>16.63,0.65,1.78,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>ec20f7b4500f46a9ab7877311f1081ea</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Spc_PrescreptionImage_Print.ReportDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text10 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.25,0.59,1.75,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>7460c000e4a9462c98407b5dffe00d7d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{PageNumber.ToString()} از {TotalPageCount.ToString()}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="10" type="CustomFormat" isKey="true">
+                <StringFormat>##</StringFormat>
+              </TextFormat>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=False, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text27 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>3.81,0.76,12.28,0.76</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>8d524dbabff84d1e8e67d6347c483623</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>گزارش تصویر برداری</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text4 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3.81,0.28,12.28,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9.75</Font>
+              <Guid>4a2ed7b81ae648cda46486a5e91c8778</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{CorpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Guid>cbb7445874374f51beb60bbdbf3261c6</Guid>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand1>
+        <GroupHeaderBand2 Ref="13" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2.98,20.8,7</ClientRectangle>
+          <Components isList="true" count="30">
+            <Text38 Ref="14" type="Text" isKey="true">
+              <Border>Top, Left, Right;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0.22,20.8,2.16</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,11,Bold</Font>
+              <Guid>2eb8a3642fa94f29b2790703a1e95426</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <BarCode6 Ref="15" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="16" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>0.2,0.95,5,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionImage_Print.CompositionUID}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>c695cc81d7de4ea3a9afb445aa2dac6c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode6</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode6>
+            <Text39 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13,0.42,3.6,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9,Bold</Font>
+              <Guid>e583a834f49947ea90668460c224f445</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  شناسه نسخه الکترونیک</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text39>
+            <Text45 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.4,0.82,11.2,1.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9</Font>
+              <Guid>f63646518c9c4a718444684c832a39fb</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text45</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.CompositionUID}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text45>
+            <Text48 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0.42,3.68,1.76</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>22fab06585ec4a59af66d923dd242424</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text48</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>شناسه نسخه الکترونیک</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text48>
+            <Text41 Ref="20" type="Text" isKey="true">
+              <Border>Top, Left, Right;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,2.38,20.8,1.16</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,11,Bold</Font>
+              <Guid>7f02f486a78b4b6f98611653250080ac</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+            <Text49 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,2.42,3.68,0.96</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>db5d8fa28810473eb208eb63ed508f5d</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text49</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>مرکز درمانی</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text49>
+            <Text42 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.2,2.42,1.4,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>8ac28cd995204e28933ab76a9f915949</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text42</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  نام مرکز</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text42>
+            <BarCode7 Ref="23" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="24" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>0.2,2.56,5,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionImage_Print.WebServiceGuid}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>505ea5b84feb46e2be7af615919b37d9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode7</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode7>
+            <Text43 Ref="25" type="Text" isKey="true">
+              <Border>Top, Left, Right;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,3.55,20.8,1.76</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,11,Bold</Font>
+              <Guid>2421b363dea84f9cb0afc7345bf4d6dc</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text43>
+            <Text16 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,3.62,3.68,1.56</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>d0a923328ae74e64889adb15dde8a8ab</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>مشخصات مراجعه کننده</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text3 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14,3.82,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>687e380c822e4c8eafd5d04e36e07368</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  نام و  تخلص </Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text12 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.2,4.62,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>55d34b18a09c41ef9e72c3562aee01b4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  تاریخ تولد</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text12>
+            <Text6 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13,4.62,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>3ddbc9e59a574520a2ecb66955ebf7d6</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.BirthDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text2 Ref="30" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,3.82,6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>9da1dcb268494909a02c44f338365f14</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.FullName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text2>
+            <Text13 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,4.62,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>a57f8db7d9bb45c89e800298442875f7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  شماره ملی</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text13>
+            <Text11 Ref="32" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.8,4.62,3,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>fb4581be4a9140fc8c0c08c183a43040</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.NationalCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <BarCode1 Ref="33" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="34" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>0.2,4.02,5,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionImage_Print.PatientBarcode}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>53df49a72eeb4060b9fc2c039b22b4f6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode1</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode1>
+            <Text1 Ref="35" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,5.33,20.8,1.76</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,11,Bold</Font>
+              <Guid>2fc293fcfa8d43dcbb68ae04b3fe90a9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text20 Ref="36" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.2,5.62,1.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>10d8388952eb456ea67bfd394e9e2c14</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  نوع بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text20>
+            <Text21 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,5.62,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>fa92533a55464856bd5324b79717685e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  صندوق بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text21>
+            <Text24 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13,5.62,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>e2c17f726412458ab9c8c0a5d7cec4b5</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.InsurerType}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text24>
+            <Text25 Ref="39" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.4,5.62,2.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>5d78ae8c690640aba29e7a5dc2498dc4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.InsurerBox}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text25>
+            <Text22 Ref="40" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14,6.42,2.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>b0c4ebdb12db4d60a41462f9a810c42f</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>:  شماره بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text22>
+            <Text26 Ref="41" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9,6.42,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>4102ad2051664ab8b61057d833886e23</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.InsurNo}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text26>
+            <Text28 Ref="42" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,5.42,3.68,1.56</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>9943582dd73e4dfaa48e7edd29f8d3d3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>سازمان بیمه</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <BarCode3 Ref="43" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="44" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>0.2,5.82,5,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionImage_Print.InsurerBarcode}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>97a239f13ab142a38b4b5812109b1430</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode3</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+            </BarCode3>
+            <Text47 Ref="45" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,2.42,9.4,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>3aeaa1cd2303435a8188d5444e9fea1e</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text47</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <Text>{Spc_PrescreptionImage_Print.companyName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text47>
+            <StartPointPrimitive2 Ref="46" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>5.3,0.22,0,0</ClientRectangle>
+              <Name>StartPointPrimitive2</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <ReferenceToGuid>5abe0f9056924914954ff6ca18644104</ReferenceToGuid>
+            </StartPointPrimitive2>
+            <StartPointPrimitive1 Ref="47" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>16.9,0.22,0,0</ClientRectangle>
+              <Name>StartPointPrimitive1</Name>
+              <Page isRef="4" />
+              <Parent isRef="13" />
+              <ReferenceToGuid>d03124695b884fd4a3bf593bf649c823</ReferenceToGuid>
+            </StartPointPrimitive1>
+          </Components>
+          <Condition>{Spc_PrescreptionDrug_Print.Id}</Condition>
+          <Conditions isList="true" count="0" />
+          <Guid>bc311bf77a014d5095cde19f8dd4e3e2</Guid>
+          <Name>GroupHeaderBand2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </GroupHeaderBand2>
+        <DataBand1 Ref="48" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,10.78,20.8,3</ClientRectangle>
+          <Components isList="true" count="17">
+            <Text17 Ref="49" type="Text" isKey="true">
+              <Border>Bottom;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0.02,20.8,2.96</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,11,Bold</Font>
+              <Guid>c8bc4d01ea334bb0bfdf4cbb7143f841</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text19 Ref="50" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0.22,1.88,2.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>2910d48eda5d459b85ead4c47844b394</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>{Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>SystemVariables</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text23 Ref="51" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,0.22,11,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>28c6c70f95e4461fa7a1be7bbc557148</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>{Spc_PrescreptionImage_Print.Descript}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <BarCode2 Ref="52" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="53" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>0.2,1.1,5,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionImage_Print.Barcode}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>bc7f4b262a7f4646bb526a1d7f75c4a6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode2</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+            </BarCode2>
+            <Text31 Ref="54" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>19,0.22,1.68,2.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>3d3a8412a1624d128372a2afb232c612</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>دارو</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>SystemVariables</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+            <Text36 Ref="55" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,1.22,8.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>12572ab1dba74538806e75a7d029a8b7</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>{Spc_PrescreptionImage_Print.Note}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <Text37 Ref="56" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.6,1.42,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>f36e2571c9084edbaa040a747ae8af53</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text37</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>:  توضیحات</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text37>
+            <Text44 Ref="57" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.6,2.22,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>5493e6fedcf34417a75d3d8974cdc063</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text44</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>:  دستورالعمل</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text44>
+            <Text46 Ref="58" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.6,2.02,8.8,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>bb31753cde35457cae7574b106854625</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text46</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>{Spc_PrescreptionImage_Print.PatientInstruction}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text46>
+            <StartPointPrimitive3 Ref="59" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>16.9,-0.02,0,0</ClientRectangle>
+              <Name>StartPointPrimitive3</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>1bd4488ac92846b0a24b56ac88755c06</ReferenceToGuid>
+            </StartPointPrimitive3>
+            <EndPointPrimitive3 Ref="60" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>16.9,3,0,0</ClientRectangle>
+              <Name>EndPointPrimitive3</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>1bd4488ac92846b0a24b56ac88755c06</ReferenceToGuid>
+            </EndPointPrimitive3>
+            <StartPointPrimitive4 Ref="61" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>5.3,-0.02,0,0</ClientRectangle>
+              <Name>StartPointPrimitive4</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>6f069df6e3444fb8b56f3d3ac3741884</ReferenceToGuid>
+            </StartPointPrimitive4>
+            <EndPointPrimitive4 Ref="62" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>5.3,3,0,0</ClientRectangle>
+              <Name>EndPointPrimitive4</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>6f069df6e3444fb8b56f3d3ac3741884</ReferenceToGuid>
+            </EndPointPrimitive4>
+            <StartPointPrimitive5 Ref="63" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>20.79,-0.02,0,0</ClientRectangle>
+              <Name>StartPointPrimitive5</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>9f8839c8b0854cd08d0bdce05a332382</ReferenceToGuid>
+            </StartPointPrimitive5>
+            <EndPointPrimitive5 Ref="64" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>20.79,3,0,0</ClientRectangle>
+              <Name>EndPointPrimitive5</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>9f8839c8b0854cd08d0bdce05a332382</ReferenceToGuid>
+            </EndPointPrimitive5>
+            <StartPointPrimitive6 Ref="65" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>0,-0.02,0,0</ClientRectangle>
+              <Name>StartPointPrimitive6</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>68d42d514ea048f796fe51847a17f3cd</ReferenceToGuid>
+            </StartPointPrimitive6>
+            <EndPointPrimitive6 Ref="66" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>0,3,0,0</ClientRectangle>
+              <Name>EndPointPrimitive6</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <ReferenceToGuid>68d42d514ea048f796fe51847a17f3cd</ReferenceToGuid>
+            </EndPointPrimitive6>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName isNull="true" />
+          <DataSourceName>Spc_PrescreptionDrug_Print</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+        <GroupFooterBand1 Ref="67" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,14.58,20.8,3</ClientRectangle>
+          <Components isList="true" count="16">
+            <Text9 Ref="68" type="Text" isKey="true">
+              <Border>Left, Right;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0.02,20.8,1.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,11,Bold</Font>
+              <Guid>6fa4e465920348b5bc423a6193ef14bb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text35 Ref="69" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,0.22,3.6,1.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>92750d4a9c5c4a2198bfb3067fd70946</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>مشخصات تجویزگر</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+            <Text18 Ref="70" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15,0.22,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>bffaa578ac7241aab6034e6fd660c7e4</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>:  نام داکتر</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text18>
+            <Text32 Ref="71" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10,0.22,4.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>0b53d0333db54cc0add8fd06a8a77927</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>{Spc_PrescreptionImage_Print.AttenderName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text32>
+            <Text29 Ref="72" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.6,1.02,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>55ed7a3f60a540ebbd8f31fbc4583071</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>:  نظام داکتری</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text29>
+            <Text33 Ref="73" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.4,1.02,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>bab321eb30ce4018b8d9e7fe1f009d22</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>{Spc_PrescreptionImage_Print.MSC}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text33>
+            <Text30 Ref="74" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.2,1.02,2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10,Bold</Font>
+              <Guid>14f0b790725644d2914d5410a87d9eb4</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>:  تاریخ تجویز</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text30>
+            <Text34 Ref="75" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.2,1.02,1.8,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>c875e1b2b5684524ab02bff603df525b</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>{Spc_PrescreptionImage_Print.ExpiryDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text34>
+            <BarCode5 Ref="76" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Transparent</BackColor>
+              <BarCodeType Ref="77" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true" />
+              <ClientRectangle>0.2,0.62,5,0.8</ClientRectangle>
+              <Code>{Spc_PrescreptionImage_Print.AttenderBarcode}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>d7e03a43a4e140648d691aff21d40f88</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode5</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+            </BarCode5>
+            <Text15 Ref="78" type="Text" isKey="true">
+              <Border>All;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,1.82,20.8,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,11,Bold</Font>
+              <Guid>b733096db3344c09831c297e7cfada81</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text40 Ref="79" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.6,2.02,4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,10</Font>
+              <Guid>b9823cf35ae245bd8d67ce137a77f642</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>{Spc_PrescreptionImage_Print.RepeatCount}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text14 Ref="80" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>17,2.02,3.6,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,12,Bold</Font>
+              <Guid>1a61cd6dc05e481a886bb73bfcc67d72</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <Text>تعداد تکرار</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <StartPointPrimitive7 Ref="81" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>16.9,0.02,0,0</ClientRectangle>
+              <Name>StartPointPrimitive7</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <ReferenceToGuid>7133653d397440759f6aac1f83123ca9</ReferenceToGuid>
+            </StartPointPrimitive7>
+            <EndPointPrimitive7 Ref="82" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>16.9,3.02,0,0</ClientRectangle>
+              <Name>EndPointPrimitive7</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <ReferenceToGuid>7133653d397440759f6aac1f83123ca9</ReferenceToGuid>
+            </EndPointPrimitive7>
+            <StartPointPrimitive8 Ref="83" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>5.3,0.02,0,0</ClientRectangle>
+              <Name>StartPointPrimitive8</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <ReferenceToGuid>fed0de325a2249fca958f3dd3943802a</ReferenceToGuid>
+            </StartPointPrimitive8>
+            <EndPointPrimitive8 Ref="84" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>5.2,3.02,0,0</ClientRectangle>
+              <Name>EndPointPrimitive8</Name>
+              <Page isRef="4" />
+              <Parent isRef="67" />
+              <ReferenceToGuid>fed0de325a2249fca958f3dd3943802a</ReferenceToGuid>
+            </EndPointPrimitive8>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </GroupFooterBand1>
+        <VerticalLinePrimitive1 Ref="85" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>16.9,3.2,0.0254,6.88</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="86" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>d03124695b884fd4a3bf593bf649c823</Guid>
+          <Name>VerticalLinePrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="87" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive1>
+        <HorizontalLinePrimitive1 Ref="88" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>100,18.4,18,0.0254</ClientRectangle>
+          <Color>0, 0, 39</Color>
+          <EndCap Ref="89" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>8a5d89a93719401e96243b2ea34b511b</Guid>
+          <Name>HorizontalLinePrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="90" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive1>
+        <VerticalLinePrimitive2 Ref="91" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>5.3,3.2,0.0254,6.88</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="92" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>5abe0f9056924914954ff6ca18644104</Guid>
+          <Name>VerticalLinePrimitive2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="93" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive2>
+        <VerticalLinePrimitive3 Ref="94" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>16.9,10.76,0.0254,3.02</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="95" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>1bd4488ac92846b0a24b56ac88755c06</Guid>
+          <Name>VerticalLinePrimitive3</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="96" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive3>
+        <VerticalLinePrimitive4 Ref="97" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>5.3,10.76,0.0254,3.02</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="98" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>6f069df6e3444fb8b56f3d3ac3741884</Guid>
+          <Name>VerticalLinePrimitive4</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="99" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive4>
+        <VerticalLinePrimitive5 Ref="100" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>20.79,10.76,0.0254,3.02</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="101" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>9f8839c8b0854cd08d0bdce05a332382</Guid>
+          <Name>VerticalLinePrimitive5</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="102" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive5>
+        <VerticalLinePrimitive6 Ref="103" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>0,10.76,0.0254,3.02</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="104" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>68d42d514ea048f796fe51847a17f3cd</Guid>
+          <Name>VerticalLinePrimitive6</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="105" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive6>
+        <VerticalLinePrimitive7 Ref="106" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>16.9,14.6,0.0254,3</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="107" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>7133653d397440759f6aac1f83123ca9</Guid>
+          <Name>VerticalLinePrimitive7</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="108" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive7>
+        <VerticalLinePrimitive8 Ref="109" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>5.3,14.6,0.0254,3</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="110" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>fed0de325a2249fca958f3dd3943802a</Guid>
+          <Name>VerticalLinePrimitive8</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <StartCap Ref="111" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive8>
+        <EndPointPrimitive2 Ref="112" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>5.3,10.08,0,0</ClientRectangle>
+          <Name>EndPointPrimitive2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>5abe0f9056924914954ff6ca18644104</ReferenceToGuid>
+        </EndPointPrimitive2>
+        <EndPointPrimitive1 Ref="113" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>16.9,10.08,0,0</ClientRectangle>
+          <Name>EndPointPrimitive1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <ReferenceToGuid>d03124695b884fd4a3bf593bf649c823</ReferenceToGuid>
+        </EndPointPrimitive1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>ccd6a642c2bc4898ae052c10e3f6c2da</Guid>
+      <Margins>0.1,0.1,0.1,0.1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+      <Watermark Ref="114" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="115" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>2/11/2021 6:13:51 PM</ReportChanged>
+  <ReportCreated>2/1/2015 2:00:37 PM</ReportCreated>
+  <ReportFile>C:\CIS_TeamProject\CIS-Project\CIS\CIS.Web\Stimuls\MC\Prn_PrescriptionImage.mrt</ReportFile>
+  <ReportGuid>156da56dd7eb458b974fa182a8cb8586</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2013.2.1612</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

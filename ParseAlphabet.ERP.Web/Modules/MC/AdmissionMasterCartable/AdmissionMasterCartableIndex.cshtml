@@ -1,0 +1,271 @@
+﻿@{
+    ViewBag.Title = "کارتابل طرح درمان";
+}
+<link href="~/lib/ModulesCss/AdmissionCartable.css" rel="stylesheet"/>
+<link href="~/lib/ModalePrint/PrintCss.css" rel="stylesheet"/>
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="~/js/NewPagetable.js"></script>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="header-title d-flex">
+                    <div id="bcTarget" style="display : none"></div>
+                    <span>@ViewBag.Title</span>
+                    <div class="inboundTimer float-left">
+
+                        <button class="btn btn-success waves-effect" type="button" id="resetList">بازنشانی</button>
+                        <div class="timerBtn border-right pr-2">
+                            <button class="btn btn-info" type="button" id="refreshlist">
+                                <i class="fa fa-sync-alt"></i>
+                            </button>
+                            <button class="btn btn-success" type="button" id="stopTimerInterval">
+                                <i class="fa fa-play"></i>
+                            </button>
+                        </div>
+
+                        <div class="timerBox text-center">
+                            <div class="font-18" id="timerBox">00:30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="card-body">
+                            <fieldset id="filterInputBox" class="group-box group-box-gray" data-parsley-validate>
+                                <legend>فیلتر</legend>
+                                <div class="row">
+
+                                    <div class="form-group col-md-3 ml-0 mb-0">
+                                        <label>تاریخ روز کاری</label>
+                                        <div class="double-input-box">
+                                            <div class="double-input">
+                                                <input id="fromWorkDayDatePersian" type="text" class="form-control persian-date" placeholder="تاریخ را وارد نمایید" data-inputmask="'mask':'9999/99/99'"
+                                                       data-parsley-shamsidate
+                                                       data-parsley-errors-container="#fromWorkDayDatePersianContainer"
+                                                       maxlength="10" tabindex="1"/>
+                                            </div>
+                                            <div class="double-input">
+                                                <input id="toWorkDayDatePersian" type="text" class="form-control persian-date" placeholder="تاریخ را وارد نمایید" data-inputmask="'mask':'9999/99/99'"
+                                                       data-parsley-shamsidate
+                                                       data-parsley-errors-container="#toWorkDayDatePersianContainer"
+                                                       maxlength="10" tabindex="2"/>
+                                            </div>
+                                        </div>
+                                        <div class="double-input-box">
+                                            <div class="double-input" id="fromWorkDayDatePersianContainer"></div>
+                                            <div class="double-input" id="toWorkDayDatePersianContainer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 ml-0 mb-0">
+                                        <label>تسویه شده/نشده</label>
+                                        <div>
+                                            <select id="isSettled" class="form-control select2" title="" tabindex="3">
+                                                <option value="-1">انتخاب کنید</option>
+                                                <option value="0">تسویه نشده</option>
+                                                <option value="1">تسویه شده</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" id="expandAdmissionBtn" onclick="expandAdmissionMaster(this)" class="btn btn-light border-orange plus">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                <div class="slideToggle get" style="display:none;">
+                                    <div class="row">
+
+                                        <div class="form-group col-sm-3">
+                                            <label>شعبه</label>
+                                            <select id="branchId" class="form-control select2" tabindex="4"></select>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label>گردش کار</label>
+                                            <div class="col-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="workflowId" class="select2 select2-quick-access" tabindex="5">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label>مرحله</label>
+                                            <div class="col-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="stageId" class="select2 select2-quick-access" tabindex="6">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-md-1">
+                                            <label>شناسه پرونده</label>
+                                            <input id="cartableAdmissionMasterId" type="text" class="form-control number" tabindex="7"/>
+                                        </div>
+
+                                        <div class="form-group col-sm-3">
+                                            <label>مراجعه کننده</label>
+                                            <div class="col-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="patientId" class="select2 select2-quick-access" tabindex="8">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group col-md-1">
+                                            <label style="visibility:hidden">جستجو</label>
+                                            <div class="form-group">
+                                                <button class="btn btn-success" type="button" tabindex="9" id="refreshAdmissionMasterPagetable" style="padding:4px">جستجو</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <ul id="tabActionBox" class="nav nav-pills nav-justified" role="tablist"></ul>
+                            <div id="tabBoxByAction" class="tab-content group-box group-box-gray w-100 d-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="actionMasterModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">انتخاب گام</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right" data-parsley-validate style="padding:0;">
+                <div class="card-body" style="padding:0;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div style="overflow-y:scroll !important;overflow-x:auto!important;padding:5px" id="tableLine">
+                                <table style="width:100% !important">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:4%">سطر</th>
+                                        <th style="width:10%">شناسه پرونده</th>
+                                        <th style="width:25%">جریان کار</th>
+                                        <th style="width:25%">مرحله</th>
+                                        <th style="width:36%">عملیات</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="actionModalTable">
+                                    <tr>
+                                        <td colspan="5" style="text-align:center">سطری وجود ندارد</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('actionMasterModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="actionsMadterModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">انتخاب گام</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right" data-parsley-validate style="padding:0;">
+                <div class="card-body" style="padding:0;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div style="overflow-y:scroll !important;overflow-x:auto!important;padding:5px" id="tableLine">
+                                <table style="width:100% !important">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:4%">سطر</th>
+                                        <th style="width:25%">جریان کار</th>
+                                        <th style="width:25%">مرحله</th>
+                                        <th style="width:6%">تعداد پرونده</th>
+                                        <th style="width:40%">گام</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="actionsMasterModalTable">
+                                    <tr>
+                                        <td colspan="5" style="text-align:center">سطری وجود ندارد</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal_saveMasterActions" onclick="modal_saveMasterActions('actionsMadterModal',this);" class="btn btn-success waves-effect waves-light" title="Ctrl + S"><i class="fa fa-check-circle"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('actionsMadterModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="actionErrModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">سطر های خطادار</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right" data-parsley-validate style="padding:0;">
+                <div class="card-body" style="padding:0;">
+                    <div class="row">
+                        <div class="col-12">
+                            <div style="overflow-y:scroll !important;overflow-x:auto!important;padding:5px" id="tableLine">
+                                <table style="width:100% !important">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:5%">سطر</th>
+                                        <th style="width:95%">شناسه پرونده / خطا</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody id="actionErrTable">
+                                    <tr>
+                                        <td colspan="2" style="text-align:center">سطری وجود ندارد</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('actionErrModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/AdmissionMaster/AdmissionMasterPrintIndex.cshtml")
+
+@await Html.PartialAsync("/Modules/MC/AdmissionMaster/AdmissionMasterDisplay.cshtml")
+
+<script src="~/plugins/barcode/jquery-barcode.min.js"></script>
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+
+<script src="~/Modules/MC/AdmissionMasterCartable/AdmissionMasterCartableIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

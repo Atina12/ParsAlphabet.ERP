@@ -1,0 +1,242 @@
+﻿<link href="~/lib/ModulesCss/AdmissionDisplay.css" rel="stylesheet"/>
+
+<div id="admissionRequestDisplayModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-size-xxlg">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0">نمایش درخواست</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height-lg text-right">
+<div class="">
+<div class="PrnModalId" id="">
+    <div class="d-block w-100 text-right mb-2 pr-3">
+        <div class="key_id">
+            <lable id="">شناسه : </lable> <span id="admissionIdDisplay">0</span>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-blue mb-3">
+    <legend>درخواست</legend>
+
+    <div id="serviceSection" class="w-100 d-none" style="position:relative">
+        <div class="table-responsive">
+            <table class="table table-styles border mb-0" style="width:100% !important">
+                <thead class="table-thead-fixed">
+                <tr>
+                    <th>مراجعه کننده</th>
+                    <th>کدملی</th>
+                    <th>جنسیت</th>
+                    <th>ملیت</th>
+                    <th>کدپستی</th>
+                    <th>شماره شناسنامه</th>
+                    <th>موبایل</th>
+                    <th>وضعیت تاهل</th>
+                    <th>تحصیلات</th>
+                    <th>شماره بیمه</th>
+                    <th>شماره صفحه دفترچه</th>
+                    <th>تاریخ انقضاء</th>
+                </tr>
+                </thead>
+                <tbody id="patientAdmission">
+                </tbody>
+            </table>
+        </div>
+        <div style="border-bottom:1px dashed" class="mb-3 mt-3"></div>
+        <div class="table-responsive admissionDisplayRequest">
+            <table class="table table-styles border mb-0" id="requestServiceSection">
+            </table>
+        </div>
+        <div style="border-bottom:1px dashed" class="mb-3 mt-3"></div>
+        <div class="table-responsive">
+            <table class="table table-styles border mb-0" style="width:100% !important" id="tempdiagnosisList">
+                <thead>
+                <tr>
+                    <th class="col-width-percent-1">ردیف</th>
+                    <th class="col-width-percent-3">وضعیت تشخیص</th>
+                    <th class="col-width-percent-6">تشخیص</th>
+                    <th class="col-width-percent-3">میزان شدت بیماری </th>
+                    <th class="col-width-percent-6">توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempDiagDisplay">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="itemSection" class="w-100 d-none" style="position:relative">
+        <div class="table-responsive mb-3">
+            <table class="table table-styles border mb-0" style="width:100% !important">
+                <thead class="table-thead-fixed">
+                <tr>
+                    <th>مراجعه کننده</th>
+                    <th>شماره شناسنامه</th>
+                    <th>تاریخ تولد</th>
+                    <th>جنسیت</th>
+                    <th>ملیت</th>
+                    <th>کدپستی</th>
+                    <th>شغل</th>
+                    <th>تلفن</th>
+                    <th>موبایل</th>
+                    <th>وضعیت تاهل</th>
+                    <th>تحصیلات</th>
+                    <th>نام پدر</th>
+                    <th>آدرس</th>
+                </tr>
+                </thead>
+                <tbody id="patientSale">
+                </tbody>
+            </table>
+        </div>
+        <div style="border-bottom:1px dashed" class="mb-3 mt-3"></div>
+        <div class="table-responsive admissionDisplayRequest">
+            <table class="table table-styles border mb-0" id="requestItemSection">
+            </table>
+        </div>
+    </div>
+
+    <div id="serviceSectionTamin" class="d-none" style="position:relative">
+        <div class="table-responsive mb-3">
+            <table class="table table-styles border mb-0" style="width:100% !important">
+                <thead class="table-thead-fixed">
+                <tr>
+                    <th>مراجعه کننده</th>
+                    <th>کدملی</th>
+                    <th>شناسه استحقاق درمان</th>
+                    <th>جنسیت</th>
+                    <th>ملیت</th>
+                    <th>کدپستی</th>
+                    <th>شماره شناسنامه</th>
+                    <th>موبایل</th>
+                    <th>وضعیت تاهل</th>
+                    <th>تحصیلات</th>
+                </tr>
+                </thead>
+                <tbody id="patientDisplayTamin">
+                </tbody>
+            </table>
+        </div>
+        <div style="border-bottom:1px dashed" class="mb-3 mt-3"></div>
+        <div class="table-responsive admissionDisplayRequest">
+            <table class="table table-styles border mb-0" id="requestServiceSectionTamin">
+            </table>
+        </div>
+    </div>
+
+    <div id="serviceSectionPrescriptionTamin" class="d-none" style="position:relative">
+        <div class="table-responsive mb-3">
+            <table class="table table-styles border mb-0" style="width:100% !important">
+                <thead class="table-thead-fixed">
+                <tr>
+                    <th>مراجعه کننده</th>
+                    <th>کدملی</th>
+                    <th>جنسیت</th>
+                    <th>ملیت</th>
+                    <th>کدپستی</th>
+                    <th>شماره شناسنامه</th>
+                    <th>موبایل</th>
+                    <th>وضعیت تاهل</th>
+                    <th>تحصیلات</th>
+                </tr>
+                </thead>
+                <tbody id="patientDisplayPrescriptionTamin">
+                </tbody>
+            </table>
+        </div>
+        <div style="border-bottom:1px dashed" class="mb-3 mt-3"></div>
+        <div class="table-responsive admissionDisplayRequest">
+            <table class="table table-styles border mb-0" id="requestServiceSectionPrescriptionTamin">
+            </table>
+        </div>
+    </div>
+
+</fieldset>
+
+<fieldset id="tempDisplayPrsTaminFielset" class="group-box group-box-orange mb-3 d-none" style="position:relative">
+    <legend>جزئیات نسخه ها</legend>
+    <div class="row">
+        <div class="table-responsive ">
+            <table class="table table-styles border mb-0">
+                <thead class="table-thead-fixed">
+                <tr>
+                    <th>شناسه نسخه</th>
+                    <th>نام ولایت</th>
+                    <th>نوع نسخه</th>
+                    <th>نمبر تذکره</th>
+                    <th>نام داکتر</th>
+                    <th>نظام داکتری</th>
+                    <th>تخصص</th>
+                    <th>تاریخ نسخه</th>
+                    <th>دلیل ارجاع</th>
+                    <th>توضیحات</th>
+                    <th>گروه آزمایشگاهی</th>
+                    <th>کد تشخیص</th>
+                    <th>متن تشخیص</th>
+                </tr>
+                </thead>
+                <tbody id="tempDisplayPrsTamin">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="group-box group-box-green mb-3">
+    <legend>جریان کار </legend>
+    <div class="row">
+        <div class="table-responsive ">
+            <div id="hasGetWorkFlowError"></div>
+            <table class="table table-styles border mb-0" id="tbadmissionWorkFlow" style="position:relative">
+                <thead class="table-thead-fixed">
+                <tr>
+                    <th class="col-width-percent-6">شناسه</th>
+                    <th class="col-width-percent-20">جریان کار</th>
+                    <th class="col-width-percent-20">مرحله</th>
+                    <th class="col-width-percent-20">گام</th>
+                    <th class="col-width-percent-9">تاریخ ثبت</th>
+                    <th class="col-width-percent-9">کاربر ثبت کننده</th>
+                </tr>
+                </thead>
+                <tbody id="admissionWorkFlowGet">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="group-box group-box-gray mb-3">
+    <legend>
+        <span>جزییات جریان کار</span>
+        <span id="admissionWorkFlowIdOnDetails" class="font-weight-bold"></span>
+    </legend>
+    <div class="row">
+        <div class="table-responsive">
+            <div id="hasGetWorkFlowDetailError"></div>
+            <table class="table table-styles border mb-0 displaynone" id="tbadmissionWorkFlowDetailGet" style="position:relative">
+                <thead class="table-thead-fixed" id="admissionWorkFlowDetailGetColumn">
+                </thead>
+                <tbody id="admissionWorkFlowDetailGet">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
+</div>
+</div>
+<div class="modal-footer">
+    <button id="modal-close" onclick="modal_close('admissionRequestDisplayModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+
+<script src="/Modules/MC/AdmissionDisplay/AdmissionDisplay.js"></script>

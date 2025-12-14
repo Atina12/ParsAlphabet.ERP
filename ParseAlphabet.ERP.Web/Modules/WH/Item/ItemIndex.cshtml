@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "کالاها و خدمات";
+}
+
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-size-lg">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height text-right" data-parsley-validate>
+<div class="row" id="rowKeyId">
+    <div class="d-block w-100 text-right mb-2 pr-3">
+        <div class="key_id">
+            <lable id="modal_keyid_caption"></lable>
+            <span id="modal_keyid_value"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label>نوع آیتم</label>
+        <div class="chosen-container-parent">
+            <select id="itemTypeId" class="form-control select2" required data-parsley-selectvalzero data-parsley-errors-container="#itemTypeIdError" tabindex="1">
+                <option value="0">انتخاب کنید</option>
+            </select>
+        </div>
+        <div id="itemTypeIdError"></div>
+    </div>
+    <div class="form-group col-sm-8">
+        <label>نام</label>
+        <input id="name" type="text" class="form-control " required data-parsley-errors-container="#nameIdError" maxlength="100" title="" tabindex="2"/>
+        <div id="nameIdError"></div>
+    </div>
+    <div class="form-group col-sm-4">
+        <label>دسته بندی </label>
+        <select id="categoryId" class="form-control select2" tabindex="3" required data-parsley-errors-container="#categoryIdError">
+        </select>
+
+        <div id="categoryIdError"></div>
+    </div>
+    <div class="form-group col-sm-4">
+        <label>واحد شمارش</label>
+        <select id="unitId" class="form-control select2" tabindex="4" required data-parsley-errors-container="#unitIdError">
+        </select>
+
+        <div id="unitIdError"></div>
+    </div>
+    <div class="form-group col-sm-4 goods share charge  service">
+        <label>مالیات بر ارزش افزوده فروش</label>
+        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'vatEnable');" tabindex="5">
+            <input id="vatEnable" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="دارد,ندارد"/>
+        </div>
+    </div>
+    <div class="form-group col-sm-4 goods share charge service">
+        <label>درصد مالیات بر ارزش افزوده فروش </label>
+        <div>
+            <select id="vatId" class="form-control select2" disabled maxlength="3" data-parsley-max="99" title="" data-parsley-errors-container="#vatIdError" tabindex="6">
+                <option value="0">انتخاب کنید</option>
+            </select>
+            <div id="vatIdError"></div>
+        </div>
+    </div>
+    <div class="form-group col-sm-4 share ">
+        <label>وضعیت اشتراک</label>
+        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'unlimited');" tabindex="7">
+            <input id="unlimited" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="نامحدود ,محدود  "/>
+        </div>
+    </div>
+    <div class="form-group col-sm-4 share">
+        <label>تاریخ شروع اشتراک</label>
+        <div>
+            <input type="text" id="subscriptionFromDatePersian" data-parsley-selectvalzero class="form-control persian-date" required placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-errors-container="#subscriptionFromDatePersianErrorContainer" data-parsley-comparedate1="subscriptionToDatePersian" maxlength="10" tabindex="8"/>
+        </div>
+        <div class="double-input" id="subscriptionFromDatePersianErrorContainer"></div>
+    </div>
+    <div class="form-group col-sm-4 share">
+        <label>تاریخ پایان اشتراک</label>
+        <div>
+            <input type="text" id="subscriptionToDatePersian" data-parsley-selectvalzero class="form-control persian-date" required placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-errors-container="#subscriptionToDatePersianErrorContainer" maxlength="10" tabindex="9"/>
+        </div>
+        <div class="double-input" id="subscriptionToDatePersianErrorContainer"></div>
+    </div>
+
+    <div class="form-group col-sm-4 charge ">
+        <label>کسور مالیات تکلیفی</label>
+        <select id="payrollTaxId" class="form-control select2" tabindex="10" required data-parsley-errors-container="#payrollTaxIdError">
+        </select>
+        <div id="payrollTaxIdError"></div>
+
+    </div>
+
+    <div class="form-group col-sm-4 goods">
+        <label>قیمت مصرف کننده</label>
+        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'priceIncludingVat');" tabindex="11">
+            <input id="priceIncludingVat" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+        </div>
+    </div>
+    <div class="form-group col-sm-4 goods">
+        <label>الزام بارکد</label>
+        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'barcodeMandatory');" tabindex="12">
+            <input id="barcodeMandatory" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+        </div>
+    </div>
+    <div class="form-group col-sm-4">
+        <label> تامین کننده انحصاری</label>
+        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'exclusiveSupplier');" tabindex="13">
+            <input id="exclusiveSupplier" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+        </div>
+    </div>
+    <div class="form-group col-sm-4">
+        <label> وضعیت</label>
+        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="14">
+            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 m-t-10" id="tabpanelItem">
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        <li class="nav-item waves-effect waves-light itemCategory " id="itemCategoryLi">
+            <a class="nav-link" data-toggle="tab" href="#itemCategory" role="tab">
+                <span class="d-none d-md-block">صفات دسته بندی</span>
+                <span class="d-block d-md-none">
+                    <i class="mdi mdi-home-variant h5"></i>
+                </span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light unit" id="unitLi">
+            <a class="nav-link" data-toggle="tab" href="#unit" role="tab">
+                <span class="d-none d-md-block">واحد شمارش</span>
+                <span class="d-block d-md-none">
+                    <i class="mdi mdi-email h5"></i>
+                </span>
+            </a>
+        </li>
+        <li class="nav-item waves-effect waves-light itemVendor" id="itemVendorLi">
+            <a class="nav-link " data-toggle="tab" href="#itemVendor" role="tab">
+                <span class="d-none d-md-block">ذینفعان </span>
+                <span class="d-block d-md-none">
+                    <i class="mdi mdi-email h5"></i>
+                </span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content group-box group-box-gray">
+        <div class="tab-pane p-3" id="itemCategory" role="tabpanel">
+            <div class="form-group itemCategory ">
+                <div class="row" id="tableLineitemCategoryDsipaly">
+                    <div class="form-group col-sm-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:200px" id="tableLineitemCategory">
+                            <table style="width:100% !important">
+                                <thead id="tableLineTheadColumns"></thead>
+                                <tbody id="tableLineTbodyLines"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="unit" role="tabpanel">
+            <div class="form-group unit ">
+                <div class="row" id="tableLineunitIdDsipaly">
+                    <div class="form-group col-sm-12">
+
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:200px" id="tableLineunitId">
+                            <table style="width:100% !important">
+                                <thead>
+                                <tr>
+                                    <th style="width:8%">شناسه</th>
+                                    <th style="width:23%">نام</th>
+                                    <th style="width:23%">ضریب</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="5" style="text-align:center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="itemVendor" role="tabpanel">
+            <div class="form-group itemVendor ">
+                <div class="row" id="tableLineitemVendorDsipaly">
+                    <div class="form-group col-sm-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:200px" id="tableLineitemVendor">
+                            <table style="width:100% !important">
+                                <thead id="tableLineitemVendorTheadColumns">
+                                <tr>
+                                    <th>شناسه</th>
+                                    <th>گروه</th>
+                                    <th>نام ذینفع</th>
+                                    <th>نام کاربر</th>
+                                    <th>تاریخ و زمان ثبت</th>
+                                    <th>وضعیت</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tableLineitemVendorTbodyLines"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="modal-save" onclick="modal_save();" class="btn btn-success waves-effect waves-light" tabindex="15" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+    <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" data-dismiss="modal" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+<!--Modal-->
+</div>
+
+<script src="/Modules/WH/Item/ItemIndex.js"></script>

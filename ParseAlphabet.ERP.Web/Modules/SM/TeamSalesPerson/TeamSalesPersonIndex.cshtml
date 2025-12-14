@@ -1,0 +1,21 @@
+﻿<div id="teamSalesPersonModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تیم فروش</h5>
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="card-body " id="teamSalesPerson_pagetable" data-parsley-validate>
+                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="team-close" onclick="modal_close('teamSalesPersonModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/Modules/SM/TeamSalesPerson/TeamSalesPersonIndex.js"></script>

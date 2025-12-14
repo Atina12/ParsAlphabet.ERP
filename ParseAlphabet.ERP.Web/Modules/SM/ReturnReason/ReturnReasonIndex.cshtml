@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "دلایل برگشت";
+}
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>علت مرجوعی</label>
+                        <div>
+                            <input id="name" type="text" class="form-control" title="" maxlength="50" required tabindex="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="2">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save('AddEditModal','get_NewPageTable');" class="btn btn-success waves-effect waves-light" tabindex="3" title="Ctrl + S"><i class="fa fa-check-circle"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('AddEditModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Modules/SM/ReturnReason/ReturnReasonIndex.js"></script>

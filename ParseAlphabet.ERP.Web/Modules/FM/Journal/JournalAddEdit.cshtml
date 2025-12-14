@@ -1,0 +1,63 @@
+﻿<!--Modal-->
+<div id="AddEditModalJu" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div id="journalFormModal" class="modal-body modal-max-height text-right  pb-5 overflow-visible" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>شعبه</label>
+                        <div>
+                            <select id="branchIdJo" type="text" class="form-control select2" required data-parsley-selectvalzero title="" tabindex="1" data-parsley-errors-container="#branchIdJoErrorContainer">
+                            </select>
+                        </div>
+                        <div id="branchIdJoErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6" id="documentNoContainer">
+                        <label>شماره سند</label>
+                        <div>
+                            <input id="documentNoJo" type="text" class="form-control number" title="" data-parsley-max="32768" tabindex="2" data-parsley-errors-container="#documentNoJoErrorContainer">
+                        </div>
+                        <div id="documentNoJoErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نوع سند</label>
+                        <div>
+                            <select id="documentTypeIdJo" type="text" class="form-control select2" required data-parsley-selectvalzero title="" tabindex="3" data-parsley-errors-container="#documentTypeIdJoErrorContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="documentTypeIdJoErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>تاریخ سند</label>
+                        <div class="position-relative">
+                            <input id="documentDatePersianJo" type="text" notreset class="form-control mask persian-date" required placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate="" value="@PersianDateTime.GetToday()" data-parsley-errors-container="#documentDatePersianJoErrorContainer" maxlength="10" tabindex="4"/>
+                        </div>
+                        <div id="documentDatePersianJoErrorContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="modal-save-intoline" onclick="modal_saveJournal('AddEditModalJu',true);"class="btn btn-success waves-effect waves-light" tabindex="5"><i class="fa fa-save"></i>ذخیره - ورود</button>
+                <button id="modal-save" onclick="modal_saveJournal('AddEditModalJu');" class="btn btn-success waves-effect waves-light" tabindex="6"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close(`AddEditModalJu`)" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<script src="~/Modules/FM/Journal/JournalAddEdit.js"></script>

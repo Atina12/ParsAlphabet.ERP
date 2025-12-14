@@ -1,0 +1,44 @@
+﻿<link href="~/lib/TreeViewPage/treeViewPage.css" rel="stylesheet"/>
+
+<fieldset id="treeViewPage" class="group-box group-box-green mt-2 mb-2 p-3 w-100" asp-antiforgery="true">
+    <legend>ساختار درختی</legend>
+    <button type="button" id="treeViewExpand" onclick="treeViewPageExpand(this)" class="btn btn-light border-green plus">
+        <i class="fas fa-minus"></i>
+    </button>
+    <div class="slideToggle get open" style="position:relative">
+        <div id="treeviewTreeBtn" class="pb-4"></div>
+        <div id="treeViewPaths" class="pb-1">
+            <div id="treeViewPathBox" class="d-flex mt-4 mb-4">
+                <div class="treeViewPathTitle">مسیر انتخاب شده : </div>
+                <div id="treeViewPathContent"></div>
+            </div>
+            <div id="treeViewCopyLine" class="d-flex mt-4 mb-4">
+                <div class="treeViewCopyLineTitle">مسیر کپی شده : </div>
+                <div id="treeViewCopyLineContent"></div>
+            </div>
+        </div>
+        <div id="treeViewContent">
+            <div id="treeViewRootContent"></div>
+        </div>
+    </div>
+</fieldset>
+
+@*<div id="treeViewSearchModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right"><h5 class="modal-title mt-0" id="modal_title">جستجو</h5></div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="row">
+                    <ul id="treeViewSearchList" class="treeViewSearchList"></ul>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>*@
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/lib/TreeViewPage/treeViewPage.js"></script>

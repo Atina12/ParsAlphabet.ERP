@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "محاسبات ریالی انبار";
+}
+<link href="~/Content/css/FormPlateHeaderLine.css" rel="stylesheet"/>
+<div class="content-page" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title - @ViewContext.RouteData.Values["fiscalYear"]</span>
+                                <input id="unitCostCalculationId" type="hidden" class="form-control number" readonly value="@ViewContext.RouteData.Values["id"]"/>
+                                <input id="currentCostingMethodId" type="hidden" class="form-control number" readonly value="@ViewContext.RouteData.Values["costingMethodId"]"/>
+                                <button title="اولین" id="headerFirst" onclick="display_pagination_display('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-next"></i>
+                                </button>
+                                <button title="قبلی" id="headerPrevious" onclick="display_pagination_display('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play"></i>
+                                </button>
+                                <input id="headerIndex" onkeydown="headerindexChoose_display(event)" type="text" autocomplete="off" class="form-control number col-1 d-inline mr-2 ml-1" maxlength="10" placeholder="شناسه برگه"/>
+                                <button title="بعدی" id="headerNext" onclick="display_pagination_display('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play fa-rotate-180"></i>
+                                </button>
+                                <button title="آخرین" id="headerLast" onclick="display_pagination_display('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-previous"></i>
+                                </button>
+                                <button onclick="unitCostCalculationLineExcel()" type="button" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button title="چاپ" id="headerLast" onclick="printUnitCostCalculationLine()" type="button" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                                <button onclick="unitCostCalculationLinelist()" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+
+                                <input id="fiscalYear" type="hidden" class="form-control" readonly value="@ViewContext.RouteData.Values["fiscalYear"]"/>
+                            </div>
+
+                        </div>
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <div class="float-right">
+                                    <lable>شناسه : </lable>
+                                    <span id="showId"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="header-div-content" style="opacity: 1;" tabindex="-1">
+                            <fieldset class="group-box mt-3 group-box-green">
+                                <legend id="tableLineTbodyLineslegend">شعب</legend>
+                                <div style="padding: .5rem 0.5rem;">
+                                    <div class="table-responsive">
+                                        <div style="overflow-y:scroll !important;min-height:150px;max-height:250px" id="tableLine">
+                                            <table style="width:100% !important">
+                                                <thead id="tableLineTheadColumns">
+                                                </thead>
+                                                <tbody id="tableLineTbodyLines">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div id="divUnitCostCalculationLine" style="opacity: 1;" tabindex="-2">
+                            <fieldset class="group-box mt-3 group-box-blue">
+                                <legend id="tableLineDetailTbodyLineslegend"></legend>
+                                <div style="padding: .5rem 0.5rem;">
+                                    <div class="table-responsive">
+                                        <div style="min-height:450px;max-height:450px" id="tableLine">
+                                            <table style="width:100% !important">
+                                                <thead id="tableDetailLineTheadColumns">
+                                                </thead>
+
+                                                <tbody id="tableDetailLineTbodyLines">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="stepLogModalUnitCostCalculationLine" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست گام های ثبت شده</h5>
+                </div>
+            </div>
+
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body" id="itemPageTable">
+                    <div class="row mb-3">
+                        <div class="form-group col-sm-4">
+                            <select class="form-control" id="actionUnitCostCalculationLine"></select>
+                        </div>
+                        <div class="form-group col-sm-2 pr-0">
+                            <button onclick="update_actionUnitCostCalculationLine()" id="update_action_btn" type="button" class="btn btn-success ml-2 pa waves-effect" value="">ثبت گام</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">گام</th>
+                                <th class="col-width-percent-10">کاربر</th>
+                                <th class="col-width-percent-10">تاریخ</th>
+                            </tr>
+                            </thead>
+                            <tbody id="stepLogRowsUnitCostCalculationLine">
+                            <tr id="emptyRow">
+                                <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <fieldset class="group-box mt-3 group-box-blue displaynone w-100" id="itemUnitCostUpdateStepPageTablefieldset">
+                    <legend>وضعیت سفارشات زیر را مشخص نمایید</legend>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="exportCSV" onclick="export_csvUnitCostUpdateStep()" class="btn btn-excel waves-effect" style=" margin :0px 0px 2px 0px"><i class="fa fa-file-excel"></i>اکسل</button>
+                    </div>
+                    <div class="table-responsive" style="overflow-y:scroll;max-height:200px">
+                        <table class="table table-styles border mb-0" style="width:100%;overflow:auto">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-5">شناسه سفارش</th>
+                                <th class="col-width-percent-15">جریان کار</th>
+                                <th class="col-width-percent-10">مرحله</th>
+                                <th class="col-width-percent-10">گام جاری</th>
+                                <th class="col-width-percent-10">تاریخ برگه</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempErrorUnitCostCalculationUpdateStepResultLines">
+                            <tr id="emptyRow">
+                                <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+
+                <fieldset class="group-box mt-3 group-box-blue displaynone" id="itemUnitCostCalculationTablefieldset">
+                    <legend>وضعیت اسناد انبار زیر را مشخص نمایید</legend>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="exportCSV" onclick="export_csvUnitCost()" class="btn btn-excel waves-effect" style=" margin :0px 0px 2px 0px"><i class="fa fa-file-excel"></i>اکسل</button>
+                    </div>
+                    <div class="table-responsive" style="overflow-y:scroll;max-height:200px">
+                        <table class="table table-styles border mb-0" style="width:100%;overflow:auto">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-5">شناسه انبار</th>
+                                <th class="col-width-percent-15">جریان کار</th>
+                                <th class="col-width-percent-10">مرحله</th>
+                                <th class="col-width-percent-10">گام جاری</th>
+                                <th class="col-width-percent-10">تاریخ برگه</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempErrorUnitCostCalculationResultLines">
+                            <tr id="emptyRow">
+                                <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('stepLogModalUnitCostCalculationLine')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorPostingGroupResult" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">ارسال سند</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-100">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempPostingGroupError">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfresultmodal-close" onclick="modal_close('errorPostingGroupResult')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<script src="~/Modules/FM/Finanace.js"></script>
+<script src="~/Modules/WF/WorkFlow.js"></script>
+<script src="~/Modules/WH/UnitCostCalculationLine/UnitCostCalculationLineIndex.js"></script>

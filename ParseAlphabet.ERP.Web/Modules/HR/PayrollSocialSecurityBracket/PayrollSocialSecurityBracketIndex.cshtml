@@ -1,0 +1,141 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "کسورات بیمه ";
+}
+
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+<input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName") " data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+
+<div id="AddEditModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-sm-6">
+                        <label>سال مالی</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <select id="fiscalYearId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-selectvalzero tabindex="1" data-parsley-errors-container="#fiscalYearIdErrorContainer">
+                                <option value="0" selected>انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="fiscalYearIdErrorContainer"></div>
+
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <input type="text" id="name" class="form-control " required data-parsley-errors-container="#nameErrorContainer" tabindex="2"/>
+                        </div>
+                        <div id="nameErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>بیمه گر</label>
+                        <div class="col-sm-12 chosen-container-parent">
+                            <select id="insurerId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-selectvalzero tabindex="3" data-parsley-errors-container="#insurerIdErrorContainer">
+                                <option value="0" selected>انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="insurerIdErrorContainer"></div>
+
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام گارگاه</label>
+                        <div>
+                            <input id="workshopName" type="text" class="form-control atoz0t9-valid" title="" required data-parsley-errors-container="#workshopNameErrorContainer" maxlength="50" tabindex="4">
+                        </div>
+                        <div id="workshopNameErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>کد گارگاه</label>
+                        <div>
+                            <input type="text" id="workshopCode" class="form-control number" required data-parsley-errors-container="#workshopCodeErrorContainer" tabindex="5"/>
+                        </div>
+                        <div id="workshopCodeErrorContainer"></div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>ردیف پیمان</label>
+                        <div>
+                            <input type="text" id="contractNo" class="form-control number" tabindex="6" data-parsley-min="1" data-parsley-max="999" maxlength="3"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نوع بیمه</label>
+                        <div>
+                            <select id="socialSecurityTypeId" class="form-control" title="" data-parsley-selectvalzero tabindex="7" data-parsley-errors-container="#socialSecurityTypeIdErrorContainer">
+                                <option value="0">انتخاب کنید</option>
+                                <option value="1">خویش فرما</option>
+                                <option value="2">پرسنلی</option>
+                            </select>
+                        </div>
+                        <div id="socialSecurityTypeIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>درصد بیمه کارفرما</label>
+                        <div>
+                            <input type="text" id="employerSCPercentage" class="form-control number" tabindex="8" data-parsley-min="0" data-parsley-max="99" maxlength="2"/>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>درصد بیمه پرسنل</label>
+                        <div>
+                            <input type="text" id="employeeSCPercentage" class="form-control number" tabindex="9" data-parsley-min="0" data-parsley-max="99" maxlength="2"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>درصد بیمه بیکاری</label>
+                        <div>
+                            <input type="text" id="unEmploymentSCPercentage" class="form-control number" tabindex="10" data-parsley-min="0" data-parsley-max="99" maxlength="2"/>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>سقف بیمه حقوق</label>
+                        <div>
+                            <input id="maxPensionableAmount" type="text" class="form-control money" tabindex="11" maxlength="9" data-parsley-min="0" data-parsley-max="999999999"/>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group col-sm-6 ">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="12">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" tabindex="13" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close(`AddEditModal`)" class="btn btn-secondary waves-effect" data-dismiss="modal" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal-->
+<script src="/Modules/SM/SalesMarketing.js"></script>
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="/Modules/WF/WorkFlow.js"></script>
+<script src="~/Modules/HR/PayrollSocialSecurityBracket/PayrollSocialSecurityBracketIndex.js"></script>

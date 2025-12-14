@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "کاربران";
+}
+<input style="display:none">
+<input type="password" style="display:none">
+
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="stimul_preview" @*onclick="stimul_preview()"*@ class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                                <button type="button" id="readyforadd" onclick="modal_ready_for_add();" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-align-top modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <input id="firstName" type="text" class="form-control atoz-valid" title="" required maxlength="50" tabindex="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> تخلص</label>
+                        <div>
+                            <input id="lastName" type="text" class="form-control atoz-valid" title="" required maxlength="50" tabindex="2"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نمبر تذکره</label>
+                        <div>
+                            <input id="nationalCode" type="text" class="form-control str-number" title="" required data-parsley-nationalcode="" data-parsley-existnationalcode="" maxlength="10" tabindex="3"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>ایمیل</label>
+                        <div>
+                            <input id="email" type="text" class="form-control" title="" data-parsley-mobileemail="" data-parsley-validate-if-empty="true" data-parsley-email="" data-parsley-existemailaddress="" maxlength="50" tabindex="4"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>موبایل</label>
+                        <div>
+                            <input id="mobileNo" type="text" class="form-control str-number" title="" data-parsley-mobileemail="" data-parsley-validate-if-empty="true" data-parsley-existmobilenumber="" tabindex="5"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام کاربری</label>
+                        <div>
+                            <input id="username" type="text" class="form-control" title="" data-parsley-existusername="" required maxlength="50" tabindex="6"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نقش</label>
+                        <div>
+                            <select id="roleId" class="form-control select2" required tabindex="7" data-parsley-errors-container="#roleIdError" data-parsley-selectvalzero>
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="roleIdError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="8">
+                            <input id="isActive" type="checkbox" name="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6" hidden-on-edit="true">
+                        <label>رمز عبور</label>
+                        <div>
+                            <input id="password" type="password" class="form-control" title="" required data-parsley-excluded="false" maxlength="10" autocomplete="off" tabindex="9"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6" hidden-on-edit="true">
+                        <label>تکرار رمز عبور</label>
+                        <div>
+                            <input id="passwordconf" type="password" class="form-control" title="" required data-parsley-excluded="false" data-parsley-equalto="#password" maxlength="10" autocomplete="off" tabindex="10"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 uploadfrm">
+                        <label>تصویر</label>
+                        <div>
+                            <img class="img-thumbnail" id="picture" alt="200x200" style="width: 280px; height: auto;" src="/content/images/blank-person.png" data-holder-rendered="true" tabindex="11"/>
+                            <p>
+                                <span class="btn btn-print-outline btn-file">
+                                    تصویر جدید <input type="file" accept="image/jpg,image/jpeg,image/png" onchange="readPictureFromURL(this);" tabindex="12"/>
+                                </span>
+                                <span class="btn maroon_outline float-left" onclick="clearPicture()" tabindex="12">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" tabindex="14"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close();" class="btn btn-secondary waves-effect" data-dismiss="modal" tabindex="14"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<!-- Change Password Modal -->
+<div id="ChangePassModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تغییر رمز عبور</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal1_keyid_caption"></lable>
+                            <span id="modal1_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <div>
+                            <input type="password" id="newpassword" class="form-control" title=" " maxlength="10" required
+                                   placeholder="رمز ورود جدید" tabindex="13"/>
+                        </div>
+                        <div class="m-t-10">
+                            <input type="password" id="newpasswordconf" class="form-control" title=" " maxlength="10" required
+                                   data-parsley-equalto="#newpassword"
+                                   placeholder="تکرار رمز ورود جدید" tabindex="14"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-changepass-save" class="btn btn-success waves-effect waves-light" tabindex="15"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-changepass-close" onclick="modal_close('ChangePassModal');" class="btn btn-secondary waves-effect" data-dismiss="modal"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Change Password Modal -->
+<!-- Show Picture Modal -->
+<div id="ShowPictureModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-align-top modal-size-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">قاب عکس</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <img src="" alt="" style="width:400px;height:auto"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('ShowPictureModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Change Password Modal -->
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="/Modules/GN/User/UserIndex.js"></script>
+@*<script src="~/plugins/parsleyjs/parsley-rtl.min.js"></script>*@

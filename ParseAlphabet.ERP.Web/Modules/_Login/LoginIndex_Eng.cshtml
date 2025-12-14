@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Opr"] = ViewBag.Opr;
+    Layout = "~/Views/Shared/_LoginLayout_Eng.cshtml";
+}
+<div class="wrapper-page">
+    <div class="card card-pages shadow-none">
+
+        <div class="card-body">
+            <div class="text-center m-t-0 m-b-15 logo" id="corpname">
+                <img src="~/Content/images/favicon.png" alt="" height="30">
+                <label class="logo-admin">نام کیلنیک</label>
+            </div>
+
+            <h5 class="font-18 text-center">Login</h5>
+
+            <form class="form-horizontal m-t-30" action="/Login/LoginIndex" method="post">
+
+                <div class="form-group">
+                    <div class="col-12">
+                        @*<label>نام کاربری</label>*@
+                        <input class="form-control" title="" name="_username" type="text" required="" placeholder="نام کاربری">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-12">
+                        @*<label>رمز ورود</label>*@
+                        <input class="form-control" title="" name="_password" type="password" required="" placeholder="رمز ورود">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-12">
+                        <div class="checkbox checkbox-primary">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">مرا به خاطر بسپار</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group text-center m-t-20">
+                    <div class="col-12">
+                        <button class="btn btn-primary btn-block btn-lg waves-effect waves-light" type="submit">ورود</button>
+                    </div>
+                </div>
+
+                <div class="form-group row m-t-30 m-b-0">
+                    <div class="col-sm-7">
+                        <a href="/ForgotPassword"><i class="fa fa-lock m-r-5"></i> رمز عبور خود را فراموش کرده اید؟</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Modules/_Login/Login.js"></script>
+}

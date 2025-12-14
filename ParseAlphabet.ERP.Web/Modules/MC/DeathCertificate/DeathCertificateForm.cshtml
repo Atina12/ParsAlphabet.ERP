@@ -1,0 +1,523 @@
+﻿@{
+    ViewBag.Title = "فوت";
+}
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/lib/switchCheckbox/switchBox.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/AdmissionRefer.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button id="choiceOfAdmission" type="button" onclick="modal_show('searchAdmissionModal');" class="btn btn-info waves-effect" title="Ctrl + F"><i class="fa fa-user-alt"></i>انتخاب پذیرش</button>
+        <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+        <button id="saveForm" type="button" onclick="saveDeathForm()" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+        <button id="newForm" type="button" onclick="resetFormDeath()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+<div class="row displaynone" id="BoxBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="deathId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>شناسه شباد</th>
+            <th>انقضاء دفترچه</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+
+
+@*<fieldset class="group-box group-box-blue mt-3" id="deathFieldset">
+                                <legend> ثبت اطلاعات</legend>
+                                <div class="row " id="deathForm" data-parsley-validate>*@
+
+@*<div class="form-group col-lg-2  col-sm-2">
+                                    <label>وضعیت نمبر تذکره </label>
+                                    <div>
+                                        <input id="switchList" type="checkbox" checked data-toggle="toggle" data-on="دارد" data-off="ندارد" data-onstyle="success" data-offstyle="info" data-width="160" data-height="27" tabindex="8">
+                                    </div>
+                                </div>*@
+@*<div class="form-group col-lg-2 col-sm-4">
+                                            <label>نمبر تذکره</label>
+                                            <div>
+                                                <input id="nationalId" type="text" class="form-control str-number" title="" data-parsley-nationalcode="" data-parsley-existnationalcode="" data-parsley-errors-container="#nationalIdError" maxlength="10" tabindex="9" />
+                                            </div>
+                                            <div id="nationalIdError"></div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2 col-sm-2">
+                                            <label>جنسیت</label>
+                                            <div>
+                                                <select id="genderId" class="form-control" title="" required data-parsley-notequalnumber="0" tabindex="10">
+                                                    <option selected value="0">انتخاب کنید</option>
+                                                    <option value="1">مرد</option>
+                                                    <option value="2">زن</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2  col-sm-4">
+                                            <label>نام </label>
+                                            <div>
+                                                <input id="firstName" type="text" class="form-control atoz-valid" maxlength="100" tabindex="11" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2  col-sm-4">
+                                            <label> تخلص </label>
+                                            <div>
+                                                <input id="lastName" type="text" class="form-control atoz-valid" maxlength="100" tabindex="12" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2  col-sm-4">
+                                            <label>تاریخ تولد</label>
+                                            <div>
+                                                <input id="birthDate" type="text" class="form-control" maxlength="22" required data-parsley-shamsidate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="13" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>*@
+
+
+<fieldset class="group-box group-box-gray mt-3" id="sendReferFieldset">
+<legend>اطلاعات ثبت مرگ</legend>
+
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(6)">
+        <a class="nav-link active" data-toggle="tab" id="deathLink" href="#deathBox" role="tab">
+            <span class="d-none d-md-block">اطلاعات گواهی فوت</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+
+
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(8)">
+        <a class="nav-link" data-toggle="tab" id="deathCauseLink" href="#deathCauseBox" role="tab">
+            <span class="d-none d-md-block">علت فوت</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+
+
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(7)">
+        <a class="nav-link" data-toggle="tab" id="infantDeliveryLink" href="#infantDeliveryBox" role="tab">
+            <span class="d-none d-md-block">اطلاعات نوزاد </span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(10)">
+        <a class="nav-link" data-toggle="tab" id="medicalHistoryLink" href="#medicalHistoryBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه داکتری مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+
+
+</ul>
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+@*START Death*@
+<div class="tab-pane active p-3" id="deathBox" role="tabpanel">
+    <div class="row tabToggle6" id="deathForm2" data-parsley-validate>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>نام صادرکننده مجوزدفن</label>
+            <div>
+                <select id="burialAttesterId" class="form-control select2" tabindex="14" required data-parsley-errors-container="#burialAttesterIdContainer"></select>
+            </div>
+            <div id="burialAttesterIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>تاریخ صدور گواهی فوت</label>
+            <div>
+                <input id="issueDate" type="text" class="form-control" maxlength="22" required data-parsley-shamsidate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="15"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>شماره سریال گواهی فوت</label>
+            <div>
+                <input id="serialNumber" type="text" class="form-control" required maxlength="20" tabindex="16"/>
+            </div>
+
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>تاریخ و زمان فوت</label>
+            <div>
+                <input id="deathDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="17">
+
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>مکان فوت</label>
+            <div>
+                <select id="deathLocationId" class="form-control select2" tabindex="18" required data-parsley-errors-container="#serialNumberContainer"></select>
+            </div>
+            <div id="serialNumberContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>محل فوت - </label>
+            <label> ولایت</label>
+            <select id="countryDivisionEstateId" class="form-control select2" tabindex="19" data-parsley-errors-container="#countryDivisionEstateIdContainer"></select>
+            <div id="countryDivisionEstateIdContainer"> </div>
+
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>محل فوت - </label>
+            <label> شهر</label>
+            <select id="countryDivisionCityId" class="form-control select2" tabindex="19" data-parsley-errors-container="#countryDivisionCityIdContainer"></select>
+            <div id="countryDivisionCityIdContainer"></div>
+
+
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نمبر تذکره سرپرست خانوار</label>
+            <div>
+                <input id="householdHeadNationalCode" type="text" class="form-control str-number" required title="" data-parsley-nationalcode="" data-parsley-existnationalcode="" data-parsley-errors-container="#householdHeadNationalCodeError" maxlength="10" tabindex="20"/>
+            </div>
+            <div id="householdHeadNationalCodeError"></div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>منبع تشخیص فوت</label>
+            <div>
+                <select id="sourceOfNotificationId" class="form-control select2" tabindex="22" required data-parsley-errors-container="#sourceOfNotificationIdContainer"></select>
+            </div>
+            <div id="sourceOfNotificationIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>نام صادرکننده گواهی فوت</label>
+            <div>
+                <select id="individualRegisterId" class="form-control select2" tabindex="23" required data-parsley-errors-container="#IndividualRegisterIdContainer"></select>
+            </div>
+            <div id="IndividualRegisterIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>توضیحات</label>
+            <div>
+                <input id="comment" type="text" class="form-control" maxlength="100" tabindex="24"/>
+            </div>
+        </div>
+        @*<div class="col-sm text-right">
+                                                    <div class="button-items" style="margin:20px 0 10px 0;">
+                                                        <button id="adddeath" type="button" class="btn btn-light border-blue" tabindex="29"><i class="fa fa-arrow-down"></i>ثبت</button>
+                                                        <button id="canceleddeath" type="button" class="btn btn-light border-green" tabindex="30"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                                                    </div>
+                                                </div>*@
+        @*<div class="table-responsive" style="width:100%;height: 300px;">
+                                                    <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdeathList">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="col-width-percent-3">ردیف</th>
+                                                                <th>علت فوت</th>
+                                                                <th>وضعیت تشخیص علت فوت</th>
+                                                                <th>فاصله زمانی تقریبی علت فوت تا مرگ</th>
+                                                                <th>واحد زمان</th>
+                                                                <th>عملیات</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tempdeath">
+                                                            <tr id="emptyRow"><td colspan="5" class="text-center">سطری وجود ندارد</td></tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>*@
+    </div>
+</div>
+@*END Death*@
+
+@*START causeDeath*@
+<div class="tab-pane  p-3" id="deathCauseBox" role="tabpanel">
+    <div class="row tabToggle8" id="deathCauseForm" data-parsley-validate>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>علت فوت</label>
+            <div>
+                <select id="causeId" class="form-control select2" tabindex="25" required data-parsley-errors-container="#causeIdContainer"></select>
+            </div>
+            <div id="causeIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>وضعیت تشخیص فوت</label>
+            <div>
+                <select id="statusId" class="form-control select2" tabindex="26" required data-parsley-errors-container="#statusIdContainer"></select>
+            </div>
+            <div id="statusIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-3  col-sm-4">
+            <label>فاصله زمانی تقریبی علت فوت تا مرگ</label>
+            <div>
+                <input id="durationDeath" type="text" placeholder="سال - ماه - هفته - روز - ساعت -دقیقه - ثانیه" class="form-control number" maxlength="50" tabindex="27" required/>
+            </div>
+        </div>
+        <div class="form-group   col-lg-2 col-sm-4">
+            <label>واحد زمان</label>
+            <div>
+                <select id="durationDeathUnitId" class="form-control select2" tabindex="28" required data-parsley-errors-container="#durationDeathUnitIdContainer"></select>
+            </div>
+            <div id="durationDeathUnitIdContainer"></div>
+        </div>
+
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0;">
+                <button id="adddeathCause" type="button" class="btn btn-light border-blue" tabindex="29"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceleddeathCause" type="button" class="btn btn-light border-green" tabindex="30"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdeathCauseList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>علت فوت</th>
+                    <th>وضعیت تشخیص علت فوت</th>
+                    <th>فاصله زمانی تقریبی علت فوت تا مرگ</th>
+                    <th>واحد زمان</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempdeathCause">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END causeDeath*@
+
+@*START infantDelivery*@
+<div class="tab-pane  p-3" id="infantDeliveryBox" role="tabpanel">
+    <div class="row tabToggle7" id="infantDeliveryForm" data-parsley-validate>
+
+
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>وزن نوزاد هنگام تولد</label>
+            <div>
+                <input id="infantWeight" type="text" class="form-control " maxlength="100" tabindex="30" required/>
+            </div>
+
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>واحد وزن</label>
+            <div>
+                <select id="infantWeightUnitId" class="form-control select2" tabindex="31" required data-parsley-errors-container="#infantWeightUnitIdContainer"></select>
+            </div>
+            <div id="infantWeightUnitIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-1 col-sm-5">
+            <label>تعداد قل</label>
+            <div>
+                <input id="deliveryNumber" type="text" class="form-control number" maxlength="100" tabindex="32"/>
+            </div>
+        </div>
+        <div class="form-group  col-lg-1 col-sm-5">
+            <label>مرتبه قل</label>
+            <div>
+                <input id="deliveryPriority" type="text" class="form-control number" maxlength="100" tabindex="33"/>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>عامل زایمان</label>
+            <div>
+                <select id="deliveryAgentId" class="form-control select2" tabindex="34" required data-parsley-errors-container="#routeId_drugHistoryContainer"></select>
+            </div>
+            <div id="routeId_drugHistoryContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>مکان زایمان</label>
+            <div>
+                <select id="deliveryLocationId" class="form-control select2" tabindex="35" required data-parsley-errors-container="#deliveryLocationIdContainer"></select>
+            </div>
+            <div id="deliveryLocationIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>نمبر تذکره مادر</label>
+            <div>
+                <input id="motherNationalCode" type="text" class="form-control str-number" maxlength="100" tabindex="36" required/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>نام مادر</label>
+            <div>
+                <input id="motherFirstName" type="text" class="form-control atoz-valid" maxlength="100" tabindex="37" required/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label> تخلص مادر</label>
+            <div>
+                <input id="motherLastName" type="text" class="form-control atoz-valid" maxlength="100" tabindex="38" required/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>تاریخ تولد</label>
+            <div>
+                <input id="motherBirthDate" type="text" class="form-control" maxlength="22" required data-parsley-shamsidate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="39"/>
+            </div>
+
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>شماره موبایل</label>
+            <div>
+                <input id="motherMobileNumber" type="text" class="form-control str-number" maxlength="100" tabindex="40"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addinfantDelivery" type="button" class="btn btn-light border-blue" tabindex="41"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledinfantDelivery" type="button" class="btn btn-light border-green" tabindex="42"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempinfantDeliveryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>وزن تولد</th>
+                    <th>واحد وزن</th>
+                    <th>تعداد قل</th>
+                    <th>مرتبه قل</th>
+                    <th>عامل زایمان</th>
+                    <th>مکان زایمان</th>
+                    <th>نمبر تذکره مادر</th>
+                    <th>نام مادر</th>
+                    <th> تخلص مادر</th>
+                    <th>تاریخ تولد</th>
+                    <th>شماره موبایل</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempinfantDelivery">
+                <tr id="emptyRow">
+                    <td colspan="13" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugHistory*@
+
+@*START medicalHistory*@
+<div class="tab-pane  p-3" id="medicalHistoryBox" role="tabpanel">
+    <div class="row tabToggle10" id="medicalHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نام بیماری</label>
+            <div>
+                <select id="conditionId_medicalHistory" class="form-control select2" tabindex="43" required data-parsley-errors-container="#conditionId_medicalHistoryContainer"></select>
+            </div>
+            <div id="conditionId_medicalHistoryContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ شروع بیماری</label>
+            <div>
+                <input id="dateOfOnSet" type="text" class="form-control" maxlength="16" required data-parsley-shamsidatetime placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="44"/>
+            </div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-4">
+            <label>مدت زمان بیماری قبلی</label>
+            <div>
+                <input id="onsetDurationToPresent_medicalHistory" type="text" placeholder="سال - ماه - هفته - روز" class="form-control number" maxlength="50" tabindex="45" required/>
+            </div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-2 col-sm-3">
+            <label>واحد اندازه گیری</label>
+            <div>
+                <select id="onsetDurationToPresentUnitId_medicalHistory" class="form-control select2" tabindex="46" required data-parsley-errors-container="#onsetDurationToPresentUnitId_medicalHistoryContainer"></select>
+            </div>
+            <div id="onsetDurationToPresentUnitId_medicalHistoryContainer"></div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-5">
+            <label>توضیح</label>
+            <div>
+                <input id="description_medicalHistory" type="text" class="form-control" maxlength="100" tabindex="47"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addmedicalHistory" type="button" class="btn btn-light border-blue" tabindex="48"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledmedicalHistory" type="button" class="btn btn-light border-green" tabindex="49"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempmedicalHistoryList">
+                <thead>
+                <tr>
+                    <th class="col-width-percent-3">ردیف</th>
+                    <th>نام بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری قبلی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیح</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempmedicalHistory">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END medicalHistory*@
+
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/SearchAdmissionModal/SearchAdmissionModal.cshtml")
+
+@*START diagToothForm*@
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Modules/MC/DeathCertificate/DeathCertificateForm.js"></script>

@@ -1,0 +1,47 @@
+﻿<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+
+<div class="loadin-div displaynone ">
+    <button data-pageno="0" data-pagerowscount="0" class="displaynone btn btn-warning " onclick="refreshBackbutton(this)">
+        <i class="fa fa-undo fa-2x">
+        </i>
+    </button>
+</div>
+<div class="table-responsive table-responsive-report" id="parentTableReport">
+    <table class="table table-styles border mb-0 body-report" id="pagetableReportList">
+        <thead id="headerColumnReport" class="table-thead-fixed">
+        </thead>
+        <tbody id="dataRowsReport" class="table-body-report">
+        </tbody>
+        <tbody id="summaryRowReport" class="displaynone table-summarybody-fixed">
+        </tbody>
+    </table>
+</div>
+<div id="footerPageing" class="row mt-2">
+    <div class="col-sm-12 col-md-9 ">
+        <div class="pagetablefooterinfo row col-md-12 ">
+            <div class="dataTables_info text-right">
+                نمایش <span id="firstRow">0</span> تا <span id="lastRow">0</span> - صفحه <span id="currentPage">0</span>
+            </div>
+            <div>
+                <i id="loaderSReaport"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div id="countRowButton" class="btn-group pagerowscount dropup float-left">
+            <button type="button" class="btn btn-default" data-toggle="dropdown" id="dropDownCountersName"></button>
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">-</span>
+            </button>
+            <div class="dropdown-menu" id="dropDownCounters">
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/SearchModal.cshtml")
+
+<script src="~/js/PageTableReport.js"></script>
+<script src="~/js/formplate.js"></script>
+<script type="text/javascript" src="/Modules/_Report/_SettingReport.js"></script>

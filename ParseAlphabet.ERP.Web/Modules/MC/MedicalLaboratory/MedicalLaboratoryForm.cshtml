@@ -1,0 +1,953 @@
+﻿@{
+    ViewBag.Title = "آزمایشگاه";
+}
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/lib/switchCheckbox/switchBox.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/AdmissionRefer.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/Prescription.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button id="choiceOfAdmission" type="button" onclick="modal_show('searchAdmissionModal');" class="btn btn-info waves-effect" title="Ctrl + F"><i class="fa fa-user-alt"></i>انتخاب پذیرش</button>
+        <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+        <button id="saveForm" type="button" onclick="saveMedicalLaboratoryForm()" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+        <button id="newForm" type="button" onclick="resetFormMedicalLaboratory()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+<div class="row displaynone" id="BoxBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="medicalLaboratoryId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+<fieldset class="group-box group-box-green mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            <th>شناسه شباد</th>
+            <th>انقضاء دفترچه</th>
+            <th>داکتر</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" id="labRequestFormLink" href="#labRequestBox" role="tab">
+            <span class="d-none d-md-block">اطلاعات نمونه درخواستی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" id="labTestResultRLink" href="#labTestResultRBox" role="tab">
+            <span class="d-none d-md-block">جواب های آزمایش</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="resultRowRLink" href="#resultRowRBox" role="tab">
+            <span class="d-none d-md-block">مرجع های آزمایش</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    @*<li class="nav-item waves-effect waves-light" onclick="focusInput(4)">
+                                        <a class="nav-link" data-toggle="tab" id="pathologyResultLink" href="#pathologyResultBox" role="tab">
+                                            <span class="d-none d-md-block">جواب های پاتولوژی</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+                                        </a>
+                                    </li>*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(5)">
+        <a class="nav-link" data-toggle="tab" id="diagnosisLink" href="#diagnosisBox" role="tab">
+            <span class="d-none d-md-block">تشخیص</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content group-box group-box-gray">
+<div class="tab-pane active p-3" id="labRequestBox" role="tabpanel">
+    <div class="tabToggle1" id="labRequestForm" data-parsley-validate>
+        <fieldset id="requestBox" class="group-box group-box-gray" style="overflow-x:hidden;height:auto;width:100%">
+            <legend>نمونه ها</legend>
+
+            <div class="row m-0" id="medicalLaboratoryForm" data-parsley-validate>
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> کد یا شماره ی ظرف</label>
+                    <div>
+                        <input id="specimenCode" type="text" class="form-control" required maxlength="20" tabindex="1"/>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label>تاریخ و زمان نمونه گیری</label>
+                    <div>
+                        <input id="specimenDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="2">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label>نوع نمونه گرفته شده</label>
+                    <div>
+                        <select id="specimenTypeId" class="form-control select2" tabindex="3" required data-parsley-errors-container="#specimenTypeIdContainer"></select>
+                    </div>
+                    <div id="specimenTypeIdContainer"></div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label>کیفیت نمونه</label>
+                    <div>
+                        <select id="adequacyForTestingId" class="form-control select2" tabindex="4" required data-parsley-errors-container="#adequacyForTestingIdContainer"></select>
+                    </div>
+                    <div id="adequacyForTestingIdContainer"></div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> روش جمع آوری نمونه آزمایشگاهی </label>
+                    <div>
+                        <select id="collectionProcedureId" class="form-control select2" tabindex="5" required data-parsley-errors-container="#collectionProcedureContainer"></select>
+                    </div>
+                    <div id="collectionProcedureContainer"></div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> کد منحصر بفرد آزمایشگاه</label>
+                    <div>
+                        <input id="specimenIdentifier" type="text" class="form-control" required maxlength="20" tabindex="6"/>
+                    </div>
+                </div>
+
+                <div class="col-sm text-right">
+                    <div class="button-items" style="margin:5px 0 10px 0px;">
+                        <button type="button" id="addMedicalLaboratoryRequest" class="btn btn-light border-green " tabindex="7"><i class="fa fa-arrow-down"></i>ثبت</button>
+                        <button id="canceledLabRequest" type="button" class="btn btn-light border-green" tabindex="8"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive" style="overflow-x:hidden;height:auto;width:100%">
+                <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="medicalLaboratoryRequestsList">
+                    <thead>
+                    <tr>
+                        <th class="col-width-percent-5">ردیف</th>
+                        <th class="col-width-percent-7">کد یا شماره ی ظرف</th>
+                        <th class="col-width-percent-9">تاریخ و زمان نمونه گیری</th>
+                        <th class="col-width-percent-21">نوع نمونه گرفته شده</th>
+                        <th class="col-width-percent-6">کیفیت نمونه</th>
+                        <th class="col-width-percent-35">روش جمع آوری نمونه آزمایشگاهی</th>
+                        <th class="col-width-percent-7"> کد منحصر بفرد آزمایشگاه </th>
+                        <th class="col-width-percent-10">عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="medicalLaboratoryRequests">
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        <fieldset id="requestMethodBox" class="group-box group-box-orange mt-4" style="overflow-x:hidden;height:auto;width:100%;">
+            <legend>روش های انجام نمونه</legend>
+
+            <div class="row m-0" id="medicalLaboratoryRequestMethodForm" data-parsley-validate>
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> تاریخ و زمان جواب</label>
+                    <div>
+                        <input id="resultDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="9">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> تاریخ شروع انجام آزمایش</label>
+                    <div>
+                        <input id="processDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="10">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> تاریخ دریافت نمونه توسط آزمایشگاه</label>
+                    <div>
+                        <input id="receiptDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="11">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3  col-sm-4">
+                    <label> روش انجام آزمایش</label>
+                    <div>
+                        <select data-placeholder="روش انجام آزمایش" id="methodId" class="form-control select2" tabindex="12"></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3  col-sm-4">
+                    <label> نام پنل آزمایش</label>
+                    <div>
+                        <select data-placeholder="نام پنل آزمایش" id="laboratoryPanelId" class="form-control select2" tabindex="13"></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-4  col-sm-4">
+                    <label> توضیحات</label>
+                    <div>
+                        <input type="text" class="form-control" id="methodDescription" tabindex="14" required/>
+                    </div>
+                </div>
+
+                <div class="col-sm text-right">
+                    <div class="button-items" style="margin-top:22px">
+                        <button type="button" id="addLabTestResult" class="btn btn-light border-green " tabindex="15"><i class="fa fa-arrow-down"></i>ثبت</button>
+                        <button id="canceledLabRequestMethod" type="button" class="btn btn-light border-green" tabindex="16"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-styles border mr-0 mb-0" id="medicalLaboratoryRequestMethodsList">
+                    <thead>
+                    <tr>
+                        <th class="col-width-percent-3">ردیف</th>
+                        <th class="col-width-percent-10">تاریخ و زمان جواب</th>
+                        <th class="col-width-percent-10">تاریخ شروع انجام آزمایش</th>
+                        <th class="col-width-percent-10">تاریخ دریافت نمونه توسط آزمایشگاه</th>
+                        <th class="col-width-percent-10"> روش انجام آزمایش</th>
+                        <th class="col-width-percent-10"> نام پنل آزمایش</th>
+                        <th class="col-width-percent-10">توضیحات</th>
+                        <th class="col-width-percent-5">عملیات</th>
+                    </tr>
+
+                    </thead>
+                    <tbody id="medicalLaboratoryRequestMethods">
+                    </tbody>
+
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<div class="tab-pane  p-3" style="overflow-x:hidden;height:auto;width:100%" id="labTestResultRBox" role="tabpanel">
+<div class="tabToggle2" id="labTestResultRForm" data-parsley-validate>
+<fieldset id="resultRowBox" class="group-box group-box-orange" style="overflow-x:hidden;height:112px;width:100%">
+    <legend>روش های انجام نمونه</legend>
+    <div class="table-responsive" style="width: 100%;">
+        <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="subMedicalLaboratoryRequestMethodsList">
+            <thead>
+            <tr>
+                <th class="col-width-percent-3">ردیف</th>
+                <th class="col-width-percent-10">تاریخ و زمان جواب</th>
+                <th class="col-width-percent-10">تاریخ شروع انجام آزمایش</th>
+                <th class="col-width-percent-10">تاریخ دریافت نمونه توسط آزمایشگاه</th>
+                <th class="col-width-percent-10"> روش انجام آزمایش</th>
+                <th class="col-width-percent-10"> نام پنل آزمایش</th>
+                <th class="col-width-percent-10">توضیحات</th>
+                <th class="col-width-percent-5">عملیات</th>
+            </tr>
+            </thead>
+            <tbody id="subMedicalLaboratoryRequestMethods">
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+<fieldset id="resultRowBox" class="group-box group-box-blue mt-4" style="overflow-x:hidden;height:auto;width:100%">
+    <legend>جواب های آزمایش</legend>
+    <div class="row m-0" id="medicalLaboratoryResultForm" data-parsley-validate>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label> وضعیت جواب آزمایش</label>
+            <div>
+                <select data-placeholder=" وضعیت  جواب آزمایش" id="resultStatusId" class="form-control select2" tabindex="17"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4">
+            <label> عنوان آزمایش</label>
+            <div>
+                <select data-placeholder=" عنوان آزمایش" id="testNameId" class="form-control select2" tabindex="18"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4">
+            <label> پنل آزمایش</label>
+            <div>
+                <select data-placeholder=" پنل آزمایش" id="testPanelId" class="form-control select2" tabindex="19"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4">
+            <label> ترتیب انجام آزمایش</label>
+            <div>
+                <input id="testSequence" type="text" class="form-control" required maxlength="16" tabindex="20">
+            </div>
+        </div>
+
+        <div class="form-group col-lg-4  col-sm-4">
+            <label> توضیحات</label>
+            <div>
+                <input id="commentResult" type="text" class="form-control" required maxlength="100" tabindex="21">
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4">
+            <label> انتخاب نوع جواب</label>
+            <div>
+                <select data-placeholder=" انتخاب نوع جواب" class="form-control" id="resultType" tabindex="22">
+                    <option value="0" selected>انتخاب نوع جواب</option>
+                    <option value="1">جواب از نوع (بلی/خیر)</option>
+                    <option value="2">جواب آزمایش های از نوع داده </option>
+                    <option value="3">جواب آزمایش های از نوع شمارشی </option>
+                    <option value="4">جواب آزمایش های از نوع کیفی </option>
+                    <option value="5">جواب آزمایش های از نوع عددی نسبتی </option>
+                    <option value="6">جواب آزمایش های از عددی واحددار </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-1  col-sm-4" id="resultRowBooleanBox">
+            <label>بلی,خیر </label>
+            <div id="testResultBooleanfunk" class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'testResultBoolean');" tabindex="23">
+                <input id="testResultBoolean" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowCodedBox">
+            <label> </label>
+            <div>
+                <select data-placeholder=" نوع داده " id="testResultCoded" class="form-control select2" tabindex="24"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowQuantityBox3">
+            <label> </label>
+            <div>
+                <input id="testResultIdQuantity" placeholder="تعداد" type="text" class="form-control" maxlength="16" tabindex="25">
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowQuantityBox4">
+            <label> </label>
+            <div>
+                <select data-placeholder=" واحد " id="testResultUnitId" class="form-control select2" tabindex="26"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowCountBox">
+            <label> </label>
+            <div>
+                <input id="testResultCount" placeholder="تعداد" type="text" class="form-control" maxlength="16" tabindex="27">
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowOrdinalBox">
+            <label> </label>
+            <div>
+                <select data-placeholder=" جواب " id="testResultOrdinal" class="form-control select2" tabindex="28"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowProportionBox4">
+            <label> </label>
+            <div>
+                <input id="testResultNumerator" placeholder="صورت کسر" type="text" class="form-control" maxlength="16" tabindex="29">
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowProportionBox5">
+            <label> </label>
+            <div>
+                <input id="testResultDenominator" placeholder="مخرج" type="text" class="form-control" maxlength="16" tabindex="30">
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2  col-sm-4" id="resultRowProportionBox6">
+            <label> </label>
+            <div>
+                <select data-placeholder=" نوع نسبت " id="testResultTypeId" class="form-control select2" tabindex="31"></select>
+            </div>
+        </div>
+
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top: 22px">
+                <button type="button" id="addResultRow" class="btn btn-light border-green " tabindex="32"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledLabResult" type="button" class="btn btn-light border-green" tabindex="33"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-styles border mr-0 mb-0" id="medicalLaboratoryResultsList">
+            <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>وضعیت جواب آزمایش</th>
+                <th>عنوان آزمایش</th>
+                <th>پنل آزمایش</th>
+                <th>ترتیب انجام آزمایش</th>
+                <th>توضیحات</th>
+                <th>عملیات</th>
+            </tr>
+
+            </thead>
+            <tbody id="medicalLaboratoryResults">
+            </tbody>
+
+        </table>
+    </div>
+</fieldset>
+<fieldset id="panelResultBox" class="group-box group-box-gray mt-4" style="overflow-x:hidden;height:auto;width:100%">
+    <div class="card-body">
+
+        <h4 class="mt-0 header-title">پنل آزمایش اختصاصی</h4>
+        <p class="sub-title">در صورتیکه از پنل جامع استفاده نمی نمایید، پنل اختصاصی مربوطه را انتخاب نمائید. </p>
+
+        <div id="accordion">
+            <div class="card mb-0">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0 mt-0 font-14">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="text-dark collapsed">
+                            گزارش پاتولوژی
+                        </a>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                    <div class="card-body">
+                        <div id="resultPathologyRowBox" class="group-box group-box-gray mt-4" style="overflow-x:hidden;height:auto;width:100%" data-parsley-validate>
+                            <fieldset class="group-box group-box-gray fieldset-lab col-12">
+                                <div class="row m-0" @*id="pathologyResultForm" data-parsley-validate*@>
+                                    <div class="form-group col-lg-4  col-sm-4">
+                                        <label>خلاصه وضعیت کنونی بیمار</label>
+                                        <div>
+                                            <input id="clinicalInformation" type="text" class="form-control" required tabindex="34"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4  col-sm-4">
+                                        <label>شرح ماکروسکوپیک</label>
+                                        <div>
+                                            <input id="macroscopicExamination" type="text" class="form-control" required tabindex="35"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4  col-sm-4">
+                                        <label>شرح میکروسکوپیک</label>
+                                        <div>
+                                            <input id="microscopicExamination" type="text" class="form-control" required tabindex="36"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="group-box group-box-gray fieldset-lab col-12">
+                                <legend>تشخیص پاتولوژی</legend>
+                                <div class="row m-0" id="pathologyDiagnosisResultForm" data-parsley-validate>
+                                    <div class="form-group col-lg-3 col-sm-4">
+                                        <label>تشخیص</label>
+                                        <div>
+                                            <select id="pathologyDiagnosis" class="form-control select2" tabindex="37" required data-parsley-errors-container="#pathologyDiagnosisContainer"></select>
+                                        </div>
+                                        <div id="pathologyDiagnosisContainer"></div>
+                                    </div>
+                                    <div class="form-group col-lg-3  col-sm-4">
+                                        <label>وضعیت تشخیص</label>
+                                        <div>
+                                            <select data-placeholder="انتخاب کنید" id="pathologyDiagnosisStatusId" class="form-control select2" tabindex="38"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3  col-sm-4">
+                                        <label>مورفولوژی</label>
+                                        <div>
+                                            <select id="morphologyId" class="form-control select2" tabindex="38">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3  col-sm-4">
+                                        <label>تمایز مورفولوژی</label>
+                                        <div>
+                                            <select id="morphologyDifferentiationId" class="form-control select2" tabindex="39">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3  col-sm-4">
+                                        <label>توپوگرافی</label>
+                                        <div>
+                                            <select id="topographyId" class="form-control select2" tabindex="40">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-3  col-sm-4">
+                                        <label>جهت بدن</label>
+                                        <div>
+                                            <select id="topographyLateralityId" class="form-control select2" tabindex="41">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4  col-sm-4">
+                                        <label>توضیحات</label>
+                                        <div>
+                                            <input id="pathologyDiagnosisDescription" type="text" class="form-control" required maxlength="100" tabindex="42">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm text-right">
+                                    <div class="button-items" style="margin-top: 22px">
+                                        <button type="button" id="addTopologyResultRow" class="btn btn-light border-green " tabindex="43"><i class="fa fa-arrow-down"></i>ثبت</button>
+                                        <button id="canceledTopologyResult" type="button" class="btn btn-light border-green" tabindex="44"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-styles border mr-0 mb-0" id="pathologyResultsList">
+                                        <thead>
+                                        <tr>
+                                            <th>ردیف</th>
+                                            <th>وضعیت کنونی بیمار</th>
+                                            <th>شرح ماکروسکوپیک</th>
+                                            <th>شرح میکروسکوپیک</th>
+                                            <th>مورفولوژی</th>
+                                            <th>تمایز مورفولوژی</th>
+                                            <th>توپوگرافی</th>
+                                            <th>جهت بدن</th>
+                                            <th>تشخیص</th>
+                                            <th>وضعیت تشخیص</th>
+                                            <th>توضیحات</th>
+                                            <th>عملیات</th>
+                                        </tr>
+
+                                        </thead>
+                                        <tbody id="pathologyResults">
+                                        <tr id="emptyRow">
+                                            <td colspan="12" class="text-center">سطری وجود ندارد</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="card mb-0">
+                                                            <div class="card-header" id="headingTwo">
+                                                                <h5 class="mb-0 mt-0 font-14">
+                                                                    <a class="text-dark collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                        Collapsible Group Item #2
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion" style="">
+                                                                <div class="card-body">
+                                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                                                    accusamus terry richardson ad squid. 3 wolf moon officia
+                                                                    aute, non cupidatat skateboard dolor brunch. Food truck
+                                                                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                                                    sunt aliqua put a bird on it squid single-origin coffee
+                                                                    nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                                    helvetica, craft beer labore wes anderson cred nesciunt
+                                                                    sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                                                                    Leggings occaecat craft beer farm-to-table, raw denim
+                                                                    aesthetic synth nesciunt you probably haven't heard of them
+                                                                    accusamus labore sustainable VHS.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card mb-0">
+                                                            <div class="card-header" id="headingThree">
+                                                                <h5 class="mb-0 mt-0 font-14">
+                                                                    <a class="text-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                                        Collapsible Group Item #3
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion" style="">
+                                                                <div class="card-body">
+                                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                                                    accusamus terry richardson ad squid. 3 wolf moon officia
+                                                                    aute, non cupidatat skateboard dolor brunch. Food truck
+                                                                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                                                                    sunt aliqua put a bird on it squid single-origin coffee
+                                                                    nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                                    helvetica, craft beer labore wes anderson cred nesciunt
+                                                                    sapiente ea proident. Ad vegan excepteur butcher vice lomo.
+                                                                    Leggings occaecat craft beer farm-to-table, raw denim
+                                                                    aesthetic synth nesciunt you probably haven't heard of them
+                                                                    accusamus labore sustainable VHS.
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
+        </div>
+
+    </div>
+
+</fieldset>
+</div>
+</div>
+<div class="tab-pane  p-3" style="overflow-x:hidden;height:auto;width:100%" id="resultRowRBox" role="tabpanel">
+    <div class="tabToggle3" id="resultRowRForm" data-parsley-validate>
+        <fieldset id="referenceRangeBox1" class="group-box group-box-gray" style="overflow-x:hidden;height:100px;width:100%">
+            <legend>جواب های آزمایش</legend>
+            <div class="table-responsive" style="width: 100%; ">
+                <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="subMedicalLaboratoryResultsList">
+                    <thead>
+                    <tr>
+                        <th class="col-width-percent-4">ردیف</th>
+                        <th class="col-width-percent-10">وضعیت جواب آزمایش</th>
+                        <th class="col-width-percent-25">عنوان آزمایش</th>
+                        <th class="col-width-percent-25">پنل آزمایش</th>
+                        <th class="col-width-percent-10">ترتیب انجام آزمایش</th>
+                        <th class="col-width-percent-20">توضیحات</th>
+                        <th class="col-width-percent-10">عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="subMedicalLaboratoryResults">
+                    </tbody>
+                </table>
+            </div>
+
+        </fieldset>
+        <fieldset id="referenceRangeBox" class="group-box group-box-gray mt-4" style="overflow-x:hidden;height:auto;width:100%">
+            <legend>مرجع های آزمایش</legend>
+            <div class="row m-0" id="medicalLaboratoryReferenceForm" data-parsley-validate>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> محدوده سنی</label>
+                    <div>
+                        <select required data-placeholder=" محدوده سنی" id="ageRangeId" class="form-control select2" data-parsley-errors-container="#ageRangeIdErrorContainer" tabindex="45"></select>
+                    </div>
+                    <div id="ageRangeIdErrorContainer"></div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label>دوره بارداری</label>
+                    <div>
+                        <select data-placeholder=" دوره بارداری" id="gestationAgeRangeId" class="form-control select2" tabindex="46"></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label>فاز هورمونی</label>
+                    <div>
+                        <select required data-placeholder="  فاز هورمونی" id="hormonalPhaseId" class="form-control select2" tabindex="47"></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label>وضعیت"</label>
+                    <div>
+                        <select required data-placeholder="  وضعیت" id="referenceStatusId" class="form-control select2" tabindex="48"></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label>نژاد"</label>
+                    <div>
+                        <select required data-placeholder="  نژاد" id="speciesId" class="form-control select2" tabindex="49"></select>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> جنسیت </label>
+                    <div>
+                        <select required id="genderId" class="form-control select2" title="" data-parsley-errors-container="#genderIdError" data-parsley-group="addservice" data-parsley-notequalnumber="0" tabindex="50">
+                            <option selected value="0">انتخاب کنید</option>
+                            <option value="1">مرد</option>
+                            <option value="2">زن</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> حد پایینی و حداقلی طبیعی</label>
+                    <div>
+                        <input id="lowRangeDescriptive" type="text" class="form-control" required maxlength="16" tabindex="51">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> حد بالایی و حداکثری طبیعی</label>
+                    <div>
+                        <input id="highRangeDescriptive" type="text" class="form-control" required maxlength="16" tabindex="52">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2  col-sm-4">
+                    <label> شرایط خاص</label>
+                    <div>
+                        <input id="condition" type="text" class="form-control" required maxlength="16" tabindex="53">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-4  col-sm-4">
+                    <label> توضیحات تکمیلی</label>
+                    <div>
+                        <input id="referenceRangeDescription" type="text" class="form-control" required maxlength="16" tabindex="54">
+                    </div>
+                </div>
+
+                <div class="col-sm text-right">
+                    <div class="button-items" style="margin-top: 22px">
+                        <button type="button" id="addReferenceRange" class="btn btn-light border-green " tabindex="55"><i class="fa fa-arrow-down"></i>ثبت</button>
+                        <button id="canceledLabReference" type="button" class="btn btn-light border-green" tabindex="56"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-styles border mr-0 mb-0" id="medicalLaboratoryReferencesList">
+                    <thead>
+                    <tr>
+                        <th class="col-width-percent-5">ردیف</th>
+                        <th class="col-width-percent-15">محدوده سنی</th>
+                        <th class="col-width-percent-10">دوره بارداری</th>
+                        <th class="col-width-percent-10"> فاز هورمونی</th>
+                        <th class="col-width-percent-10">وضعیت</th>
+                        <th class="col-width-percent-7">نژاد</th>
+                        <th class="col-width-percent-5">جنسیت</th>
+                        <th class="col-width-percent-7">حد پایینی و حداقلی طبیعی</th>
+                        <th class="col-width-percent-7">حد بالایی و حداکثری طبیعی</th>
+                        <th class="col-width-percent-7">شرایط خاص</th>
+                        <th class="col-width-percent-10">توضیحات تکمیلی</th>
+                        <th class="col-width-percent-15">عملیات</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="medicalLaboratoryReferences">
+                    </tbody>
+
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="tab-pane p-3" id="diagnosisBox" role="tabpanel">
+    <div id="diagnosisForm" class="tabToggle4" data-parsley-validate>
+        <div class="row" id="medicalLaboratoryDiagnosisForm" data-parsley-validate>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>وضعیت تشخیص</label>
+                <div>
+                    <select id="diagnosisStatusId" class="form-control select2" tabindex="66" required data-parsley-errors-container="#statusIdContainer"></select>
+                </div>
+                <div id="statusIdContainer"></div>
+            </div>
+            <div class="form-group col-lg-3 col-sm-4">
+                <label>تشخیص</label>
+                <div>
+                    <select id="diagnosisReasonId" class="form-control select2" tabindex="67" required data-parsley-errors-container="#diagnosisReasonIdContainer"></select>
+                </div>
+                <div id="diagnosisReasonIdContainer"></div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>میزان شدت بیماری</label>
+                <div>
+                    <select id="serverityId" class="form-control select2" tabindex="68" required data-parsley-errors-container="#serverityIdContainer"></select>
+                </div>
+                <div id="serverityIdContainer"></div>
+            </div>
+            <div class="form-group col-lg-4 col-sm-4">
+                <label>توضیحات</label>
+                <input id="comment" class="form-control" tabindex="69" maxlength="100"/>
+            </div>
+            <div class="col-sm text-right">
+                <div class="button-items" style="margin:20px 0 10px 0;">
+                    <button type="button" id="addDiagnosis" class="btn btn-light border-green " tabindex="70"><i class="fa fa-arrow-down"></i>ثبت</button>
+                    <button id="canceledDiagnosis" type="button" class="btn btn-light border-green" tabindex="71"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                </div>
+            </div>
+        </div>
+        <fieldset id="diagnosisBox" class="group-box group-box-gray" style="overflow-x:hidden;height:auto;width:100%">
+            <legend>تشخیص ها</legend>
+            <div class="table-responsive" style="width:100%;height: 300px;">
+                <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="medicalLaboratoryDiagnosisesList">
+                    <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>وضعیت تشخیص</th>
+                        <th>تشخیص</th>
+                        <th>میزان شدت بیماری </th>
+                        <th>توضیحات</th>
+                        <th>عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="medicalLaboratoryDiagnosises">
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+<div class="displaynone">
+    <table>
+        <tr id="emptyRowRequests">
+            <td colspan="8" class="text-center ">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowRequestMethods">
+            <td colspan="9" class="text-center">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowSubRequestMethods">
+            <td colspan="8" class="text-center">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowResults">
+            <td colspan="7" class="text-center">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowSubResults">
+            <td colspan="7" class="text-center">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowPathology">
+            <td colspan="12" class="text-center">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowReferences">
+            <td colspan="12" class="text-center">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowDiagnosises">
+            <td colspan="6" class="text-center">سطری وجود ندارد</td>
+        </tr>
+        <tr id="emptyRowPathology">
+            <td colspan="9" class="text-center">سطری وجود ندارد</td>
+        </tr>
+    </table>
+</div>
+
+<div id="resultTypeDetailModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">نوع جواب</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="row">
+                    <div class="form-group col-lg-6  col-sm-4">
+                        <label> نوع جواب</label>
+                        <div>
+                            <select disabled data-placeholder=" انتخاب نوع جواب" class="form-control" id="resultType" tabindex="78">
+                                <option value="0" selected>انتخاب نوع جواب</option>
+                                <option value="1">جواب از نوع (بلی/خیر)</option>
+                                <option value="2">جواب آزمایش های از نوع داده </option>
+                                <option value="3">جواب آزمایش های از نوع شمارشی </option>
+                                <option value="4">جواب آزمایش های از نوع کیفی </option>
+                                <option value="5">جواب آزمایش های از نوع عددی نسبتی </option>
+                                <option value="6">جواب آزمایش های از عددی واحددار </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-2  col-sm-4" id="resultRowBooleanBox">
+                        <label>بلی,خیر </label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'testResultBoolean');" tabindex="79">
+                            <input id="testResultBoolean" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowCodedBox">
+                        <label> </label>
+                        <div>
+                            <select disabled data-placeholder=" نوع داده " id="testResultCoded" class="form-control select2" tabindex="80"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowQuantityBox3">
+                        <label> </label>
+                        <div>
+                            <input disabled id="testResultIdQuantity" placeholder="" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" tabindex="81">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowQuantityBox4">
+                        <label> </label>
+                        <div>
+                            <select disabled data-placeholder=" واحد " id="testResultUnitId" class="form-control select2" tabindex="82"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowCountBox">
+                        <label> </label>
+                        <div>
+                            <input disabled id="testResultCount" placeholder="تعداد" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" tabindex="83">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowOrdinalBox">
+                        <label> </label>
+                        <div>
+                            <select disabled data-placeholder=" جواب " id="testResultOrdinal" class="form-control select2" tabindex="84"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowProportionBox4">
+                        <label> </label>
+                        <div>
+                            <input disabled placeholder="صورت کسر" id="testResultNumerator" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" tabindex="85">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowProportionBox5">
+                        <label> </label>
+                        <div>
+                            <input disabled placeholder="مخرج" id="testResultDenominator" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" tabindex="86">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4  col-sm-4" id="resultRowProportionBox6">
+                        <label> </label>
+                        <div>
+                            <select data-placeholder=" نوع نسبت " id="testResultTypeId" class="form-control select2" tabindex="87" disabled></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('resultTypeDetailModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/SearchAdmissionModal/SearchAdmissionModal.cshtml")
+
+@await Html.PartialAsync("/Modules/MC/AdmissionDisplay/AdmissionDisplay.cshtml")
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Modules/MC/MedicalLaboratory/MedicalLaboratoryForm.js"></script>

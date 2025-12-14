@@ -1,0 +1,1092 @@
+﻿@{
+    ViewBag.Title = "طرح درمان";
+}
+
+
+<link href="~/lib/ModulesCss/AdmissionForm.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/admissionMasterForm.css" rel="stylesheet"/>
+<link href="~/lib/ModalePrint/PrintCss.css" rel="stylesheet"/>
+
+
+<div class="content-page displaynone" id="content-page">
+<div class="content" id="admissionFormBox">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15" id="form">
+<div class="header-title d-flex header-title d-flex">
+    <div id="bcTarget" style="display : none"></div>
+    <div class="row col-md-5 header-form-box">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div id="bcTarget" style="display : none"></div>
+    <div class="button-items col-5">
+        <input id="userTypeOnOff" type="checkbox" checked data-toggle="toggle" data-on="سوابق بانک اطلاعاتی" data-off="استعلام آنلاین" data-onstyle="secondary" data-offstyle="success" data-width="180" data-height="27">
+        <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+        <button id="newForm" type="button" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+        <button id="PrntType4" type="button" class="btn btn-print" onclick="admissionstandprint()"><i class="fa fa-print "></i>چاپ کیوسک</button>
+        <button id="admissionCash" type="button" class="btn btn-orange waves-effect"><i class="fa fa-plus-circle"></i>دریافت و پرداخت</button>
+
+
+    </div>
+</div>
+<div class="card-body">
+
+<div class="row d-none" id="admBox">
+    <div class="col-lg-5 col-md-7 d-flex">
+        <div class="form-group col-sm-3">
+            <label>شناسه پرونده</label>
+            <input id="admissionsMasterId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+        </div>
+        <div class="form-group col-sm-6">
+            <label>جریان کار</label>
+            <input id="masterWorkflowName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-sm-6">
+            <label>مرحله</label>
+            <input id="masterStageName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>تاریخ / زمان</label>
+            <input id="masterDateTime" type="text" class="form-control number" placeholder="____/__/__" maxlength="10" readonly/>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>ثبت کننده</label>
+            <input id="masterUserFullName" type="text" class="form-control" readonly/>
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>گام</label>
+            <input id="masterActionName" type="text" class="form-control number" readonly/>
+        </div>
+        <div class="form-group col-sm-3 d-none">
+            <label>گام</label>
+            <input id="masterActionId" type="text" class="form-control number" readonly/>
+        </div>
+        <div class="form-group col-sm-3 d-none">
+            <label>شناسه پذیرش</label>
+            <input id="admnId" type="text" class="form-control number" readonly/>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-gray mt-3" id="admissionsList">
+    <legend>لیست درخواست</legend>
+    <div class="table-responsive">
+        <table class="table table-styles pagetablebody border mb-0" id="admissionsListTable">
+        </table>
+    </div>
+</fieldset>
+
+<fieldset id="attenderForm" class="group-box group-box-green mt-3" asp-antiforgery="true">
+    <legend>داکتر</legend>
+    <div class="row">
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>داکتر</label>
+            <div class="col-12 chosen-container-parent">
+                <select data-placeholder="انتخاب کنید" id="attenderId" class="select2 select2-quick-access" tabindex="1">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2">
+            <label>شیفت</label>
+            <div>
+                <select class="form-control" id="reserveShift" tabindex="2" disabled>
+                    <option value="0" selected>انتخاب شیفت</option>
+                    <option value="1">شیفت صبح</option>
+                    <option value="2">شیفت عصر</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>داکتر ارجاع دهنده</label>
+            <div class="col-12 chosen-container-parent">
+                <select data-placeholder="انتخاب کنید" id="referringDoctorId" class="select2 select2-quick-access" tabindex="3">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ نسخه</label>
+            <div id="datepicker-place">
+                <input id="prescriptionDate" type="text" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate maxlength="10" tabindex="4" disabled/>
+                <ul class="parsley-errors-list filled d-none" id="parsley-prisdate">
+                    <li class="parsley-expdate">تاریخ نسخه معتبر نمی باشد</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group row col-lg-4 col-sm-12">
+            <div class="col-lg-12 col-sm-12" style="display: inline-flex;">
+                <div class="col-lg-3 col-sm-1-5" style="padding: 0 2px 0 2px">
+                    <label>نوبت</label><input id="reserveNo" type="text" class="form-control text-right number" maxlength="3" readonly placeholder=""/>
+                </div>
+                <div class="col-lg-4 col-sm-2-5" style="padding: 0 2px 0 2px">
+                    <label>تاریخ</label>
+                    <input id="reserveDate" type="text" class="form-control text-right number" maxlength="10" readonly placeholder=""/>
+                </div>
+                <div class="col-lg-1 col-sm-1" style="padding: 0 2px 0 29px">
+                    <label class="col-12">&nbsp;</label>
+                    <button type="button" id="showReserve" class="btn btn-secondary pt-0 m-t-1" style="font-size:12px;height:30px">
+                        <i class="fa fa-bars" aria-hidden="true" style="padding-top:3px"></i>
+                    </button>
+                </div>
+                <div class="col-lg-4 col-sm-2-5 d-none" style="padding: 0 2px 0 2px">
+                    <label></label>
+                    <input id="scheduleBlockId" type="text" class="form-control text-right number" readonly/>
+                </div>
+            </div>
+        </div>
+        <div id="rowtimeShiftDaysAdmissionMaster" class="table-responsive">
+            <div>
+                <table class="table table-styles border mb-0">
+
+                    <thead>
+                    <tr>
+                        <th style="width:20%">تاریخ</th>
+                        <th style="width:20%">شیفت</th>
+                        <th style="width:20%">زمان</th>
+                        <th style="width:20%">حضوری (باقیمانده/ظرفیت کل)</th>
+                        <th style="width:20%">غیرحضوری (باقیمانده/ظرفیت کل )</th>
+                    </tr>
+                    </thead>
+                    <tbody id="temptimeShiftDaysAdmissionMaster">
+                    <tr id="emptyRow">
+                        <td colspan="5" style="text-align:center">سطری وجود ندارد</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<div id="patientAndInsurerValidate" data-parsley-validate>
+<fieldset class="group-box group-box-orange mt-3" id="patientForm">
+
+    <button id="searchPatient" type="button" class="btn btn-light border-orange searchPatientBtn" onclick="searchPatient()" style="float:left;margin:-28px 0 0 15px" title="جستجو (Ctrl+Shift+f)"><i class="fa fa-search"></i>جستجو</button>
+    <legend>مراجعه کننده</legend>
+    <div class="row">
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="patientId" type="text" class="form-control number" disabled maxlength="50"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>نوع مراجعه</label>
+            <div class="col-lg-12 chosen-container-parent">
+                <select id="referralTypeId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="5"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-3 col-sm-2">
+            <label>نمبر تذکره / نمبر تابعیت (خارجی )</label>
+            <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                <input id="nationalCode" type="text" name="nationalCode" class="form-control col-8 str-number" maxlength="12" tabindex="6" data-parsley-nationalcodeadmission="" data-parsley-errors-container="#nationalCodeErrorContainer"/>
+                <span class="input-group-btn input-group-append">
+                    <button id="getPatientInfoWS" class="btn btn-secondary bootstrap-touchspin-up" type="button" data-toggle="tooltip" data-placement="bottom" title="وب سرویس استحقاق درمان" disabled>
+                        <i class="fas fa-cogs"></i>
+                    </button>
+                </span>
+                <span class="input-group-btn input-group-append">
+                    <button id="getPersobByBirthWS" style="align-items: center;" class="btn btn-secondary bootstrap-touchspin-up d-inline-flex" type="button" data-toggle="tooltip" data-placement="bottom" title="وب سرویس استعلام هویت" disabled>
+                        <i class="fas fa-users"></i>
+                    </button>
+                    <input id="birthYear" type="text" class="form-control number" style="height: 23px;width: 0px;padding: 0;opacity: 0;" maxlength="4" onclick="birthYearcclick(event)" onkeydown="birthYearKeydown(event)" title="برای استعلام هویت سال تولد الزامی می باشد" placeholder="سال تولد"/>
+
+                </span>
+            </div>
+            <div id="nationalCodeErrorContainer"></div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>نام</label>
+            <div>
+                <input id="firstName" type="text" class="form-control atoz-valid" title="" data-parsley-group="addservice" required data-parsley-maxlength="50" tabindex="7"/>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-3">
+            <label> تخلص</label>
+            <div>
+                <input id="lastName" type="text" class="form-control atoz-valid" title="" data-parsley-group="addservice" required data-parsley-maxlength="50" tabindex="8"/>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>کارفرما</label>
+            <div>
+                <input id="workshopName" type="text" class="form-control" disabled tabindex="-1"/>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تاریخ تولد</label>
+            <div>
+                <input id="birthDatePersian" type="text" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate maxlength="10" tabindex="9" disabled/>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>جنسیت</label>
+            <div>
+                <select id="genderId" class="form-control select2" title="" data-parsley-group="addservice" required data-parsley-notequalnumber="0" data-parsley-errors-container="#genderIdErrorContainer" tabindex="10">
+                    <option selected value="0">انتخاب کنید</option>
+                    <option value="1">مرد</option>
+                    <option value="2">زن</option>
+                </select>
+            </div>
+            <div id="genderIdErrorContainer"></div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-2 basicInsurer-section">
+            <label>ملیت</label>
+            <div class="col-lg-12 chosen-container-parent">
+                <select id="countryId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="11"></select>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>موبایل</label>
+            <div>
+                <input id="mobile" type="text" class="form-control str-number" maxlength="11" onkeydown="keyDownMobile(event)" data-parsley-mobileno="" tabindex="12"/>
+            </div>
+        </div>
+    </div>
+    <button type="button" id="expandAdmissionBtn" onclick="expandAdmission(this)" class="btn btn-light border-orange plus">
+        <i class="fas fa-plus"></i>
+    </button>
+    <div class="row">
+        <div class="col-sm-1" style="text-align:end">
+            <button type="button" class="btn btn-light border-orange" style="visibility:hidden" disabled tabindex="-1">ویرایش</button>
+        </div>
+    </div>
+    <div class="slideToggle get" style="display:none;">
+        <div class="row">
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>شماره شناسنامه</label>
+                <div>
+                    <input id="idCardNumber" type="text" tabindex="1000000" maxlength="13" class="form-control str-number"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>نمبر خانه (Postal Code)</label>
+                <div>
+                    <input id="postalCode" type="text" tabindex="1000001" maxlength="10" class="form-control number"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>شغل</label>
+                <div>
+                    <input id="jobTitle" type="text" tabindex="1000002" maxlength="50" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>تلفن</label>
+                <div>
+                    <input id="phoneNo" type="text" tabindex="1000003" maxlength="11" class="form-control str-number"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>وضعیت تاهل</label>
+                <div>
+                    <select id="maritalStatusId" tabindex="1000004" class="form-control select2">
+                        <option value="0">انتخاب کنید</option>
+                        <option value="1">طلاق گرفته</option>
+                        <option value="2">متاهل</option>
+                        <option value="3">مجرد</option>
+                        <option value="4">همسر فوت شده</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2 basicInsurer-section">
+                <label>تحصیلات</label>
+                <div class="col-lg-12 chosen-container-parent">
+                    <select id="educationLevelId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="1000005"></select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>نام پدر</label>
+                <div>
+                    <input id="fatherFirstName" maxlength="50" tabindex="1000006" type="text" class="form-control atoz-valid"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-4 col-sm-5">
+                <label>آدرس</label>
+                <div>
+                    <input id="address" type="text" class="form-control" tabindex="1000007" maxlength="100"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-4 col-sm-5">
+                <label>توضیحات</label>
+                <div>
+                    <input id="description" type="text" class="form-control" tabindex="1000008" onkeydown="tabkeyDownDescription(event)" maxlength="200"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset id="insurerForm" class="group-box group-box-blue mt-3" data-parsley-validate>
+    <legend>بیمه گر</legend>
+    <div class="row">
+
+        <div class="form-group col-lg-3 col-sm-3 basicInsurer-section">
+            <label>بیمه اجباری / صندوق بیمه</label>
+            <div class="col-lg-12 chosen-container-parent">
+                <select id="basicInsurerLineId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="13" data-parsley-errors-container="#basicInsurerLineIdErrorContainer">
+                </select>
+            </div>
+            <div id="basicInsurerLineIdErrorContainer"></div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-3 compInsurer-section">
+            <label>بیمه تکمیلی/طرف قرارداد</label>
+            <div class="col-lg-12 chosen-container-parent">
+                <select id="compInsurerThirdPartyId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="14">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 thirdParty-section">
+            <label>تخفیف</label>
+            <div class="col-lg-12 chosen-container-parent">
+                <select id="discountInsurerId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="15">
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-1 col-sm-1 basicInsurer-section">
+            <label>شماره بیمه</label>
+            <div>
+                <input id="basicInsurerNo" type="text" class="form-control str-number" maxlength="16" data-parsley-maxlength="16" tabindex="16"/>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2 col-sm-2 E-Section">
+            <label>انقضاء دفترچه</label>
+            <div id="datepicker-place">
+                <input id="basicInsurerExpirationDatePersian" type="text" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate maxlength="10" tabindex="17"/>
+                <ul class="parsley-errors-list filled d-none" id="parsley-expdate">
+                    <li class="parsley-expdate">تاریخ انقضاء دفترچه معتبر نمی باشد</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group col-lg-1 col-sm-1 B-Section">
+            <label>شماره صفحه دفترچه</label>
+            <div>
+                <input id="basicInsurerBookletPageNo" type="text" class="form-control number" maxlength="9" data-parsley-max="9999" tabindex="18"/>
+            </div>
+        </div>
+    </div>
+</fieldset>
+</div>
+
+<div class="serviceItemSection w-100 mt-4">
+<ul id="tabActionBox" class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" id="servicePart" onclick="tabActionBoxConfig('servicePart',event)">
+        <a class="nav-link active" data-toggle="tab" href="#serviceBox" role="tab">
+            <div class="d-flex justify-content-center align-items-center w-100" style="font-size: 11px!important;">
+                <span class="d-md-block">خدمت</span>
+                <span class="d-md-block ml-2 mr-2"> - </span>
+                <span class="d-md-block">خالص قابل دریافت</span>
+                <div id="serviceBoxNetAmount" resetstyle="true" class="countOfListWaiting elementActive mr-2 d-flex justify-content-center align-items-center">0</div>
+            </div>
+        </a>
+        <div id="servicePartAccess"></div>
+    </li>
+    <li class="nav-item waves-effect waves-light" id="itemPart" onclick="tabActionBoxConfig('itemPart',event)">
+        <a class="nav-link" data-toggle="tab" href="#itemBox" role="tab">
+            <div class="d-flex justify-content-center align-items-center w-100" style="font-size: 11px!important;">
+                <span class="d-md-block">کالا</span>
+                <span class="d-md-block ml-2 mr-2"> - </span>
+                <span class="d-md-block">خالص قابل دریافت</span>
+                <div id="itemBoxNetAmount" resetstyle="true" class="countOfListWaiting elementInActive mr-2 d-flex justify-content-center align-items-center">0</div>
+            </div>
+        </a>
+        <div id="itemPartAccess"></div>
+    </li>
+</ul>
+<div id="tabBoxByAction" class="tab-content group-box group-box-gray w-100">
+
+<div class="tab-pane active p-3" id="serviceBox" role="tabpanel">
+    <div class="row" id="serviceForm">
+        <div class="form-group col-lg-4 col-sm-4-5">
+            <label>خدمت</label>
+            <div class="col-lg-12 chosen-container-parent">
+                <select data-placeholder="انتخاب کنید" id="serviceId" class="select2" tabindex="19">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-1-5">
+            <label>تعداد</label>
+            <div>
+                <input id="qtyService" type="text" class="form-control number" maxlength="5" tabindex="20" data-parsley-max="200"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>مبلغ خدمات پایه</label>
+            <div>
+                <input id="basicServicePrice" type="text" class="form-control money" maxlength="12" tabindex="-2" readonly/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 basicInsurer-section">
+            <label>سهم بیمه پایه</label>
+            <div>
+                <input id="basicShareAmount" type="text" class="form-control money" maxlength="12" tabindex="-1" readonly/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3 compInsurer-section">
+            <label>سهم بیمه تکمیلی</label>
+            <div>
+                <input id="compShareAmount" type="text" class="form-control money" maxlength="12" tabindex="-1" readonly/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>سهم طرف قرارداد</label>
+            <div>
+                <input id="thirdPartyAmount" type="text" class="form-control money" maxlength="12" tabindex="-1" disabled/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>سهم تخفیف</label>
+            <div>
+                <input id="discountAmount" type="text" class="form-control money" maxlength="12" tabindex="-1" disabled/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>خالص قابل دریافت</label>
+            <div>
+                <input id="netAmount" type="text" class="form-control money difference-input" maxlength="12" tabindex="-1" readonly/>
+            </div>
+        </div>
+        <div class="col-lg-12 text-right">
+            <div class="button-items">
+                <button id="healthInsuranceClaim" type="button" class="btn btn-light border-green jump" style="margin-bottom: 10px" tabindex="-1">
+                    <i class="fas fa-info-circle color-deep-blue"></i>
+                    <span style="width:auto" id="healthClaimTitle">استحقاق خدمت <span class="highlight-success">دارد</span></span>
+                </button>
+                <button id="addService" type="button" class="btn btn-light border-blue" style="margin-bottom: 10px" tabindex="21">
+                    <i class="fa fa-arrow-down"></i>
+                    افزودن
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <div id="hasServiceError"></div>
+            <table class="table table-styles border mb-0" id="pagetable">
+                <thead>
+                <tr>
+                    <th class="col-width-percent-5">ردیف</th>
+                    <th class="col-width-percent-21">خدمت</th>
+                    <th class="col-width-percent-5">تعداد</th>
+                    <th class="col-width-percent-8">مبلغ خدمات پایه</th>
+                    <th class="col-width-percent-10">سهم بیمه پایه</th>
+                    <th class="col-width-percent-10">سهم بیمه تکمیلی</th>
+                    <th class="col-width-percent-10">سهم طرف قرارداد</th>
+                    <th class="col-width-percent-8">سهم تخفیف</th>
+                    <th class="col-width-percent-8">خالص قابل دریافت</th>
+                    <th class="col-width-percent-6">استحقاق خدمت</th>
+                    <th class="col-width-percent-3">عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempService">
+                <tr id="emptyRow">
+                    <td colspan="11" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+                <tbody id="sumRowService" class="displaynone">
+                <tr>
+                    <td class="text-left" colspan="8">جمع</td>
+                    <td class="col-width-percent-5 money total-amount sumNetPriceService">۰</td>
+                    <td class="col-width-percent-5"></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <fieldset id="DiagAdmissionForm" class="group-box group-box-green mt-3">
+        <legend>تشخیص</legend>
+
+        <div class="w-100" style="margin-top:29px">
+            <button type="button" id="expandAdmissionBtnDiag" onclick="expandAdmission(this)" class="btn btn-light border-green plus" style="margin: -30px 0 0 15px">
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="slideToggle get" style="display: none">
+                @*START diag*@
+                <div class="tab-pane p-3" id="diagBox" role="tabpanel">
+                    <div id="diagForm" class="row tabToggle14" data-parsley-validate>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>وضعیت تشخیص</label>
+                            <div>
+                                <select id="statusId" class="form-control select2 diagnosis-filed" tabindex="125" required data-parsley-errors-container="#statusIdContainer"></select>
+                            </div>
+                            <div id="statusIdContainer"></div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>تشخیص</label>
+                            <div>
+                                <select id="diagnosisResonId" class="form-control select2 diagnosis-filed" tabindex="126" required data-parsley-errors-container="#diagnosisResonIdContainer"></select>
+                            </div>
+                            <div id="diagnosisResonIdContainer"></div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>میزان شدت بیماری</label>
+                            <div>
+                                <select id="serverityId" class="form-control select2 diagnosis-filed" tabindex="127" required data-parsley-errors-container="#serverityIdContainer"></select>
+                            </div>
+                            <div id="serverityIdContainer"></div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-4">
+                            <label>دلیل مراجعه</label>
+                            <div>
+                                <select id="reasonForEncounterId" class="form-control select2 diagnosis-filed" tabindex="128" required data-parsley-errors-container="#reasonForEncounterIdContainer"></select>
+                            </div>
+                            <div id="reasonForEncounterIdContainer"></div>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-4">
+                            <label>توضیحات</label>
+                            <input id="comment" class="form-control diagnosis-filed" tabindex="129" maxlength="100"/>
+                        </div>
+                        <div class="col-sm text-right">
+                            <div class="button-items" style="margin:20px 0 10px 0;">
+                                <button type="button" id="addDiagnosis" class="btn btn-light border-green my-2" tabindex="130"><i class="fa fa-arrow-down"></i>ثبت</button>
+                                <button id="canceledDiagnosis" type="button" class="btn btn-light border-green" tabindex="131"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="width:100%;height: 110px;">
+                            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdiagnosisesList">
+                                <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>وضعیت تشخیص</th>
+                                    <th>تشخیص</th>
+                                    <th>میزان شدت بیماری </th>
+                                    <th>توضیحات</th>
+                                    <th>عملیات</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempDiagForm">
+                                <tr id="emptyRow">
+                                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                @*END diag*@
+            </div>
+        </div>
+
+    </fieldset>
+
+    <div class="row" style=" border-top: 1px solid #dee2e6;margin-top:12px">
+        <div class="d-flex justify-content-end w-100" style="margin-left:15px;margin-top:11px">
+            <button onclick="cancelEdit()" type="button" class="btn btn-secondary waves-effect cancelEdit ml-2" disabled><i class="fa fa-times" style=" margin-left: 5px;"></i>انصراف</button>
+            <button id="saveFormService" onclick="" type="button" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save" style=" margin-left: 5px;"></i>ذخیره</button>
+        </div>
+    </div>
+</div>
+
+<div class="tab-pane p-3" id="itemBox" role="tabpanel">
+    <div id="itemForm">
+        <div class="row">
+            <div class="form-group col-lg-4 col-sm-4-5">
+                <label>کالا</label>
+                <div class="col-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="ItemId" class="form-control select2" tabindex="40">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>تعداد</label>
+                <div>
+                    <input id="qtyItem" type="text" class="form-control number" maxlength="7" tabindex="41" value="1"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-4 col-sm-4-5">
+                <label>صفات </label>
+                <div>
+                    <div class="col-12 chosen-container-parent">
+                        <select id="itemcategoryattribute" class="form-control select2" tabindex="42" disabled></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>واحد اندازه گیری</label>
+                <div>
+                    <input id="unitItemName" type="text" class="form-control" maxlength="3" disabled tabindex="43"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>تامین کننده</label>
+                <div>
+                    <input id="vendorId" type="text" class="form-control" disabled tabindex="44"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>قرارداد</label>
+                <div>
+                    <select id="contractTypeId" class="form-control select2" title="" tabindex="45" disabled>
+                        <option value="1">1 - قطعی</option>
+                        <option value="2">2 - امانی</option>
+                        <option value="3">3 - کمیسیونی</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-2">
+                <label>مدل قیمت گذاری</label>
+                <div>
+                    <input id="pricingModelName" type="text" class="form-control" maxlength="8" disabled tabindex="46"/>
+                    <input id="pricingModelId" type="hidden" class="form-control d-none" disabled tabindex="47"/>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-3 col-sm-5 displaynone" id="pricingRangeBox">
+                <label>نرخ</label>
+                <div>
+                    <input id="minPrice" style="width:30%;float:right" type="text" class="form-control money" maxlength="10" tabindex="48" disabled value="000,000,000"/>
+                    <input id="price" style="width:30%;float:right;margin:0 5px 0 5px" type="text" class="form-control money" maxlength="11" tabindex="49"/>
+                    <input id="maxPrice" style="width:30%;float:right" type="text" class="form-control money" maxlength="10" tabindex="50" disabled value="000,000,000"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4" id="pricingFixBox">
+                <label>نرخ</label>
+                <div>
+                    <input id="fixPrice" type="text" class="form-control money" style="background-color:#c6c6c6" maxlength="10" tabindex="51" disabled/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 basicInsurer-section">
+                <label>مبلغ پایه کالا (حاصلضرب تعداد * نرخ) </label>
+                <div>
+                    <input id="basicItemPrice" type="text" class="form-control money" maxlength="12" tabindex="52" disabled/>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2 col-sm-4 basicInsurer-section">
+                <label>سهم بیمه اجباری</label>
+                <div>
+                    <input id="basicShareAmountItem" type="text" class="form-control money" maxlength="12" tabindex="53" disabled/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 compInsurer-section">
+                <label>سهم بیمه تکمیلی</label>
+                <div>
+                    <input id="compShareAmountItem" type="text" class="form-control money" maxlength="12" tabindex="54" disabled/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 compInsurer-section">
+                <label>سهم طرف قرارداد</label>
+                <div>
+                    <input id="thirdPartyAmountItem" type="text" class="form-control money" maxlength="12" tabindex="55" disabled/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>سهم تخفیف</label>
+                <div>
+                    <input id="discountAmountItem" type="text" class="form-control money" maxlength="12" tabindex="56" disabled/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-3">
+                <label>خالص قابل دریافت</label>
+                <div>
+                    <input id="netAmountItem" type="text" class="form-control money" maxlength="10" disabled tabindex="57"/>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 text-right">
+                <div class="button-items">
+                    <button id="addItem" type="button" class="btn btn-light border-blue" style="margin-bottom: 10px" tabindex="58"><i class="fa fa-arrow-down"></i>افزودن</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <div id="hasItemError"></div>
+                <table class="table table-styles border mb-0" id="pagetable">
+                    <thead>
+                    <tr>
+                        <th class="col-width-percent-5">ردیف</th>
+                        <th class="col-width-percent-20">کالا</th>
+                        <th class="col-width-percent-5">تعداد</th>
+                        <th class="col-width-percent-8">نرخ</th>
+                        <th class="col-width-percent-8">مبلغ پایه کالا</th>
+                        <th class="col-width-percent-8">سهم بیمه اجباری</th>
+                        <th class="col-width-percent-8">سهم بیمه تکمیلی</th>
+                        <th class="col-width-percent-8">سهم طرف قرارداد </th>
+                        <th class="col-width-percent-5">سهم تخفیف</th>
+                        <th class="col-width-percent-5">خالص قابل دریافت</th>
+                        <th class="col-width-percent-5">عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempItem">
+                    <tr id="emptyRow">
+                        <td colspan="11" class="text-center">سطری وجود ندارد</td>
+                    </tr>
+                    </tbody>
+                    <tbody id="sumRowItem" class="displaynone">
+                    <tr>
+                        <td class="text-left" colspan="9">جمع</td>
+                        <td style="background-color:#c6c6c6;font-weight:bold" class="money sumNetPriceItem">۰</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row" style=" border-top: 1px solid #dee2e6;margin-top:12px">
+            <div class="d-flex justify-content-end w-100" style="margin-left:15px;margin-top:11px">
+                <button onclick="cancelEdit()" type="button" class="btn btn-secondary waves-effect cancelEdit ml-2" disabled><i class="fa fa-times" style=" margin-left: 5px;"></i>انصراف</button>
+                <button id="saveFormItem" type="button" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save" style=" margin-left: 5px;"></i>ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="PrnAdmission" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="PrnModalId" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه : </lable> <span id="modal_keyid_value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType1" onclick="separationprint()" class="btn btn-default" style="font-weight:bolder;">چاپ تفکیک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType2" onclick="aggregationprint()" class="btn btn-default" style="font-weight:bolder;">چاپ تجمیع<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 2 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType3" onclick="doubleprint()" class="btn btn-default" style="font-weight:bolder;">چاپ دو نسخه ای<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 3 )</sub></a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnAdmission')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="PrnAdmissionItem" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="PrnModalId" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه : </lable> <span id="modal_keyid_valueItem">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType1" onclick="separationprintSale()" class="btn btn-default" style="font-weight:bolder;">چاپ تفکیک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType4" onclick="admissionitemstandprint()" class="btn btn-default" style="font-weight:bolder;">چاپ کیوسک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnAdmissionItem')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reserveModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog pt-0 modal-size-xlg">
+        <div class="modal-content">
+            @await Html.PartialAsync("/Modules/MC/Admission/GetAttenderReserve.cshtml")
+        </div>
+    </div>
+</div>
+
+<div id="patientInsuranceModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">جستجو</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="">
+                    <div class="table-responsive table-responsive-thead-fixed">
+                        <table class="table table-styles border mb-0" id="insurancePagetable">
+                            <thead class="table-thead-fixed">
+                            <tr>
+                                <th class="col-width-percent-10">شناسه بیمه</th>
+                                <th class="col-width-percent-10">شناسه صندوق بیمه</th>
+                                <th class="col-width-percent-10">نام بیمه</th>
+                                <th class="col-width-percent-10">شماره بیمه</th>
+                                <th class="col-width-percent-15">تاریخ انقضاء</th>
+                                <th class="col-width-percent-13">انتخاب</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempInsurances">
+                            <tr>
+                                <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modalClosePatientInsurance('patientInsuranceModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="referralIdModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">جستجو</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="table-responsive table-responsive-thead-fixed">
+                    <table class="table table-styles border mb-0">
+                        <thead class="table-thead-fixed">
+                        <tr>
+                            <th class="col-width-percent-30">شناسه شباد</th>
+                            <th class="col-width-percent-30">شرکت اختصاص دهنده</th>
+                            <th class="col-width-percent-30">شرکت صادر کننده</th>
+                            <th class="col-width-percent-10">انتخاب</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempReferralIdList">
+                        <tr>
+                            <td id="rowRef_1" colspan="4" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('referralIdModel')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="searchPatientModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" id="elementModal">
+        <div class="modal-content" id="addResizer">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">بیمه های ثبت شده</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-min-height text-right" data-parsley-validate>
+                <fieldset class="group-box group-box-green">
+                    <legend>جستجو</legend>
+                    <div class="row">
+                        <div class="form-group col-lg-2 col-sm-2 compInsurer-section">
+                            <label>کالا / خدمت</label>
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="ItemOrService" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="200">
+                                    <option value="1">1 - کالا</option>
+                                    <option value="2">2 - خدمت</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>مراجعه کننده</label>
+                            <div>
+                                <input id="searchPatientFullName" type="text" class="form-control" maxlength="50" tabindex="201">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>نمبر تذکره مراجعه کننده</label>
+                            <div>
+                                <input id="searchPatientNationalCode" type="text" class="form-control str-number" maxlength="50" tabindex="202">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>شماره بیمه</label>
+                            <div>
+                                <input id="searchPatientBasicInsurerNo" type="text" class="form-control" maxlength="10" tabindex="203">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>موبایل</label>
+                            <div>
+                                <input id="searchPatientMobileNo" type="text" class="form-control" maxlength="11" tabindex="204">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-4">
+                            <label>بیمه اجباری / صندوق بیمه</label>
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="searchPatientBasicInsurerLineId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="205">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4 col-sm-4 compInsurer-section">
+                            <label>بیمه تکمیلی/طرف قرارداد</label>
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="searchPatientCompInsurerThirdPartyId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="206">
+                                    <option value="0">انتخاب کنید</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-3 thirdParty-section">
+                            <label>تخفیف</label>
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="searchPatientDiscountInsurerId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="207">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <button id="searchPatientAdmission" type="button" class="btn btn-light border-green" style="margin-top:22.5px">
+                                <i class="fa fa-search"></i>
+                                جستجو
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="table-responsive" style="height:70vh">
+                    <table class="table table-styles border mb-0" id="patientListPagetable">
+                        <thead class="table-thead-fixed">
+                        <tr>
+                            <th class="col-width-percent-3">ردیف</th>
+                            <th class="col-width-percent-8">نوع مراجعه</th>
+                            <th class="col-width-percent-4">شناسه</th>
+                            <th class="col-width-percent-5">کدملی</th>
+                            <th class="col-width-percent-6">نام</th>
+                            <th class="col-width-percent-6"> تخلص</th>
+                            <th class="col-width-percent-4">تاریخ تولد</th>
+                            <th class="col-width-percent-3">جنسیت</th>
+                            <th class="col-width-percent-6">ملیت</th>
+                            <th class="col-width-percent-9">بیمه اجباری</th>
+                            <th class="col-width-percent-7">صندوق بیمه</th>
+                            <th class="col-width-percent-4">شماره بیمه</th>
+                            <th class="col-width-percent-5">تاریخ انقضاء</th>
+                            <th class="col-width-percent-8">بیمه تکمیلی</th>
+                            <th class="col-width-percent-8">طرف قرارداد</th>
+                            <th class="col-width-percent-8">تخفیف</th>
+                            <th class="col-width-percent-6">موبایل</th>
+                            <th class="col-width-percent-3">انتخاب</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempPatient">
+                        <tr id="emptyRow">
+                            <td colspan="18" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modalRowCountBtn" class="btn btn-secondary" disabled>تعداد سطر : <span id="modalRowCount"> 0 </span></button>
+                <button id="modal-close" onclick="modal_closeAdmission('searchPatientModal', true)" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/AdmissionMaster/AdmissionMasterDisplay.cshtml")
+
+@await Html.PartialAsync("/Modules/SearchPatientModal.cshtml")
+
+@await Html.PartialAsync("/Modules/SearchPatientInsurerModal.cshtml")
+
+<div id="actionLogModalAdmission" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست گام های ثبت شده</h5>
+                </div>
+            </div>
+
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body" id="itemPageTable">
+                    <div class="row mb-3">
+                        <div class="form-group col-sm-4">
+                            <div class="col-lg-12 chosen-container-parent">
+                                <select id="actionDropDown" class="form-control select2"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-2 pr-0">
+                            <button onclick="update_actionAdmission()" id="update_action_btn" type="button" class="btn btn-success ml-2 pa waves-effect">
+                                <i class="fa fa-check-circle"></i>
+                                <span>ثبت گام</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">گام</th>
+                                <th class="col-width-percent-10">کاربر</th>
+                                <th class="col-width-percent-10">تاریخ</th>
+                            </tr>
+                            </thead>
+                            <tbody id="stepLogRowsAdmission">
+                            <tr id="emptyRow">
+                                <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('actionLogModalAdmission')" class="btn btn-secondary waves-effect" Esc><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Modules/MC/AdmissionMaster/AdmissionMasterActionIndex.js"></script>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/js/AdmissionWebService.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/js/getJsonDataAsync.js"></script>
+<script src="/Modules/MC/AdmissionMaster/AdmissionMasterForm.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

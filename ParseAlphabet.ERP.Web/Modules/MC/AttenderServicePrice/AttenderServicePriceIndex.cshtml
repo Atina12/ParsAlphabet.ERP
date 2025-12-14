@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "تخصیص خدمات به داکتران";
+}
+
+
+<link href="~/lib/ModulesCss/Service.css" rel="stylesheet"/>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="attenterTransformServiceModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتقال خدمات داکتران</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height" id="attenterTransformServiceForm" data-parsley-validate>
+                <div class="row mt-3 text-right">
+                    <div class="col-sm-6">
+                        <div class="col-12 mb-0">
+                            <div class="form-group">
+                                <label>داکتر مبدا</label>
+                                <div>
+                                    <select id="fromAttender" class="form-control select2" tabindex="100001" required data-parsley-selectvalzero data-parsley-attenderchnage data-parsley-errors-container="#fromAttendrContainer">
+                                    </select>
+                                </div>
+                                <div id="fromAttendrContainer"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-0">
+                            <div class="form-group">
+                                <label>موضوع درمان</label>
+                                <div>
+                                    <select id="medicalSubjectId" class="form-control select2" tabindex="100002">
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 mb-0">
+                            <div class="form-group">
+                                <label>مبنای کمیسیون</label>
+                                <div>
+                                    <select id="attenderMarginBracketId" class="form-control select2" tabindex="100003">
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-12 mb-0">
+                            <div class="form-group">
+                                <label>داکتر مقصد</label>
+                                <div>
+                                    <select id="toAttender" class="form-control select2" tabindex="100004" required data-parsley-selectvalzero data-parsley-attenderchnage data-parsley-errors-container="#toAttendrContainer">
+                                    </select>
+                                </div>
+                                <div id="toAttendrContainer"></div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="attenterTransformServiceModalResult">
+                    <div class="card-body">
+                        <div>
+                            <table class="table table-styles border mb-0">
+
+                                <thead>
+                                <tr>
+                                    <th style="width:5%">
+                                        <input id="chkAll" type="checkbox" onchange="attenterTransformServiceSelectAll()"/>
+                                    </th>
+                                    <th style="width:15%">شناسه</th>
+                                    <th style="width:80%">نام</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempattenterTransformService">
+                                <tr id="emptyRow">
+                                    <td colspan="3" style="text-align:center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="perviewTransformServiceBox" class="preview-box">
+                    <button id="perviewTransformService" class="btn preview-box-btn">
+                        <span class="preview-box-btn-lable" tabindex="100003">
+                            پیش نمایش
+                        </span>
+                        <span class="preview-box-lable">
+                            پیش نمایش بروز رسانی :
+                            <span id="perviewTransformServiceCounter" class="preview-box-Counter">0</span>
+                        </span>
+                    </button>
+                </div>
+                <div id="saveTransformServiceBox" class="save-box">
+                    <button id="saveTransformService" class="btn btn-success save-box-btn" disabled>
+                        <span id="saveTransformServiceLable" class="save-box-btn-lable" tabindex="100004">
+                            بروز رسانی
+                        </span>
+                        <span class="save-box-lable">
+                            تعداد سطر بروز شده :
+                            <span id="saveTransformServiceCounter" class="save-box-Counter">0</span>
+                        </span>
+                    </button>
+                </div>
+                <button id="enableForm" class="btn blue_1 waves-effect" disabled><i class="fa fa-file-alt"></i>فعال سازی</button>
+                <button id="modal-close" onclick="modal_close('attenterTransformServiceModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<div id="sendModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0"> خدمات قابل ارسال</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="items-info text-right d-flex">
+                    <div class="services-info text-right d-flex">
+                        <p class="d-inline-block pl-2 m-1  font-12">داکتر : <span class="attenderInfoModal"></span></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="carousel-inner">
+                    <div class="carousel-item-box">
+                        <div class="card-body " id="sendtoCentral_pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="sendBtn" onclick="sendAttenderService();" class="btn btn-success waves-effect waves-light" tabindex="10"><i class="fa fa-save"></i>ارسال</button>
+
+                <button id="modal-close" onclick="modal_close('sendModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("/Modules/MC/AttenderServicePriceLine/AttenderServiceList.cshtml")
+
+<script src="/Modules/MC/AttenderServicePrice/AttenderServicePriceIndex.js"></script>

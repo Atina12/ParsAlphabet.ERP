@@ -1,0 +1,42 @@
+﻿<div id="roleFiscalYearPermissionModal" class="modal fade bs-example-modal-lg col-width-percent-85" data-keyboard="false" tabindex="-1" aria-labelledby="modal_title" role="dialog" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-sm pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">دسترسی سال مالی</h5>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="modal-body text-right " style="overflow-y:scroll !important;overflow-x:auto!important;height:220px;">
+
+
+                    <fieldset class="group-box group-box-blue mb-3">
+                        <legend> سال مالی </legend>
+                        <div class="table-responsive " style=" height: 180px; min-height: 100px; resize: vertical;">
+                            <table class="table table-styles border mb-0" style="overflow:auto" id="tbFiscalYear">
+                                <thead class="table-thead-fixed">
+                                <tr>
+                                    <th class="col-width-percent-1 text-center">
+                                        <input id="getFiscalYearValAll" onchange="getFiscalYearValAll(this,'tbFiscalYear')" type="checkbox" autocomplete="off">
+                                    </th>
+                                    <th class="col-width-percent-2">شناسه</th>
+                                    <th class="col-width-percent-12">نام</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbFiscalYearGet">
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="saveFiscalYearPermission();" class="btn btn-success waves-effect waves-light" tabindex="30" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('roleFiscalYearPermissionModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/GN/RoleFiscalYearPermission/RoleFiscalYearPermissionIndex.js"></script>

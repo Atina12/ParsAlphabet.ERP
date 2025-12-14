@@ -1,0 +1,52 @@
+﻿.suggest-container {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  max-height: 200px;
+  flex-direction: column;
+  overflow: auto;
+  background-color: #fff;
+}
+
+.suggest-icon {
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  cursor: pointer;
+}
+
+.suggest-box {
+  padding-left: 20px;
+}
+
+.suggest-icon-remove {
+  left: 15px;
+}
+
+.suggest-container-open {
+  border-radius: 0px 0px 5px 5px;
+  border: 0.5px solid;
+  border-width: 0px 0.5px 0.5px 0.5px;
+  border-top: 0.5px solid #ced4da;
+  min-height: 100px;
+}
+
+.suggest-row {
+  line-break: anywhere;
+  text-align: right;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.suggest-box-open {
+  border-radius: 5px 5px 0px 0px;
+  border: 0.5px solid;
+  border-width: 0.5px 0.5px 0px 0.5px !important;
+}
+
+.highlight-suggest {
+  background-color: #5897fb;
+  color: #fff;
+}

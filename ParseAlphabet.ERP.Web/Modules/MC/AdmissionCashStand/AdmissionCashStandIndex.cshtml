@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<!--oncontextmenu="return false"-->
+<html>
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title id="title_page"></title>
+    <meta content="Clinic Information System" name="description"/>
+    <meta content="ParsAlphabet" name="author"/>
+    <link rel="shortcut icon" href="/Content/images/favicon.ico">
+
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" asp-append-version="true">
+    <link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+
+    <link href="~/Content/css/bundle.min.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet" media="screen"/>
+    <link href="~/Content/css/printstyle.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet" media="print"/>
+    <link href="~/lib/ModalePrint/PrintCss.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet"/>
+    <link href="~/lib/ModulesCss/AdmissionCashStand.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet"/>
+
+    @{
+        <link href="/Content/scss/rtl/style-rtl.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet" type="text/css"/>
+    }
+    <script src="~/Content/js/jquery.min.js"></script>
+    <link href="~/plugins/Keyboard/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+
+    <div class="topbar">
+        <nav class="navbar-custom  row col-12">
+            <span id="ipstand" class="col-3">@ViewBag.StandIp</span>
+            <div class="text-center col-6">
+                <span class="pt-3 font-20">مجتمع بهداشتی درمانی شهید شوریده </span>
+                <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQCAMAAAC3Ycb+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjhFRjZEOTFDQTk3QzExRUE4NENFREZFRkY5OUJFRTA5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjhFRjZEOTFEQTk3QzExRUE4NENFREZFRkY5OUJFRTA5Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OEVGNkQ5MUFBOTdDMTFFQTg0Q0VERkVGRjk5QkVFMDkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OEVGNkQ5MUJBOTdDMTFFQTg0Q0VERkVGRjk5QkVFMDkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz55nCAiAAADAFBMVEX0+//65gDr7OzK0HSwuTKvqkTwsbXi4uL6+vjQBRK3xtB8e4fx89v99Iz88XJpaWn76y+irQBBSE3S0tLpi5Fzc3LLzMz87k/J2uV8g4Ld3d2Wo6zp9v7S14r65ue7vLtWV1h/f37X6PObnJvHGyafqgSls73Cw8Ojo6Oys7T42tw9Q0eDg4PYAAuBgXbkbnWdUFWLi4vB0du2KjLcRk80ODvw8PCUlJOEdna7w02rrKv29vaapBb6+/J6gIGtu8Ti9P///erXKjXp7MZETFHf8v+Om6P+/v/k57gBAQHyvcGVnCmIi1fl+P+jRkz++Lfg4NBpcnj0xMdfZGeUlF2Gk5vd4afg8//k9v/++snp/f8kJCT66Bf4/f95eXiNkkdNU1aOaGrS5O/NChb99PWSmTOpsx4SEhL09eFia3Hu//+rPEL8/PzBwaP99qKksAD9/feLjWaeq7SDhGz++vqirAuvr4aCjpbaOkTh6/POz7V3d3ZXXGB2jYv65wz7/v99fXyKjk6PlT56hY3Ozs/hX2jt9/9wfIA4PkH+/N2qgYPmfIKcphCeqArfVF22ubt8fHuEio6GiV/e8f/HyMnr1teQkI/24wPTAhB2gon+/PyRYGJ7e3pvb299ipG3uJiBhYr+//v6+/uEh2fn+v/PDRn+6QD65gV8f1PX2NmUmZ25ubju8NPGFB/CyWDc7vru7u7h5LDGxsagqwJ6h4TO3+ulrxOJjzLV1tbsnKH3+Or09/jTFSGhpqj2ztGnp6jp6emVW17j8fni9fqvsLG2trba35/l8vv09PR4iYjRCRZudnt8aWrCmJswMTGeqQaXoCB+fn2IcHF3e3p7e3zUBRCgqwd+fYF3fn2fqQX+9/iIiIf87+/PBhOYmJifoKDm5ubd8ftzf4X54OF+gYB2dnW/wMDd7fXarK+fgoPo8PSnp3rg3J7Z2tmIimi9aW7g8/x6dnXLX2Z3doG4srLV1b+RlZefoI+Yn0iBenry8vKRlGCOkJf9/f2eoHz///8C0jE+AAABAHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AU/cHJQAAKiZJREFUeNrsnQ1YU3e+50FcA1oRgkHBFzhieDFgBQtUUEENYlR0KdeCIDFqlYJc8fqyOkMq0aLG60uxclm0pLcqLmNRiwYdbB3BHXBQ51LjTGGuGKBtoLuzy+597jy3u3LH/e//nARIQgg5h/OWk/N7+jx9DCSccz75/t7+b26At/Ha11+nkvdhbvzzHKftXTXx/cs8ENbYhx7t4huAB8ISW/b+LrG4aAIPhC3eaolYLNZO7OGBsMLegt4KA9LPA2FD8JizS4xZ+/8d4IEwr473J4pN5vt3cTwQ9uCAMf3/tPJA2INDrF0a5MkDYRLHY3Mc0GP9ugHwQBizG48ntlvwEBd92sMDYcpWDWZWZvZtfCsPhJkycI3HLnG7NY+iXzd78kAYsK8f3zootmFFvyI1hPBAHPVVS8Q2TXtmfxwPhG5xvH9rl9Y2D+ixGhN5ILTamjkTD7a3j8JD6/srf8ADobHomHPLRiA3E8i6yAk8ELrswzm3JrZrxfas6Ffk5lg8kFFt2WOPieKxrGid6DrggdASxpccHBOHWFu0/q9xPBA6PNU9sSNWtE5z5w0PhOKC49bEdrFjBgXS0QR4IBTS8Fiyy1EaqEB2aoIKeSDUhY2JeGiIxb5nrv5FAHggFHVGJt5rx4UDOqyj6QlXeCDkS+M2lMZBMW4rWif/gnyBuDiQvWvmLNl1T0zEoMPSBKXyQEi0G3Nu7UKl0U6Eh1Z79C/RPYAHQlat8ZiYnxp2WMemiMJSeSAk2OVlMJ+6B/2Udjw81i0UdbcCHsg4Wez9+rbHxHsH28XjtKLn+/8S2Q94IOOJ38tIgoEF9E+niPre8ECIWuGyr9d4TDxICgyMx/opvSFxgAdCEAYs+w6K28nCIfYVH51STJHD4jiQy8s+hDDuiUk1X/HWKX/svQN4IDjNCKNdTLL5fnt0ik7UDHggOGE8vrVLTIFpz26dohKF1PFAcMC48f6tXe1iSnD4Ll0/BemNFgAeiIOdwhu3HRgKHwePTyEP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" alt="" height="45">
+            </div>
+            <a class="nav-link waves-effect col-3 text-left" href="#" id="btn-fullscreen">
+                <i class="mdi mdi-arrow-expand-all noti-icon font-26"></i>
+            </a>
+        </nav>
+    </div>
+    <div class="box displaynone" id="loader">
+        <img src="/Content/images/heart.png" id="heartbeat"/>
+    </div>
+    <div class="content-page displaynone" id="content-page">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card" style="margin-top:25px;margin-bottom:40px">
+                            <div class="">
+                                <div class="row">
+                                    <div class="timer-page">
+                                        <span class="text-danger font-32">
+                                            <span id="timerPageSecond">0</span>
+                                            <span style="font-size:15px">ثانیه</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="barcode-div" id="barcodeSection">
+                                    <div class="row text-center">
+                                        <div class="col-lg-2"></div>
+                                        <div class="form-group col-lg-8">
+                                            <div class="input-group">
+                                                <input id="barcode" type="text" class="form-control barcode height-100 font-24 text-center" maxlength="17" placeholder="از قسمت بارکدخوان ، بارکد را وارد نمایید" tabindex="21"/>
+                                                <div class="input-group-prepend ">
+                                                    <button id="barcodeReset" class="btn btn-danger fa fa-times pr-4 pl-4 waves-effect " onclick="$('#barcode').val('').focus()"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<button id="checkprint" onclick="contentPrintAdmissionCompress(307493)"> click print</button>*@
+                            </div>
+                            <div class="card" style="margin-top:5px;margin-bottom:10px">
+                                <h2 id="text_fieldset" class=" font-24 mr-2 font-weight-bold change-color-word text-center d-none">کارت بانکی را بکشید</h2>
+                                <div class="waiting-card d-none">
+                                    <div class="waiting-card-content row">
+                                        <div class="col-2"></div>
+                                        <div class="col-4 d-flex justify-content-center align-content-center">
+                                            <div class="form-group d-flex justify-content-center flex-column" style="margin-top: 17px;">
+                                                @*<div class="height-100 d-flex align-items-center" style="font-size:40px;margin-right: 2px;">مبلغ</div>*@
+                                                <div id="serviceNetAmountOrSaleNetAmount" class="height-100 d-flex align-items-center" style="color:#fc5454;font-size:40px;margin-right: 2px;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 bank-card d-flex justify-content-center">
+                                            <img class="logo-payment-card" src="/Content/images/credit-card-1.svg" alt="در انتظار دریافت کارت"/>
+                                        </div>
+                                        <div class="col-2"></div>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="patientSection">
+                                    <input id="saleTypeId" type="hidden"/>
+                                    <input id="admissionTypeId" type="hidden"/>
+                                    <input id="patientId" type="hidden"/>
+                                    <fieldset id="service_fieldset" class="group-box group-box-blue d-none" style="margin-top:15px">
+                                        <legend>اطلاعات مراجعه کننده</legend>
+                                        <div class="row">
+                                            <div class="form-group col-lg-12  ">
+                                                <label class="font-weight-normal font-22">شناسه</label> :
+                                                <label class="font-weight-bolder font-24" id="serviceAdmissionId"></label>
+                                                <label class="font-weight-normal font-22">مراجعه کننده</label> :
+                                                <label class="font-weight-bolder font-24" id="servicePatientName"></label>
+                                            </div>
+
+                                            <div class="form-group col-lg-4 basicInsurer-section">
+                                                <label class="font-18">بیمه اجباری</label>
+                                                <div>
+                                                    <input id="basicInsurerName" type="text" class="form-control money height-60 font-22" maxlength="12" tabindex="-1" disabled/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-lg-4 basicInsurer-section">
+                                                <label class="font-18">بیمه تکمیلی</label>
+                                                <div>
+                                                    <input id="compInsurerName" type="text" class="form-control money height-60 font-22" maxlength="12" tabindex="-1" disabled/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-lg-4 basicInsurer-section">
+                                                <label class="font-18">طرف قرار داد</label>
+                                                <div>
+                                                    <input id="thirdPartyName" type="text" class="form-control money height-60 font-22" maxlength="12" tabindex="-1" disabled/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-lg-7" style="margin-top: 17px;">
+                                                <div>
+                                                    <input disabled id="serviceNetAmount" type="text" class="form-control number height-100 font-26" tabindex="21" style="margin-right: 2px;">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg-5">
+                                                <div class="button-items" style="margin-top: 17px; width: 98%;">
+                                                    <button onclick="resetAll(true)" type="button" class="sendToPos btn btn-secondary height-100 font-22 waves-effect" style="width: 30%;" tabindex="23" disabled>
+                                                        انصراف
+                                                    </button>
+                                                    <button onclick="sendToPcPos()" type="button" class="sendToPos btn btn-success height-100 font-22 waves-effect" style="width: 65%;" tabindex="23" disabled>
+                                                        پرداخت
+                                                    </button>
+                                                    <figure class="image-arrow-figure-pay">
+                                                        <img src="/Content/images/arrowImage.png" class="image-arrow-pay" alt="در انتظار دریافت کارت"/>
+                                                        <figcaption class="image-arrow-label-pay">برای پرداخت کلیک کنید</figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset id="item_fieldset" class="group-box group-box-blue d-none" style="margin-top:15px">
+                                        <legend>اطلاعات مراجعه کننده</legend>
+                                        <div class="row">
+                                            <div class="form-group col-lg-12 font-24">
+                                                <label class="font-weight-normal font-22">شناسه</label> :
+                                                <label class="font-weight-bolder font-24" id="saleAdmissionId"></label>
+                                                <label class="font-weight-normal font-22">مراجعه کننده</label> :
+                                                <label class="font-weight-bolder font-24" id="salePatientName"></label>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-lg-7" style="margin-top: 17px;">
+                                                <div>
+                                                    <input disabled id="saleNetAmount" type="text" class="form-control number height-100 font-26" tabindex="21" style="margin-right: 2px;">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg-5">
+                                                <div class="button-items" style="margin-top: 17px; width: 98%;">
+                                                    <button onclick="resetAll()" type="button" class="sendToPos btn btn-secondary height-100 font-22 waves-effect" style="width: 30%;" tabindex="23" disabled>
+                                                        انصراف
+                                                    </button>
+                                                    <button onclick="sendToPcPos()" type="button" class="sendToPos btn btn-success height-100 font-22 waves-effect" style=" width: 65%;" tabindex="23" disabled>
+                                                        پرداخت
+                                                    </button>
+                                                    <figure class="image-arrow-figure-pay">
+                                                        <img src="/Content/images/arrowImage.png" class="image-arrow-pay" alt="در انتظار دریافت کارت"/>
+                                                        <figcaption class="image-arrow-label-pay">برای پرداخت کلیک کنید</figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="comments">
+                                <span>1.از قسمت بارکدخوان ، لطفا بارکد وارد نمایید.</span>
+                                <span>2.جهت پرداخت ، دکمه پرداخت را فشار دهید.</span>
+                                <span>3.کارت بانکی را بکشید.</span>
+                                <span>4.رمز خود را وارد نموده ، مبلغ بر روی کارتخوان را پرداخت نمایید.</span>
+                                <span>5.پرداخت به اتمام رسیده و پرینت خود را بردارید.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <span class="d-none d-sm-inline-block"> توسعه نوآفرین الفبای پارس <i class="mdi mdi-hospital text-danger"> </i>سیستم مدیریت اطلاعات درمانگاه </span>
+        </footer>
+    </div>
+    <div class="clearfix mt-2 mb-1" style="height:1px"></div>
+    <iframe id="frmDirectPrint" style="display:none"></iframe>
+</div>
+<script src="~/Content/js/site.bundle.min.js"></script>
+<script src="~/lib/library-bundle/libbundle.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/lib/library-bundle/web.bundle.min.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/Content/js/app.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/MC/AdmissionCashStand/AdmissionCashStandIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/js/formplate.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/_PcPos/PcPosProperty.json?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/js/JsonSinitizer.js"></script>
+</body>
+</html>

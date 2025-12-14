@@ -1,0 +1,269 @@
+﻿@{
+    ViewBag.Title = "کسورات بیمه";
+}
+
+
+<link href="~/lib/ModulesCss/AdmissionServiceReimbursmentIndex.css" rel="stylesheet"/>
+
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="inboundTimer float-left">
+                        </div>
+                        <div class="header-title d-flex">
+                            <span class="col-3">@ViewBag.Title</span>
+                            <div class="button-items col-9">
+                                <button onclick="getpageReimb()" id="getReport" class="btn green_2 waves-effect waves-light"><i class="fa fa-search"></i>جستجو</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            <fieldset class="group-box group-box-gray">
+                                <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <legend>فیلتر</legend>
+                                <div class="row slideToggle open">
+                                    <div class="row col-12" id="admissionReimburesmentForm" data-parsley-validate>
+                                        @* ///////////////////////////////////////////////////////////////////////////////// *@
+                                        <div class="form-group col-lg-3  col-sm-4">
+                                            <label>تاریخ رزرو</label>
+                                            <div class="double-input-box">
+                                                <div class="double-input">
+                                                    <input type="text" id="rb_fromReserveDatePersian" class="form-control number persian-date" placeholder="____/__/__" value="@PersianDateTime.GetFirstDayOfCurrentMonth()" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-errors-container="#fromReserveDateErrorContainer" data-parsley-comparedate="rb_toReserveDatePersian" data-parsley-dateisonemonth="rb_toReserveDatePersian" maxlength="10" tabindex="20000"/>
+                                                </div>
+                                                <div class="double-input">
+                                                    <input type="text" id="rb_toReserveDatePersian" class="form-control number persian-date" placeholder="____/__/__" value="@PersianDateTime.GetToday()" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-errors-container="#toReserveDateErrorContainer" maxlength="10" tabindex="20001"/>
+                                                </div>
+                                            </div>
+                                            <div class="double-input-box">
+                                                <div class="double-input" id="fromReserveDateErrorContainer"></div>
+                                                <div class="double-input" id="toReserveDateErrorContainer"></div>
+                                            </div>
+                                        </div>
+                                        @* ///////////////////////////////////////////////////////////////////////////////// *@
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>جریان کار</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="rb_workflowId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-errors-container="#rb_workflowIdErrorContainer" tabindex="20002">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="rb_workflowIdErrorContainer"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>مرحله</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="rb_stageId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-errors-container="#rb_stageIdErrorContainer" tabindex="20003">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="rb_stageIdErrorContainer"></div>
+                                        </div>
+                                        @* ///////////////////////////////////////////////////////////////////////////////// *@
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>شناسه پرونده</label>
+                                            <input id="rb_AdmissionMasterId" type="text" class="form-control number" tabindex="20004"/>
+                                        </div>
+
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>شناسه پذیرش</label>
+                                            <input id="rb_AdmissionId" type="text" class="form-control number" tabindex="20005"/>
+                                        </div>
+
+                                        @* ///////////////////////////////////////////////////////////////////////////////// *@
+
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>بیمه اجباری</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="rb_insurerId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-errors-container="#rb_insurerIdErrorContainer" tabindex="20006">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="rb_insurerIdErrorContainer"></div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2 col-sm-4 basicInsurer-section">
+                                            <label>صندوق بیمه اجباری</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="rb_basicInsurerLineId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-errors-container="#rb_basicInsurerLineIdErrorContainer" tabindex="20007" disabled>
+                                                </select>
+                                            </div>
+                                            <div id="rb_basicInsurerLineIdErrorContainer"></div>
+                                        </div>
+
+                                        @* ///////////////////////////////////////////////////////////////////////////////// *@
+                                        <div class="form-group col-lg-2 col-sm-4 compInsurer-section">
+                                            <label>بیمه تکمیلی</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="rb_compInsurerId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="20008">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4 compInsurer-section">
+                                            <label>صندوق بیمه تکمیلی</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="rb_compInsurerLineId" data-placeholder="انتخاب کنید" class="form-control select2" data-parsley-errors-container="#rb_compInsurerLineIdErrorContainer" tabindex="20009" disabled>
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="rb_compInsurerLineIdErrorContainer"></div>
+                                        </div>
+                                        @* ///////////////////////////////////////////////////////////////////////////////// *@
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>مراجعه کننده</label>
+                                            <div class="col-12 chosen-container-parent">
+                                                <input id="rb_patientFullName" type="text" class="form-control " tabindex="20010"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>داکتر</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="rb_attenderId" class="form-control select2" tabindex="20011">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-sm-6">
+                                            <label>خدمت</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="rb_serviceId" class="form-control select2" tabindex="20012">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>نوع خدمت</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="rb_serviceTypeId" class="form-control select2" tabindex="20013">
+                                                    <option></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <ul id="tabBox" class="nav nav-pills nav-justified mt-4 d-none" role="tablist">
+                                <li class="nav-item waves-effect waves-light" onclick="selectTab(1,'requestBasicInsurerPagetable')">
+                                    <a id="requestBasicInsurerPagetableTagA" class="nav-link active" data-toggle="tab" href="#requestBasicInsurerTab" role="tab">
+                                        <span class="d-none d-md-block">بیمه اجباری</span>
+                                        <span class="d-block d-md-none">
+                                            <i class="mdi mdi-account h5"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" onclick="selectTab(2,'requestComInsurerPagetable')">
+                                    <a id="requestComInsurerPagetableTagA" class="nav-link" data-toggle="tab" href="#requestComInsurerTab" role="tab">
+                                        <span class="d-none d-md-block">بیمه تکمیلی</span>
+                                        <span class="d-block d-md-none">
+                                            <i class="mdi mdi-account h5"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="tabBoxPagetables" class="tab-content group-box group-box-gray w-100 d-none">
+                                <div class="tab-pane active pr-3 pl-3 pb-3 pt-0" id="requestBasicInsurerTab" role="tabpanel">
+                                    <div class="row tabToggle1">
+                                        <div class="col-12">
+                                            <div class="card-body " id="requestBasicInsurerPagetable">
+                                                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="requestComInsurerTab" role="tabpanel">
+                                    <div class="row tabToggle3">
+                                        <div class="col-12">
+                                            <div class="card-body " id="requestComInsurerPagetable">
+                                                @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="newAdmFormModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" style="height:88%">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">ویرایش پذیرش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentNewAdmission" data-parsley-validate="">
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close_newAdm()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="changeInsurerDataModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">ویرایش اطلاعات بیمه</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="changeInsurerData" data-parsley-validate="">
+                <div class="form-group col-12 pt-2">
+                    <div class="row" id="rowKeyId">
+                        <div class="d-block w-100 text-right mb-2 pr-3">
+                            <div class="key_id">
+                                <lable id="modal_keyid_caption">شناسه</lable>
+                                <span id="modal_keyid_value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-lg-4 col-sm-4 basicInsurer-section">
+                        <label>شماره بیمه</label>
+                        <div>
+                            <input id="insurNoReimbursment" type="text" class="form-control str-number" maxlength="16" data-parsley-maxlength="16" tabindex="100001"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4 col-sm-4 E-Section">
+                        <label>انقضاء دفترچه</label>
+                        <div id="datepicker-place">
+                            <input id="insurExpDatePersianReimbursment" type="text" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate maxlength="10" tabindex="100002"/>
+                            <ul class="parsley-errors-list filled d-none" id="parsley-expdate">
+                                <li class="parsley-expdate">تاریخ انقضاء دفترچه معتبر نمی باشد</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4 col-sm-4 B-Section">
+                        <label>شماره صفحه دفترچه</label>
+                        <div>
+                            <input id="insurPageNoReimbursment" type="text" class="form-control number" maxlength="9" data-parsley-max="9999" data-parsley-min="0" tabindex="100003"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalSaveChangeInsurer" onclick="savechangeInsurerData();" class="btn btn-success waves-effect waves-light" tabindex="100004"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('changeInsurerDataModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/SearchPatientModal.cshtml")
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="~/js/admission.js"></script>
+<script src="/Modules/MC/AdmissionServiceReimbursment/AdmissionServiceReimbursmentIndex.js"></script>

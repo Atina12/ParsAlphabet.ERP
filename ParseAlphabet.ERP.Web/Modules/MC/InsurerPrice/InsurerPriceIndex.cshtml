@@ -1,0 +1,935 @@
+﻿@{
+    ViewBag.Title = "قیمت گذاری بیمه";
+}
+
+<link href="~/lib/ModulesCss/Service.css" rel="stylesheet"/>
+
+<style>
+    #services_pagetable .table-responsive-table,
+    #items_pagetable .table-responsive-table {
+        height: calc(100vh - 250px) !important;
+    }
+
+    #medicalItemPrice_getPage .table-responsive-table {
+        height: calc(100vh - 310px) !important;
+    }
+</style>
+
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                            </div>
+                        </div>
+
+                        <div class="card-body" id="medicalItemPrice_getPage">
+                            <fieldset class="group-box group-box-gray">
+                                <legend>فیلتر</legend>
+                                <div class="row slideToggle open" id="medicalItemPriceFilters" data-parsley-validate>
+                                    <div class="row col-12">
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>شناسه</label>
+                                            <input id="medicalItemPriceId" type="text" class="form-control number" tabindex="1"/>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>دسته بندی کالا / خدمت</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="itemTypeId" class="form-control select2" tabindex="2" data-parsley-selectvalzero data-parsley-errors-container="#itemTypeIdErrorContainer">
+                                                    <option value="0">انتخاب کنید</option>
+                                                    <option value="1">1 - کالا</option>
+                                                    <option value="2">2 - خدمت</option>
+                                                </select>
+                                            </div>
+                                            <div id="itemTypeIdErrorContainer"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>نوع بیمه</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="insurerTypeId" class="form-control select2" tabindex="3" data-parsley-selectvalzero data-parsley-errors-container="#insurerTypeIdErrorContainer">
+                                                    <option value="0">انتخاب کنید</option>
+                                                    <option value="1">1 - اجباری</option>
+                                                    <option value="2">2 - تکمیلی</option>
+                                                    <option value="4">4 - طرف قرارداد</option>
+                                                    <option value="5">5 - تخفیف</option>
+                                                </select>
+                                            </div>
+                                            <div id="insurerTypeIdErrorContainer"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>موضوع درمان</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="medicalSubjectId" class="form-control select2" tabindex="4" data-parsley-errors-container="#medicalSubjectIdErrorContainer">
+                                                </select>
+                                            </div>
+                                            <div id="medicalSubjectIdErrorContainer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-12">
+                                        <div class="form-group col-lg-4 col-sm-4">
+                                            <label id="itemIdLabel"></label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select id="itemId" class="form-control select2" tabindex="5">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                            <div id="itemIdErrorContainer"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label style="visibility:hidden">جستجو</label>
+                                            <div class="col-sm-12">
+                                                <div class="button-items text-right">
+                                                    <button onclick="getMedicalItemPriceList()" id="getList" class="btn green_2 waves-effect waves-light" tabindex="6"><i class="fa fa-search"></i>جستجو</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="insurerPriceModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" data-backdrop="static" aria-hidden="true" onkeydown="">
+    <div class="modal-dialog modal-size-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">تعرفه بیمه کالا و خدمات</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" id="insurerPriceForm" data-parsley-validate>
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label>کالا/خدمات</label>
+                        <div>
+                            <select id="insurerPriceItemTypeId" class="form-control select2" tabindex="29">
+                                <option value="1">1- کالا</option>
+                                <option value="2">2 - خدمات</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label>نوع تعرفه</label>
+                        <div>
+                            <select id="insurerTypePI" class="form-control select2" tabindex="30">
+                                <option value="1">1 - اجباری</option>
+                                <option value="2">2 - تکمیلی</option>
+                                <option value="4">3 - طرف قرارداد</option>
+                                <option value="5">4 - تخفیف</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="hasNationalCodePIDiv">
+                        <label>وضعیت نمبر تذکره</label>
+                        <div>
+                            <select id="hasNationalCodePI" class="form-control select2" tabindex="31">
+                                <option value="0">دارد</option>
+                                <option value="1">ندارد</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label>بیمه</label>
+                        <div>
+                            <select id="insurerPI" class="form-control select2" required tabindex="32" data-parsley-errors-container="#insurerPIContainer"></select>
+                        </div>
+                        <div id="insurerPIContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-4" id="insuranceBoxPIDiv">
+                        <label>صندوق بیمه</label>
+                        <div>
+                            <select id="insuranceBoxPI" class="form-control select2" tabindex="33"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="attributePIIDiv">
+                        <label>نشانه</label>
+                        <div>
+                            <select id="attributePI" class="form-control select2" tabindex="34">
+                                <option value="0">انتخاب کنید</option>
+                                <option value="">ندارد</option>
+                                <option value="*">*</option>
+                                <option value="*+">*+</option>
+                                <option value='"'>"</option>
+                                <option value="+">+</option>
+                                <option value="#*+">#*+</option>
+                                <option value="#+">#+</option>
+                                <option value="#">#</option>
+                                <option value="#*">#*</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="serviceTypeIdPIDiv">
+                        <label>نوع خدمت</label>
+                        <div>
+                            <select id="serviceTypeIdPI" class="form-control select2" tabindex="35" data-parsley-errors-container="#serviceTypeIdPIContainer">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="serviceTypeIdPIContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label>نوع محاسبه</label>
+                        <div>
+                            <select id="insurerPriceCalculationMethodIdPI" class="form-control select2" tabindex="36">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="fromServiceIdPIDiv">
+                        <label>از شناسه خدمت</label>
+                        <div>
+                            <input id="fromServiceIdPI" type="text" class="form-control number" maxlength="10" tabindex="37" data-parsley-rangeid data-parsley-max="32767" data-parsley-rangeidPI/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="toServiceIdPIDiv">
+                        <label>تا شناسه خدمت</label>
+                        <div>
+                            <input id="toServiceIdPI" type="text" class="form-control number" maxlength="10" tabindex="38" data-parsley-rangeid data-parsley-max="32767" data-parsley-rangeidPI/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="fromNationalCodePIDiv">
+                        <label>از نمبر تذکره</label>
+                        <div>
+                            <input id="fromNationalCodePI" type="text" class="form-control number" maxlength="10" tabindex="39" data-parsley-nationalcoderangei/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="toNationalCodePIDiv">
+                        <label>تا نمبر تذکره</label>
+                        <div>
+                            <input id="toNationalCodePI" type="text" class="form-control number" maxlength="10" tabindex="40" data-parsley-nationalcoderangei/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="priceProfessionalCodePIDiv">
+                        <label>تعرفه حرفه ای</label>
+                        <div>
+                            <input id="priceProfessionalCodePI" type="text" class="form-control money" maxlength="10" tabindex="41" data-parsley-min="0"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="priceTechnicalCodePIDiv">
+                        <label>تعرفه فنی</label>
+                        <div>
+                            <input id="priceTechnicalCodePI" type="text" class="form-control money" maxlength="10" tabindex="42" data-parsley-min="0"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="priceAnesthesiaBasePIDiv">
+                        <label>تعرفه بیهوشی</label>
+                        <div>
+                            <input id="priceAnesthesiaBasePI" type="text" class="form-control money" maxlength="10" tabindex="43" data-parsley-min="0"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4" id="compPriceDiv">
+                        <label>تعرفه</label>
+                        <div>
+                            <input id="compPrice" type="text" class="form-control money" maxlength="10" tabindex="44" data-parsley-min="0"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label>درصد پوشش بیمه</label>
+                        <div>
+                            <input id="sharePer" type="text" class="form-control decimal mask" maxlength="6" required tabindex="45" data-parsley-maxminpercent data-inputmask="'mask':'9{2,3}/9{3}','radixPoint':'/'"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="perviewInsurerPriceBox" class="preview-box">
+                    <button id="perviewInsurerPrice" class="btn preview-box-btn">
+                        <span class="preview-box-btn-lable" tabindex="46">
+                            پیش نمایش
+                        </span>
+                        <span class="preview-box-lable">
+                            پیش نمایش بروز رسانی :
+                            <span id="perviewInsurerPriceCounter" class="preview-box-Counter">0</span>
+                        </span>
+                    </button>
+                </div>
+                <div id="savePriceServiceBox" class="save-box">
+                    <button id="savePriceInsurer" class="btn btn-success save-box-btn" disabled>
+                        <span id="savePriceInsurerLable" class="save-box-btn-lable" tabindex="47">
+                            بروز رسانی
+                        </span>
+                        <span class="save-box-lable">
+                            تعداد سطر بروز شده :
+                            <span id="affectedRowsInsurer" class="save-box-Counter">0</span>
+                        </span>
+                    </button>
+                </div>
+                <button id="enableFormPI" onclick="enableForm(this, 'pi' , '#savePriceInsurer' )" class="btn blue_1 waves-effect" disabled><i class="fa fa-file-alt"></i>فعال سازی</button>
+                <button id="modal-close" onclick="modal_close('insurerPriceModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="insuranceTransformServiceModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event,this)">
+<div class="modal-dialog modal-size-xl">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0">انتقال بیمه کالا و خدمات</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height" id="insuranceTransformServiceForm" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="changeTabTransform(1)">
+        <a class="nav-link active" data-toggle="tab" href="#insuranceBox" data-no="1" role="tab" id="firstTab">
+            <span class="d-none d-md-block">بیمه اجباری</span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="changeTabTransform(2)">
+        <a class="nav-link" data-toggle="tab" href="#compInsuranceBox" data-no="2" role="tab">
+            <span class="d-none d-md-block">بیمه تکمیلی</span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="changeTabTransform(3)">
+        <a class="nav-link" data-toggle="tab" href="#thirdPartyBox" data-no="3" role="tab">
+            <span class="d-none d-md-block">طرف قرار داد</span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="changeTabTransform(4)">
+        <a class="nav-link" data-toggle="tab" href="#discountBox" data-no="4" role="tab">
+            <span class="d-none d-md-block">تخفیف</span>
+        </a>
+    </li>
+</ul>
+<div class="tab-content group-box group-box-gray text-right">
+<div class="tab-pane active p-3 " id="insuranceBox" role="tabpanel" data-parsley-validate>
+    <div class="form-group tabToggle1" data-parsley-validate>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>کالا/خدمات</label>
+                    <div class="col-sm-12 chosen-container-parent">
+                        <select id="serviceOrItemInsurance" class="form-control itemtype-basic select2" tabindex="249">
+                            <option value="1">1 - کالا</option>
+                            <option value="2">2 - خدمت</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>به روزرسانی / حذف</label>
+                    <div>
+                        <select id="operationTypeInsurance" class="form-control select2" data-parsley-selectvalzero data-parsley-errors-container="#operationTypeFromError" tabindex="254">
+                            <option value="1">1 - به روزرسانی</option>
+                            <option value="2">2- حذف</option>
+                        </select>
+                    </div>
+                    <div id="operationTypeFromError"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>بیمه اجباری مبدا</label>
+                        <div>
+                            <select id="basicInsurerIdFrom" class="form-control select2" data-parsley-validationmodal data-parsley-selectvalzero="" data-parsley-errors-container="#basicInsurerIdFromError" tabindex="250">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="basicInsurerIdFromError"></div>
+                    </div>
+                </div>
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>صندوق بیمه مبدا</label>
+                        <div>
+                            <select id="basicInsuranceBoxIdFrom" class="form-control select2" tabindex="251" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#basicInsuranceBoxIdFromError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="basicInsuranceBoxIdFromError"></div>
+
+                    </div>
+
+                </div>
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>روش محاسبه</label>
+                        <div>
+                            <select id="basicCalculationMethodId" class="form-control select2" tabindex="252" required data-parsley-selectvalzero data-parsley-errors-container="#basicCalculationMethodIdError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="basicCalculationMethodIdError"></div>
+                    </div>
+
+                </div>
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>خدمت</label>
+                        <div>
+                            <select id="basicItemId" class="form-control select2" tabindex="253" data-parsley-validationmodal="">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>بیمه اجباری مقصد</label>
+                        <div>
+                            <select id="basicInsurerIdTo" class="form-control select2" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#basicInsurerIdToError" tabindex="255">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="basicInsurerIdToError"></div>
+                    </div>
+                </div>
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>صندوق بیمه مقصد</label>
+                        <div>
+                            <select id="basicInsuranceBoxIdTo" class="form-control select2" tabindex="256" onkeydown="" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#basicInsuranceBoxIdToError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="basicInsuranceBoxIdToError"></div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>درصد پوشش</label>
+                        <div>
+                            <input id="basicInsurerSharePer" type="text" class="form-control money" maxlength="3" required data-parsley-maxminpercent tabindex="257" disabled onblur="lastElementTab()" data-parsley-errors-container="#basicInsurerSharePerError"/>
+
+                        </div>
+                        <div id="basicInsurerSharePerError"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="basicCalculationMethodResult">
+            <div class="card-body">
+                <div>
+                    <table class="table table-styles border mb-0">
+
+                        <thead>
+                        <tr>
+                            <th style="width:10%">انتخاب</th>
+                            <th style="width:10%">ردیف</th>
+                            <th style="width:30%">روش محاسبه</th>
+                            <th style="width:20%">درصد پوشش</th>
+                            <th style="width:20%">تعداد خدمات</th>
+                            <th style="width:10%">عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempbasicCalculationMethod">
+                        <tr id="emptyRow">
+                            <td colspan="6" style="text-align:center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="compInsuranceBox" role="tabpanel">
+    <div class="form-group tabToggle2" data-parsley-validate>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>کالا/خدمات</label>
+                    <div class="col-sm-12 chosen-container-parent">
+                        <select id="serviceOrItemCompInsurance" class="form-control itemtype-comp select2" tabindex="259">
+                            <option value="1">1 - کالا</option>
+                            <option value="2">2 - خدمت</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>به روزرسانی / حذف</label>
+                    <div>
+                        <select id="operationTypeCompInsurance" class="form-control select2" data-parsley-selectvalzero data-parsley-errors-container="#operationTypeCompInsuranceFromError" tabindex="264">
+                            <option value="1">1 - به روزرسانی</option>
+                            <option value="2">2- حذف</option>
+                        </select>
+                    </div>
+                    <div id="operationTypeCompInsuranceFromError"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>بیمه تکمیلی مبدا</label>
+                        <div>
+                            <select id="compInsuranceBoxIdFrom" class="form-control select2" tabindex="260" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#compInsuranceBoxIdFromError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="compInsuranceBoxIdFromError"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>صندوق بیمه مبدا</label>
+                        <div>
+                            <select id="compInsurerLineIdFrom" class="form-control select2" tabindex="261" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#compInsurerLineIdFromError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="compInsurerLineIdFromError"></div>
+
+                    </div>
+                </div>
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>روش محاسبه</label>
+                        <div>
+                            <select id="compCalculationMethodId" class="form-control select2" tabindex="262" required data-parsley-selectvalzero data-parsley-errors-container="#compCalculationMethodIdError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="compCalculationMethodIdError"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>خدمت</label>
+                        <div>
+                            <select id="compItemId" class="form-control select2" tabindex="263" data-parsley-validationmodal="">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>بیمه تکمیلی مقصد</label>
+                        <div>
+                            <select id="compInsuranceBoxIdTo" class="form-control select2" tabindex="265" onkeydown="" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#compInsuranceBoxIdToError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="compInsuranceBoxIdToError"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>صندوق بیمه مقصد</label>
+                        <div>
+                            <select id="compInsurerLineIdTo" class="form-control select2" tabindex="266" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#compInsurerLineIdToError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="compInsurerLineIdToError"></div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>درصد پوشش</label>
+                        <div>
+                            <input id="compInsurerSharePer" type="text" class="form-control money" maxlength="3" required data-parsley-maxminpercent tabindex="267" disabled onblur="lastElementTab()" data-parsley-errors-container="#compInsurerSharePerError"/>
+
+                        </div>
+                        <div id="compInsurerSharePerError"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div id="compCalculationMethodResult">
+            <div class="card-body">
+                <div>
+                    <table class="table table-styles border mb-0">
+
+                        <thead>
+                        <tr>
+                            <th style="width:10%">انتخاب</th>
+                            <th style="width:10%">ردیف</th>
+                            <th style="width:30%">روش محاسبه</th>
+                            <th style="width:20%">درصد پوشش</th>
+                            <th style="width:20%">تعداد خدمات</th>
+                            <th style="width:10%">عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempcompCalculationMethod">
+                        <tr id="emptyRow">
+                            <td colspan="6" style="text-align:center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="thirdPartyBox" role="tabpanel">
+    <div class="form-group tabToggle3" data-parsley-validate>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>کالا/خدمات</label>
+                    <div class="col-sm-12 chosen-container-parent">
+                        <select id="serviceOrItemThirdParty" class="form-control itemtype-thirdparty select2" tabindex="270">
+                            <option value="1">1 - کالا</option>
+                            <option value="2">2 - خدمت</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>به روزرسانی / حذف</label>
+                    <div>
+                        <select id="operationTypeThirdParty" class="form-control select2 select2" data-parsley-selectvalzero data-parsley-errors-container="#operationTypeThirdPartyFromError" tabindex="274">
+                            <option value="1">1 - به روزرسانی</option>
+                            <option value="2">2- حذف</option>
+                        </select>
+                    </div>
+                    <div id="operationTypeThirdPartyFromError"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>طرف قرارداد مبدا</label>
+                        <div>
+                            <select id="thirdPartyIdFrom" class="form-control select2" tabindex="271" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#thirdPartyIdFromError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="thirdPartyIdFromError"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>طرف قرارداد مقصد</label>
+                        <div>
+                            <select id="thirdPartyIdTo" class="form-control select2" tabindex="275" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#thirdPartyIdToError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="thirdPartyIdToError"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>روش محاسبه</label>
+                        <div>
+                            <select id="thirdCalculationMethodId" class="form-control select2" tabindex="272" required data-parsley-selectvalzero data-parsley-errors-container="#thirdCalculationMethodIdError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="thirdCalculationMethodIdError"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-6 mb-0">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>درصد پوشش</label>
+
+                        <div>
+                            <input id="thirdInsurerSharePer" type="text" class="form-control money" maxlength="3" required data-parsley-maxminpercent tabindex="276" disabled onblur="lastElementTab()" data-parsley-errors-container="#thirdInsurerSharePerError"/>
+
+                        </div>
+                        <div id="thirdInsurerSharePerError"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>خدمت</label>
+                        <div>
+                            <select id="thirdItemId" class="form-control select2" tabindex="273" data-parsley-validationmodal="">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="thirdCalculationMethodResult">
+            <div class="card-body">
+                <div>
+                    <table class="table table-styles border mb-0">
+
+                        <thead>
+                        <tr>
+                            <th style="width:10%">انتخاب</th>
+                            <th style="width:10%">ردیف</th>
+                            <th style="width:30%">روش محاسبه</th>
+                            <th style="width:20%">درصد پوشش</th>
+                            <th style="width:20%">تعداد خدمات</th>
+                            <th style="width:10%">عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempthirdCalculationMethod">
+                        <tr id="emptyRow">
+                            <td colspan="6" style="text-align:center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="discountBox" role="tabpanel">
+    <div class="form-group  tabToggle4" data-parsley-validate>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>کالا/خدمات</label>
+                    <div class="col-sm-12 chosen-container-parent">
+                        <select id="serviceOrItemDiscount" class="form-control itemtype-discount select2" tabindex="280">
+                            <option value="1">1 - کالا</option>
+                            <option value="2">2 - خدمت</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group col-12">
+                    <label>به روزرسانی / حذف</label>
+                    <div>
+                        <select id="operationTypeDiscount" class="form-control select2" data-parsley-selectvalzero data-parsley-errors-container="operationTypeDiscountFromError" tabindex="284">
+                            <option value="1">1 - به روزرسانی</option>
+                            <option value="2">2- حذف</option>
+                        </select>
+                    </div>
+                    <div id="operationTypeDiscountFromError"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>تخفیف مبدا</label>
+                        <div>
+                            <select id="discountIdFrom" class="form-control select2" tabindex="281" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#discountIdFromError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="discountIdFromError"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-12 mb-0">
+                    <div class="form-group">
+                        <label>تخفیف مقصد</label>
+                        <div>
+                            <select id="discountIdTo" class="form-control select2" tabindex="285" data-parsley-validationmodal="" data-parsley-selectvalzero="" data-parsley-errors-container="#discountIdToError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="discountIdToError"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>روش محاسبه</label>
+                        <div>
+                            <select id="discountCalculationMethodId" class="form-control select2" tabindex="282" required data-parsley-selectvalzero data-parsley-errors-container="#discountCalculationMethodIdError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="discountCalculationMethodIdError"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-6 mb-0">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>درصد پوشش</label>
+
+                        <div>
+                            <input id="discountInsurerSharePer" type="text" class="form-control money" maxlength="3" required data-parsley-maxminpercent tabindex="286" disabled onblur="lastElementTab()" data-parsley-errors-container="#discountInsurerSharePerError"/>
+
+                        </div>
+                        <div id="discountInsurerSharePerError"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col-sm-6">
+                <div class="col-12 mb-0">
+                    <div class="form-group">
+                        <label>خدمت</label>
+                        <div>
+                            <select id="discountItemId" class="form-control select2" tabindex="283" data-parsley-validationmodal="">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="discountCalculationMethodResult">
+            <div class="card-body">
+                <div>
+                    <table class="table table-styles border mb-0">
+
+                        <thead>
+                        <tr>
+                            <th style="width:10%">انتخاب</th>
+                            <th style="width:10%">ردیف</th>
+                            <th style="width:30%">روش محاسبه</th>
+                            <th style="width:20%">درصد پوشش</th>
+                            <th style="width:20%">تعداد خدمات</th>
+                            <th style="width:10%">عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempdiscountCalculationMethod">
+                        <tr id="emptyRow">
+                            <td colspan="6" style="text-align:center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+    <div id="perviewTransformServiceBox" class="preview-box">
+        <button onclick="saveCopyInsurer(true)" id="previewTransformService" class="btn preview-box-btn">
+            <span class="preview-box-btn-lable" tabindex="100004">
+                پیش نمایش
+            </span>
+            <span class="preview-box-lable">
+                پیش نمایش بروز رسانی :
+                <span id="perviewTransformServiceCounter" class="preview-box-Counter">0</span>
+            </span>
+        </button>
+    </div>
+    <div id="saveTransformServiceBox" class="save-box">
+        <button onclick="saveCopyInsurer(false,1)" id="saveTransformService" class="btn btn-success save-box-btn" disabled>
+            <span id="saveTransformServiceLable" class="save-box-btn-lable" tabindex="100005">
+                بروز رسانی
+            </span>
+            <span class="save-box-lable">
+                تعداد سطر بروز شده :
+                <span id="saveTransformServiceCounter" class="save-box-Counter">0</span>
+            </span>
+        </button>
+    </div>
+    <div id="deleteTransformServiceBox" class="delete-box">
+        <button onclick="saveCopyInsurer(false,2)" id="deleteTransformService" class="btn btn-danger delete-box-btn" disabled>
+            <span id="deleteTransformServiceLable" class="delete-box-btn-lable" tabindex="100005">
+                حذف
+            </span>
+            <span class="delet-box-lable">
+                تعداد سطر حذف شده :
+                <span id="deleteTransformServiceCounter" class="delete-box-Counter">0</span>
+            </span>
+        </button>
+    </div>
+    <button id="enableFormCopy" onclick="enableForm(this,'copy','#saveTransformService')" class="btn blue_1 waves-effect" disabled><i class="fa fa-file-alt"></i>فعال سازی</button>
+    <button id="modal-close" onclick="modal_close('insuranceTransformServiceModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="sendModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0"> تعرفه بیمه</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="items-info text-right d-flex">
+                    <div class="services-info text-right d-flex">
+                        <p class="d-inline-block pl-2 m-1 border-left font-12"> خدمت : <span class="serviceNameSendModal"></span></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="carousel-inner">
+                    <div class="carousel-item-box">
+                        <div class="card-body " id="sendtoCentral_pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="sendBtn" onclick="sendInsurerToCentral();" class="btn btn-success waves-effect waves-light" tabindex="10"><i class="fa fa-save"></i>ارسال</button>
+
+                <button id="modal-close" onclick="modal_close('sendModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("/Modules/MC/InsurerPriceLine/InsurerPriceLineIndex.cshtml")
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="/Modules/MC/InsurerPrice/InsurerPriceIndex.js"></script>

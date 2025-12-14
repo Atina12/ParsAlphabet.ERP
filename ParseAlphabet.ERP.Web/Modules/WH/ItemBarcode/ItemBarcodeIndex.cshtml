@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "بارکد";
+}
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-align-top modal-size-md">
+    <div class="modal-content">
+        <div class="modal-header bg-header">
+            <div class="text-right">
+                <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+            </div>
+        </div>
+        <div class="modal-body modal-max-height text-right " data-parsley-validate>
+            <div class="row" id="rowKeyId">
+                <div class="d-block w-100 text-right mb-2 pr-3">
+                    <div class="key_id">
+                        <lable id="modal_keyid_caption"></lable>
+                        <span id="modal_keyid_value"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>نوع آیتم</label>
+                    <div>
+                        <select id="itemTypeId" class="form-control" title="" required data-parsley-selectvalzero tabindex="1">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>نام آیتم</label>
+                    <div>
+                        <select id="itemNameId" class="form-control" title="" required data-parsley-selectvalzero tabindex="2">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>دسته بندی </label>
+                    <div>
+                        <input id="categoryItemId" type="text" class="form-control" tabindex="3" disabled/>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>صفات آیتم</label>
+                    <div>
+                        <select id="itemAttributeIds" class="form-control select2" title="" data-parsley-selectvalzero required tabindex="4">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>بارکد </label>
+                    <div>
+                        <input id="barcode" type="text" class="form-control" title="" maxlength="16" required tabindex="5"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick=" resetInputs(); modal_close();" class="btn btn-secondary waves-effect" data-dismiss="modal" tabindex="6" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+
+<script src="/Modules/WH/ItemBarcode/ItemBarcodeIndex.js"></script>

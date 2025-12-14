@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ParsAlphabet.ERP.Domain.Models.DatabaseEntities;
+
+public partial class AdmissionReferClinicFindingLineDetail
+{
+    public int HeaderId { get; set; }
+
+    public byte RowNumber { get; set; }
+
+    public byte DetailRowNumber { get; set; }
+
+    public short? BodySiteId { get; set; }
+
+    public short? LateralityId { get; set; }
+}

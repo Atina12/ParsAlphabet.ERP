@@ -1,0 +1,142 @@
+﻿#content-page {
+    padding-bottom: 40px;
+}
+
+.green_4:hover {
+    color: #fff !important
+}
+
+.nav {
+    margin-top: 10px;
+}
+
+#reserve_weekdays.nav {
+    margin-top: 10px;
+    border-bottom: 0 !important;
+}
+
+.tab-content {
+    border-top: 2px solid #566271 !important;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top: none;
+}
+
+.carousel-inner .day-slot .nav-pills .nav-link.active {
+    background-color: #fff !important;
+    color: #112233 !important;
+}
+
+#tabBoxByAction {
+    position: relative
+}
+
+    #tabBoxByAction .table-responsive-table {
+        height: auto;
+    }
+
+.card.m-b-30 {
+    margin-bottom: 0px !important;
+}
+
+.new-page-table {
+    table-layout: unset !important;
+}
+
+    .body-report.table-styles thead tr th, .body-report.table-styles tbody tr td, .new-page-table.table-styles thead tr th, .new-page-table.table-styles tbody tr td {
+        min-width: unset !important;
+    }
+
+.ui-resizable-w {
+    cursor: auto !important;
+    width: 15px !important;
+}
+
+.elementActive {
+    background-color: white;
+    color: #354558
+}
+
+.elementInActive {
+    background-color: rgba(180, 180, 180,0.9);
+    color: black
+}
+
+.countOfListWaiting {
+    min-width: 20px;
+    width: auto;
+    height: 20px;
+    border-radius: 50px;
+    font-size: 12px
+}
+
+/*#tabBoxByAction #parentPageTableBody {
+    height: calc(100vh - 450px) !important;*/
+/*height: 350px;*/
+/*resize: vertical;
+}*/
+
+#reservedListTo #parentPageTableBody,
+#reservedListFrom #parentPageTableBody {
+    height: calc(100vh - 550px) !important;
+}
+
+#reservedMoveListTo #parentPageTableBody,
+#reservedMoveListFrom #parentPageTableBody {
+    height: calc(100vh - 550px) !important;
+}
+
+#tabBoxByAction .table-responsive-table {
+    min-height: 300px !important;
+    height: 510px !important
+}
+
+#actionModal th,
+#actionsModal th,
+#actionErrModal th {
+    border: 1px solid #dee2e6;
+    height: 20px;
+    background-color: #dee2e6;
+    background: #d2d1d1;
+    padding: 2px
+}
+
+#actionModal td,
+#actionsModal td,
+#actionErrModal td {
+    padding: 4px;
+    border: 1px solid #dee2e6;
+}
+
+/*.actionBtnClick {
+    border-color: #008024 !important;
+    color: #008024 !important;
+}*/
+
+.step-btn {
+    padding: 4px 16px;
+    color: #333;
+    text-decoration: none;
+    background: #e5e5e5;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#actionsModalTable .active {
+    border: 1px solid #343a40;
+    border-radius: 3px;
+}
+
+
+#actionErrTable .showIds {
+    height: 18px;
+    overflow: hidden;
+    margin-top: 4px;
+    transition: height 1s;
+}
+
+.showAllIds {
+    height:auto !important;
+}

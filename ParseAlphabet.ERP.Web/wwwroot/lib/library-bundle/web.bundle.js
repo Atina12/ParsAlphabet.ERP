@@ -1,0 +1,502 @@
+const msg_row_created = "سطر جدید ایجاد شد .";
+const msg_row_create_error = "ایجاد سطر جدید با خطا مواجه شد .";
+const msg_row_edited = "تغییرات ثبت شد .";
+const msg_row_edit_error = "ثبت تغییرات با خطا مواجه شد .";
+const msg_row_deleted = "سطر حذف شد .";
+const msg_row_delete_error = "حذف سطر با خطا مواجه شد .";
+const msg_system_error = "شرح خطا به جدول لاگ ارسال شد .";
+const msg_java_error = "شرح خطا در کنسول درج شد .";
+const msg_sql_error = "خطا در ارتباط با بانک اطلاعاتی .";
+const msg_access_error = "دسترسی به این قسمت برای کاربری شما امکان پذیر نمی باشد .";
+const msg_loginexp_error = "زمان دسترسی شما به سیستم به اتمام رسیده است";
+const msg_cookie_disable = "کوکی سیستم شما خاموش می باشد";
+const msg_picturesize_limit_50 = "حجم تصویر نمی تواند بیشتر از ۵۰ کیلوبایت باشد .";
+const msg_confirm_new_page = "آیا برای ایجاد برگه جدید اطمینان دارید؟";
+const msg_confirm_edit = "آیا برای ثبت تغییرات اطمینان دارید؟";
+const msg_confirm_row = "آیا برای ثبت تغییرات در سطر اطمینان دارید؟";
+const msg_delete_row = "برای حذف این سطر اطمینان دارید ؟";
+const msg_incorrect_percentage = "درصد وارد شده باید کوچکتر یا مساوی 100 باشد";
+const msg_nothing_found = "سطری وجود ندارد";
+const msg_error_file_type = "فرمت فایل صحیح نمیباشد";
+
+
+const admission = {
+    delay: 6, // second
+    netPriceError: "قابل دریافت نمی تواند صفر می باشد",
+    hasService: "خدمت مورد نظر قبلا ثبت شده",
+    hasOpenAccType: "حساب باز قبلا ثبت شده",
+    hasbankAccount: "حساب بانکی قبلا ثبت شده",
+    notHasService: "خدمت را انتخاب نمایید",
+    notHasQty: "تعداد را وارد نمایید",
+    notHasService_Ret: "خدمت را جهت ثبت مرجوعی انتخاب نمایید",
+    notHasAttender: "طبیب را انتخاب نمایید",
+    fundTypeError: "نوع پرداخت را مشخص نمایید",
+    payAmountError: "مبلغ نمی تواند صفر باشد",
+    conflictAmountErrorAdm: "قابل دریافت با دریافتی مغایرت دارد ، مجاز به ثبت نمی باشید",
+    conflictSumError_Ret: "قابل پرداخت با پرداختی مغایرت دارد ، مجاز به ثبت نمی باشید",
+    sumCashOrServiceError_Ret: "قابل پرداخت نمی تواند کوچکتر از صفر باشد",
+    select_attender: "طبیب و شیفت را انتخاب نمایید",
+    setReserveInfo: "اطلاعات نوبت را وارد نمایید",
+    insert_success: "پذیرش با موفقیت ثبت شد",
+    insert_error: "ثبت پذیرش با خطا مواجه شد",
+    insert_success_Ret: "مرجوعی با موفقیت ثبت شد",
+    insert_error_Ret: "ثبت مرجوعی با خطا مواجه شد",
+    notDefinedCashId: "شناسه صندوق پذیرش برای این پایانه مشخص نشده است",
+    notValidResDate: "نوبت مورد نظر به اتمام رسیده",
+    notAllowedOpenAcc: "صندوق جاری مجاز به ثبت حساب باز نمی باشد",
+    defineAdmission: "نوبت را مشخص نمایید",
+    notValidDiscountPrice: "مبلغ تخفیف نمی تواند بیشتر از سهم مراجعه کننده باشد",
+    inOutAttOREmpNotValid: "امکان پرداخت به پرسنل و پزشک مجاز نمی باشد",
+    inOutFromCardNotValid: "امکان پرداخت از محل کارت مجاز نمی باشد",
+    notDefinedOpenAccType: "نوع حساب باز را مشخص نمایید",
+    notDefinedEmployee: "پرسنل را انتخاب نمایید",
+    insurExpDateNotValid: "تاریخ انقضاء دفترچه معتبر نمی باشد",
+    priscriptionDateNotValid: "تاریخ نسخه معتبر نمی باشد",
+    deActiveService: "وضعیت خدمت غیر فعال می باشد",
+    notServiceType: "نوع خدمت مشخص نشده است",
+    notCsvAdmissionClose: "سطری یافت نشد",
+    reserve: {
+        "msg-1": "زمانبدی حضور طبیب دارای اشکال می باشد",
+        "msg-2": "زمان حضور پزشک به پایان رسیده است",
+        "msg-3": "تعداد پذیرش تکمیل شده است . مایل به رزرو نوبت اضافه می باشید ؟",
+        "msg-4": "تعداد پذیرش به انضمام نوبت اضافه تکمیل شده است"
+    }
+
+}
+
+const prMsg = {
+    delay: 6, //second
+    notValidExpireDate: "تاریخ اعتبار معتبر نمی باشد",
+    repeatCount: "تعداد تکرار نسخه را وارد نمایید",
+    notHasItem: "هیچ نسخه ای ثبت نشده",
+    insert_success: "نسخه با موفقیت ثبت شد",
+    insert_error: "ثبت نسخه با خطا مواجه شد",
+    pleaseFillSearchItem: "شناسه پذیرش یا مشخصات مراجعه کننده را وارد نمایید",
+    selectDrugProductId: "لطفا دارو را مشخص نمایید",
+    selectDrugNameId: "لطفا نام دارو را مشخص نمایید",
+    existItem: "آیتم قبلا اضافه شده",
+    selectService: "لطفا خدمت را مشخص نمایید",
+    selectStatusIdDiagnosis: "لطفا وضعیت تشخیص را مشخص نمایید",
+    selectAdmission: "لطفا پذیرش را مشخص نمایید",
+    existService: "خدمت قبلا اضافه شده",
+    existStatusIdDiagnosis: "وضعیت تشخیص قبلا اضافه شده",
+    checkQtyMaxDrug: "تعداد از حداکثر تعداد نمیتواند بیشتر باشد",
+    errorDrug: "ثبت نسخه دارو با خطا مواجه شد",
+    errorImage: "ثبت تصویربرداری با خطا مواجه شد",
+    errorLab: "ثبت آزمایش با خطا مواجه شد",
+}
+
+const admImgMsg = {
+    delay: 6, //second
+    insert_success: "جواب تصویر برداری با موفقیت ثبت شد",
+}
+
+const admissionItem = {
+    notHasItem: "کالا را انتخاب نمایید",
+    notHasItem_Ret: "کالا را جهت ثبت مرجوعی انتخاب نمایید",
+}
+
+const admissionSale = {
+    delay: 5,
+    netPriceError: "قابل دریافت نمی تواند صفر می باشد",
+    hasItem: "کالا مورد نظر قبلا ثبت شده",
+    notHasItem: "کالا را انتخاب نمایید",
+    conflictAmountErrorAdm: "قابل دریافت با دریافتی مغایرت دارد ، مجاز به ثبت نمی باشید",
+    insert_success: "سفارش جدید با موفقیت ثبت شد",
+    insert_error: "ثبت سفارش با خطا مواجه شد",
+    notDefinedCashId: "شناسه صندوق پذیرش برای این پایانه مشخص نشده است",
+    notAllowedOpenAcc: "صندوق جاری مجاز به ثبت حساب باز نمی باشد",
+    inOutAttOREmpNotValid: "امکان پرداخت به پرسنل و پزشک مجاز نمی باشد",
+    inOutFromCardNotValid: "امکان پرداخت از محل کارت مجاز نمی باشد",
+    notDefinedOpenAccType: "نوع حساب باز را مشخص نمایید",
+    notDefinedEmployee: "پرسنل را انتخاب نمایید"
+}
+
+const cashStandMessage = {
+    notPossiblePayment: "امکان پرداخت درخواست پذیرش میسر نمی باشد به باجه پذیرش مراجعه کنید",
+    min10000: "حداقل مبلغ 10,000 ریال می باشد",
+    errorSystem: "خطای سیستمی به مدیر سیستم اطلاع دهید"
+}
+const serviceProviderFullTitle = "سیستم برنامه ریزی منابع سازمانی وبسلا";
+
+const viewData_baseUrl_MC = "/api/MC";
+const viewData_baseUrl_GN = "/api/GN";
+const viewData_baseUrl_HR = "/api/HR";
+const viewData_baseUrl_FM = "/api/FM";
+const viewData_baseUrl_WH = "/api/WH";
+const viewData_baseUrl_SM = "/api/SM";
+const viewData_baseUrl_PU = "/api/PU";
+const viewData_baseUrl_PB = "/api/PB";
+const viewData_baseUrl_CR = "/api/CR";
+const viewData_baseUrl_FA = "/api/FA";
+const viewData_baseUrl_WF = "/api/WF";
+
+const module_settingReport_src = "/Modules/_Report/_SettingReport.js";
+const footerBodyPrintIfrem = "<script type='text/javascript'>window.print();</script>";
+
+const alertify_delay = 5;
+const select2_delay = 50;
+const interval_Inbound = "00:30";
+const spinner = $(`.spinner-border`);
+
+const unlimitedOfflineNumber = 500;
+
+var fillEmptyRow = (colCount) => {
+    var result = `<tr id="emptyRow"><td colspan="${colCount}" style="text-align:center">${msg_nothing_found}</td></tr>`;
+    return result;
+}
+
+const linerAlertify = (content, type, delay = alertify_delay) => {
+    let Id = Math.round(Math.random() * 999999);
+    let messageContent =
+        `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            <button type="button" id="alert_close_${Id}" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            ${content}
+        </div>`;
+
+    $(".alert-content").append(messageContent)
+    setTimeout(() => $(`#alert_close_${Id}`).click(), delay * 1000);
+};
+
+const stimulsBaseUrl = {
+    MC: { Rep: "/Stimuls/MC/Rep_", Prn: "/Stimuls/MC/Prn_" },
+    GN: { Rep: "/Stimuls/GN/Rep_", Prn: "/Stimuls/GN/Prn_" },
+    HR: { Rep: "/Stimuls/HR/Rep_", Prn: "/Stimuls/HR/Prn_" },
+    FM: { Rep: "/Stimuls/FM/Rep_", Prn: "/Stimuls/FM/Prn_" },
+    WH: { Rep: "/Stimuls/WH/Rep_", Prn: "/Stimuls/WH/Prn_" },
+    SM: { Rep: "/Stimuls/SM/Rep_", Prn: "/Stimuls/SM/Prn_" },
+    PU: { Rep: "/Stimuls/PU/Rep_", Prn: "/Stimuls/PU/Prn_" },
+    PB: { Rep: "/Stimuls/PB/Rep_", Prn: "/Stimuls/PB/Prn_" },
+    CR: { Rep: "/Stimuls/CR/Rep_", Prn: "/Stimuls/CR/Prn_" },
+    FA: { Rep: "/Stimuls/FA/Rep_", Prn: "/Stimuls/FA/Prn_" },
+    WF: { Rep: "/Stimuls/WF/Rep_", Prn: "/Stimuls/WF/Prn_" }
+}
+Object.freeze(stimulsBaseUrl);
+
+
+const posBaseUrl = {
+    behPardakht: { payment: `${viewData_baseUrl_FM}/PCPOS/Behpardakht/PcPosBehpardakhtApi/payment` },
+}
+Object.freeze(posBaseUrl);
+
+const dbtype = {
+    BigInt: 0,
+    Binary: 1,
+    dbtype_Bit: 2,
+    dbtype_Char: 3,
+    dbtype_DateTime: 4,
+    dbtype_Decimal: 5,
+    Float: 6,
+    Image: 7,
+    Int: 8,
+    Money: 9,
+    NChar: 10,
+    NText: 11,
+    NVarChar: 12,
+    Real: 13,
+    UniqueIdentifier: 14,
+    SmallDateTime: 15,
+    SmallInt: 16,
+    SmallMoney: 17,
+    Text: 18,
+    Timestamp: 19,
+    TinyInt: 20,
+    VarBinary: 21,
+    VarChar: 22,
+    Variant: 23,
+    Xml: 25,
+    Udt: 29,
+    Structured: 30,
+    Date: 31,
+    Time: 32,
+    DateTime2: 33,
+    DateTimeOffset: 34
+}
+Object.freeze(dbtype);
+
+const KeyCode = {
+    ArrowUp: 38,
+    ArrowRight: 39,
+    ArrowDown: 40,
+    ArrowLeft: 37,
+    Page_Up: 33,
+    Page_Down: 34,
+    Home: 36,
+    End: 35,
+    Delete: 46,
+    Shift: 16,
+    Insert: 45,
+    Enter: 13,
+    Esc: 27,
+    Space: 32,
+    Tab: 9,
+    F1: 112,
+    F2: 113,
+    F3: 114,
+    F4: 115,
+    F5: 116,
+    F6: 117,
+    key_a: 65,
+    key_c: 67,
+    key_f: 70,
+    key_l: 76,
+    key_n: 78,
+    key_p: 80,
+    key_t: 84,
+    key_s: 83,
+    key_w: 87,
+    key_f: 70,
+    key_General_0: 48,
+    key_General_1: 49,
+    key_General_2: 50,
+    key_General_3: 51,
+    key_General_4: 52,
+    comma: 188,
+    dot: 110
+}
+Object.freeze(KeyCode);
+
+const admFillItem = {
+    basicInsurer: 1,
+    basicInsuranceBox: 2,
+    compInsurer: 3,
+    thirdParty: 4,
+    admissionState: 5,
+    attender: 6,
+    service: 7,
+    serviceType: 8,
+    serviceCenter: 9,
+    speciality: 10
+}
+Object.freeze(admFillItem);
+
+const datePart = {
+    miliSecond: 1,
+    second: 2,
+    minute: 3,
+    hour: 4,
+    day: 5
+}
+Object.freeze(datePart);
+
+const fileValidation = {
+    validSize: 30, // kb
+    ValidExt: "xls,xlsx,PNG,jpg,jpeg,bpm"
+}
+Object.freeze(fileValidation);
+
+
+const sex = {
+    "1": "مردانه",
+    "2": "زنانه",
+    "3": "بچگانه",
+    "4": "پسرانه",
+    "5": "دخترانه",
+    "6": "مردانه/زنانه"
+}
+Object.freeze(sex);
+
+const sex1 = {
+    "مردانه": "1",
+    "زنانه": "2",
+    "بچگانه": "3",
+    "پسرانه": "4",
+    "دخترانه": "5",
+    "مردانه/زنانه": "6"
+}
+Object.freeze(sex1);
+
+const colExpConfig = {
+    "1": "collapseAll",
+    "2": "expandAll",
+    "3": "collapseRoot",
+}
+Object.freeze(sex);
+
+const maxValue = {
+    "0": "32767",
+    "8": "2147483647",
+    "16": "9223372036854775807"
+}
+Object.freeze(maxValue);
+
+const admissionStage = {
+
+    admissionService: { id: 52, name: "پذیرش بهداشت" },
+    admissionSaleItem: { id: 54, name: "سفارش کالا" },
+    admissionTaminPrescription: { id: 64, name: "پذیرش نسخه نویسی تامین اجتماعی" },
+    admissionTaminParaClinic: { id: 65, name: "پذیرش نسخه پیچی تصویربرداری تامین اجتماعی" },
+    admissionTaminLaboratory: { id: 211, name: "پذیرش نسخه پیچی آزمایشگاه تامین اجتماعی" },
+
+    admissionServiceMaster: {id: 219, name: "پذیرش نسخه نویسی و نسخه پیچی طرح درمان بهداشت" },
+    admissionSaleItemMaster: {id: 222, name: "سفارش کالا طرح  درمان" },
+
+    admissionCashRecieve: { id: 66, name: "دریافت وجه درمان" },
+    admissionCashPayment: { id: 67, name: "پرداخت وجه درمان" },
+
+    prescription: { id: 165, name: "نسخه نویسی بهداشت" },
+    prescriptionTamin: { id: 166, name: "نسخه نویسی تامین اجتماعی" },
+    admissionImaging: { id: 169, name: "نسخه پیچی تصویربرداری" },
+    refer: { id: 69, name: "ارجاع" },
+    feedback: { id: 70, name: "بازخورد" },
+    dental: { id: 71, name: "دندانپزشکی" },
+
+    admissionMasterOutPatient: { id: 216, name: "پرونده مراجعه کننده سرپایی"},
+    admissionMasterMedicalPlan: { id: 218, name: "پرونده مراجعه کننده طرح درمان"}
+}
+Object.freeze(admissionStage);
+
+const workflowCategoryIds = {
+    purchase: { id: 1, name: "خرید" },
+    journal: { id: 2, name: "حسابداری" },
+    sales: { id: 3, name: "فروش" },
+    manufacturing: { id: 4, name: "تولید" },
+    humanResource: { id: 5, name: "منابع انسانی" },
+    treasury: { id: 6, name: "خزانه" },
+    fixedAsset: { id: 7, name: "دارایی ثابت" },
+    planning: { id: 8, name: "برنامه ریزی" },
+    cRM: { id: 9, name: "مدیریت ارتباط با مشتری" },
+    medicalCare: { id: 10, name: "درمان" },
+    warehouse: { id: 11, name: "انبار" },
+    medicalMaster: { id: 14, name: "طرح درمان" },
+}
+Object.freeze(workflowCategoryIds);
+
+const medicalSubject = {
+    inPersonTariff: { id: 1, name: "تعرفه حضوری" },
+    isOnlineTariff: { id: 2, name: "تعرفه آنلاین" },
+    inPersonIPDTariff: { id: 3, name: "تعرفه حضوری گردشگری" },
+    IsOnlineIPDTariff: { id: 4, name: "تعرفه آنلاین گردشگری" }
+}
+Object.freeze(medicalSubject);
+
+const dropDownCache =
+{
+    insurerLine: 1,
+    attender: 2,
+    compInsurerLine: 3,
+    thirdParty: 4,
+    discount: 5,
+    compInsurerLineThirdParty: 6,
+    attenderParaClinic: 7
+}
+
+const personTypeIds = {
+    customer: { id: 1, name: "مشتری" },
+    vendor: { id: 2, name: "تامین کننده" },
+    employee: { id: 3, name: "پرسنل" },
+    contact: { id: 4, name: "تماس" },
+}
+Object.freeze(personTypeIds);
+
+const taminPrescriptionTypes = {
+    drug: { id: 1, name: " دارویی" },
+    lab: { id: 2, name: " آزمایشگاه" },
+    radio: { id: 3, name: " رادیولوژی" },
+    sono: { id: 4, name: " سونوگرافی" },
+    ctScan: { id: 5, name: " سی تی اسکن" },
+    mRI: { id: 6, name: " ام آر آی" },
+    nuclear: { id: 7, name: " پزشکی هسته ای" },
+    physiotherapy: { id: 13, name: " فیزیوتراپی" },
+    densitometry: { id: 14, name: " سنجش تراکم استخوان" },
+    sideways: { id: 17, name: " خدمات جنبی" },
+};
+Object.freeze(taminPrescriptionTypes);
+
+const admissionTypesArray = [
+    {
+        id: 1,
+        name: "کالا",
+        color: "#02c58d"
+    },
+    {
+        id: 2,
+        name: "خدمت / بهداشت",
+        color: "#ff89ba"
+    },
+    {
+        id: 3,
+        name: "خدمت / تامین",
+        color: "#89aaf3"
+    }
+];
+Object.freeze(admissionTypesArray);
+
+const reportCacheParameter = {
+
+    admissionService: 10,
+    admissionSale: 20,
+    attenderCommission: 30,
+    insurance: 40,
+    prescription: 50,
+    dental: 60,
+    admissionUser: 70,
+    admissionClose: 80,
+    admissionCash: 90,
+}
+
+function extractHostname(url) {
+    let hostname = "", hostnameWithPort = "", httpWithHostName = "", httpWithHostNameAndPort = "";
+    httpWithHostName = httpWithHostNameAndPort = url.split("//")[0] + "//";
+
+    if (url.indexOf("//") > -1)
+        hostname = url.split('/')[2];
+    else
+        hostname = url.split('/')[0];
+
+    hostnameWithPort = hostname;
+    hostname = hostname.split(':')[0];
+    hostname = hostname.split('?')[0];
+
+    httpWithHostName += hostname;
+    httpWithHostNameAndPort += hostnameWithPort;
+
+    return {
+        url, // https://www.site.com:1024/page1/12/13/type
+        httpWithHostName, // https://www.site.com
+        httpWithHostNameAndPort, // https://www.site.com:1024
+        hostnameWithPort, // www.site.com:1024
+        hostname // www.site.com
+    };
+}
+
+const hostDataPart = extractHostname(window.location.href);
+
+
+const admissionExtraProperty = {
+    deleteTaminDateTime: 1,
+    referredHID: 2,
+    referralTypeId: 3,
+    inqueryId: 4,
+    hID: 5,
+    hIDOnline: 6,
+    updateHIDDateTime: 7,
+    updateHIDResult: 8,
+    referralID: 9,
+    reasonForEncounterId: 10,
+    requestEPrescriptionId: 11,
+    registerPrescriptionId: 12,
+    serviceTypeId: 13,
+    paraClinicTypeCode: 14,
+    provinceName: 15,
+    paraclinicTypeCodeName: 16,
+    patientNationalCode: 17,
+    attenderName: 18,
+    attenderMSC: 19,
+    attenderSpeciality: 20,
+    prescriptionDate: 21,
+    comments: 22,
+    patientMobile: 23,
+    referReason: 24,
+    serviceLaboratoryGroupId: 25,
+    diagnosisCode: 26,
+    diagnosisComment: 27,
+    registerTaminResult: 28,
+    deleteTaminResult: 29,
+    responsibleNationalCode: 30,
+    responsiblePersonId: 31,
+    relationType: 32,
+    covered: 33,
+    recommendationMessage: 34,
+    registerTaminDateTime: 35
+}

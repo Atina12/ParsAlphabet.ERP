@@ -1,0 +1,34 @@
+﻿<link href="~/lib/TreeViewPageTable/treeViewPageTable.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+<fieldset id="treeViewPageTable" class="group-box group-box-green mt-2 mb-2 p-3 w-100" asp-antiforgery="true">
+    <legend>ساختار درختی</legend>
+    <button type="button" id="treeViewExpand" onclick="treeViewPageTableExpand(this)" class="btn btn-light border-green plus">
+        <i class="fas fa-minus"></i>
+    </button>
+    <div class="slideToggle get open" style="position:relative">
+        <div id="treeviewTreeBtn" class="pb-4"></div>
+        <div id="treeViewPaths" class="pb-1">
+            <div id="treeViewPathBox" class="d-flex mt-4 mb-4">
+                <div class="treeViewPathTitle">مسیر انتخاب شده : </div>
+                <div id="treeViewPathContent"></div>
+            </div>
+            <div id="treeViewCopyLine" class="d-flex mt-4 mb-4">
+                <div class="treeViewCopyLineTitle">مسیر کپی شده : </div>
+                <div id="treeViewCopyLineContent"></div>
+            </div>
+        </div>
+        <div id="treeViewContent">
+            <div id="treeViewRootContent">
+                <table>
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/lib/TreeViewPageTable/treeViewPageTable.js"></script>

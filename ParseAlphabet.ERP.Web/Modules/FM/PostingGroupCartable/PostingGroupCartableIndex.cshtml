@@ -1,0 +1,163 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "کارتابل اسناد";
+}
+<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/PostingGroupCartable.css" rel="stylesheet"/>
+<link href="~/lib/ModalePrint/PrintCss.css" rel="stylesheet"/>
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="~/js/NewPagetable.js"></script>
+
+<input id="stageIdPostingGroupCartableParameter" type="hidden" class="form-control number" readonly value="@ViewContext.RouteData.Values["stageId"]"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <div id="quickSearchContainer" style="display: contents"></div>
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            <ul id="tabLinkBoxes" class="nav nav-pills nav-justified" role="tablist"></ul>
+                            <div id="tabBoxes" class="tab-content group-box group-box-gray"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/FM/NewTreasury/NewTreasuryAddEdit.cshtml")
+
+@await Html.PartialAsync("/Modules/FM/Journal/JournalAddEdit.cshtml")
+
+<div id="PrnJournal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="PrnModalId" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه : </lable> <span id="modal_keyid_journal_value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType1" onclick="clickModalJounal(1) " class="btn btn-default" style="font-weight:bolder;"> چاپ حسابداری مرتب سازی بر اساس تاریخ ثبت <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType2" onclick="clickModalJounal(2) " class="btn btn-default" style="font-weight:bolder;"> چاپ حسابداری مرتب سازی بر اساس کل - معین - تفصیل <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 2 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType3" onclick="clickModalJounal(3)" class="btn btn-default" style="font-weight:bolder;"> چاپ در سطح معین <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 3 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType4" onclick="clickModalJounal(4)" class="btn btn-default" style="font-weight:bolder;"> چاپ در سطح تفصیل <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnJournal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+
+<div id="errorPostingGroupResult" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">ارسال سند</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-100">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempPostingGroupError">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfresultmodal-close" onclick="modal_close('errorPostingGroupResult')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="displayTreasuryLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" style="height:auto">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayTreasuryLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="cartableModalClose('displayTreasuryLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="displayJournalLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" style="height:88%">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayJournalLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="cartableModalClose('displayJournalLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/FM/NewTreasury/TreasuryActionIndex.cshtml")
+@await Html.PartialAsync("/Modules/FM/Journal/JournalActionIndex.cshtml")
+
+
+<script src="/Modules/WF/WorkFlow.js"></script>
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="/Modules/FM/PostingGroupCartable/PostingGroupCartableIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/FM/TreasurySearch/TreasuryQuickSearchIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

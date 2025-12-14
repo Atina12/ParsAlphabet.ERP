@@ -1,0 +1,184 @@
+.tree, .tree ul {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+    .tree ul {
+        margin-left: 1em;
+        position: relative
+    }
+
+        .tree ul ul {
+            margin-left: .5em
+        }
+
+        .tree ul:before {
+            content: "";
+            display: block;
+            width: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 6px;
+            border-left: 1px solid
+        }
+
+    .tree li {
+        margin: 0;
+        padding: 0 1em;
+        line-height: 2em;
+        color: #2e353d;
+        font-weight: 700;
+        position: relative;
+        font-size: 16px;
+        cursor:pointer;
+    }
+
+    .tree ul li:before {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 0;
+        border-top: 1px solid;
+        margin-top: -1px;
+        position: absolute;
+        top: 1em;
+        right: 6px;
+    }
+    .tree li input.form-control {
+        display: inline-block;
+        width: auto;
+        padding: .268rem .35rem;
+    }
+    .tree li span .button-operation {
+        display: none !important;
+    }
+    .tree li span:hover .button-operation {
+        display: inline-block !important;
+        max-height:30px;
+    }
+    .tree li:focus .button-operation, .tree li:active .button-operation {
+        display: none;
+    }
+    .tree li .button-operation button i {
+        font-size:15px;
+    }
+
+    .tree li .button-operation .btn-danger:active, .tree li .button-operation .btn-danger:focus {
+        background-color: transparent !important;
+        border: none !important;
+        color: #dc3545 !important;
+        box-shadow: none !important;
+    }
+    .tree li .button-operation .btn-success:active, .tree li .button-operation .btn-success:focus {
+        background-color: transparent !important;
+        border: none !important;
+        color: #047d5a !important;
+        box-shadow: none !important;
+    }
+    .tree li .button-operation .btn-success:active, .tree li .button-operation .btn-success:focus {
+        background-color: transparent !important;
+        border: none !important;
+        color: #047d5a !important;
+        box-shadow: none !important;
+    }
+    .tree li .button-operation .btn-info:active, .tree li .button-operation .btn-info:focus {
+        background-color: transparent !important;
+        border: none !important;
+        color: #319cd0 !important;
+        box-shadow: none !important;
+    }
+    .tree li .btn-info {
+        color: #59c6fb;
+    }
+    .tree li .btn-success {
+        color: #02c58d;
+    }
+    .tree li .btn-danger {
+        color: #fc5454;
+    }
+    .tree li .btn-info:hover {
+        background-color: transparent;
+        color: #3e96c1;
+        border: none;
+    }
+    .tree li .btn-success:hover {
+        background-color: transparent;
+        color: #0a9e74;
+        border: none;
+    }
+    .tree li .btn-danger:hover {
+        background-color: transparent;
+        color: #c33838;
+        border: none;
+    }
+
+    .tree ul li:last-child:before {
+        background: #fff;
+        height: auto;
+        top: 1em;
+        bottom: 0
+    }
+
+.indicator {
+    margin-left: 5px;
+}
+
+.tree li a {
+    text-decoration: none;
+    color: #2e353d;
+}
+
+.tree li button, .tree li button:active, .tree li button:focus {
+    text-decoration: none;
+    color: #369;
+    border: none;
+    background: transparent;
+    margin: 0px 0px 0px 0px;
+    outline: 0;
+}
+
+.del-node-box {
+    display: -webkit-inline-box;
+    position: relative;
+    bottom: 19px;
+}
+
+.del-node-box .del-node {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+    .del-node-box .del-node p {
+        color: #555;
+    }
+.del-node-box .del-node button {
+    padding: 0px 5px;
+}
+    .del-node-box .del-node button.btn-outline-success {
+        border: 1px solid #02c58d;
+        color: #02c58d;
+    }
+    .del-node-box .del-node button.btn-outline-success:hover {
+        background-color: #02c58d;
+        color:#fff;
+    }
+    .del-node-box .del-node button.btn-outline-dark {
+        border: 1px solid #354558;
+        color: #354558;
+        margin-right: 3px;
+    }
+    .del-node-box .del-node button.btn-outline-dark:hover {
+        background-color: #354558;
+        color: #fff;
+    }
+.triangle-up {
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #ddd;
+    position: relative;
+    top: 22px;
+    right: 0px;
+}

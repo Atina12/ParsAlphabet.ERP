@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "درخواست";
+}
+<link href="~/Content/css/FormPlateHeaderLine.css" rel="stylesheet"/>
+<div id="itemRequestDisplayPage">
+    <div class="main-display">
+        <div class="button-items col-md-12">
+            <button title="اولین" id="headerFirst" onclick="display_pagination_display('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-skip-next"></i>
+            </button>
+            <button title="قبلی" id="headerPrevious" onclick="display_pagination_display('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-play"></i>
+            </button>
+            <input id="headerIndex" onkeydown="headerindexChoose_display(event)" type="text" autocomplete="off" class="form-control number col-1 d-inline mr-2 ml-1" maxlength="10" placeholder="شناسه برگه"/>
+            <button title="بعدی" id="headerNext" onclick="display_pagination_display('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-play fa-rotate-180"></i>
+            </button>
+            <button title="آخرین" id="headerLast" onclick="display_pagination_display('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-skip-previous"></i>
+            </button>
+        </div>
+        <fieldset class="group-box mt-3 group-box-green">
+            <legend>مشخصات درخواست</legend>
+            <div class="card-body" id="headerDisplay_pagetable">
+                <div class="table-responsive table-responsive-table">
+                    <table class="table">
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="group-box mt-3 group-box-orange">
+            <legend>لیست گردش</legend>
+            <div class="card-body" id="lineDisplay_pagetable">
+                <div class="all">
+                    <div class="table-responsive table-responsive-table" id="parentPageTableBody">
+                        <table class="table table-styles border mb-0 pagetablebody new-page-table">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <input id="itemTransactionId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+    <input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["stageId"]"/>
+    <input id="workflowId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["workflowId"]"/>
+    <input id="isDefaultCurrency" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["isDefaultCurrency"]"/>
+</div>
+
+
+<script src="~/Modules/WH/ItemRequest/ItemRequestDisplay.js"></script>

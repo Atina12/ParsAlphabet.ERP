@@ -1,0 +1,199 @@
+﻿.scroll tfoot,
+.pagetablebody tfoot {
+    display: table;
+    width: 100% !important;
+    position: sticky !important;
+    bottom: -1px !important;
+}
+
+    .scroll thead tr th:first-child,
+    .scroll tbody tr td:first-child,
+    .scroll tfoot tr th:first-child {
+        border-right: 1px solid #dee2e6 !important;
+    }
+
+.scroll tbody {
+    overflow: hidden !important;
+}
+
+.scroll thead tr {
+    width: 100% !important;
+}
+
+.scroll thead {
+    display: table;
+    width: 100%;
+    position: sticky;
+    top: 0px;
+    z-index: 999
+}
+
+.scroll tbody {
+    display: block !important;
+    height: auto !important;
+}
+
+.detail-headerLine {
+    text-align: center;
+    margin: auto auto 6px auto;
+    padding: inherit;
+}
+
+#header-lines-div .table-responsive {
+    height: 350px;
+    overflow-y: scroll
+}
+
+#header-lines-div .ins-out .funkyradio {
+    width: auto !important;
+    margin: unset !important;
+}
+
+.item-detail-box {
+    display: flex;
+    width: 25%;
+}
+
+.item-detail-group {
+    font-size: 12px;
+    text-align: center;
+    font-weight: bolder;
+    background-color: rgba(0, 0, 0, 0.01);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin: auto;
+    margin-top: 5px;
+    width: 280px;
+    border: 2px solid rgba(46,53,61, 0.61);
+    display: inline-flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-detail {
+    float: right;
+    color: rgba(0,0,0, 0.70);
+    background-color: rgba(8, 8, 8, 0.30);
+    padding: 5px 10px 5px 10px;
+    margin: 0;
+    width: 110px;
+    min-width: 110px;
+    text-align: right;
+}
+
+.item-detail-val {
+    float: right;
+    color: rgba(0,0,0, 0.70);
+    padding: 5px 10px 5px 10px;
+    margin: 0;
+}
+
+.table tr.plateheader-editmode td {
+    padding: 0 !important;
+}
+
+table.table-headerline {
+    height: 350px;
+}
+
+    table.table-headerline .emptyrow {
+        border: 0;
+        text-align: center;
+    }
+
+.header-pagination-btn {
+    height: 27px;
+}
+
+    .header-pagination-btn i {
+        margin-left: 0 !important;
+        font-size: 19px !important;
+        margin-top: -5px;
+        display: inline-block;
+    }
+
+#emptyRow td {
+    width: 100%;
+}
+
+#header-div-content {
+    transition: .5s;
+}
+
+#haederLineActive {
+    background-color: #11648d;
+    color: white;
+}
+
+.pulse {
+    animation: animate 2s linear infinite
+}
+
+@keyframes animate {
+    0% {
+        box-shadow: 0 0 0 0 rgb(17,100,141), 0 0 0 0 rgb(17,100,141)
+    }
+
+    40% {
+        box-shadow: 0 0 0 4px rgba(255,109,74,0), 0 0 0 0 rgb(17,100,141)
+    }
+
+    60% {
+        box-shadow: 0 0 0 6px rgba(255,109,74,0), 0 0 0 0 rgb(17,100,141)
+    }
+
+    80% {
+        box-shadow: 0 0 0 8px rgba(255, 109, 74, 0), 0 0 0 8px rgba(255, 109, 74, 0)
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 109, 74, 0), 0 0 0 15px rgba(255, 109, 74, 0)
+    }
+}
+
+#header-div-content .table-responsive,
+#headerDisplay_pagetable .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto !important;
+}
+    /* width */
+    #header-div-content .table-responsive::-webkit-scrollbar,
+    #headerDisplay_pagetable .table-responsive::-webkit-scrollbar {
+        height: 10px
+    }
+
+    /* Track */
+    #header-div-content .table-responsive::-webkit-scrollbar-track,
+    #headerDisplay_pagetable .table-responsive::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    #header-div-content .table-responsive::-webkit-scrollbar-thumb,
+    #headerDisplay_pagetable .table-responsive::-webkit-scrollbar-thumb {
+       /* background: #888;*/
+        background: #a7a7a7
+    }
+
+#headerDisplay_pagetable .table {
+    table-layout: fixed !important;
+    font-size: inherit !important;
+}
+
+#header-lines-div table > tbody > tr:not(.highlight) .fixedColumn {
+    background-color: white !important;
+    position: sticky !important;
+    left: -1px !important;
+}
+
+#header-lines-div table > tbody > tr.highlight .fixedColumn {
+    background-color: inherit !important;
+    position: sticky !important;
+    left: -1px !important;
+}
+
+.tableLayoutFixed {
+    table-layout: fixed !important;
+}

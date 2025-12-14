@@ -1,0 +1,66 @@
+﻿<div class="tab-pane p-3" id="diagBox" role="tabpanel">
+    <div id="diagForm" class="row tabToggle14" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>وضعیت تشخیص</label>
+            <div>
+                <select id="statusId" class="form-control select2" tabindex="125" required data-parsley-errors-container="#statusIdContainer"></select>
+            </div>
+            <div id="statusIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>تشخیص</label>
+            <div>
+                <select id="diagnosisResonId" class="form-control select2" tabindex="126" required data-parsley-errors-container="#diagnosisResonIdContainer"></select>
+            </div>
+            <div id="diagnosisResonIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>میزان شدت بیماری</label>
+            <div>
+                <select id="serverityId" class="form-control select2" tabindex="127" required data-parsley-errors-container="#serverityIdContainer">
+                    @*<option value="-1">انتخاب کنید</option>*@
+                </select>
+            </div>
+            <div id="serverityIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تاریخ و زمان تشخیص</label>
+            <div>
+                <input id="diagnosisDateTime" type="text" class="form-control" @*required*@ data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'"
+                       required data-parsley-errors-container="#diagnosisDateTimeContainer">
+
+            </div>
+            <div id="serverityIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>توضیحات</label>
+            <input id="comment" class="form-control" tabindex="128" maxlength="100"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0;">
+                <button type="button" id="addDiagnosis" class="btn btn-light border-green my-2" tabindex="129"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledDiagnosis" type="button" class="btn btn-light border-green" tabindex="130"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdiagnosisList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>وضعیت تشخیص</th>
+                    <th>تشخیص</th>
+                    <th>میزان شدت بیماری </th>
+                    <th>تاریخ و زمان تشخیص </th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempDiag">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

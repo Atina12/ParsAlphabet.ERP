@@ -1,0 +1,665 @@
+﻿<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<style>
+    #favoritembox_1 #fromFavorite_1 #pagetable_p_1 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_17 #fromFavorite_17 #pagetable_p_17 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+
+    #favoritembox_2 #fromFavorite_2 #pagetable_p_2 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_3 #fromFavorite_3 #pagetable_p_3 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_4 #fromFavorite_4 #pagetable_p_4 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_5 #fromFavorite_5 #pagetable_p_5 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+        overflow-x: hidden;
+    }
+
+    #favoritembox_6 #fromFavorite_6 #pagetable_p_6 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_7 #fromFavorite_7 #pagetable_p_7 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_12 #fromFavorite_12 #pagetable_p_12 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_13 #fromFavorite_13 #pagetable_p_13 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+
+    #favoritembox_14 #fromFavorite_14 #pagetable_p_14 #parentPageTableBody {
+        max-height: 300px;
+        min-height: 100px;
+    }
+</style>
+<div id="favoriteTaminModals" class="modal fade " data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-size-full">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0" id="modal_title">برچسب گذاری</h5>
+    </div>
+</div>
+
+<div class="modal-header">
+
+    <div class="col-md-3 form-group ml-0 mb-0 text-right">
+        <label>داکتر</label>
+        <div class="col-12 chosen-container-parent">
+            <select class="select2" id="attenderIdFavoriteTamin" tabindex="1" required data-parsley-errors-container="#attenderIdFavoriteTaminErrorContainer">
+            </select>
+        </div>
+        <div id="attenderIdFavoriteTaminErrorContainer"></div>
+    </div>
+</div>
+<div class="modal-body text-right" data-parsley-validate>
+<div class="card-body ">
+
+<fieldset id="peracraptionFilset" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist" id="favoriteTaminTabNav">
+    @*دارو*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link" data-toggle="tab" onclick="changeTabByClick(1)" id="favoriteLink1" href="#favoritembox_1" role="tab">
+            <div class="d-none d-md-block">
+                <span>دارویی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*خدمات جنبی*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(17)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink17" onclick="changeTabByClick(17)" href="#favoritembox_17" role="tab">
+            <div class="d-none d-md-block">
+                <span>خدمات جنبی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*نسخه ارجاعی*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(12)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink12" onclick="changeTabByClick(12)" href="#favoritembox_12" role="tab">
+            <div class="d-none d-md-block">
+                <span>نسخه ارجاعی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*آزمایشگاه*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink2" onclick="changeTabByClick(2)" href="#favoritembox_2" role="tab">
+            <div class="d-none d-md-block">
+                <span>آزمایشگاه</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*رادیولوژی*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink3" onclick="changeTabByClick(3)" href="#favoritembox_3" role="tab">
+            <div class="d-none d-md-block">
+                <span>رادیولوژی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*سی تی اسکن*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(5)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink5" onclick="changeTabByClick(5)" href="#favoritembox_5" role="tab">
+            <div class="d-none d-md-block">
+                <span>سی تی اسکن</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*ام آر آی*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(6)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink6" onclick="changeTabByClick(6)" href="#favoritembox_6" role="tab">
+            <div class="d-none d-md-block">
+                <span>ام آر آی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*سونوگرافی*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink4" onclick="changeTabByClick(4)" href="#favoritembox_4" role="tab">
+            <div class="d-none d-md-block">
+                <span>سونوگرافی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*فیزیوتراپی*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(8)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink13" onclick="changeTabByClick(13)" href="#favoritembox_13" role="tab">
+            <div class="d-none d-md-block">
+                <span>فیزیوتراپی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*داکتری هسته ای*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(7)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink7" onclick="changeTabByClick(7)" href="#favoritembox_7" role="tab">
+            <div class="d-none d-md-block">
+                <span>داکتری هسته ای</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    @*سنجش تراکم استخوان*@
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(9)">
+        <a class="nav-link" data-toggle="tab" id="favoriteLink14" onclick="changeTabByClick(14)" href="#favoritembox_14" role="tab">
+            <div class="d-none d-md-block">
+                <span>سنجش تراکم استخوان</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+@*دارو*@
+<div class="tab-pane p-3" id="favoritembox_1" role="tabpanel">
+    <div class="row tabToggle1" id="fromFavorite_1" data-parsley-validate>
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>برند</label>
+            <div class="funkyradio funkyradio-success col-12 p-0" style="display:inline-grid" onkeydown="funkyradio_keydown(event,'isBrFavorite');" tabindex="9">
+                <input id="isBrFavorite" type="checkbox" onchange="changeCheckBoxFavoriteTamin(this)" switch-value="بلی,خیر"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>نام دارو <span id="Titlefavorite_1">ژنریک</span></label>
+            <div>
+                <select id="serviceIdFavorite_1" class="form-control select2" favoritecategory="13" tabindex="10" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_1Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_1Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تعداد</label>
+            <input id="quantityFavorite_1" type="text" class="form-control number" maxlength="10" tabindex="11" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>زمان مصرف</label>
+            <div>
+                <select id="drugInstructionFavorite" favoritecategory="14" class="form-control select2" tabindex="12" required data-parsley-selectvalzero data-parsley-errors-container="#drugInstructionFavoriteContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="drugInstructionFavoriteContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>مقادیر مصرف</label>
+            <div>
+                <select id="drugAmountFavorite" favoritecategory="15" class="form-control select2" tabindex="13" required data-parsley-selectvalzero data-parsley-errors-container="#drugAmountFavoriteContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="drugAmountFavoriteContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>طریقه مصرف</label>
+            <div>
+                <select id="drugUsageFavorite" favoritecategory="16" class="form-control select2" tabindex="14">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دوره تکرار </label>
+            <input id="repeatFavorite" type="text" class="form-control number" maxlength="10" tabindex="15"/>
+        </div>
+
+        <div class="form-group col-lg-4 col-sm-4 mt-5">
+            <i class="ml-3 pl-3 pr-3  color-box-green"></i>
+            داروهای بیمه ای یا معادل ژنریک
+            <i class="ml-3 mr-3 pl-3 pr-3 color-box-red"></i>
+            داروهای غیر بیمه ای
+        </div>
+        <div class="col-sm text-right  mt-5">
+            <div class="button-items">
+
+                <button onclick="saveFavoriteTamin(1)" type="button" class="btn btn-light border-blue" tabindex="16"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(1)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(1)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_1" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+
+    </div>
+</div>
+@*خدمات جنبی*@
+<div class="tab-pane p-3" id="favoritembox_17" role="tabpanel">
+    <div class="row tabToggle12" id="fromFavorite_17" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_17" favoritecategory="17" class="form-control select2" tabindex="122" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_12Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_12Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_17" type="text" class="form-control number" maxlength="10" tabindex="123" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(17)" type="button" class="btn btn-light border-blue" tabindex="124"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(17)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(17)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_17" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+@*نسخه ارجاعی*@
+<div class="tab-pane p-3" id="favoritembox_12" role="tabpanel">
+    <div class="row tabToggle17" id="fromFavorite_12" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_12" favoritecategory="17" class="form-control select2" tabindex="21" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_17Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_17Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_12" type="text" class="form-control number" maxlength="10" tabindex="22" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(12)" type="button" class="btn btn-light border-blue" tabindex="23"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(12)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(12)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_12" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+@*آزمایشگاه*@
+<div class="tab-pane p-3" id="favoritembox_2" role="tabpanel">
+    <div class="row tabToggle2" id="fromFavorite_2" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_2" favoritecategory="19" class="form-control select2" tabindex="31" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_2Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_2Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_2" type="text" class="form-control number" maxlength="10" tabindex="32" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(2)" type="button" class="btn btn-light border-blue" tabindex="33"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(2)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(2)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_2" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+@*رادیولوژی*@
+<div class="tab-pane p-3" id="favoritembox_3" role="tabpanel">
+    <div class="row tabToggle3" id="fromFavorite_3" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_3" favoritecategory="20" class="form-control select2" tabindex="41" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_3Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_3Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_3" type="text" class="form-control number" maxlength="10" tabindex="42" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(3)" type="button" class="btn btn-light border-blue" tabindex="43"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(3)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(3)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_3" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+@*سی تی اسکن*@
+<div class="tab-pane p-3" id="favoritembox_5" role="tabpanel">
+    <div class="row tabToggle4" id="fromFavorite_5" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_5" favoritecategory="23" class="form-control select2" tabindex="51" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_4Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_4Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_5" type="text" class="form-control number" maxlength="10" tabindex="52" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(5)" type="button" class="btn btn-light border-blue" tabindex="53"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(5)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(5)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_5" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+@*ام آر آی*@
+<div class="tab-pane p-3" id="favoritembox_6" role="tabpanel">
+    <div class="row tabToggle5" id="fromFavorite_6" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_6" favoritecategory="21" class="form-control select2" tabindex="61" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_5Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_5Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تعداد</label>
+            <input id="quantityFavorite_6" type="text" class="form-control number" maxlength="10" tabindex="62" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(6)" type="button" class="btn btn-light border-blue" tabindex="63"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(6)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(6)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_6" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+@*سونوگرافی*@
+<div class="tab-pane p-3" id="favoritembox_4" role="tabpanel">
+    <div class="row tabToggle6" id="fromFavorite_4" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_4" favoritecategory="22" class="form-control select2" tabindex="71" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_6Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_6Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تعداد</label>
+            <input id="quantityFavorite_4" type="text" class="form-control number" maxlength="10" tabindex="72" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(4)" type="button" class="btn btn-light border-blue" tabindex="73"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(4)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(4)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_4" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+@*فیزیوتراپی*@
+<div class="tab-pane p-3" id="favoritembox_13" role="tabpanel">
+    <div class="row tabToggle8" id="fromFavorite_13" data-parsley-validate>
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_13" favoritecategory="24" class="form-control select2" tabindex="80" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_13Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_13Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_13" type="text" class="form-control number" maxlength="10" tabindex="81" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>عنوان اندام</label>
+            <div>
+                <select id="parentOrganIdFavorite" favoritecategory="25" class="form-control select2" tabindex="82" required data-parsley-selectvalzero data-parsley-errors-container="#organParentIdFavoriteContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="organParentIdFavoriteContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>اندامک</label>
+            <div>
+                <select id="organIdFavorite" favoritecategory="26" class="form-control select2" tabindex="83" data-parsley-errors-container="#organName2favoriteContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="organName2favoriteContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نام بیماری</label>
+            <div>
+                <select id="illnessFavorite" favoritecategory="27" class="form-control select2" tabindex="84" required data-parsley-selectvalzero data-parsley-errors-container="#illnessFavoriteContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="illnessFavoriteContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>طرح درمان</label>
+            <div>
+                <select id="planFavorite" favoritecategory="28" class="form-control select2" tabindex="85" required data-parsley-selectvalzero data-parsley-errors-container="#planFavoriteContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="planFavoriteContainer"></div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(13)" type="button" class="btn btn-light border-blue" tabindex="86"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(13)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(13)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_13" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+
+    </div>
+</div>
+@*داکتری هسته ای*@
+<div class="tab-pane p-3" id="favoritembox_7" role="tabpanel">
+    <div class="row tabToggle7" id="fromFavorite_7" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_7" favoritecategory="29" class="form-control select2" tabindex="91" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_7Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_7Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_7" type="text" class="form-control number" maxlength="10" tabindex="92" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(7)" type="button" class="btn btn-light border-blue" tabindex="93"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(7)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(7)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_7" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+
+    </div>
+</div>
+@*سنجش تراکم استخوان*@
+<div class="tab-pane p-3" id="favoritembox_14" role="tabpanel">
+    <div class="row tabToggle9" id="fromFavorite_14" data-parsley-validate>
+
+        <div class="form-group col-lg-4 col-sm-6">
+            <label>عنوان خدمت</label>
+            <div>
+                <select id="serviceIdFavorite_14" favoritecategory="30" class="form-control select2" tabindex="101" required data-parsley-selectvalzero data-parsley-errors-container="#serviceIdFavorite_14Container">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="serviceIdFavorite_14Container"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <input id="quantityFavorite_14" type="text" class="form-control number" maxlength="10" tabindex="102" required data-parsley-min="1" data-parsley-max="32565"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin-top:24px">
+                <button onclick="saveFavoriteTamin(14)" type="button" class="btn btn-light border-blue" tabindex="103"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button onclick="resetFavoriteForm(14)" type="button" class="btn btn-light border-green"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                <button onclick="addPrescriptionFavoriteLines(14)" type="button" class="btn btn-light border-orange" tabindex="17"><i class="fa fa-arrow-left"></i>اضافه به لیست</button>
+            </div>
+        </div>
+        <div class="table-responsive" id="pagetable_p_14" style="overflow-x:hidden">
+            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+        </div>
+    </div>
+</div>
+</div>
+</fieldset>
+</div>
+</div>
+<div class="modal-footer">
+    <button id="modal-close" onclick="modal_close('favoriteTaminModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="errorRepeatList" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">لیست آیتم های تکراری</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">شناسه</th>
+                                <th class="col-width-percent-50">خدمت / دارو</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempRepeatList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="" onclick="modal_close('errorRepeatList')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Modules/MC/FavoritePrescription/FavoriteTaminIndex.js"></script>

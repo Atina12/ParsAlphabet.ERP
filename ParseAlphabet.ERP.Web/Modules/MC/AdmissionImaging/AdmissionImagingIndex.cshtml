@@ -1,0 +1,111 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "تصویر برداری";
+}
+<style>
+    .tox-toolbar-overlord tox-tbtn--disabled {
+        display: none !important;
+    }
+</style>
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                                <button type="button" id="formPlateListAdd" onclick="AdmissionImagingForm()" class="btn btn-info waves-effect waves-light" title="Ctrl + Insert"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 displaynone" id="relationalBox">
+                                <div class="form-group d-flex">
+                                    <label class="relational-caption">کپشن فیلتر</label>
+                                    <div class="chosen-container-parent" style="float: right !important">
+                                        <select data-placeholder="انتخاب کنید..." id="form_keyvalue" class="select2">
+                                            <option value="0">انتخاب کنید...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<div id="displayAdmissionImagingModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right" id="contentdisplayAdmissionImaging" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayAdmissionImagingModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="PrnAdmissionImaging" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <fieldset class="tab-content group-box group-box-gray mt-3">
+                <div class="app-text-countiner">
+                    <textarea id="attenderInstruction"></textarea>
+                </div>
+            </fieldset>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnAdmissionImaging')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="newAdmEditFormModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" style="height:88%">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">ویرایش پذیرش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentNewAdmissionEdit" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close_newAdm()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var uId = @User.FindFirstValue("UserId");
+    var uFullName = '@User.FindFirstValue("FullName")';
+</script>
+<script src="~/js/formplate.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/js/tiny.js"></script>
+<script src="~/Modules/MC/AdmissionImaging/AdmissionImagingIndex.js"></script>

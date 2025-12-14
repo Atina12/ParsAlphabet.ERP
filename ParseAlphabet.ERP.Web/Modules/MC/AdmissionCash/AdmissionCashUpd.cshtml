@@ -1,0 +1,371 @@
+﻿@{
+    ViewBag.Title = "اصلاح وجوه";
+}
+
+<link href="~/lib/ModulesCss/AdmissionCash.css" rel="stylesheet"/>
+<link href="~/lib/ModalePrint/PrintCss.css" rel="stylesheet"/>
+
+<div id="bcTarget" style="display : none"></div>
+<div class="content-page displaynone" id="content-page">
+    <div class="content" id="admissionCashUpdFormBox">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15" id="form">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <button id="list_admCash" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+                                <button id="saveForm" onclick="saveForm()" type="button" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-5 col-md-7 d-flex">
+                                    <div class="form-group col-sm-3">
+                                        <label>شناسه</label>
+                                        <div>
+                                            <input id="dispId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-5">
+                                        <label>تاریخ/زمان</label>
+                                        <input id="dateTime" type="text" class="form-control number" placeholder="____/__/__" maxlength="10" readonly/>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>ثبت کننده</label>
+                                        <input id="userFullName" type="text" class="form-control" readonly/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <fieldset id="admissionServiceForm" class="group-box group-box-green mt-3">
+                                <legend>پرونده</legend>
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <div id="hasServiceError"></div>
+                                        <table class="table table-styles border mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th class="col-width-percent-3">ردیف</th>
+                                                <th class="col-width-percent-6">شناسه</th>
+                                                <th class="col-width-percent-8">نمبر تذکره</th>
+                                                <th class="col-width-percent-10">نام و  تخلص</th>
+                                                <th class="col-width-percent-15">جریان کار</th>
+                                                <th class="col-width-percent-15">مرحله</th>
+                                                <th class="col-width-percent-10">مبلغ کل</th>
+                                                <th class="col-width-percent-10">مبلغ پرداخت شده</th>
+                                                <th class="col-width-percent-10">مبلغ مانده</th>
+                                                <th class="col-width-percent-10">عملیات</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tempSelectedRequests">
+                                            <tr id="emptyRow">
+                                                <td colspan="10" class="text-center">سطری وجود ندارد</td>
+                                            </tr>
+                                            </tbody>
+                                            <tbody id="sumRowRequest" class="displaynone">
+                                            <tr>
+                                                <td class="text-left col-width-percent-75" colspan="8">جمع</td>
+                                                <td class="col-width-percent-10 money total-amount" id="sumNetPrice">0</td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="group-box group-box-blue mt-3" id="admissionListForm">
+                                <legend>لیست درخواست</legend>
+                                <div class="table-responsive">
+                                    <table class="table table-styles pagetablebody border mb-0" id="admissionListTableForm" style="width:100% !important">
+                                    </table>
+                                </div>
+                            </fieldset>
+
+                            @await Html.PartialAsync("/Modules/MC/AdmissionCash/AdmissionPaymentForm.cshtml")
+
+                            @await Html.PartialAsync("/Modules/MC/AdmissionCash/CashSummeryUser.cshtml")
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+<!--Modal-DetailCash-->
+
+<div id="detailAdmissionCash" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">جزئیات دریافت / پرداخت</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right">
+                <div class="">
+                    <fieldset class="group-box group-box-green mb-3">
+                        <legend>دریافت/ پرداخت</legend>
+                        <div class="row">
+                            <div class="table-responsive ">
+                                <div id="hasServiceError"></div>
+                                <table class="table table-styles border mb-0 min-width-0-table">
+                                    <thead class="table-thead-fixed">
+                                    <tr>
+                                        <th class="col-width-percent-2">شناسه</th>
+                                        <th class="col-width-percent-3">ردیف</th>
+                                        <th class="col-width-percent-5">نوع</th>
+                                        <th class="col-width-percent-6">وجه</th>
+                                        <th class="col-width-percent-6">پوز</th>
+                                        <th class="col-width-percent-5">ارز</th>
+                                        <th class="col-width-percent-8">تفصیل</th>
+                                        <th class="col-width-percent-6">مبلغ</th>
+                                        <th class="col-width-percent-6">نرخ تسعیر ارز</th>
+                                        <th class="col-width-percent-6">مبلغ دریافتی</th>
+                                        <th class="col-width-percent-9">شماره حساب</th>
+                                        <th class="col-width-percent-6">شماره مرجع</th>
+                                        <th class="col-width-percent-5">شماره کارت</th>
+                                        <th class="col-width-percent-5">شماره ترمینال</th>
+                                        <th class="col-width-percent-7">تاریخ ثبت</th>
+                                        <th class="col-width-percent-10">کاربر ثبت کننده</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="detailCash">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('detailAdmissionCash')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="printAdmissionModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="separationPrint" onclick="printAdmission('Prn_Admission.mrt')" class="btn btn-default" style="font-weight:bolder;">چاپ تفکیک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="aggregationPrint" onclick="printAdmission('Prn_AdmissionCompress.mrt')" class="btn btn-default" style="font-weight:bolder;">چاپ تجمیع<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 2 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="doublePrint" onclick="printAdmission('Prn_AdmissionDouble.mrt')" class="btn btn-default" style="font-weight:bolder;">چاپ دو نسخه ای<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 3 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="standPrint" onclick="printAdmission('Prn_AdmissionStand.mrt')" class="btn btn-default" style="font-weight:bolder;">چاپ کیوسک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('printAdmissionModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="printAdmissionItemModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="separationPrint" onclick="printAdmission('Prn_AdmissionSales.mrt',1)" class="btn btn-default" style="font-weight:bolder;">چاپ تفکیک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="standPrint" onclick="printAdmission('Prn_AdmissionStand.mrt',1)" class="btn btn-default" style="font-weight:bolder;">چاپ کیوسک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('printAdmissionItemModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="PrnAdmission" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="PrnModalId" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه : </lable> <span id="modal_keyid_value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType1" onclick="separationprint()" class="btn btn-default" style="font-weight:bolder;">چاپ تفکیک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType2" onclick="aggregationprint()" class="btn btn-default" style="font-weight:bolder;">چاپ تجمیع<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 2 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType3" onclick="doubleprint()" class="btn btn-default" style="font-weight:bolder;">چاپ دو نسخه ای<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 3 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType4" onclick="cashstandprint()" class="btn btn-default" style="font-weight:bolder;">چاپ کیوسک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnAdmission')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="PrnAdmissionSale" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="PrnModalId" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه : </lable> <span id="modal_keyid_value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType1" onclick="saleseparationprint()" class="btn btn-default" style="font-weight:bolder;">چاپ تفکیک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType4" onclick="cashstandprint()" class="btn btn-default" style="font-weight:bolder;">چاپ کیوسک<sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnAdmissionSale')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="admissionCashInfoModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">نمایش درخواست</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right">
+                <div>
+                    <div class="PrnModalId">
+                        <div class="d-block w-100 text-right mb-2 pr-3">
+                            <div class="key_id">
+                                <lable>شناسه : </lable> <span id="admissionCashPayInfoModalId">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <fieldset class="group-box group-box-blue mt-3">
+                        <legend>درخواست ها</legend>
+                        <div class="table-responsive">
+                            <table class="table table-styles pagetablebody border mb-0" id="admissionCashPayInfo" style="width: 100% !important">
+                            </table>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="cashFormDisplay" class="group-box group-box-gray mt-3">
+                        <legend>دریافت / پراخت صندوق (<span id="cashFormTitle"></span>)</legend>
+
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0" id="admissionCashDisplay">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-3">ردیف</th>
+                                    <th class="col-width-percent-8">دریافت و پرداخت</th>
+                                    <th class="col-width-percent-15">نوع وجه</th>
+                                    <th class="col-width-percent-5">پوز</th>
+                                    <th class="col-width-percent-5">ارز</th>
+                                    <th class="col-width-percent-10">تفصیل</th>
+                                    <th class="col-width-percent-7">مبلغ</th>
+                                    <th class="col-width-percent-4">نرخ تسعیر</th>
+                                    <th class="col-width-percent-7" id="payAmountThead">خالص</th>
+                                    <th class="col-width-percent-9" id="userFullName">کاربر ثبت کننده</th>
+                                    <th class="col-width-percent-8" id="createDate">تاریخ ثبت</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempCashDisplay">
+                                <tr id="emptyRow">
+                                    <td colspan="11" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                                <tbody id="sumRowCashDisplay">
+                                <tr>
+                                    <td colspan="8" class="text-left">جمع</td>
+                                    <td style="background-color:#c6c6c6;font-weight:bold" id="sumPayAmountCashAdmDisplay">0</td>
+                                    <td colspan="2"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('admissionCashInfoModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/AdmissionCash/SelectRequestModal.cshtml")
+
+@await Html.PartialAsync("/Modules/MC/AdmissionMaster/AdmissionMasterDisplay.cshtml")
+
+<script>
+    var admissionCashId = @ViewContext.RouteData.Values["id"];
+</script>
+<script src="/js/formplate.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/Modules/WF/WorkFlow.js"></script>
+<script src="/Modules/MC/AdmissionCash/AdmissionPaymentForm.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/Modules/MC/AdmissionCash/AdmissionCashUpd.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

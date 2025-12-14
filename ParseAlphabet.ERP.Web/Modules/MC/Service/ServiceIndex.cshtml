@@ -1,0 +1,234 @@
+﻿@{
+    ViewBag.Title = "خدمات";
+}
+
+
+<link href="~/lib/ModulesCss/Service.css" rel="stylesheet"/>
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-xl">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height text-right" data-parsley-validate>
+<div class="row" id="rowKeyId">
+    <div class="d-block w-100 text-right mb-2 pr-3">
+        <div class="key_id">
+            <lable id="modal_keyid_caption"></lable>
+            <span id="modal_keyid_value"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-12">
+        <label>عنوان خدمت (آفلاین)</label>
+        <div>
+            <input id="name" type="text" class="form-control" maxlength="100" title="" required tabindex="1"/>
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <label>عنوان خدمت (آنلاین)</label>
+        <div>
+            <input id="onlineName" type="text" class="form-control" maxlength="50" title="" required tabindex="2"/>
+        </div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label>نوع خدمت بهداشت</label>
+        <div>
+            <select id="serviceTypeId" class="form-control select2" title="" tabindex="3" data-parsley-errors-container="#serviceTypeIdErrorContainer" required>
+                <option value="">انتخاب کنید</option>
+            </select>
+        </div>
+        <div id="serviceTypeIdErrorContainer"></div>
+    </div>
+    <div class="form-group col-sm-6">
+        <label> وضعیت</label>
+        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="4">
+            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <label>توضیحات چاپ نمایش</label>
+        <div>
+            <input type="text" id="printDescription" class="form-control" title="" tabindex="5"/>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <ul class="nav nav-pills nav-justified" role="tablist">
+
+            <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+                <a class="nav-link active" data-toggle="tab" id="sepasFormLink" href="#sepasBox" role="tab">
+                    <span class="d-none d-md-block"> بهداشت (RVU)</span>
+                    <span class="d-block d-md-none">
+                        <i class="mdi mdi-account h5"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+                <a class="nav-link" data-toggle="tab" id="cdtFormLink" href="#cdtBox" role="tab">
+                    <span class="d-none d-md-block">بهداشت (CDT) </span>
+                    <span class="d-block d-md-none">
+                        <i class="mdi mdi-email h5"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+                <a class="nav-link" data-toggle="tab" id="attenderFormLink" href="#attenderBox" role="tab">
+                    <span class="d-none d-md-block">تامین اجتماعی (نسخه پیچی پاراکلینیک) </span>
+                    <span class="d-block d-md-none">
+                        <i class="mdi mdi-email h5"></i>
+                    </span>
+                </a>
+            </li>
+
+
+        </ul>
+        <div class="tab-content group-box group-box-gray">
+
+            <div class="tab-pane active p-3" id="sepasBox" role="tabpanel">
+                <div class="tabToggle1" id="labRequestForm">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label>نمبر تذکره</label>
+                            <div>
+                                <select id="terminologyId" class="form-control select2" titleId="terminologyName" title="" tabindex="6" data-parsley-errors-container="#nationalCodeErrorContainer">
+                                    <option value="0">انتخاب شناسه ملی</option>
+                                </select>
+                            </div>
+                            <div id="nationalCodeErrorContainer"></div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>نمبر تذکره</label>
+                            <div>
+                                <input id="tarefCodeterminology" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>ضریب حرفه ای</label>
+                            <div>
+                                <input id="professionalCodeK" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>ضریب فنی</label>
+                            <div>
+                                <input id="technicalCodeK" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>ضریب بیهوشی</label>
+                            <div>
+                                <input id="anesthesiaBaseK" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane p-3" id="cdtBox" role="tabpanel">
+                <div class="tabToggle2" id="labRequestForm">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label>نمبر تذکره</label>
+                            <div>
+                                <select id="cdtTerminologyId" class="form-control select2" titleId="cdtTerminologyName" title="" tabindex="7" data-parsley-errors-container="#cdtNationalCodeErrorContainer">
+                                    <option value="0">انتخاب شناسه ملی</option>
+                                </select>
+                            </div>
+                            <div id="cdtNationalCodeErrorContainer"></div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label> نام</label>
+                            <div>
+                                <input id="descriptionCdtTerminology" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>نمبر تذکره</label>
+                            <div>
+                                <input id="codeCdtTerminology" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane p-3" id="attenderBox" role="tabpanel">
+                <div class="tabToggle3" id="labRequestForm">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label>نمبر تذکره</label>
+                            <div>
+                                <select id="taminTerminologyId" class="form-control select2" titleId="taminTerminologyName" title="" tabindex="8" data-parsley-errors-container="#taminTerminologyIdErrorContainer">
+                                    <option value="0">انتخاب شناسه ملی</option>
+                                </select>
+                            </div>
+                            <div id="taminTerminologyIdErrorContainer"></div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>نمبر تذکره</label>
+                            <div>
+                                <input id="tarefCode" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>تعرفه سازمان</label>
+                            <div>
+                                <input id="govermentPrice" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>تعرفه آزاد</label>
+                            <div>
+                                <input id="freePrice" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>تعرفه فنی</label>
+                            <div>
+                                <input id="techPrice" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>حداقل سن</label>
+                            <div>
+                                <input id="minAge" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>حداکثر سن</label>
+                            <div>
+                                <input id="maxAge" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>جنسیت قابل قبول</label>
+                            <div>
+                                <input id="acceptableGender" type="text" class="form-control" tabindex="-1" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+
+    <button id="modal-save" onclick="saveService();" class="btn btn-success waves-effect waves-light" tabindex="9" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+    <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="~/plugins/search-modal/search-modal.js"></script>
+<script src="/Modules/MC/Service/ServiceIndex.js"></script>

@@ -1,0 +1,35 @@
+﻿/*.scroll tbody {
+    height: calc(100vh - 500px);
+}*/
+
+.row-danger {
+    background-color: #ffe0e0 !important;
+    transition: .3ms ease;
+}
+
+#contentNewAdmission #content-page {
+    margin-right: 0 !important
+}
+
+    #contentNewAdmission #content-page .content {
+        margin-top: 0 !important
+    }
+
+        #contentNewAdmission #content-page .content .container-fluid {
+            padding: 0 !important
+        }
+
+.tab-content {
+    border-top: 2px solid #566271 !important;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top: none;
+}
+
+
+#requestBasicInsurerPagetable .table-responsive-table,
+#requestComInsurerPagetable .table-responsive-table {
+    min-height: 300px !important;
+    height: 400px !important
+    /*    height: calc(100vh - 525px) !important;*/
+}

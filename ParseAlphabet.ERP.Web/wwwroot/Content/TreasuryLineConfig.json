@@ -1,0 +1,1581 @@
+[
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 34
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 1
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 2
+      },
+      {
+        "id": "amount",
+        "inputMethod": 1
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 34
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 2
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 2
+      },
+      {
+        "id": "amount",
+        "inputMethod": 1
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 34
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 3
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 2
+      },
+      {
+        "id": "amount",
+        "inputMethod": 1
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondBranchNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondBranchName",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondAccountNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondIssuer",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      },
+      {
+        "id": "bankIssuerId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountIssuer",
+        "inputMethod": 1
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 34
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 4
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "transitNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 2
+      },
+      {
+        "id": "amount",
+        "inputMethod": 1
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 34
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 5
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "transitNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 2
+      },
+      {
+        "id": "amount",
+        "inputMethod": 1
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 34
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 9
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 2
+      },
+      {
+        "id": "amount",
+        "inputMethod": 1
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 1
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 36
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 3
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 3
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondBranchNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondBranchName",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondAccountNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondIssuer",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      },
+      {
+        "id": "bankIssuerId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountIssuer",
+        "inputMethod": 1
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 39
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 6
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 3
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 39
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 8
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 3
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 51
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 1
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 3
+      },
+      {
+        "id": "ExchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "Bond Step",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 51
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 4
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "transitNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 3
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 51
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 5
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": 2
+      },
+      {
+        "id": "transitNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 1
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 3
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 35
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 1
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 1
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "Bondtep",
+        "inputMethod": 3
+      }
+    ]
+
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 35
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 3
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": 2
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": 3
+      },
+      {
+        "id": "amount",
+        "inputMethod": 3
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondBranchNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondBranchName",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondAccountNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondIssuer",
+        "inputMethod": 3
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": 3
+      },
+      {
+        "id": "bankIssuerId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountIssuer",
+        "inputMethod": 1
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 35
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 5
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethd": 1
+      },
+      {
+        "id": "inOut",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "3"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "3"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 35
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 6
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "3"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "3"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 35
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 8
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "3"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "3"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 15
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 1
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 15
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 4
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 15
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 5
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 14
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 1
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 14
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 3
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "3"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "3"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondBranchNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondBranchName",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondAccountNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondIssuer",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bankIssuerId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountIssuer",
+        "inputMethod": 1
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 14
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 5
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 14
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 6
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId", 
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 14
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 8
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 49
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 6
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 49
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 8
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": "2"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "1"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": "1"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      }
+    ]
+  },
+  {
+    "headerFields": [
+      {
+        "fieldId": "stageId",
+        "fieldValue": 37
+      }
+    ],
+    "lineFields": [
+      {
+        "fieldId": "fundTypeId",
+        "fieldValue": 3
+      }
+    ],
+    "configs": [
+      {
+        "id": "rowNumber",
+        "inputMethod": "1"
+      },
+      {
+        "id": "inOut",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "bankAccountId",
+        "inputMethod": "2"
+      },
+      {
+        "id": "transitNo",
+        "inputMethod": "1"
+      },
+      {
+        "id": "documentNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "currencyId",
+        "inputMethod": "3"
+      },
+      {
+        "id": "amount",
+        "inputMethod": "3"
+      },
+      {
+        "id": "exchangeRate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondBranchNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondBranchName",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondAccountNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondSerialNo",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondDueDate",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondIssuer",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bondStep",
+        "inputMethod": "3"
+      },
+      {
+        "id": "bankIssuerId",
+        "inputMethod": 2
+      },
+      {
+        "id": "bankAccountIssuer",
+        "inputMethod": 1
+      }
+    ]
+  }
+]

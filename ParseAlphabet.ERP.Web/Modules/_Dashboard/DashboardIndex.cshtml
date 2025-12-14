@@ -1,0 +1,306 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "داشبورد";
+}
+<link href="/plugins/chartist/css/chartist.css" rel="stylesheet"/>
+<link href="/Content/scss/rtl/Pages/dashboard-rtl.css" rel="stylesheet"/>
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            @*<button class="notification">Give me one notification!</button>*@
+
+            @*<div class="row w-100">
+                <div class="card w-100">
+                    <div class="card-body" id="treeviewpage1">
+                        @await Html.PartialAsync("/Modules/TreeViewPageTable.cshtml")
+                    </div>
+                </div>
+            </div>*@
+
+            @*<div class="row w-100">
+                    <div class="card w-100">
+                        <div class="card-body" id="treeviewpage-number2">
+                            @await Html.PartialAsync("/Modules/TreeViewPageTable.cshtml")
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="row">
+                @*<div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card" style="min-height: 300px;">
+                            <div class="card-header-dark">
+                                <p class="text-center">آب و هوا</p>
+                            </div>
+                            <p style="text-align: center;position: relative;top: 81px;display:none;">دسترسی به سرور وجود ندارد.</p>
+                            <div class="forecast-content" id="weatherinfo">
+
+                            </div>
+                        </div>
+                    </div>*@
+                <!--New calendar-->
+                @*<button onclick="notifyMe()">Notify me!</button>*@
+                @*<div class="col-lg-3 col-md-6 col-sm-6 mt-xs-2">
+                    <div class="card" style="min-height: 300px;">
+                        <div class="card-header-dark">
+                            <p class="text-center">تقویم</p>
+                        </div>
+                        <div class="table-responsive calendar-dashboard col-md-12" id="calendarinfo" style="padding:0px;">
+
+                        </div>
+                    </div>
+                </div>*@
+                @*End New calendar*@
+                <div id="kpiFundTypeSummary" class="col-lg-12 col-md-12 col-sm-12 mt-xs-4 text-right" style="background-color:#ffffff;">
+                    <div class="card" style="min-height: 300px;">
+                        @await Html.PartialAsync("/Modules/MC/AdmissionCash/CashSummeryUser.cshtml")
+                    </div>
+                </div>
+                @*<div class="col-lg-3 col-md-6 col-sm-6">
+                        <input type="text" id="suggestBoxInput" autocomplete="off" class="form-control" />
+                    </div>*@
+
+            </div>
+
+            @*<div class="row" style="display:none;">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="card m-b-30">
+                            <div class="card-header-dark">
+                                <p class="text-right">نوبت دهی</p>
+                            </div>
+                            <div class="card-body" style="max-height:460px;">
+                                <ul class="nav nav-pills nav-justified m-b-5" role="tablist">
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link active" data-toggle="tab" href="#p-today" role="tab">
+                                            <span class="d-none d-md-block">امروز</span><span class="d-block d-md-none"><i class="mdi mdi-home-variant h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-toggle="tab" href="#p-yesterday" role="tab">
+                                            <span class="d-none d-md-block">دیروز</span><span class="d-block d-md-none"><i class="mdi mdi-account h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-toggle="tab" href="#p-lastweek" role="tab">
+                                            <span class="d-none d-md-block">هفته گذشته</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-toggle="tab" href="#p-lastmonth" role="tab">
+                                            <span class="d-none d-md-block">ماه گذشته</span><span class="d-block d-md-none"><i class="mdi mdi-settings h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light">
+                                        <a class="nav-link" data-toggle="tab" href="#p-lastyear" role="tab">
+                                            <span class="d-none d-md-block">سال گذشته</span><span class="d-block d-md-none"><i class="mdi mdi-settings h5"></i></span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="chart-guid">
+                                    <ul class="text-center">
+                                        <li>
+                                            <span style="background:#30419b"></span>
+                                            پذرفته شده
+                                        </li>
+
+                                        <li>
+                                            <span style="background:#02c58d"></span>
+                                            در انتظار خدمت
+                                        </li>
+
+                                        <li>
+                                            <span style="background:#fcbe2d"></span>
+                                            ترخیص شده
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-content mt-3">
+                                    <div class="tab-pane active p-2" id="p-today" role="tabpanel">
+                                        <div id="stacked-bar-chart" class="ct-chart ct-golden-section"></div>
+                                    </div>
+                                    <div class="tab-pane p-2" id="p-yesterday" role="tabpanel">
+
+                                    </div>
+                                    <div class="tab-pane p-2" id="p-lastweek" role="tabpanel">
+
+                                    </div>
+                                    <div class="tab-pane p-2" id="p-lastmonth" role="tabpanel">
+
+                                    </div>
+                                    <div class="tab-pane p-2" id="p-lastyear" role="tabpanel">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="row mt-3 d-none">
+                    <div class="col-xl-12">
+                        <div class="card m-b-30">
+                            <div class="card-header-dark">
+                                <p class="text-right">صندوق</p>
+                            </div>
+                            <div class="card-body">
+                                <ul class="nav nav-pills nav-justified m-b-5" role="tablist">
+                                    <li class="nav-item waves-effect waves-light" id="todayHeader">
+                                        <a class="nav-link active" data-toggle="tab" href="#c-today" role="tab">
+                                            <span class="d-none d-md-block">امروز</span><span class="d-block d-md-none"><i class="mdi mdi-home-variant h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light" id="yesterdayHeader">
+                                        <a class="nav-link" data-toggle="tab" href="#c-yesterday" role="tab">
+                                            <span class="d-none d-md-block">دیروز</span><span class="d-block d-md-none"><i class="mdi mdi-account h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light" id="lastweekHeader">
+                                        <a class="nav-link" data-toggle="tab" href="#c-lastweek" role="tab">
+                                            <span class="d-none d-md-block">هفته گذشته</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light" id="lastmonthHeader">
+                                        <a class="nav-link" data-toggle="tab" href="#c-lastmonth" role="tab">
+                                            <span class="d-none d-md-block">ماه گذشته</span><span class="d-block d-md-none"><i class="mdi mdi-settings h5"></i></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item waves-effect waves-light" id="lastyearHeader">
+                                        <a class="nav-link" data-toggle="tab" href="#c-lastyear" role="tab">
+                                            <span class="d-none d-md-block">سال گذشته</span><span class="d-block d-md-none"><i class="mdi mdi-settings h5"></i></span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content mt-3" style="min-height:300px;">
+                                    <div class="tab-pane active p-2" id="c-today" role="tabpanel" style="height:40vh !important">
+                                        <canvas id="barToday" height="300"></canvas>
+                                    </div>
+                                    <div class="tab-pane p-2" id="c-yesterday" role="tabpanel" style="height:40vh !important">
+                                        <canvas id="barYesterday" height="300"></canvas>
+                                    </div>
+                                    <div class="tab-pane p-2" id="c-lastweek" role="tabpanel" style="height:40vh !important">
+                                        <canvas id="barLastweek" height="300"></canvas>
+                                    </div>
+                                    <div class="tab-pane p-2" id="c-lastmonth" role="tabpanel" style="height:40vh !important">
+                                        <canvas id="barLastmonth" height="300"></canvas>
+                                    </div>
+                                    <div class="tab-pane p-2" id="c-lastyear" role="tabpanel" style="height:40vh !important">
+                                        <canvas id="barLastyear" height="300"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            @*<div class="package-ping">
+                    <input id="inputPing" type="text" placeholder="domain or ip" />
+                    <button id="btnPingGet">getping</button>
+                    <p id="textPingUrl"></p>
+                    <p id="textPingMassage"></p>
+                </div>*@
+            @*---------- Chart ----------------------*@
+            <div id="dailyAdmissionDashboard" class="row mt-3">
+                <div class="col-xl-12">
+                    <div class="card m-b-30">
+                        <div class="card-header-dark">
+                            <p class="text-right">داشبورد روزانه پذیرش</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-pills nav-justified m-b-5" role="tablist">
+                                <li class="nav-item waves-effect waves-light" id="admissionHeader">
+                                    <a class="nav-link active" data-toggle="tab" href="#c-admission" role="tab">
+                                        <span class="d-none d-md-block">پذیرش</span>
+                                        <span class="d-block d-md-none">
+                                            <i class="mdi mdi-home-variant h5"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" id="itemsHeader">
+                                    <a class="nav-link" data-toggle="tab" href="#c-items" role="tab">
+                                        <span class="d-none d-md-block">کالا</span>
+                                        <span class="d-block d-md-none">
+                                            <i class="mdi mdi-home-variant h5"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" id="cashHeader">
+                                    <a class="nav-link" data-toggle="tab" href="#c-cash" role="tab">
+                                        <span class="d-none d-md-block">دریافت / پرداخت</span>
+                                        <span class="d-block d-md-none">
+                                            <i class="mdi mdi-home-variant h5"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content mt-3" style="min-height:300px;direction:rtl;">
+                                <div class="tab-pane active p-2" id="c-admission" role="tabpanel">
+                                    <div class="chartWrapper">
+                                        <div class="chartAreaWrapper">
+                                            <div class="chartAreaWrapperCountainer" style="height:50vh !important">
+                                                <canvas id="admissionChart" height="300"></canvas>
+                                            </div>
+                                            <div class="chartWrapperCharts bg-white">
+                                                <canvas id="axis_Testadm" height="300"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-2" id="c-items" role="tabpanel" style="overflow:auto">
+                                    <div class="chartWrapper">
+                                        <div class="chartAreaWrapper">
+                                            <div class="chartAreaWrapperCountainer" style="height:50vh !important">
+                                                <canvas id="itemsChart" height="300"></canvas>
+                                            </div>
+                                            <div class="chartWrapperCharts bg-white">
+                                                <canvas id="axis_Testite" height="300"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-2" id="c-cash" role="tabpanel" style="overflow:auto">
+                                    <div class="chartWrapper">
+                                        <div class="chartAreaWrapper">
+                                            <div class="chartAreaWrapperCountainer" style="height:50vh !important">
+                                                <canvas id="cashChart" height="300"></canvas>
+                                            </div>
+                                            <div class="chartWrapperCharts bg-white">
+                                                <canvas id="axis_Testcash" height="300"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*---------- Chart ----------------------*@
+
+            @*<div class="row mt-5 ">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            @await Html.PartialAsync("/Modules/treeview.cshtml")
+                        </div>
+                    </div>
+                </div>*@
+            @*</div>*@
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+<script src="~/plugins/chartjs/chart.min.js"></script>
+<script src="~/Content/pages/chartjs.init.js"></script>
+<script src="/Modules/_Dashboard/DashboardIndex.js"></script>
+@*<script src="./lib/ping/Ping.js"></script>*@
+<script type="text/javascript">
+    var cityname = "@User.FindFirstValue("LocCityName")";
+</script>

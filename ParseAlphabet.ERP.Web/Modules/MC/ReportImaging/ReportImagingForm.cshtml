@@ -1,0 +1,282 @@
+﻿@{
+    ViewBag.Title = "گزارش تصویربرداری";
+}
+
+<link href="~/lib/ModulesCss/Reports/AdmissionList.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button id="getReport" type="button" class="btn green_2 waves-effect waves-light"><i class="fa fa-sticky-note ml-2"></i>پیش نمایش</button>
+        <button id="previewReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-2"></i>تهیه گزارش</button>
+        @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+        <button id="exportPDF" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-2"></i>دریافت فایل های گزارش</button>
+        <button id="exportCSV" type="button" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+    </div>
+</div>
+
+<div class="card-body" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" href="#patientBox" role="tab">
+            <span class="d-none d-md-block">مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" href="#attenderBox" role="tab">
+            <span class="d-none d-md-block">داکتر</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" href="#serviceBox" role="tab">
+            <span class="d-none d-md-block">خدمت</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content group-box group-box-gray">
+    <div class="tab-pane active p-3" id="patientBox" role="tabpanel">
+        <div class="row tabToggle1">
+            <div class="form-group col-lg-3 col-sm-4 m-0 ">
+                <label>تاریخ ثبت</label>
+                <div class="double-input-box">
+                    <div class="double-input">
+                        <input type="text" id="fromDate" class="form-control number persian-date persian-datepicker" placeholder="____/__/__" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                               data-inputmask="'mask':'9999/99/99'"
+                               data-parsley-validate-if-empty="true"
+                               data-parsley-shamsidateservice
+                               data-parsley-chekdoubledate
+                               data-parsley-errors-container="#fromDateErrorContainer"
+                               data-parsley-comparedate="toDate"
+                               data-parsley-dateisonemonth="toDate"
+                               maxlength="10" tabindex="1"/>
+                    </div>
+                    <div class="double-input">
+                        <input type="text" id="toDate" class="form-control number persian-date persian-datepicker" placeholder="____/__/__" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"
+                               data-inputmask="'mask':'9999/99/99'"
+                               data-parsley-shamsidateservice
+                               data-parsley-errors-container="#toDateErrorContainer"
+                               maxlength="10" tabindex="2"/>
+                    </div>
+                </div>
+                <div class="double-input-box">
+                    <div class="double-input" id="fromDateErrorContainer"></div>
+                    <div class="double-input" id="toDateErrorContainer"></div>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                <label>شعبه</label>
+                <select id="branchId" class="form-control select2" multiple="multiple" name="branch[]" tabindex="3"></select>
+            </div>
+            <div class="form-group col-lg-3 col-sm-4 mb-0">
+                <label>جریان کار</label>
+                <select id="workflowId" class="form-control select2" multiple="multiple" name="workflow[]" tabindex="4"></select>
+            </div>
+            <div class="form-group col-lg-3 col-sm-4 mb-0">
+                <label>مرحله</label>
+                <select id="stageId" class="form-control select2" multiple="multiple" name="stage[]" tabindex="5"></select>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                <label>شناسه پذیرش</label>
+                <input id="id" type="text" class="form-control number" tabindex="6" maxlength="12"/>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                <label>شناسه پرونده</label>
+                <div>
+                    <input id="admissionMasterId" type="text" class="form-control number" tabindex="7" maxlength="15"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                <label>مراجعه کننده</label>
+                <div>
+                    <select id="patientId" class="form-control select2" multiple="multiple" name="states[]" tabindex="8">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                <label>نمبر تذکره مراجعه کننده</label>
+                <input id="patientNationalCode" type="text" class="form-control str-number" tabindex="9" maxlength="10" data-parsley-minlength="6"/>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>بیمه اجباری</label>
+                    <div>
+                        <select id="basicInsurerId" class="form-control select2" multiple="multiple" tabindex="10">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>صندوق اجباری</label>
+                    <div>
+                        <select id="basicInsurerLineId" class="form-control select2" multiple="multiple" tabindex="11">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>بیمه تکمیلی</label>
+                    <div>
+                        <select id="compInsurerId" multiple="multiple" class="form-control select2" tabindex="12">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>صندوق تکمیلی</label>
+                    <div>
+                        <select id="compInsurerLineId" multiple="multiple" class="form-control select2" tabindex="13">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>طرف قرارداد</label>
+                    <div>
+                        <select id="thirdPartyInsurerId" class="form-control select2" multiple="multiple" tabindex="14">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>تخفیف</label>
+                    <div>
+                        <select id="discountInsurerId" class="form-control select2" multiple="multiple" tabindex="15">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group col-lg-2 col-sm-4">
+                <label>گام</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="actionId" multiple="multiple" class="select2 select2-quick-access" tabindex="16">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                <label>کاربر ثبت کننده</label>
+                <div>
+                    <select id="userId" class="form-control select2" tabindex="17">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="attenderBox" role="tabpanel">
+        <div class="row tabToggle2">
+            <div class="col-lg-3 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>داکتر</label>
+                    <div>
+                        <select id="attenderId" multiple="multiple" class="form-control select2" tabindex="30"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-sm-4 mb-0">
+                <label>دپارتمان</label>
+                <div>
+                    <select id="departmentId" class="form-control select2" multiple="multiple" tabindex="31">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-sm-4 mb-0">
+                <label>تخصص</label>
+                <div>
+                    <select id="specialityId" class="form-control select2" multiple="multiple" tabindex="32"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="serviceBox" role="tabpanel">
+        <div class="row tabToggle3">
+            <div class="col-lg-3 col-sm-4 mb-0">
+                <div class="form-group">
+                    <label>نوع خدمت</label>
+                    <div>
+                        <select id="serviceTypeId" multiple="multiple" class="form-control select2" tabindex="40">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-sm-4 mb-0">
+                <label>خدمت</label>
+                <div>
+                    <select id="serviceId" class="form-control select2" multiple="multiple" tabindex="41"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<fieldset class="group-box group-box-gray mt-3">
+    <legend>پیش نمایش</legend>
+    <div class="pagetable-report" id="mainReport">
+        @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+
+    </div>
+</fieldset>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-9 col-sm-12 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="1">
+                            <option value="101" selected>گزارش ریز خدمات تصویربرداری - به تفکیک نام خدمت</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="2"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<script>
+    $(".tab-content").show();
+</script>
+
+<script type="text/javascript" src="/Modules/MC/ReportImaging/ReportImagingForm.js"></script>

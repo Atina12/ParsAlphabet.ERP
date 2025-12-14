@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "تخصیص نوبت داکتران";
+}
+
+<style type="text/css">
+    #attenderTimeSheetTransformModalBody {
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        padding-bottom: 5px !important;
+    }
+
+        #attenderTimeSheetTransformModalBody #parentPageTableBody > tbody {
+            overflow-x: hidden !important;
+        }
+
+    #attenderscheduleblocktimelistfieldset .table-responsive-table {
+        white-space: normal;
+        overflow: auto;
+        height: 420px !important;
+        border-collapse: collapse;
+    }
+</style>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<div id="AttenderTimeSheetTransformModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتقال نوبت داکتران</h5>
+                </div>
+            </div>
+
+            <div id="attenderTimeSheetTransformModalBody" class="modal-body modal-max-height text-right  pb-5 overflow-visible" data-parsley-validate>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label> سال مالی</label>
+                        <div>
+                            <select id="fiscalYearId" type="text" class="form-control select2" data-parsley-selectvalzero title="" tabindex="100001" data-parsley-errors-container="#fiscalYearIdErrorContainer">
+                            </select>
+                        </div>
+                        <div id="fiscalYearIdErrorContainer"></div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>شعبه </label>
+                        <div>
+                            <select id="branchId" type="text" class="form-control select2" required title="" tabindex="100002" data-parsley-errors-container="#branchIdErrorContainer">
+                            </select>
+                        </div>
+                        <div id="branchIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>دپارتمان </label>
+                        <div>
+                            <select id="departmentId" data-placeholder="انتخاب کنید"
+                                    type="text" class="form-control select2"
+                                    data-parsley-selectvalzero title=""
+                                    tabindex="100003">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>داکتر مبدا</label>
+                        <div>
+                            <select id="fromAttenderId" type="text" class="form-control select2"
+                                    data-parsley-selectvalzero
+                                    title="" tabindex="100004"
+                                    data-parsley-errors-container="#fromAttenderIdErrorContainer">
+                            </select>
+                        </div>
+                        <div id="fromAttenderIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label>تاریخ </label>
+
+                        <div class="double-input-box">
+                            <div class="double-input">
+                                <input type="text"
+                                       id="fromWorkDayDate"
+                                       data-parsley-validate-if-empty="true"
+                                       class="form-control number persian-date persian-datepicker"
+                                       placeholder="____/__/__"
+                                       value="@PersianDateTime.GetCurrentYear()/@PersianDateTime.GetCurrentMonth()/01"
+                                       data-inputmask="'mask':'9999/99/99'"
+                                       data-parsley-shamsidate
+                                       data-parsley-errors-container="#fromWorkDayDateErrorContainer"
+                                       toDate data-parsley-comparedate="toWorkDayDate"
+                                       maxlength="10"
+                                       tabindex="100005"/>
+                            </div>
+                            <div class="double-input">
+                                <input type="text"
+                                       id="toWorkDayDate"
+                                       data-parsley-validate-if-empty="true"
+                                       class="form-control number persian-date persian-datepicker"
+                                       placeholder="____/__/__"
+                                       value="@PersianDateTime.GetToday()"
+                                       data-inputmask="'mask':'9999/99/99'"
+                                       data-parsley-shamsidate
+                                       data-parsley-errors-container="#toWorkDayDateErrorContainer"
+                                       maxlength="10"
+                                       tabindex="100006"/>
+                            </div>
+                        </div>
+
+
+                        <div class="double-input-box">
+                            <div class="double-input" id="fromWorkDayDateErrorContainer"></div>
+                            <div class="double-input" id="toWorkDayDateErrorContainer"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>داکتر مقصد</label>
+                        <div>
+
+                            <select data-placeholder="انتخاب کنید"
+                                    id="toAttenderId"
+                                    class="form-control select2 select2-quick-access"
+                                    multiple="multiple"
+                                    name="toAttenderId[]"
+                                    tabindex="100007">
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div id="attenderscheduleblocktimelistfieldset" class="form-group col-sm-12" style="align-content:center">
+                        @await Html.PartialAsync("/Modules/MC/AttenderTimeSheetMedicalShift/AttenderTimeSheetMedicalShiftIndex.cshtml")
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="insertAttenderTimeSheetTransform" class="btn btn-success waves-effect waves-light" tabindex="100009"><i class="fa fa-save"></i>ذخیره</button>
+
+                <button id="modal-close" onclick="modal_close(`AttenderTimeSheetTransformModal`)" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div id="errorAttenderTimeSheet" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">لیست نوبت های رزرو شده</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-15">داکتر</th>
+                                <th class="col-width-percent-12">شناسه غیرحضوری مراجعه کننده</th>
+                                <th class="col-width-percent-10">مراجعه کننده</th>
+                                <th class="col-width-percent-8">نمبر تذکره مراجعه کننده</th>
+                                <th class="col-width-percent-11">شناسه غیرحضوری پذیرش</th>
+                                <th class="col-width-percent-7">شناسه پذیرش</th>
+                                <th class="col-width-percent-12">تاریخ رزرو غیرحضوری پذیرش </th>
+                                <th class="col-width-percent-7">تاریخ رزرو</th>
+                                <th class="col-width-percent-20">شناسه بلاک زمانی</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempErrorAttenderTimeSheet">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="" onclick="modal_close('errorAttenderTimeSheet')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/AttenderTimeSheetMedicalShift/AttenderTimeSheetMedicalShiftDisplay.cshtml")
+
+<script src="/Modules/MC/AttenderTimeSheet/AttenderTimeSheetIndex.js"></script>

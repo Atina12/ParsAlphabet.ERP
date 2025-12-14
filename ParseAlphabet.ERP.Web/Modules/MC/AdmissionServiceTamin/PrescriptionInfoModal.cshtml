@@ -1,0 +1,59 @@
+﻿<div id="prescriptionInfoModal" class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog pt-0 modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">جزئیات نسخه</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="table-responsive">
+                    <table class="table table-styles border" style="width:100% !important">
+                        <thead>
+                        <tr>
+                            <th class="col-width-percent-10">شناسه نسخه</th>
+                            <th class="col-width-percent-10">نوع نسخه</th>
+                            <th class="col-width-percent-10">نمبر تذکره</th>
+                            <th class="col-width-percent-10">نام داکتر</th>
+                            <th class="col-width-percent-10">نظام داکتری</th>
+                            <th class="col-width-percent-40">تخصص</th>
+                            <th class="col-width-percent-10">تاریخ نسخه</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempHeaderPrescriptionInfo"></tbody>
+                    </table>
+                </div>
+                <div class="table-responsive table-responsive-thead-fixed" style="height:unset!important;max-height:300px!important;">
+                    <table class="table table-styles border mb-0">
+                        <thead class="table-thead-fixed">
+                        <tr>
+                            <th class="col-width-percent-5">ردیف</th>
+                            <th class="col-width-percent-12">کد خدمت</th>
+                            <th class="col-width-percent-47">نام خدمت</th>
+                            <th class="col-width-percent-10">نوع خدمت</th>
+                            <th class="col-width-percent-8">تعداد درخواست</th>
+                            <th class="col-width-percent-8">تعداد باقیمانده</th>
+                            <th class="col-width-percent-9">تعرفه خدمت</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempPrescriptionInfo">
+                        <tr id="emptyRow">
+                            <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                        <tfoot id="sumPrescriptionInfo" class="">
+                        <tr>
+                            <td class="text-left font-weight-bolder " colspan="6">جمع</td>
+                            <td class="sum-prescription font-weight-bolder font-13"></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('prescriptionInfoModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/Modules/MC/AdmissionServiceTamin/PrescriptionInfoModal.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

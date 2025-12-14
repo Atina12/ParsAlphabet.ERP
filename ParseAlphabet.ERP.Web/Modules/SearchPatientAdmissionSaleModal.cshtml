@@ -1,0 +1,108 @@
+﻿<style>
+    .resizer {
+        background-image: url(../Content/images/resizer-icon.png)
+    }
+</style>
+<div id="searchPatientModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" id="elementModal">
+        <div class="modal-content" id="addResizer">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">جستجو</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-min-height text-right" data-parsley-validate>
+                <fieldset class="group-box group-box-green">
+                    <legend>جستجو</legend>
+                    <div class="row">
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>مراجعه کننده</label>
+                            <div>
+                                <input id="searchPatientFullName" type="text" class="form-control" maxlength="50" tabindex="200">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>نمبر تذکره مراجعه کننده</label>
+                            <div>
+                                <input id="searchPatientNationalCode" type="text" class="form-control str-number" maxlength="50" tabindex="201">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <label>موبایل</label>
+                            <div>
+                                <input id="searchPatientMobileNo" type="text" class="form-control" maxlength="11" tabindex="202">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-sm-2">
+                            <button id="searchPatientAdmission" type="button" class="btn btn-light border-green" tabindex="203" style="margin-top:22.5px">
+                                <i class="fa fa-search"></i>
+                                جستجو
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+                @*<div>*@
+                <div class="table-responsive" style="height:70vh">
+                    <table class="table table-styles border mb-0" id="patientListPagetable">
+                        <thead class="table-thead-fixed">
+                        <tr>
+                            <th class="col-width-percent-5">ردیف</th>
+                            <th class="col-width-percent-5">شناسه</th>
+                            <th class="col-width-percent-15">کدملی</th>
+                            <th class="col-width-percent-15">نام</th>
+                            <th class="col-width-percent-15"> تخلص</th>
+                            <th class="col-width-percent-7">تاریخ تولد</th>
+                            <th class="col-width-percent-5">جنسیت</th>
+                            <th class="col-width-percent-8">ملیت</th>
+                            @*<th class="col-width-percent-10">گروه مشتریان</th>*@
+                            <th class="col-width-percent-10">موبایل</th>
+                            <th class="col-width-percent-5">انتخاب</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempPatient">
+                        <tr id="emptyRow">
+                            <td colspan="10" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @*</div>*@
+            </div>
+            <div class="modal-footer">
+                <button id="modalRowCountBtn" class="btn btn-secondary" disabled>تعداد سطر : <span id="modalRowCount"> 0 </span></button>
+                <button id="modal-close" onclick="modal_close('searchPatientModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var element = document.getElementById('elementModal');
+    var addResizer = document.getElementById("addResizer");
+    var resizer = document.createElement('div');
+    resizer.className = 'resizer';
+    resizer.style.width = '30px';
+    resizer.style.height = '25px';
+    resizer.style.position = 'absolute';
+    resizer.style.right = 0;
+    resizer.style.bottom = 0;
+    resizer.style.cursor = 'se-resize';
+    resizer.style.backgroundImage = "url(../Content/images/resizer-icon.png)";
+    resizer.style.backgroundSize = "30px 25px";
+    resizer.style.backgroundRepeat = "no-repeat";
+
+    addResizer.appendChild(resizer);
+    resizer.addEventListener('mousedown', initResize, false);
+
+    function initResize(e) {
+        window.addEventListener('mousemove', Resize, false);
+        window.addEventListener('mouseup', stopResize, false);
+    }
+    function Resize(e) {
+        element.style.maxWidth = (e.clientX - element.offsetLeft) + 'px';
+        element.style.height = (e.clientY - element.offsetTop) + 'px';
+    }
+    function stopResize(e) {
+        window.removeEventListener('mousemove', Resize, false);
+        window.removeEventListener('mouseup', stopResize, false);
+    }
+</script>

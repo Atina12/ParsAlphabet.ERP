@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "کدینگ حسابداری - تفصیل";
+}
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <span class="col-3">@ViewBag.Title</span>
+                            <div class="button-items col-9">
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="stimul_preview" onclick="stimul_previewNew('pagetableDetails')" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                                <button type="button" id="addCustomer" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>مشتریان</button>
+                                <button type="button" id="addVendor" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>تامین کنندگان</button>
+                                <button type="button" id="addEmployee" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>پرسنل</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetableDetails">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/SearchModal.cshtml")
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<div id="vendorAddEditModal">
+    @await Html.PartialAsync("/Modules/PU/Vendor/VendorAddEdit.cshtml")
+</div>
+<div id="employeeAddEditModal">
+    @await Html.PartialAsync("/Modules/HR/Employee/EmployeeAddEdit.cshtml")
+</div>
+<div id="customerAddEditModal">
+    @await Html.PartialAsync("/Modules/SM/Customer/CustomerAddEdit.cshtml")
+</div>
+
+
+<script src="~/Modules/FM/AccountDetail/AccountDetailIndex.js"></script>

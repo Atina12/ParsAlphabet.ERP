@@ -1,0 +1,46 @@
+﻿<div id="insurerPatientModal" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0"> تخصیص بیمه به مراجعه کننده</h5>
+                </div>
+            </div>
+            <div class="modal-header" id="">
+                <div class="items-info text-right d-flex">
+                    <div class="services-info text-right d-flex">
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">کد بیمه : <span class="InsurerCodeModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">نام بیمه : <span class="InsurerNameModal"></span></p>
+                        <p class="d-inline-block pl-2 m-1 border-left font-12">نوع بیمه : <span class="InsurerTypeModal"></span></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body text-right p-0">
+                <div class="carousel-inner">
+                    <div class="carousel-item-box">
+                        <div class="card-body " id="insurerPatient_pagetable">
+                            <div class="float-right" style="width:35%">
+                                <div class="form-group d-flex">
+                                    <label class="relational-caption">نحوه نمایش</label>
+                                    <div class="chosen-container-parent float-right">
+                                        <select data-placeholder="نحوه نمایش" class="select2" id="selectedPatinet" tabindex="-1">
+                                            <option value="0">همه موارد</option>
+                                            <option value="1">موارد انتخاب شده </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('insurerPatientModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/MC/InsurerPatient/InsurerPatient.js"></script>

@@ -1,0 +1,103 @@
+﻿<fieldset id="cashForm" class="group-box group-box-gray mt-3">
+    <legend>دریافت / پرداخت وجه</legend>
+    <div class="row mb-3 mr-1">
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-styles border mb-0" id="admissionCash">
+
+                <caption class="operating-success d-none">لطفا کارت بکشید</caption>
+
+                <caption id="admissionMasterBalance" class="admissionMasterBalance">
+                    <span id="admissionMasterBalanceTitle">مبلغ مانده</span>
+                    <span id="admissionMasterBalanceVal" class="highlight-success">0</span> ریال
+                </caption>
+
+                <thead>
+                <tr>
+                    <th class="col-width-percent-5">ردیف</th>
+                    <th class="col-width-percent-7">دریافت و پرداخت</th>
+                    <th class="col-width-percent-20">نوع وجه</th>
+                    <th class="col-width-percent-7">پوز</th>
+                    <th class="col-width-percent-7">ارز</th>
+                    @*<th class="col-width-percent-10">نوع حساب باز</th>*@
+                    <th class="col-width-percent-10">تفصیل</th>
+                    <th class="displaynone">شماره کارت</th>
+                    <th class="col-width-percent-6">مبلغ کل</th>
+                    <th class="col-width-percent-6">نرخ تسعیر</th>
+                    <th class="col-width-percent-6" id="payAmountThead">مبلغ</th>
+                    <th class="displaynone col-width-percent-9" id="userFullName">کاربر ثبت کننده</th>
+                    <th class="displaynone col-width-percent-6" id="createDate">تاریخ ثبت</th>
+                    <th class="col-width-percent-5">عملیات</th>
+                </tr>
+                <tr id="editCashForm" data-parsley-validate>
+                    <th class="col-width-percent-5">
+                        <input type="text" class="form-control font-15" id="rowNumber" disabled/>
+                    </th>
+                    <th class="col-width-percent-7">
+                        <select data-placeholder="دریافت/پرداخت" id="inOut" class="form-control select2" tabindex="20000">
+                            <option value="1" selected>1 - دریافت</option>
+                            <option value="2">2 - پرداخت</option>
+                        </select>
+                    </th>
+                    <th class="col-width-percent-20">
+                        <select data-placeholder="وجه" id="fundTypeId" class="form-control select2" tabindex="20001" data-parsley-rqfundtypeopenacc data-parsley-errors-container="#fundTypeIdError"></select>
+                    </th>
+                    <th class="col-width-percent-7">
+                        <select data-placeholder="پوز" id="posId" class="form-control select2" tabindex="20002" data-parsley-errors-container="#posIdError">
+                            <option value="0" selected>انتخاب</option>
+                        </select>
+                    </th>
+                    <th class="col-width-percent-7">
+                        <select data-placeholder="ارز" id="currencyId" class="form-control select2" tabindex="20003" data-parsley-errors-container="#currencyIdError"></select>
+                    </th>
+                    @*<th class="col-width-percent-12"><select data-placeholder="انتخاب" id="openAccTypeId" class="form-control select2" tabindex="10004" data-parsley-rqopenaccemp data-parsley-errors-container="#openAccTypeIdError"><option value="0" selected>انتخاب</option></select><div id="fundTypeIdError"></div></th>*@
+                    <th class="col-width-percent-10">
+                        <select data-placeholder="انتخاب کنید" id="detailAccountId" class="select2 font-weight-light" tabindex="20004">
+                            <option value="0">انتخاب</option>
+                        </select>
+                        <div id="openAccTypeIdError"></div>
+                    </th>
+                    <th class="displaynone">
+                        <input type="text" class="form-control font-15" id="cardNo" disabled/>
+                    </th>
+                    <th class="col-width-percent-6">
+                        <input type="text" class="form-control money" id="amount" tabindex="20005" required data-parsley-min="1"/>
+                    </th>
+                    <th class="col-width-percent-6">
+                        <input type="text" class="form-control money" id="exchangeRate" tabindex="20006" disabled/>
+                    </th>
+                    <th class="col-width-percent-6">
+                        <input type="text" class="form-control money" id="payAmount" tabindex="-1" disabled/>
+                    </th>
+                    <th class="displaynone">
+                        <input type="text" class="form-control money" id="userFullName" tabindex="-1" disabled/>
+                    </th>
+                    <th class="displaynone">
+                        <input type="text" class="form-control money dir-ltr" value="@DateTime.Now.ToPersianDateString()" id="cashCreateDateTimePersian" tabindex="-1" disabled/>
+                    </th>
+                    <th class="col-width-percent-5">
+                        <button id="addCashAdm" onclick="addTempCashAdm()" tabindex="20007" type="button" class="btn btn-light border-dark pa float-sm-right pr-4 pl-4">افزودن</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="tempCash">
+                <tr id="emptyRow">
+                    <td colspan="10" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+                <tbody id="sumRowCash" class="displaynone">
+                <tr>
+                    <td colspan="7" class="text-center"></td>
+                    <td id="totalAmountTitle" class="text-left">جمع</td>
+                    <td style="background-color:#c6c6c6;font-weight:bold" id="sumPayAmountCashAdm" class="money">۰</td>
+                    <td class=""></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/MC/AdmissionHeaderForms/HeaderForms.js"></script>
+<script src="~/Modules/_PcPos/PcPosProperty.json"></script>

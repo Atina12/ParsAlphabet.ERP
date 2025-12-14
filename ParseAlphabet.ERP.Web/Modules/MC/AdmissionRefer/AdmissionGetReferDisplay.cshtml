@@ -1,0 +1,904 @@
+﻿@{
+    ViewBag.Title = "نمایش دریافت ارجاع";
+}
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/lib/switchCheckbox/switchBox.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/AdmissionRefer.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/Navigate.css" rel="stylesheet"/>
+
+
+<div class="content-page displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button title="اولین" id="headerFirst" onclick="display_pagination('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-skip-next"></i>
+        </button>
+        <button title="قبلی" id="headerPrevious" onclick="display_pagination('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-play"></i>
+        </button>
+        <input id="headerIndex" onkeydown="headerindexChoose(event)" type="text" autocomplete="off" class="form-control number col-2 d-inline mr-2 ml-1" placeholder="شناسه "/>
+        <button title="بعدی" id="headerNext" onclick="display_pagination('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-play fa-rotate-180"></i>
+        </button>
+        <button title="آخرین" id="headerLast" onclick="display_pagination('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-skip-previous"></i>
+        </button>
+
+        @*<button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>*@
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+<div class="row displaynone" id="AdmissionReferBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="admissionReferId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div hidden class="form-group col-lg-1 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="admissionReferTypeName" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["admissionReferTypeName"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>وضعیت ارسال ارجاع</label>
+            <input id="AdmissionSentRerferStatus" style="background-color:red;color:white;" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            <th>شناسه شباد</th>
+            <th>انقضاء دفترچه</th>
+            <th>داکتر</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+
+<!--<fieldset id="getFeedBackReferbox" class="displaynone group-box group-box-orange mt-3">
+<button type="button" onclick="plusR(this)" class="btn btn-light border-orange plus">
+    <i class="fas fa-plus"></i>
+</button>
+<legend>
+    دریافت بازخورد
+</legend>-->
+@*<button id="getFeedBackadmissionRefer" class="btn btn-light border-orange col-lg-3 col-sm-3" style="margin:0 15px 5px 0;">
+                                    <i></i>
+                                    دریافت بازخورد
+                                </button>*@
+<!--<div class="row" data-parsley-validate>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>نام و  تخلص</th>
+            <th>جنسیت</th>
+            <th>شماره تماس</th>
+            <th>آدرس</th>
+            <th>تاریخ تولد</th>
+            <th>ملیت</th>
+            <th>نمبر تذکره</th>
+            <th>وضعیت تاهل</th>
+        </tr>
+        </thead>
+        <tbody id="tempGetfeedBackRefer">
+        </tbody>
+    </table>
+</div>
+<section class="row " id="referFormT">
+    <div class="form-group col-lg-1 col-sm-2">
+        <label> قابل مشاهده</label>
+        <div class="funkyradio funkyradio-success">
+            <input id="iSQueriableT" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر" disabled />
+        </div>
+    </div>
+</section>
+<div class="slideToggle get" style="display:none;">
+<ul class="nav nav-pills nav-justified T" role="tablist">
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link active T" data-toggle="tab" href="#abuseHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">مصرف دخانیات</span><span class="d-block d-md-none"><i class="mdi mdi-account h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#admissionFieldBox" role="tab">
+            <span class="d-none d-md-block">پذیرش</span><span class="d-block d-md-none"><i class="mdi mdi-account h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#careActionFieldBox" role="tab">
+            <span class="d-none d-md-block">اقدامات درمانی</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#clinicalFindingFieldBox" role="tab">
+            <span class="d-none d-md-block">معاینات کلی مراجعه کننده</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#diagnosisFieldBox" role="tab">
+            <span class="d-none d-md-block">تشخیص</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#drugHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه دارویی</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#drugOrderedFieldBox" role="tab">
+            <span class="d-none d-md-block">ویژگی دارو تجویز شده</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#familyHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">سوابق خانوادگی</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#followupPlanFieldBox" role="tab">
+            <span class="d-none d-md-block">اطلاعات پذیرش</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#insuranceFieldBox" role="tab">
+            <span class="d-none d-md-block">اطلاعات بیمه</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#pastMedicalHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه داکتری مراجعه کننده</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+        </a>
+    </li>
+</ul>
+<!-- Tab panes -->
+<!--<div class="tab-content group-box group-box-orange ">-->
+@*START abuseHistoryField*@
+<!--<div class="tab-pane active p-3" id="abuseHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle1" id="abuseHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempabuseHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نوع ماده مخدر</th>
+                    <th>میزان مصرف</th>
+                    <th> واحد ماده مخدر </th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد مصرف</th>
+                    <th>تاریخ شروع مصرف</th>
+                    <th>تاریخ قطع مصرف</th>
+                </tr>
+                </thead>
+                <tbody id="tempabuseHistoryField">
+                <tr id="emptyRow"><td colspan="8" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END abuseHistoryField*@
+@*START admissionField*@
+<!--<div class="tab-pane p-3" id="admissionFieldBox" role="tabpanel">
+    <div class="row tabToggle1" id="admissionFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempadmissionFieldList">
+                <thead>
+                <tr>
+                    <th>تاریخ / زمان پذیرش</th>
+                    <th>نوع پذیرش</th>
+                    <th>پذیرنده</th>
+                    <th>داکتر ارجاع دهنده</th>
+                    <th>داکتر داکتر</th>
+                </tr>
+                </thead>
+                <tbody id="tempadmissionField">
+                <tr id="emptyRow"><td colspan="5" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END admissionField*@
+@*START careActionField*@
+<!--<div class="tab-pane  p-3" id="careActionFieldBox" role="tabpanel">
+    <div class="row tabToggle5" id="careActionFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempcareActionFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام اقدام</th>
+                    <th>تاریخ زمان شروع</th>
+                    <th>تاریخ زمان پایان</th>
+                    <th>مدت زمان انجام اقدام درمانی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempcareActionField">
+                <tr id="emptyRow"><td colspan="7" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END careActionField*@
+@*START clinicalFindingField*@
+<!--<div class="tab-pane  p-3" id="clinicalFindingFieldBox" role="tabpanel">
+    <div class="row tabToggle6" id="clinicalFindingFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempclinicalFindingFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>سن شروع بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری قبلی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>علائم نشانه ها و یافته های بالینی</th>
+                    <th>شدت</th>
+                    <th>علائمی که وجود ندارد</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempclinicalFindingField">
+                <tr id="emptyRow"><td colspan="9" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END clinicalFindingField*@
+@*START diagnosisField*@
+<!--<div class="tab-pane p-3" id="diagnosisFieldBox" role="tabpanel">
+    <div id="diagnosisFieldForm" class="row tabToggle4" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdiagnosisFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>وضعیت تشخیص</th>
+                    <th>تشخیص</th>
+                    <th>میزان شدت بیماری </th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempdiagnosisField">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END diagnosisField*@
+@*START drugHistoryField*@
+<!--<div class="tab-pane  p-3" id="drugHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle7" id="drugHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام دارو</th>
+                    <th>طریقه مصرف</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugHistoryField">
+                <tr id="emptyRow"><td colspan="3" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END drugHistoryField*@
+@*START drugOrderedField*@
+<!--<div class="tab-pane  p-3" id="drugOrderedFieldBox" role="tabpanel">
+    <div class="row tabToggle8" id="drugOrderedFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugOrderedFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>کد دارو</th>
+                    <th>نام ژنریک دارو</th>
+                    <th>طریقه مصرف</th>
+                    <th>تواتر مصرف</th>
+                    <th>دوز مصرفی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد اندازه گیری مدت زمان مصرف</th>
+                    <th>تعداد</th>
+                    <th>تاریخ زمان تجویز</th>
+                    <th>توضیح</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugOrderedField">
+                <tr id="emptyRow"><td colspan="12" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END drugOrderedField*@
+@*START familyHistoryField*@
+<!--<div class="tab-pane  p-3" id="familyHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle3" id="familyHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempfamilyHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نسبت با بیمار</th>
+                    <th>نام بیماری</th>
+                    <th>بیماری علت مرگ </th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempfamilyHistoryField">
+                <tr id="emptyRow"><td colspan="5" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END familyHistoryField*@
+@*START followupPlanField*@
+<!--<div class="tab-pane  p-3" id="followupPlanFieldBox" role="tabpanel">
+    <div class="row tabToggle3" id="followupPlanFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempfollowupPlanFieldList">
+                <thead>
+                <tr>
+                    <th>نوع مراجعه بعدی</th>
+                    <th>مراجعه بعدی</th>
+                    <th>واحد مراجعه بعدی</th>
+                    <th>تاریخ زمان مراجعه بعدی</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempfollowupPlanField">
+                <tr id="emptyRow"><td colspan="5" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END followupPlanField*@
+@*START insuranceField*@
+<!--<div class="tab-pane  p-3" id="insuranceFieldBox" role="tabpanel">
+    <div class="row tabToggle3" id="insuranceFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempinsuranceFieldList">
+                <thead>
+                <tr>
+                    <th>بیمه گر</th>
+                    <th>صندوق بیمه</th>
+                    <th>شماره صفحه دفترچه</th>
+                    <th>تاریخ انقضا</th>
+                    <th>شماره بیمه</th>
+                    <th>شباد</th>
+                </tr>
+                </thead>
+                <tbody id="tempinsuranceField">
+                <tr id="emptyRow"><td colspan="6" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END insuranceField*@
+@*START pastMedicalHistoryField*@
+<!--<div class="tab-pane  p-3" id="pastMedicalHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle10" id="pastMedicalHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="temppastMedicalHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان  بیماری قبلی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیح</th>
+                </tr>
+                </thead>
+                <tbody id="temppastMedicalHistoryField">
+                <tr id="emptyRow"><td colspan="6" class="text-center">سطری وجود ندارد</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+@*END pastMedicalHistoryField*@
+@*</div>
+                                </div>
+                            </fieldset>-->*@
+
+<fieldset class="group-box group-box-gray mt-3" id="sendReferFieldset">
+<legend>ارسال ارجاع</legend>
+<div class="row " id="referForm" data-parsley-validate>
+    <div class="form-group col-lg-1  col-sm-2">
+        <label> قابل مشاهده</label>
+        @*<div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'iSQueriable');" tabindex="10">
+                                            <input id="iSQueriable" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر" />
+                                        </div>*@
+        <input type="text" tabindex="10" id="iSQueriable" class="form-control" disabled/>
+    </div>
+    <div class="form-group col-lg-2  col-sm-3">
+        <label> دلیل ارجاع</label>
+        <div>
+            <input id="referredReasonId" disabled class="form-control" tabindex="11" required/>
+        </div>
+    </div>
+    <div class="form-group col-lg-2  col-sm-2">
+        <label>نوع ارجاع</label>
+        <div>
+            <input id="referredTypeId" disabled class="form-control" tabindex="12" required/>
+        </div>
+    </div>
+    <div class="form-group col-lg-5  col-sm-5">
+        <label>توضیحات</label>
+        <div>
+            <input id="referralDescription" disabled type="text" class="form-control" required maxlength="100" tabindex="13"/>
+        </div>
+    </div>
+</div>
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" id="abuseHistoryLink" href="#abuseHistoryBox" role="tab">
+            <span class="d-none d-md-block">مصرف دخانیات</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="familyHistoryLink" href="#familyHistoryBox" role="tab">
+            <span class="d-none d-md-block">سوابق خانوادگی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="bloodPerssureLink" href="#bloodPerssureBox" role="tab">
+            <span class="d-none d-md-block">فشار خون</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(5)">
+        <a class="nav-link" data-toggle="tab" id="careActionLink" href="#careActionBox" role="tab">
+            <span class="d-none d-md-block">اقدامات درمانی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(6)">
+        <a class="nav-link" data-toggle="tab" id="clinicFindingLink" href="#clinicFindingBox" role="tab">
+            <span class="d-none d-md-block">معاینات کلی مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(7)">
+        <a class="nav-link" data-toggle="tab" id="drugHistoryLink" href="#drugHistoryBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه دارویی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(8)">
+        <a class="nav-link" data-toggle="tab" id="drugOrderedLink" href="#drugOrderedBox" role="tab">
+            <span class="d-none d-md-block">ویژگی دارو تجویز شده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(9)">
+        <a class="nav-link" data-toggle="tab" id="heightWeightLink" href="#heightWeightBox" role="tab">
+            <span class="d-none d-md-block">قد و وزن</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(10)">
+        <a class="nav-link" data-toggle="tab" id="medicalHistoryLink" href="#medicalHistoryBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه داکتری مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(11)">
+        <a class="nav-link" data-toggle="tab" id="pulseLink" href="#pulseBox" role="tab">
+            <span class="d-none d-md-block">ضربان</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(12)">
+        <a class="nav-link" data-toggle="tab" id="vitalSingsLink" href="#vitalSingsBox" role="tab">
+            <span class="d-none d-md-block">علائم حیاتی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(13)">
+        <a class="nav-link" data-toggle="tab" id="waistHipLink" href="#waistHipBox" role="tab">
+            <span class="d-none d-md-block">ابعاد بدن مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(14)">
+        <a class="nav-link" data-toggle="tab" id="diagLink" href="#diagBox" role="tab">
+            <span class="d-none d-md-block">تشخیص</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+@*START abuseHistory*@
+<div class="tab-pane active p-3" id="abuseHistoryBox" role="tabpanel">
+    <div class="row tabToggle1" id="abuseHistoryForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempabuseHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نوع ماده مخدر</th>
+                    <th>میزان مصرف</th>
+                    <th>واحد ماده مخدر</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد مصرف</th>
+                    <th>تاریخ شروع مصرف</th>
+                    <th>تاریخ قطع مصرف</th>
+                </tr>
+                </thead>
+                <tbody id="tempabuseHistory">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END abuseHistory*@
+@*START familyHistory*@
+<div class="tab-pane  p-3" id="familyHistoryBox" role="tabpanel">
+    <div class="row tabToggle3" id="familyHistoryForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempfamilyHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نسبت با مراجعه کننده</th>
+                    <th>نام بیماری</th>
+                    <th>بیماری علت مرگ </th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempfamilyHistory">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END familyHistory*@
+@*START bloodPerssure*@
+<div class="tab-pane  p-3" id="bloodPerssureBox" role="tabpanel">
+    <div class="row tabToggle4" id="bloodPerssureForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="font-size:10px" id="tempbloodPerssureList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>حالت بیمار</th>
+                    <th>فشار خون دیاستولیک</th>
+                    <th>فشار خون سیستولیک</th>
+                    <th>تاریخ مشاهده</th>
+                </tr>
+                </thead>
+                <tbody id="tempbloodPerssure">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END bloodPerssure*@
+@*START careAction*@
+<div class="tab-pane  p-3" id="careActionBox" role="tabpanel">
+    <div class="row tabToggle5" id="careActionForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempcareActionList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام اقدام</th>
+                    <th>تاریخ زمان شروع</th>
+                    <th>تاریخ زمان پایان</th>
+                    <th>مدت زمان انجام اقدام درمانی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempcareAction">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END careAction*@
+@*START clinicFinding*@
+<div class="tab-pane  p-3" id="clinicFindingBox" role="tabpanel">
+    <div class="row tabToggle6" id="clinicFindingForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempclinicFindingList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>سن شروع بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری قبلی </th>
+                    <th>واحد اندازه گیری</th>
+                    <th>علائم نشانه ها و یافته های بالینی</th>
+                    <th>شدت</th>
+                    <th>علائمی که وجود ندارد</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempclinicFinding">
+                <tr id="emptyRow">
+                    <td colspan="9" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END clinicFinding*@
+@*START drugHistory*@
+<div class="tab-pane  p-3" id="drugHistoryBox" role="tabpanel">
+    <div class="row tabToggle7" id="drugHistoryForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام دارو</th>
+                    <th>طریقه مصرف</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugHistory">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugHistory*@
+@*START drugOrdered*@
+<div class="tab-pane  p-3" id="drugOrderedBox" role="tabpanel">
+    <div class="row tabToggle8" id="drugOrderedForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugOrderedList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>کد دارو</th>
+                    <th>نام ژنریک دارو</th>
+                    <th>طریقه مصرف</th>
+                    <th>تواتر مصرف</th>
+                    <th>دوز مصرفی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد اندازه گیری مدت زمان مصرف</th>
+                    <th>تعداد</th>
+                    <th>تاریخ زمان تجویز</th>
+                    <th>توضیح</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugOrdered">
+                <tr id="emptyRow">
+                    <td colspan="12" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugOrdered*@
+@*START heightWeight*@
+<div class="tab-pane  p-3" id="heightWeightBox" role="tabpanel">
+    <div class="row tabToggle9" id="heightWeightForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempheightWeightList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>قد</th>
+                    <th>وزن</th>
+                    <th>تاریخ مشاهده</th>
+                </tr>
+                </thead>
+                <tbody id="tempheightWeight">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END heightWeight*@
+@*START medicalHistory*@
+<div class="tab-pane  p-3" id="medicalHistoryBox" role="tabpanel">
+    <div class="row tabToggle10" id="medicalHistoryForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempmedicalHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری قبلی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیح</th>
+                </tr>
+                </thead>
+                <tbody id="tempmedicalHistory">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END medicalHistory*@
+@*START pulse*@
+<div class="tab-pane  p-3" id="pulseBox" role="tabpanel">
+    <div class="row tabToggle11" id="pulseForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="temppulseList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>حالت بیمار</th>
+                    <th>تعداد ضربان </th>
+                    <th>وجود / عدم وجود نبض</th>
+                    <th>روش اندازه گیری</th>
+                    <th>تاریخ مشاهده</th>
+                    <th>توضیح معاینه</th>
+                </tr>
+                </thead>
+                <tbody id="temppulse">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END pulse*@
+@*START vitalSings*@
+<div class="tab-pane  p-3" id="vitalSingsBox" role="tabpanel">
+    <div class="row tabToggle12" id="vitalSingsForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempvitalSingsList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>تعداد ضربان </th>
+                    <th>تعداد تنفس </th>
+                    <th>دمای بدن</th>
+                    <th>تاریخ مشاهده</th>
+                </tr>
+                </thead>
+                <tbody id="tempvitalSings">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END vitalSings*@
+@*START waistHip*@
+<div class="tab-pane  p-3" id="waistHipBox" role="tabpanel">
+    <div class="row tabToggle13" id="waistHipForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempwaistHipList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>اندازه دور ران</th>
+                    <th>اندازه دور کمر</th>
+                    <th>تاریخ مشاهده</th>
+                </tr>
+                </thead>
+                <tbody id="tempwaistHip">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END waistHip*@
+@*START diag*@
+@await Html.PartialAsync("/Modules/MC/AdmissionDiagnosis/DiagnosisSectionDisplay.cshtml")
+@*END diag*@
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<script type="text/javascript" class="main-script" src="/Modules/MC/AdmissionRefer/AdmissionGetReferDisplay.js"></script>

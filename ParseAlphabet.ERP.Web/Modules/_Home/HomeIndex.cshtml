@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "خانه";
+    Layout = Views.Shared._Layout;
+}
+
+@section PageStyles {
+    <link href="/Content/scss/rtl/Pages/dashboard-rtl.css" rel="stylesheet"/>
+}
+
+
+@section Scripts{
+    @*    <script>
+        loginApp(true);
+    </script>*@
+    <script>
+        navigation_item_click('/Dashboard/DashboardIndex', 'داشبورد');
+    </script>
+}

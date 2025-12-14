@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "مراجعه کنندگان";
+}
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>نمبر تابعیت (برای خارجی ها )</label>
+                        <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                            <input id="citizenCode" type="text" class="form-control str-number" title="" maxlength="10" data-parsley-validate-if-empty="true"
+                                   oninput="checkPatientInput(event)"
+                                   data-parsley-nationalcitizen data-parsley-compareidcitizen="nationalCode" data-parsley-existnationalcode=""
+                                   tabindex="1" data-parsley-errors-container="#idCodeError"/>
+                        </div>
+                        <div id="idCodeError">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نمبر تذکره</label>
+                        <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                            <input id="nationalCode" type="text" class="form-control str-number"
+                                   placeholder="____-____-_____"
+                                   data-parsley-validate-if-empty="true"
+                                   data-parsley-nationalcitizen data-parsley-nationalcode=""
+                                   data-inputmask="'mask':'9999-9999-99999'"
+                                   tabindex="2"
+                                   data-parsley-errors-container="#nationalCodeError" />
+                        </div>
+                        <div id="nationalCodeError"></div>
+                    </div>
+
+                   @*  <div class="form-group col-sm-6">
+                        <label>سال تولد</label>
+                        <div class="input-group">
+                            <input id="birthYear" placeholder="سال تولد" type="text" class="form-control number" tabindex="3" maxlength="4" title="برای استعلام هویت سال تولد الزامی می باشد"/>
+                            <div class="input-group-append">
+                                <button id="getPersonByBirthWS" style="align-items: center;border:none !important;" class="btn btn-secondary bootstrap-touchspin-up d-inline-flex " type="button" data-toggle="tooltip" data-placement="bottom" title="وب سرویس استعلام هویت">
+                                    <i class="fas fa-users"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div> *@
+                    <div class="form-group col-sm-6">
+                        <label>نام</label>
+                        <div>
+                            <input id="firstName" type="text" class="form-control atoz-valid" title="" required maxlength="50" tabindex="4" data-parsley-errors-container="#firstNameCodeError"/>
+                        </div>
+                        <div id="firstNameCodeError">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> تخلص</label>
+                        <div>
+                            <input id="lastName" type="text" class="form-control atoz-valid" title="" required maxlength="50" tabindex="5"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>تاریخ تولد</label>
+                        <div>
+                            <input id="birthDatePersian" type="text" class="form-control persian-date" maxlength="10" required data-parsley-shamsidate data-parsley-errors-container="#birthDatePersianError" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="6"/>
+                        </div>
+                        <div id="birthDatePersianError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>جنسیت</label>
+                        <div>
+                            <select id="genderId" class="form-control select2" title="" required tabindex="7">
+                                <option value="1">مرد</option>
+                                <option value="2">زن</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام پدر</label>
+                        <div>
+                            <input id="fatherFirstName" type="text" class="form-control atoz-valid" title="" required oninput="checkPatientInput(event)" maxlength="50" tabindex="8"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>تابعیت</label>
+                        <div>
+                            <select id="countryId" class="form-control select2" title="" required tabindex="9" data-parsley-errors-container="#countryIdError"></select>
+                        </div>
+                        <div id="countryIdError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>شماره موبایل</label>
+                        <div>
+                            <input id="mobileNo" type="text" class="form-control str-number" title="" data-parsley-mobileno data-parsley-errors-container="#mobileNoCodeError" maxlength="11" tabindex="10"/>
+                        </div>
+                        <div id="mobileNoCodeError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>شماره تلفن منزل </label>
+                        <div>
+                            <input id="phoneNo" type="text" class="form-control str-number" title="" data-parsley-phoneno data-parsley-errors-container="#phoneNoCodeError" maxlength="11" tabindex="11"/>
+                        </div>
+                        <div id="phoneNoCodeError"></div>
+                    </div>
+                   @*  <div class="form-group col-sm-6">
+                        <label>شماره شناسنامه</label>
+                        <div>
+                            <input id="idCardNumber" type="text" tabindex="12" maxlength="13" class="form-control str-number"/>
+                        </div>
+                    </div> *@
+                    <div class="form-group col-sm-6">
+                        <label>وضعیت تاهل</label>
+                        <div>
+                            <select id="maritalStatusId" tabindex="13" class="form-control select2">
+                                <option value="0">انتخاب کنید</option>
+                                <option value="1">طلاق گرفته</option>
+                                <option value="2">متاهل</option>
+                                <option value="3">مجرد</option>
+                                <option value="4">همسر فوت شده</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 basicInsurer-section">
+                        <label>تحصیلات</label>
+                        <div class="col-lg-12 chosen-container-parent">
+                            <select id="educationLevelId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="14">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 ">
+                        <label>شغل</label>
+                        <div>
+                            <input id="jobTitle" type="text" tabindex="15" maxlength="50" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نمبر خانه (Postal Code)</label>
+                        <div>
+                            <input id="postalCode" type="text" tabindex="16" maxlength="10" class="form-control number"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label>آدرس</label>
+                        <div>
+                            <input id="address" type="text" class="form-control" tabindex="17" maxlength="100"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="18">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-1 col-sm-1" style="margin-top:6px">
+                        <label></label>
+                        <div class="col-lg-12 chosen-container-parent">
+                            <button id="editSectionPatient" type="button" class="btn btn-light border-orange" disabled tabindex="-1">ویرایش</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save();" class="btn btn-success waves-effect waves-light" tabindex="19" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('AddEditModal')" class="btn btn-secondary waves-effect" tabindex="20" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="/Modules/FM/getJsonDataAsync.js"></script>
+
+<script src="/Modules/MC/Patient/PatientIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/js/admission.js"></script>
+
+<script>
+        $(document).ready(function () {
+        $('#birthDatePersian, #nationalCode').inputmask();
+    });
+</script>

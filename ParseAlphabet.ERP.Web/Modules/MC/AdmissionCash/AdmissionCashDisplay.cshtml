@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "نمایش دریافت/پرداخت صندوق";
+}
+
+<div id="displayShowModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">نمایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body p-0">
+                    <fieldset id="admissionServiceForm" class="group-box group-box-green">
+                        <legend>درخواست ها</legend>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <div id="hasServiceError"></div>
+                                <table class="table table-styles border mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-width-percent-5 text-center">ردیف</th>
+                                        <th class="col-width-percent-7">شناسه</th>
+                                        <th class="col-width-percent-7">نمبر تذکره</th>
+                                        <th class="col-width-percent-11">نام و  تخلص</th>
+                                        <th class="col-width-percent-20">جریان کار</th>
+                                        <th class="col-width-percent-20">مرحله</th>
+                                        <th class="col-width-percent-10">مبلغ کل</th>
+                                        <th class="col-width-percent-10">مبلغ پرداخت شده</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tempSelectedRequests">
+                                    <tr id="emptyRow">
+                                        <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                    </tr>
+                                    </tbody>
+                                    <tbody id="sumRowRequest" class="displaynone">
+                                    <tr>
+                                        <td class="text-left col-width-percent-75" colspan="6">جمع</td>
+                                        <td class="col-width-percent-10 money total-amount" id="sumNetPrice">0</td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="cashForm" class="group-box group-box-gray mt-3">
+                        <legend>دریافت / پراخت وجه</legend>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-styles border mb-0" id="admissionCash">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-width-percent-3">ردیف</th>
+                                        <th class="col-width-percent-8">دریافت و پرداخت</th>
+                                        <th class="col-width-percent-15">نوع وجه</th>
+                                        <th class="col-width-percent-5">پوز</th>
+                                        <th class="col-width-percent-5">ارز</th>
+                                        <th class="col-width-percent-10">تفصیل</th>
+                                        <th class="col-width-percent-7">مبلغ</th>
+                                        <th class="col-width-percent-4">نرخ تسعیر</th>
+                                        <th class="col-width-percent-7" id="payAmountThead">خالص</th>
+                                        <th class="col-width-percent-9" id="userFullName">کاربر ثبت کننده</th>
+                                        <th class="col-width-percent-8" id="createDate">تاریخ ثبت</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tempCash">
+                                    <tr id="emptyRow">
+                                        <td colspan="11" class="text-center">سطری وجود ندارد</td>
+                                    </tr>
+                                    </tbody>
+                                    <tbody id="sumRowCash" class="displaynone">
+                                    <tr>
+                                        <td colspan="8" class="text-left">جمع</td>
+                                        <td style="background-color:#c6c6c6;font-weight:bold" id="sumPayAmountCashAdm">0</td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayShowModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/MC/AdmissionCash/AdmissionCashDisplay.js?ver=@Guid.NewGuid().ToString().Replace("-", "")" type="text/javascript"></script>

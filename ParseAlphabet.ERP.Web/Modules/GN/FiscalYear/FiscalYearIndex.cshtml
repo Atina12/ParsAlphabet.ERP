@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "دوره مالی";
+}
+
+<link href="~/lib/datePicker/kamadatepicker.min.css" rel="stylesheet"/>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right overflow-visible" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>عنوان دوره</label>
+                        <div>
+                            <input id="name" type="text" class="form-control" maxlength="50" title="" required tabindex="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>بستن</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'closed');" tabindex="2">
+                            <input id="closed" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بسته,باز"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>تاریخ شروع</label>
+                            <input type="text" id="startDatePersian" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" required data-parsley-shamsidate data-parsley-errors-container="#startDateErrorContainer" maxlength="10" tabindex="3"/>
+                        </div>
+                        <div id="startDateErrorContainer"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>تاریخ پایان</label>
+                            <input type="text" id="endDatePersian" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" required data-parsley-shamsidate data-parsley-errors-container="#endDatePersianErrorContainer" maxlength="10" tabindex="4"/>
+                        </div>
+                        <div id="endDatePersianErrorContainer"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save('AddEditModal','newpagetable');" class="btn btn-success waves-effect waves-light" tabindex="5"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('AddEditModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+@await Html.PartialAsync("/Modules/GN/FiscalYearLine/FiscalYearLineIndex.cshtml")
+
+<script src="/Modules/GN/FiscalYear/FiscalYearIndex.js"></script>

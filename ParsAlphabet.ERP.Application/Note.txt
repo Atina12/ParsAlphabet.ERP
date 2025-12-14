@@ -1,0 +1,29 @@
+﻿  var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+
+            config.HasHeaderRecord = false;
+            //config.LeaveOpen = false;
+
+            ***************************************************
+
+
+
+             <div class="form-group col-sm-6">
+                        <label>نمبر تذکره</label>
+                        <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                            <input id="nationalCode" type="text" class="form-control str-number"
+                                   placeholder="____-____-_____"
+                                   data-parsley-validate-if-empty="true"
+                                   data-parsley-nationalcitizen data-parsley-nationalcode=""
+                                   data-inputmask="'mask':'9999-9999-99999'"
+                                   tabindex="2"
+                                   data-parsley-errors-container="#nationalCodeError" />
+                        </div>
+                        <div id="nationalCodeError"></div>
+                    </div>
+
+                    
+<script>
+        $(document).ready(function () {
+        $('#birthDatePersian, #nationalCode').inputmask();
+    });
+</script>

@@ -1,0 +1,70 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "درخواست خزانه";
+}
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+
+
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")"
+                                       data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                                <div id="quickSearchContainer" style="display: contents"></div>
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="addTreasuryRequest" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<!--Modal-->
+@await Html.PartialAsync("/Modules/FM/TreasuryRequest/TreasuryRequestAddEdit.cshtml")
+
+<!--Modela Add Edit Treasury-->
+
+
+<div id="displayTreasuryRequestLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" style="height:auto">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayTreasuryRequestLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayTreasuryRequestLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/FM/TreasuryRequest/TreasuryRequestActionIndex.cshtml")
+
+<script src="~/Modules/FM/TreasuryRequest/TreasuryRequestIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+
+<script src="~/Modules/FM/Finanace.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+
+<script src="/Modules/WF/WorkFlow.js"></script>
+
+<script src="~/Modules/FM/TreasurySearch/TreasuryQuickSearchIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

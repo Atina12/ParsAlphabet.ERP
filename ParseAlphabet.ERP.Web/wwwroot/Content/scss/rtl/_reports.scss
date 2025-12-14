@@ -1,0 +1,174 @@
+﻿.plus {
+    float: left;
+    margin: -27px 0 0 15px;
+    padding: 1px 5px 0 5px;
+}
+
+
+.table-responsive-report {
+    white-space: nowrap;
+    overflow: auto;
+    height: 400px;
+    max-height: calc(100vh - 400px) !important;
+    border-collapse: collapse;
+}
+
+.table-body-report td {
+    overflow: hidden;
+    padding: 0 1px 0 1px
+}
+
+th.ui-resizable {
+    min-width: -webkit-fill-available;
+    min-width: -moz-available;
+}
+
+.ui-resizable-w {
+    cursor: col-resize !important;
+    width: 15px !important;
+}
+
+.table-summarybody-fixed td {
+    position: sticky;
+    bottom: -1px;
+    left: unset !important;
+    background: #d2d1d1;
+    z-index: 10;
+    border-width: 0 !important;
+    overflow: hidden !important
+}
+
+.body-report.table-styles thead tr th,
+.body-report.table-styles tbody tr td,
+.new-page-table.table-styles thead tr th,
+.new-page-table.table-styles tbody tr td,
+.new-page-table.table-styles tfoot tr td,
+.new-page-tableV1.table-styles thead tr th,
+.new-page-tableV1.table-styles tbody tr td,
+.new-page-tableV1.table-styles tfoot tr td {
+    text-align: right;
+    font-size: 11px;
+    width: 8em;
+    min-width: 5em;
+}
+
+table.body-report {
+    table-layout: fixed;
+    overflow: auto;
+    min-width: 99% !important;
+}
+
+.table-thead-fixed th {
+    position: sticky;
+    top: -1px;
+    left: unset !important;
+    background: #d2d1d1;
+    z-index: 10;
+    height: 2em;
+}
+
+.table-responsive-report th {
+    overflow: hidden !important
+}
+
+.table-responsive-thead-fixed {
+    height: 60vh;
+}
+
+.summary-title.sumtitle {
+    text-align: left !important
+}
+
+.summary-title {
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+td.sum-border {
+    border-right: 1px solid #dee2e6 !important;
+    border-left: 1px solid #dee2e6 !important;
+}
+
+.empty-row {
+    text-align: center;
+}
+
+.button-selection-select2, .button-selection-select2:hover,
+.button-selection-select2:focus {
+    margin-top: 22px;
+    height: 27px;
+}
+
+.Select-selection-select2 .selection .select2-selection {
+    border-left: 0 !important;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.multiple-maxheight .selection .select2-selection {
+    max-height: 27px;
+    overflow: hidden;
+}
+
+.multiple-maxheight-md .selection .select2-selection {
+    max-height: 150px;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+.select2-container--default .select2-selection--multiple {
+    transition: max-height .5s;
+}
+
+.btn-multipel-more, .btn-multipel-more:focus {
+    color: #777;
+    position: absolute;
+    left: 10px;
+    top: 24px;
+    border: 0;
+}
+
+.select2-selection--multiple {
+    min-height: unset !important;
+    max-height: 27px;
+}
+/**::-webkit-scrollbar, *::-webkit-scrollbar-button, *::-webkit-scrollbar-corner, *::-webkit-scrollbar-thumb, *::-webkit-scrollbar-track, *::-webkit-scrollbar-track-piece {
+    border-radius: 4px;
+    width: 2px;
+    transition: width 0.3s linear;
+    position: sticky;
+    left: 0;
+}
+
+*::-webkit-scrollbar:hover, *::-webkit-scrollbar-button:hover, *::-webkit-scrollbar-corner:hover, *::-webkit-scrollbar-thumb:hover, *::-webkit-scrollbar-track:hover, *::-webkit-scrollbar-track-piece:hover {
+    border-radius: 4px;
+    width: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #a7a7a7;
+}*/
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    width: 10rem;
+    overflow: hidden;
+    cursor: pointer !important;
+}
+
+.btn-multipel-checkbox {
+    font-size: 1rem;
+}
+
+.disabled-box-report {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.not-click {
+    pointer-events: none;
+}
+
+.loadin-div {
+    right: 47%;
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+}

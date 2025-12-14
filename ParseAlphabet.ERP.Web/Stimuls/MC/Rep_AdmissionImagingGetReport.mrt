@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Connection Ref="2" type="Stimulsoft.Report.Dictionary.StiSqlDatabase" isKey="true">
+        <Alias>Connection</Alias>
+        <ConnectionStringEncrypted>9AzDC0h7k4FpSd3cS2ytXtFwmYjGWbsBRmbojcgd9rvEIGkJ5lnC7c0cpaXEdGpn8tx5Ak5ZWQlBZPW9ylSkep5S8ylPA9PwQga1qeUNonv5atnP5FkRyGIaoa15cG03kDRTje9XcXlrRE2ZTkThe/TWT43lVqM=</ConnectionStringEncrypted>
+        <Key>de049d062ca74516b2c23b48e68e2774</Key>
+        <Name>Connection</Name>
+      </Connection>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Spc_AdmissionImaging_GetRecord Ref="3" type="Stimulsoft.Report.Dictionary.StiSqlSource" isKey="true">
+        <Alias>Spc_AdmissionImaging_GetRecord</Alias>
+        <Columns isList="true" count="43">
+          <value>ORIGINAL,Id,Id,Id,System.Int32,_x0037_28dbf87b62144ba8403ab4b6a98596f</value>
+          <value>ORIGINAL,AdmissionId,AdmissionId,AdmissionId,System.Int32,_x0036_8a2851933d94281ac2ab9bc8e722a1e</value>
+          <value>ORIGINAL,AdmissionMasterId,AdmissionMasterId,AdmissionMasterId,System.Int32,b913097a58694fd680e488625b63d96c</value>
+          <value>ORIGINAL,WorkflowId,WorkflowId,WorkflowId,System.Int32,_x0032_8e4c25de9b840b688352519c6a9863b</value>
+          <value>ORIGINAL,StageId,StageId,StageId,System.Int16,_x0038_9f7c0c0a4b546458fc65cd35f00b859</value>
+          <value>ORIGINAL,ActionId,ActionId,ActionId,System.Byte,f7aa0b431e2b4cc795834ea65d855d79</value>
+          <value>ORIGINAL,AttenderId,AttenderId,AttenderId,System.Int32,_x0033_df6212e01cd4a6bb351bd41758c833c</value>
+          <value>ORIGINAL,AttenderFullName,AttenderFullName,AttenderFullName,System.String,be22347c9c624a39949cd7d1432bd3c8</value>
+          <value>ORIGINAL,MscAttender,MscAttender,MscAttender,System.String,be8928868a3c458cb2bf545861e532e2</value>
+          <value>ORIGINAL,AttenderGenderId,AttenderGenderId,AttenderGenderId,System.Byte,_x0038_513e67f87694582bc26aa1c29fc36d8</value>
+          <value>ORIGINAL,PatientId,PatientId,PatientId,System.Int32,ac5abbe46a26441da7e9ed547a2dbebb</value>
+          <value>ORIGINAL,PatientFullName,PatientFullName,PatientFullName,System.String,ae9b023bdd984a4e9e2580ad6b175c36</value>
+          <value>ORIGINAL,PatientNationalCode,PatientNationalCode,PatientNationalCode,System.String,_x0037_4f76d2e2cea4ad0b5e6f7bca07f6209</value>
+          <value>ORIGINAL,PatientBirthDate,PatientBirthDate,PatientBirthDate,System.DateTime,bf9731ab35ca48198186e5b315843517</value>
+          <value>ORIGINAL,Content,Content,Content,System.String,_x0038_982ac18219744068f12f04369bfdd8a</value>
+          <value>ORIGINAL,CreateDateTime,CreateDateTime,CreateDateTime,System.DateTime,_x0035_035cbbd0bad430daa84e50b5237ed27</value>
+          <value>ORIGINAL,CreateUserId,CreateUserId,CreateUserId,System.Int32,f7d9fc50907748fd840ce7f6efa87abc</value>
+          <value>ORIGINAL,CreateUserFullName,CreateUserFullName,CreateUserFullName,System.String,_x0034_da6db1bd04e48e29ed481ebd6e6fa44</value>
+          <value>ORIGINAL,CompanyId,CompanyId,CompanyId,System.Int32,_x0035_b5d5d3759b8445c8a2cd39cbba0ff3b</value>
+          <value>ORIGINAL,CompanyName,CompanyName,CompanyName,System.String,_x0036_f66755d897441b09187671da6a9ca29</value>
+          <value>ORIGINAL,BasicInsurerId,BasicInsurerId,BasicInsurerId,System.Int32,d87981cabaef40de92ea3d98fd0f81f2</value>
+          <value>ORIGINAL,BasicInsurerName,BasicInsurerName,BasicInsurerName,System.String,_x0036_589622efbd7495c89333dc3ed9d5d04</value>
+          <value>ORIGINAL,BasicInsurerLineId,BasicInsurerLineId,BasicInsurerLineId,System.Int32,_x0035_00234222ffe478d81a9af746ba99f78</value>
+          <value>ORIGINAL,BasicInsurerLineName,BasicInsurerLineName,BasicInsurerLineName,System.String,_x0038_c0290c4707a498c8c499ebec2c0680d</value>
+          <value>ORIGINAL,CompInsurerId,CompInsurerId,CompInsurerId,System.Int32,_x0036_4ef077556554330ad5c3e048eef7364</value>
+          <value>ORIGINAL,CompInsurerName,CompInsurerName,CompInsurerName,System.String,f37a3bc6d2e24b21b6974a13b8f0582e</value>
+          <value>ORIGINAL,ThirdPartyId,ThirdPartyId,ThirdPartyId,System.Int32,_x0038_d40d20da7054f5f987bb57005260fd2</value>
+          <value>ORIGINAL,HID,HID,HID,System.String,_x0037_06b189ecde6407f833c69334f318757</value>
+          <value>ORIGINAL,BasicInsurerExpirationDate,BasicInsurerExpirationDate,BasicInsurerExpirationDate,System.DateTime,_x0030_a66bcad84474717aabde3c45c1aeb49</value>
+          <value>ORIGINAL,BasicInsurerName1,BasicInsurerName1,BasicInsurerName1,System.String,_x0032_82f635c232e41dab8b43c9b9681bd90</value>
+          <value>ORIGINAL,BasicInsurerLineName1,BasicInsurerLineName1,BasicInsurerLineName1,System.String,_x0038_b459183bb6d4ac7b827877b9e9861dc</value>
+          <value>ORIGINAL,CompInsurerLineName,CompInsurerLineName,CompInsurerLineName,System.String,eb512ac7a2744e1aaa7e22ef61820afd</value>
+          <value>ORIGINAL,ThirdPartyId1,ThirdPartyId1,ThirdPartyId1,System.Int32,_x0030_bfa73bf62be4e429428af9e30cda67d</value>
+          <value>ORIGINAL,ThirdPartyName,ThirdPartyName,ThirdPartyName,System.String,f68b0cf63ae14cc8a1293a9376ca0000</value>
+          <value>ORIGINAL,DiscountId,DiscountId,DiscountId,System.Int32,_x0036_6018581a4a8485d90d18493abf51d9f</value>
+          <value>ORIGINAL,DiscountName,DiscountName,DiscountName,System.String,_x0038_4528a7b8d674379a3ca3ea4e025140e</value>
+          <value>ORIGINAL,BasicInsurerNo,BasicInsurerNo,BasicInsurerNo,System.String,_x0033_087b8da8b3848979789517204651752</value>
+          <value>ORIGINAL,ReferringDoctorId,ReferringDoctorId,ReferringDoctorId,System.Int32,ccfeb3346d87475085f6f7eb7557b667</value>
+          <value>ORIGINAL,ReferringDoctorName,ReferringDoctorName,ReferringDoctorName,System.String,c273b114d5c045b099b1ff4f2d9c9ac7</value>
+          <value>ORIGINAL,PrescriptionDate,PrescriptionDate,PrescriptionDate,System.DateTime,_x0039_60e9289c63f47d4a6e0b9f8f6b16667</value>
+          <value>ORIGINAL,AdmissionDateTime,AdmissionDateTime,AdmissionDateTime,System.DateTime,_x0036_0dfd08af3a3430892bf529433026bda</value>
+          <value>AdmissionDateTimePersian,System.String</value>
+          <value>PrescriptionDatePersian,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>dd301e3de1d443a7892b7d4a671b5fc5</Key>
+        <Name>Spc_AdmissionImaging_GetRecord</Name>
+        <NameInSource>Connection</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>_x0040_AdmissionImageId,,8,0</value>
+        </Parameters>
+        <SqlCommand>mc.Spc_AdmissionImaging_GetRecord</SqlCommand>
+        <Type>StoredProcedure</Type>
+      </Spc_AdmissionImaging_GetRecord>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="6">
+      <value>,ReportDate,ReportDate,,System.String,,False,False,True,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_SortDirection_x003E_None_x003C__x002F_SortDirection_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_,_x0035_b6d30c4f4ba4f06823d915863fcbde2</value>
+      <value>,CorpName,CorpName,,System.String,,False,False,True,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_SortDirection_x003E_None_x003C__x002F_SortDirection_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_,_x0033_e60c6b1c9df46029e63736ac458b841</value>
+      <value>,CorpLogo,CorpLogo,,System.Drawing.Image,,False,False,True,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_SortDirection_x003E_None_x003C__x002F_SortDirection_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_,_x0038_9276636ae9d43a69e5e3cb14ffc71c0</value>
+      <value>,admissionDatePersian,admissionDatePersian,,System.String,,False,False,True,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_SortDirection_x003E_None_x003C__x002F_SortDirection_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_,_x0037_380d51cf0ab4a87b9c60dcc74c15857</value>
+      <value>,prescriptionDatePersian,prescriptionDatePersian,,System.String,,False,False,True,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_SortDirection_x003E_None_x003C__x002F_SortDirection_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_,c703f146a20c4472bce3ab3dd81014d7</value>
+      <value>,content,content,,System.String,Spc_AdmissionImaging_GetRecord.Content,False,True,True,False,_x003C__x003F_xml_x0020_version_x003D__x0022_1.0_x0022__x0020_encoding_x003D__x0022_utf-16_x0022__x0020_standalone_x003D__x0022_yes_x0022__x003F__x003E__x003C_StiSerializer_x0020_version_x003D__x0022_1.02_x0022__x0020_type_x003D__x0022_Net_x0022__x0020_application_x003D__x0022_State_x0022__x003E__x003C_SortDirection_x003E_None_x003C__x002F_SortDirection_x003E__x003C_BindingVariable_x0020_isNull_x003D__x0022_true_x0022__x0020__x002F__x003E__x003C_Keys_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_Values_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C_CheckedStates_x0020_isList_x003D__x0022_true_x0022__x0020_count_x003D__x0022_0_x0022__x0020__x002F__x003E__x003C__x002F_StiSerializer_x003E_</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>ffd3f7d1316e4ddd96e03fd2c334cf2f</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="9">
+        <PageHeaderBand4 Ref="5" type="PageHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,7.49,1.08</ClientRectangle>
+          <Components isList="true" count="13">
+            <Image1 Ref="6" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.31,0.62,0.68,0.47</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Guid>c1de1641cb7b4c9190625169b29cb001</Guid>
+              <IconColor>68, 114, 196</IconColor>
+              <ImageData>{CorpLogo}</ImageData>
+              <Margins>0,0,0,0</Margins>
+              <Name>Image1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Stretch>True</Stretch>
+            </Image1>
+            <Text50 Ref="7" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.1,-0.02,1.01,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9,Bold</Font>
+              <Guid>2e757b2a86cf44b5a85c28dabef37463</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text50</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>هوالشافی</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text50>
+            <Text2 Ref="8" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6.7,0.12,0.68,0.27</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Guid>6d8f64c330eb4debb6036c6335194c6b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>مراجعه کننده:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text3 Ref="9" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6.7,0.61,0.62,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Guid>7a5bb56f739246e9928baa733782941c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>تاریخ چاپ:</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text43 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.94,0.4,3.46,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,9,Bold</Font>
+              <Guid>9114c444e2004471a2d46691acd3cf33</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text43</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{CorpName}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text43>
+            <Text4 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.92,0.12,0.57,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Guid>f7069cefc41a41068acbee8faccd557a</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>تاریخ پذیرش :</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1,0.43,0.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Guid>f98f51710eb64cefb02ea7a9a539f01d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>تاریخ نسخه :</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text6 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.88,0.72,0.62,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Guid>2a5510dd5c894772b16725f3487d6648</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>شناسه پذیرش :</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>5.48,0.62,1.2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Guid>60cf49ffd41e49299dffef7ea81216f7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{ReportDate}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.49,0.12,1.13,0.27</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Spc_AdmissionImaging_GetRecord.PatientFullName}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text11 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.18,0.71,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Spc_AdmissionImaging_GetRecord.AdmissionId}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text9 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.18,0.12,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Spc_AdmissionImaging_GetRecord.AdmissionDateTimePersian}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text9>
+            <Text10 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.18,0.43,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Microsoft Sans Serif,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{Spc_AdmissionImaging_GetRecord.PrescriptionDatePersian}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text10>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>38eb298a12e14996b0de19625fb873ce</Guid>
+          <Name>PageHeaderBand4</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </PageHeaderBand4>
+        <Text1 Ref="19" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>White</Brush>
+          <ClientRectangle>9.7,0.29,0.5,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <Guid>e0d274af0aff42adbe6d379705c1eee3</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>تاریخ تهیه:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text1>
+        <Text48 Ref="20" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>White</Brush>
+          <ClientRectangle>8.14,0.27,1.4,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <Guid>cc2f1b460f7049228bc7e70e3e9bfa71</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text48</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{ReportDate}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text48>
+        <Text52 Ref="21" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>White</Brush>
+          <ClientRectangle>9.5,0.59,0.7,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <Guid>26571dce2ee24452ac0b088242d5a51d</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text52</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>کاربر تهیه کننده:</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text52>
+        <Text68 Ref="22" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>White</Brush>
+          <ClientRectangle>8.13,0.6,1.4,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <Guid>e8727cd0035d408cb193cc34ebf1b82e</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text68</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{CurrentUserFullName}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text68>
+        <Image2 Ref="23" type="Image" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>10.31,0.27,0.5,0.5</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Guid>849dc18bef4543eda818142c5fa9965a</Guid>
+          <IconColor>68, 114, 196</IconColor>
+          <ImageData>{CorpLogo}</ImageData>
+          <Margins>0,0,0,0</Margins>
+          <Name>Image2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Stretch>True</Stretch>
+        </Image2>
+        <Text12 Ref="24" type="Text" isKey="true">
+          <Border>None;[0:0:39];1;Solid;False;4;Black</Border>
+          <Brush>White</Brush>
+          <ClientRectangle>6.22,1.5,1.23,0.33</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <Guid>f204bf801cff4588a6496785376c0230</Guid>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text12</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>همکار ارجمند آقای / خانم</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text12>
+        <Text13 Ref="25" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>3.42,1.58,2.71,0.2</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <HorAlignment>Right</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text13</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{Spc_AdmissionImaging_GetRecord.ReferringDoctorName}</Text>
+          <TextBrush>Black</TextBrush>
+        </Text13>
+        <Text15 Ref="26" type="Text" isKey="true">
+          <AllowHtmlTags>True</AllowHtmlTags>
+          <Border>None;Black;1;None;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <CanGrow>True</CanGrow>
+          <CanShrink>True</CanShrink>
+          <ClientRectangle>0.29,1.95,6.94,8.82</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Microsoft Sans Serif,8</Font>
+          <HorAlignment>Right</HorAlignment>
+          <LineSpacing>2</LineSpacing>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text15</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Text>{Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Spc_AdmissionImaging_GetRecord.Content,"&amp;nbsp;","")
+,"&amp;lt;",""),"/p&amp;gt;",""),"&amp;amp;",""),"br /",""),"nbsp;",""),"&amp;gt;",""),"span",""),"&amp;quot",""),"style",""),"font-size: 12pt","")}</Text>
+          <TextBrush>Black</TextBrush>
+          <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+          <TextQuality>Wysiwyg</TextQuality>
+          <Type>Expression</Type>
+        </Text15>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>ec8cf390580f482cace39e8c0dee9ca4</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11.69</PageHeight>
+      <PageWidth>8.27</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>12/23/2023 9:17:04 AM</ReportChanged>
+  <ReportCreated>12/21/2023 11:32:29 AM</ReportCreated>
+  <ReportFile>F:\Sherkat\CIS_Project\CIS\ERP\CIS.Web\Stimuls\MC\Rep_AdmissionImagingGetReport.mrt</ReportFile>
+  <ReportGuid>2641657a611b4cf085ad231d92bbd778</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2023.1.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

@@ -1,0 +1,60 @@
+﻿@using System.Drawing
+@using Stimulsoft.Report.Mvc
+@using Stimulsoft.Report.Web
+@using Stimulsoft.System.Web.UI.WebControls
+@{
+    Layout = null;
+}
+
+<style>
+    @@font-face {
+        font-family: iransans;
+        font-style: normal;
+        font-weight: normal;
+        src: url('/Content/fonts/eot/IRANSansXFaNum-Regular.eot');
+        src: url('/Content/fonts/eot/IRANSansXFaNum-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+        url('/Content/fonts/woff2/IRANSansXFaNum-Regular.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+        url('/Content/fonts/woff/IRANSansXFaNum-Regular.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+        url('/Content/fonts/ttf/IRANSansXFaNum-Regular.ttf') format('truetype');
+    }
+
+    * {
+        font-family: iransans !important;
+    }
+</style>
+<link rel="shortcut icon" href="/Content/images/favicon.ico">
+
+@Html.StiNetCoreViewer("StiMvcViewer1", new StiNetCoreViewerOptions
+{
+    Actions =
+    {
+        GetReport = "NewGetPrint",
+        ViewerEvent = "ViewerEvent"
+    },
+    Appearance =
+    {
+        BackgroundColor = Color.FromArgb(0xe8, 0xe8, 0xe8),
+        ScrollbarsMode = true
+    },
+    Toolbar =
+    {
+        PrintDestination = StiPrintDestination.Direct,
+        ShowOpenButton = false,
+        ShowParametersButton = false,
+        ShowRefreshButton = false,
+        ShowResourcesButton = false,
+        DisplayMode = StiToolbarDisplayMode.Simple,
+        ShowDesignButton = false,
+        ShowBookmarksButton = false,
+        ShowAboutButton = false,
+        ShowPrintButton = true
+    },
+    Width = Unit.Percentage(100),
+    Height = Unit.Percentage(100),
+    Server =
+    {
+        PassFormValues = true,
+        UseCompression = true
+        //CacheMode=StiServerCacheMode.None
+    }
+})

@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "سفارش فروش / برگشت";
+}
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+
+<div id="AddEditModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" style="overflow: visible !important" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-3">
+                        <label>شعبه</label>
+                        <div>
+                            <select id="branchId" class="form-control select2" tabindex="2">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label>مرحله</label>
+                        <div>
+                            <select id="stageId" class="form-control select2" required data-parsley-errors-container="#dateToErrorContainer" tabindex="1"></select>
+                        </div>
+                        <div id="stageIdErrorContainer"></div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label>واحد پول</label>
+                        <div>
+                            <select id="currencyId" class="form-control select2" tabindex="3">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label>تاریخ سفارش</label>
+                        <div>
+                            <input type="text" id="orderDatePersian" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" required data-parsley-shamsidate data-parsley-errors-container="#dateToErrorContainer" maxlength="10" tabindex="4"/>
+                        </div>
+                        <div id="dateToErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-3" id="returnReason">
+                        <label>دلیل برگشت</label>
+                        <div>
+                            <select id="returnReasonId" class="form-control select2" tabindex="5">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label>صورتحساب قانونی</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'officialInvoice');" tabindex="6">
+                            <input id="officialInvoice" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save('AddEditModal','pagetable');" class="btn btn-success waves-effect waves-light" tabindex="7 "><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+
+<script src="~/Modules/SM/SalesPersonOrder/SalesPersonOrder.js"></script>

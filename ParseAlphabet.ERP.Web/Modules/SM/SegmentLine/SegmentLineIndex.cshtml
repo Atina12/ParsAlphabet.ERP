@@ -1,0 +1,5 @@
+﻿@await Html.PartialAsync("/Modules/FormPlate2.cshtml")
+
+<input id="segmentId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+
+<script src="~/Modules/SM/SegmentLine/SegmentLineIndex.js"></script>

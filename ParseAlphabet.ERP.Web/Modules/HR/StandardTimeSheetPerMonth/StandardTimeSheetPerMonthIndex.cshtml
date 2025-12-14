@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "ساعت کار موظف ماهانه";
+}
+
+<div id="standardTimeSheetPerMonthModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title_personnelCalendar">تخصیص ساعت کار موظف ماهانه</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right pb-5" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="col-md-12 d-flex justify-content-start align-items-center">
+                        <div class="d-flex align-items-center text-right mb-2 pr-3">
+                            <div class="key_id">
+                                <lable id="modal_keyid_caption_standardTimeSheetPerMonth">شناسه</lable>
+                                <span id="modal_keyid_value_standardTimeSheetPerMonth"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" id="standardTimeSheetPerMont">
+                    <table class="table table-styles border mb-0 pagetablebody new-page-table" style="width:auto !important">
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('standardTimeSheetPerMonthModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Modules/HR/StandardTimeSheetPerMonth/StandardTimeSheetPerMonthIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

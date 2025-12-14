@@ -1,0 +1,354 @@
+﻿@{
+    ViewBag.Title = "گزارش تراز و دفاتر انبار ";
+}
+
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="/Content/css/treeview.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/ItemTransactionTrialBalancesReportIndex.css" rel="stylesheet"/>
+
+<div class="content-page  displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title">
+    <div class="button-items">
+        <span class="float-right">@ViewBag.Title</span>
+        <span id="showKindOfReportDisplay" class="float-right d-none">(<span id="showKindOfReport"></span>)</span>
+        <input id="columnType" type="checkbox" checked data-toggle="toggle" data-on=" تعدادی" data-off="ریالی" data-onstyle="success" data-offstyle="info" data-width="100" data-height="27">
+        <button disabled id="previous-level" type="button" class="btn btn-secondary" style="margin-right:5px"> سطح قبلی <i class="fas fa-arrow-up"></i></button>
+        <button disabled id="next-level" type="button" class="btn btn-secondary"> سطح بعدی <i class="fas fa-arrow-down"></i></button>
+        <button id="levelGetReport" class="btn btn-info waves-light"><i class="fas fa-file-import ml-1"></i> گزارش</button>
+
+        @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+
+        <button type="button" id="beforExportCSV" onclick="beforExport_TransactionTrialSearch_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+        <button type="button" id="beforStimul_preview" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+
+    </div>
+</div>
+
+
+<div class="card-body" id="ItemTransactionSearch" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">
+            <span class="d-md-block">اطلاعات پایه</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" href="#tab2" role="tab">
+            <span class="d-md-block">انبار</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content group-box group-box-gray">
+    <div class="tab-pane active p-3" id="tab1" role="tabpanel">
+        <div class="row tabToggle1">
+            <div class="form-group col-lg-2">
+                <label>سال مالی</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="fiscalId" class="form-control select2" tabindex="1">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>شعبه</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="branchId" class="form-control select2 " name="branchIds[]" multiple="multiple" tabindex="2">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label>جریان کار</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="workflowId" class="form-control select2 " name="workFlows[]" multiple="multiple" tabindex="3">
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label>مرحله</label>
+                <div class="col-sm-12 chosen-container-parent">
+
+                    <select id="stageId" class="form-control select2 " name="stages[]" multiple="multiple" tabindex="4">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>گام</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="actionId" name="actions[]" multiple="multiple" class="form-control select2" tabindex="5">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>ایجاد کننده</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="createUserId" class="form-control select2 " tabindex="6">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-3">
+                <label>تاریخ ثبت</label>
+                <div class="double-input-box">
+                    <div class="double-input">
+                        <input type="text"
+                               id="fromDocumentDatePersian"
+                               class="form-control number persian-date persian-datepicker"
+                               placeholder="____/__/__"
+                               value="@PersianDateTime.GetCurrentYear()/01/01"
+                               data-inputmask="'mask':'9999/99/99'"
+                               data-parsley-compareshamsidateyear="toDocumentDatePersian"
+                               data-parsley-shamsidate
+                               data-parsley-errors-container="#fromDocumentDateErrorContainer"
+                               data-parsley-comparedate="toDocumentDatePersian"
+                               maxlength="10"
+                               tabindex="7"/>
+                    </div>
+                    <div class="double-input">
+                        <input type="text"
+                               id="toDocumentDatePersian"
+                               class="form-control number persian-date persian-datepicker"
+                               placeholder="____/__/__"
+                               value="@PersianDateTime.GetToday()"
+                               data-inputmask="'mask':'9999/99/99'"
+                               data-parsley-shamsidate
+                               data-parsley-errors-container="#toDocumentDateErrorContainer"
+                               maxlength="10"
+                               tabindex="8"/>
+                    </div>
+                </div>
+                <div class="double-input-box">
+                    <div class="double-input" id="fromDocumentDateErrorContainer"></div>
+                    <div class="double-input" id="toDocumentDateErrorContainer"></div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="tab-pane p-3" id="tab2" role="tabpanel">
+        <div class="row tabToggle2">
+
+            <div class="form-group col-lg-2">
+                <label>نوع گزارش</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="reportTypeId" class="form-control select2" tabindex="9">
+                        <option value="1">1 - تراز - انبار</option>
+                        <option value="2">2 - تراز - انبار - بخش</option>
+                        <option value="3">3 - تراز -انبار- بخش - پالت</option>
+                        <option value="4">4 - کاردکس - انبار</option>
+                        <option value="5">5 - کاردکس - انبار - بخش</option>
+                        <option value="6">6 - کاردکس - انبار- بخش - پالت</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>نوع آیتم</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="itemTypeId" class="form-control select2" tabindex="10">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label> آیتم</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="itemId" class="form-control select2 " name="itemIds[]" multiple="multiple" tabindex="11">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>دسته بندی</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="categoryId" class="form-control select2" name="categorys[]" multiple="multiple" tabindex="12">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label>صفات</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="atrributeId" class="form-control select2 " name="atrributes[]" multiple="multiple" tabindex="13">
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>واحد شمارش اصلی</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="unitId" class="form-control select2" name="units[]" multiple="multiple" tabindex="14">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>واحد شمارش فرعی</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="subUnitId" class="form-control select2" name="subUnitIds[]" multiple="multiple" tabindex="15">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>انبار</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="warehouseId" class="form-control select2 " name="warehouses[]" multiple="multiple" tabindex="16">
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group col-lg-2">
+                <label>بخش</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="zoneId" class="form-control select2" name="zones[]" multiple="multiple" tabindex="17">
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group col-lg-2">
+                <label>پالت</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="binId" class="form-control select2 " name="bins[]" multiple="multiple" tabindex="18">
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<fieldset class="group-box group-box-gray mt-3 displaynone" id="treeHeaderReport" tabindex="0">
+    <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+        <i class="fas fa-minus"></i>
+    </button>
+    <legend>ساختار درختی</legend>
+    <div class="slideToggle open">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="treeview_container" class="hummingbird-treeview well h-scroll-large">
+                    <ul id="treeview" class="hummingbird-base area">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="group-box group-box-gray mt-3">
+    <legend>پیش نمایش</legend>
+    <div class="pagetable-report" id="mainReport">
+        @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+    </div>
+</fieldset>
+</div>
+
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+
+<div id="getCsvReportParameter" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="printOrExelModalTitle"></h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-12 col-sm-12 pr-0">
+                    <div class="row mb-3">
+                        <div class="form-group col-lg-4">
+                            <label>نوع گزارش</label>
+                            <div class="col-sm-12 chosen-container-parent">
+                                <select id="reportTypeIdForPrintAndExel" class="form-control select2" tabindex="9">
+                                    <option value="1">1 - تراز - انبار</option>
+                                    <option value="2">2 - تراز - انبار - بخش</option>
+                                    <option value="3">3 - تراز -انبار- بخش - پالت</option>
+                                    <option value="4">4 - کاردکس - انبار</option>
+                                    <option value="5">5 - کاردکس - انبار - بخش</option>
+                                    <option value="6">6 - کاردکس - انبار- بخش - پالت</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div style="margin-top:24px!important">
+
+                                <input id="columnTypeForPrintAndExel" type="checkbox" checked data-toggle="toggle" data-on=" تعدادی" data-off="ریالی" data-onstyle="success" data-offstyle="info" data-width="100" data-height="27">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-lg-4">
+                            <label>انبار</label>
+                            <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                <select id="warehouseIdPrint" class="form-control select2 " name="warehouses[]" multiple="multiple" tabindex="16">
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-lg-4">
+                            <label>بخش</label>
+                            <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                <select id="zoneIdPrint" class="form-control select2" name="zones[]" multiple="multiple" tabindex="17">
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-lg-4">
+                            <label>پالت</label>
+                            <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                <select id="binIdPrint" class="form-control select2 " name="bins[]" multiple="multiple" tabindex="18">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button id="stimul_preview" class="btn btn-success waves-effect waves-light d-none"><i class="fa fa-save"></i>چاپ</button>
+                <button id="exportCSV" onclick="export_ItemTransactionTrialSearch_csv()" class="btn btn-success waves-effect waves-light d-none"><i class="fa fa-save"></i>اکسل</button>
+                <button id="modal-close" onclick="modal_close('getCsvReportParameter')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>
+
+<script type="text/javascript" src="/Modules/_Report/_SettingReport.js"></script>
+<script type="text/javascript" src="/Modules/WH/Report/ItemTransactionTrialBalancesReport/ItemTransactionTrialBalancesReportIndex.js"></script>
+<script src="/Content/pages/treeview.js"></script>

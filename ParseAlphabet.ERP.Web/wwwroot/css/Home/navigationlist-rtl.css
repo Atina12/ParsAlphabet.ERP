@@ -1,0 +1,45 @@
+﻿table tr th, table tr td {
+    text-align: center;
+}
+.content-page .content {
+    padding-left: 0;
+    padding-right: 0;
+}
+.panel-flat {
+    height: 100%;
+    min-height: 864px;
+    margin-bottom: 0;
+}
+
+.list-body .item-type h5 {
+    font-weight: 800;
+}
+
+.list-body .item-group h6 {
+    padding-top: 5px;
+    font-weight: 800;
+    color: #2283d6;
+}
+
+.list-body .item-type ul, .list-body .item-group ul {
+    list-style: none;
+    padding-right: 10px;
+    padding-right: 0px;
+}
+
+.list-body .item-type ul li:last-child {
+    margin-bottom: 35px;
+}
+
+.list-body .item-type ul li a, .list-body .item-group ul li a {
+    color: #233905;
+}
+
+.list-body .item-type ul li a:hover, .list-body .item-group ul li a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 480px) {
+     .panel-flat {
+         min-height: 100%;
+     }
+ }

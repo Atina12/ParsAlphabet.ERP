@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = "گزارش جستجو اسناد حسابداری";
+}
+
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+<div class="content-page  displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                @*<input id="codeRangeType" type="checkbox" checked data-toggle="toggle" data-on="همه حساب ها" data-off="حساب انتخاب کاربر" data-onstyle="success" data-offstyle="info" data-width="150" data-height="27">*@
+                                <button id="getReport" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-1"></i>پیش نمایش</button>
+                                <button id="showReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-1"></i>تهیه گزارش</button>
+                                @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+                                <button type="button" id="exportCSV" onclick="export_JournalVoucherSearch_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="JournalVoucherSearch" data-parsley-validate>
+                            <ul class="nav nav-pills nav-justified" role="tablist">
+                                <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+                                    <a class="nav-link active" data-toggle="tab" href="#vouncher1" role="tab">
+                                        <span class="d-none d-md-block"> اطلاعات پایه</span>
+                                        <span class="d-block d-md-none">
+                                            <i class="mdi mdi-home-variant h5"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+                                    <a class="nav-link" data-toggle="tab" href="#vouncher2" role="tab">
+                                        <span class="d-none d-md-block">حسابداری</span>
+                                        <span class="d-block d-md-none">
+                                            <i class="mdi mdi-account h5"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content group-box group-box-gray">
+                                <div class="tab-pane active p-3" id="vouncher1" role="tabpanel">
+                                    <div class="row form-group tabToggle1">
+                                        <div class="form-group col-lg-2">
+                                            <label>سال مالی</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="fiscalId" class="select2 select2-quick-access" tabindex="1">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>شعبه</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="branchId" class="form-control select2 select2-quick-access" multiple="multiple" name="branchId[]" tabindex="2">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-lg-2">
+                                            <label>ارز</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="defaultCurrencyId" class="select2 select2-quick-access" tabindex="3">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>ایجاد کننده سربرگ</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="createUserId" class="select2 select2-quick-access" tabindex="4">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>نوع سند</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="documentTypeId" class="select2 select2-quick-access" tabindex="5">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>گام</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="actionId" class="form-control select2 select2-quick-access" multiple="multiple" name="action[]" tabindex="6">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label>تاریخ سند</label>
+                                            <div class="double-input-box">
+                                                <div class="double-input">
+                                                    <input type="text" id="fromDocumentDatePersian" class="form-control number persian-date persian-datepicker" placeholder="____/__/__" value="@PersianDateTime.GetCurrentYear()/01/01" data-inputmask="'mask':'9999/99/99'" data-parsley-compareshamsidateyear="toDocumentDatePersian" data-parsley-shamsidate data-parsley-errors-container="#fromDocumentDateErrorContainer" data-parsley-comparedate="toDocumentDatePersian" maxlength="10" tabindex="7"/>
+                                                </div>
+                                                <div class="double-input">
+                                                    <input type="text" id="toDocumentDatePersian" class="form-control number persian-date persian-datepicker" placeholder="____/__/__" value="@PersianDateTime.GetToday()" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-errors-container="#toDocumentDateErrorContainer" maxlength="10" tabindex="8"/>
+                                                </div>
+                                            </div>
+                                            <div class="double-input-box">
+                                                <div class="double-input" id="fromDocumentDateErrorContainer"></div>
+                                                <div class="double-input" id="toDocumentDateErrorContainer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-3" id="vouncher2" role="tabpanel">
+                                    <div class="row form-group tabToggle2">
+                                        <div class="form-group col-lg-2">
+                                            <label>کد کل</label>
+                                            <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                                <input id="fromAccountGLId" type="text" class="form-control number double-inputsearch" tabindex="9" data-parsley-greaterthanequal="#toAccountGLId" data-parsley-errors-container="#fromAccountGLIdError" placeholder="از :"/>
+                                                <input id="toAccountGLId" type="text" class="form-control number  double-inputsearch" tabindex="10" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromAccountGLIdError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>کد معین</label>
+                                            <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                                <input id="fromAccountSGLId" type="text" class="form-control number double-inputsearch" tabindex="11" data-parsley-greaterthanequal="#toAccountSGLId" data-parsley-errors-container="#fromAccountSGLIdError" placeholder="از :"/>
+                                                <input id="toAccountSGLId" type="text" class="form-control number double-inputsearch" tabindex="12" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromAccountSGLIdError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>کد تفضیل</label>
+                                            <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                                <input id="fromAccountDetailId" type="text" class="form-control number double-inputsearch" tabindex="13" data-parsley-greaterthanequal="#toAccountDetailId" data-parsley-errors-container="#fromAccountDetailIdError" placeholder="از :"/>
+                                                <input id="toAccountDetailId" type="text" class="form-control number double-inputsearch" tabindex="14" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromAccountDetailIdError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>شماره سند</label>
+                                            <div class="col-sm-12 chosen-container-parent double-input-box">
+                                                <input id="fromDocumentNo" type="text" class="form-control number double-input" tabindex="15" maxlength="5" data-parsley-greaterthanequal="#toDocumentNo" data-parsley-errors-container="#fromDocumentNoError" placeholder="از :"/>
+                                                <input id="toDocumentNo" type="text" class="form-control number double-input" tabindex="16" maxlength="5" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromDocumentNoError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>شناسه</label>
+                                            <div class="col-sm-12 chosen-container-parent double-input-box">
+                                                <input id="fromJournalId" type="text" class="form-control number double-input" tabindex="17" maxlength="5" data-parsley-greaterthanequal="#toJournalId" data-parsley-errors-container="#fromJournalIdError" placeholder="از :"/>
+                                                <input id="toJournalId" type="text" class="form-control number double-input" tabindex="18" maxlength="5" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromJournalIdError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>نرخ تسعیر ارز</label>
+                                            <div class="col-sm-12 chosen-container-parent double-input-box">
+                                                <input id="fromExchangeRate" type="text" class="form-control money double-input" tabindex="19" maxlength="12" data-parsley-greaterthanequal="#toExchangeRate" data-parsley-errors-container="#fromExchangeRateError" placeholder="از :"/>
+                                                <input id="toExchangeRate" type="text" class="form-control money double-input" tabindex="20" maxlength="12" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromExchangeRateError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>بدهکار</label>
+                                            <div class="col-sm-12 chosen-container-parent double-input-box">
+                                                <input id="fromAmountDebit" type="text" class="form-control money double-input" tabindex="21" maxlength="12" data-parsley-greaterthanequal="#toAmountDebit" data-parsley-errors-container="#fromAmountDebitError" placeholder="از :"/>
+                                                <input id="toAmountDebit" type="text" class="form-control money double-input" tabindex="22" maxlength="12" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromAmountDebitError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>بستانکار</label>
+                                            <div class="col-sm-12 chosen-container-parent double-input-box">
+                                                <input id="fromAmountCredit" type="text" class="form-control money double-input" tabindex="23" maxlength="12" data-parsley-greaterthanequal="#toAmountCredit" data-parsley-errors-container="#fromAmountCreditError" placeholder="از :"/>
+                                                <input id="toAmountCredit" type="text" class="form-control money double-input" tabindex="24" maxlength="12" placeholder="تا :"/>
+                                            </div>
+                                            <div id="fromAmountCreditError"></div>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label>شرح سند</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <input id="description" type="text" class="form-control" tabindex="25" data-parsley-minlengthdescription="4" maxlength="200"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            <label>سیستمی/غیرسیستمی</label>
+                                            <select id="bySystem" class="form-control" tabindex="26">
+                                                <option value="-1">انتخاب کنید</option>
+                                                <option value="1">بلی</option>
+                                                <option value="0">خیر</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset class="group-box group-box-gray mt-3">
+                                <legend>پیش نمایش</legend>
+                                <div class="pagetable-report" id="mainReport">
+                                    @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-6 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="100">
+                            <option value="101" selected>صورت خلاصه</option>
+                            <option value="102">صورت ریز</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="101"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<script src="~/js/formplate.js"></script>
+<script type="text/javascript" src="/Modules/_Report/_SettingReport.js"></script>
+<script type="text/javascript" src="/Modules/FM/Report/JournalVoucherSearchReport.js"></script>

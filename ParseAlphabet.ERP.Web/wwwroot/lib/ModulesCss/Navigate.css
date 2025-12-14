@@ -1,0 +1,11 @@
+﻿
+.header-pagination-btn {
+    height: 27px;
+}
+
+    .header-pagination-btn i {
+        margin-left: 0 !important;
+        font-size: 19px !important;
+        margin-top: -5px;
+        display: inline-block;
+    }

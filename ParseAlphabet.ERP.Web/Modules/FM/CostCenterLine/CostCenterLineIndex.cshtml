@@ -1,0 +1,5 @@
+﻿@await Html.PartialAsync("/Modules/FormPlate2.cshtml")
+
+<input id="costCenterId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+<input id="costCenterName" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["name"]"/>
+<script src="~/Modules/FM/CostCenterLine/CostCenterLineIndex.js"></script>

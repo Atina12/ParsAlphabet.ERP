@@ -1,0 +1,26 @@
+﻿[
+  {
+    "outputFile": "wwwroot/Content/scss/rtl/Pages/dashboard-rtl.css",
+    "inputFile": "wwwroot/Content/scss/rtl/Pages/dashboard-rtl.scss"
+  },
+  {
+    "outputFile": "wwwroot/Content/scss/ltr/style.css",
+    "inputFile": "wwwroot/Content/scss/ltr/style.scss"
+  },
+  {
+    "outputFile": "wwwroot/Content/scss/rtl/_usfull-color.css",
+    "inputFile": "wwwroot/Content/scss/rtl/_usfull-color.scss"
+  },
+  {
+    "outputFile": "wwwroot/plugins/search-modal/search-modal.css",
+    "inputFile": "wwwroot/plugins/search-modal/search-modal.scss"
+  },
+  {
+    "outputFile": "wwwroot/Content/scss/rtl/style-rtl.css",
+    "inputFile": "wwwroot/Content/scss/rtl/style-rtl.scss"
+  },
+  {
+    "outputFile": "wwwroot/plugins/SuggestBox/SuggestBox.css",
+    "inputFile": "wwwroot/plugins/SuggestBox/SuggestBox.scss"
+  }
+]

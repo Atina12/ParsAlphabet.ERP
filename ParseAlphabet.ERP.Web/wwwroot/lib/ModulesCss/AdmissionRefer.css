@@ -1,0 +1,91 @@
+﻿/*.plus {
+    float: left;
+    margin: -27px 0 0 15px;
+    padding: 1px 5px 0 5px;
+}
+
+a.nav-link.active {
+    background-color: #566271 !important;
+    color: #fff !important;
+}
+
+#AdmissionReferBox .table-responsive {
+    white-space: nowrap;
+    overflow: auto;
+    max-height: calc(100vh - 500px);
+}
+
+.nav-link {
+    font-size: 0.85rem;
+}*/
+/*.nav-link.T {
+    font-size: 0.7rem;
+}*/
+/*.getFeedBackadmissionRefer {
+    border: 2px solid #ff9254;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 5px 0 5px;
+}
+
+.legendGet {
+    padding: 0 !important;
+}
+
+#referFormT {
+    margin-top: 20px;
+}
+.table-responsive {
+    border-collapse: collapse;
+    margin: 0 10px 0 10px
+}
+
+
+.table tbody td {
+    overflow: hidden;
+    padding: 0 1px 0 1px
+}
+.green_4:hover {
+    color: #fff !important
+}
+.nav {
+    margin-top: 10px;
+    border-bottom: 2px solid #566271 !important;
+}
+
+    .nav.T {
+        margin-top: 10px;
+        border-bottom: 2px solid #FF9254 !important;
+    }
+
+.nav-link {
+    border-bottom: none;
+    border-width: 1px;
+    padding: 9px 0 9px 0;
+}
+
+
+
+.tab-content {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top: none;
+    min-height: 300px;
+}
+
+.Sub-Caption {
+    font-size: 10px;
+    padding-right: 3px;
+}*/
+
+.table-styles thead th {
+    position: sticky;
+    top: -1px;
+    height: 36px;
+}
+
+a.nav-link.active.T {
+    background-color: #fcb186 !important;
+    border-color: #FF9254 !important;
+    color: #fff !important;
+}

@@ -1,0 +1,366 @@
+﻿@{
+    ViewBag.Title = "گزارش تراز و دفاتر";
+}
+
+<link href="~/lib/ModulesCss/JournalTrialBalanceSearchReport.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="/Content/css/treeview.css" rel="stylesheet"/>
+
+<input type="hidden" id="nowDate" value="@DateTime.Now.ToPersianDateString("{0}/{1}/{2}")"/>
+<input type="hidden" id="yearDate" value="@PersianDateTime.GetCurrentYear()/01/01"/>
+<div class="content-page  displaynone" id="content-page">
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title">
+    <div class="button-items">
+        <span class="float-right">@ViewBag.Title</span>
+        <span id="showKindOfReportDisplay" class="float-right d-none">(<span id="showKindOfReport"></span>)</span>
+        <input id="columnType" type="checkbox" checked data-toggle="toggle" data-on="دو ستونی" data-off="چهارستونی" data-onstyle="success" data-offstyle="info" data-width="100" data-height="27">
+        <button disabled id="previous-level" type="button" class="btn btn-secondary" style="margin-right:5px"> سطح قبلی <i class="fas fa-arrow-up"></i></button>
+        <button disabled id="next-level" type="button" class="btn btn-secondary"> سطح بعدی <i class="fas fa-arrow-down"></i></button>
+        <button id="levelAndNoteGetReport" class="btn btn-info waves-light"><i class="fas fa-file-import ml-1"></i> گزارش</button>
+        <button id="resetFilters" class="btn green_2 waves-effect waves-light"><i class="fas fa-undo ml-1"></i>بازنشانی</button>
+        <button type="button" id="beforExportCSV" onclick="beforExport_JournalTrialSearch_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+        <button type="button" id="beforStimul_preview" class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+    </div>
+</div>
+
+<div class="card-body" id="JournalVoucherSearch" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">
+            <span class="d-md-block">اطلاعات پایه</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" href="#tab2" role="tab">
+            <span class="d-md-block">حسابداری</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<div class="tab-content group-box group-box-gray">
+    <div class="tab-pane active p-3" id="tab1" role="tabpanel">
+        <div class="row tabToggle1">
+            <div class="form-group col-lg-2">
+                <label>سال مالی</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="fiscalId" class="form-control select2" tabindex="1">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>شعبه</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="branchId" class="form-control select2 select2-quick-access" multiple="multiple" name="branchId[]" tabindex="2">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>ارز</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="currencyId" class="select2 select2-quick-access" tabindex="3">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>نوع سند</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="journalDocumentTypeId" class="form-control select2" tabindex="4">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>گام</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="actionId" class="form-control select2 select2-quick-access" multiple="multiple" name="action[]" tabindex="5">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-3">
+                <label>تاریخ سند</label>
+                <div class="double-input-box">
+                    <div class="double-input">
+                        <input type="text" id="fromDocumentDate" class="form-control persian-date persian-datepicker" placeholder="____/__/__" value="@PersianDateTime.GetCurrentYear()/01/01" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-compareshamsidateyear="toDocumentDate" data-parsley-errors-container="#fromDocumentDateErrorContainer" data-parsley-comparedate="toDocumentDate" maxlength="10" tabindex="6" required/>
+                    </div>
+                    <div class="double-input">
+                        <input type="text" id="toDocumentDate" class="form-control persian-date persian-datepicker" placeholder="____/__/__" value="@PersianDateTime.GetToday()" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate data-parsley-errors-container="#toDocumentDateErrorContainer" maxlength="10" tabindex="7" required/>
+                    </div>
+                </div>
+                <div class="double-input-box">
+                    <div class="double-input" id="fromDocumentDateErrorContainer"></div>
+                    <div class="double-input" id="toDocumentDateErrorContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="tab2" role="tabpanel">
+        <div class="row form-group tabToggle2">
+            <div class="form-group col-lg-2">
+                <label>نوع گزارش</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select id="reportType" class="form-control select2" tabindex="8">
+                        <option value="11">11 - تراز - کل</option>
+                        <option value="12">12 - تراز - معین</option>
+                        <option value="13">13 - تراز - تفصیل</option>
+                        <option value="14">14 - دفتر - کل</option>
+                        <option value="15">15 - دفتر - معین</option>
+                        <option value="16">16 - دفتر - تفصیل</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>کد کل</label>
+                <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                    <input id="fromAccountGLId" type="text" maxlength="3" class="form-control number double-inputsearch" tabindex="9" data-parsley-greaterthanequal="#toAccountGLId" data-parsley-errors-container="#fromAccountGLIdError" placeholder="از :"/>
+                    <input id="toAccountGLId" type="text" maxlength="3" class="form-control number  double-inputsearch" tabindex="10" placeholder="تا :"/>
+                </div>
+                <div id="fromAccountGLIdError"></div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>کد معین</label>
+                <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                    <input id="fromAccountSGLId" maxlength="4" type="text" class="form-control number double-inputsearch" tabindex="11" data-parsley-greaterthanequal="#toAccountSGLId" data-parsley-errors-container="#fromAccountSGLIdError" placeholder="از :"/>
+                    <input id="toAccountSGLId" maxlength="4" type="text" class="form-control number double-inputsearch" tabindex="12" placeholder="تا :"/>
+                </div>
+                <div id="fromAccountSGLIdError"></div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>کد تفضیل</label>
+                <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                    <input id="fromAccountDetailId" maxlength="8" type="text" class="form-control number double-inputsearch" tabindex="13" data-parsley-greaterthanequal="#toAccountDetailId" data-parsley-errors-container="#fromAccountDetailIdError" placeholder="از :"/>
+                    <input id="toAccountDetailId" maxlength="8" type="text" class="form-control number double-inputsearch" tabindex="14" placeholder="تا :"/>
+                </div>
+                <div id="fromAccountDetailIdError"></div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>از موضوع هزینه</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="fromCostObjectId" class="select2 select2-quick-access" tabindex="15" data-parsley-greaterthanequal="#toCostObjectId" data-parsley-errors-container="#fromCostObjectIdError" placeholder="از :">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+                <div id="fromCostObjectIdError"></div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>تا موضوع هزینه</label>
+                <div class="col-sm-12 chosen-container-parent">
+                    <select data-placeholder="انتخاب کنید" id="toCostObjectId" class="select2 select2-quick-access" tabindex="16">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+                <label>شماره سند</label>
+                <div class="col-sm-12 chosen-container-parent double-input-box">
+                    <input id="fromDocumentNo" type="text" class="form-control number double-input" tabindex="17" maxlength="5" data-parsley-greaterthanequal="#toDocumentNo" data-parsley-errors-container="#fromDocumentNoError" placeholder="از :"/>
+                    <input id="toDocumentNo" type="text" class="form-control number double-input" tabindex="18" maxlength="5" placeholder="تا :"/>
+                </div>
+                <div id="fromDocumentNoError"></div>
+            </div>
+            <div class="form-group col-lg-2">
+                <label>شناسه</label>
+                <div class="col-sm-12 chosen-container-parent double-input-box">
+                    <input id="fromJournalId" type="text" class="form-control number double-input" tabindex="19" maxlength="5" data-parsley-greaterthanequal="#toJournalId" data-parsley-errors-container="#fromJournalIdError" placeholder="از :"/>
+                    <input id="toJournalId" type="text" class="form-control number double-input" tabindex="20" maxlength="5" placeholder="تا :"/>
+                </div>
+                <div id="fromJournalIdError"></div>
+            </div>
+            <div class="form-group col-lg-2 mb-0">
+                <label>کاربر</label>
+                <div>
+                    <select id="createUserId" class="form-control select2" tabindex="21">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 mb-0">
+                <label>عدم محاسبه حساب های افتتاحیه</label>
+                <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'openingJournal');" tabindex="22">
+                    <input id="openingJournal" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                </div>
+            </div>
+            <div class="col-lg-2 mb-0">
+                <label>عدم محاسبه حساب های اختتامیه</label>
+                <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'endingJournal');" tabindex="23">
+                    <input id="endingJournal" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                </div>
+            </div>
+            <div class="col-lg-2 mb-0">
+                <label>عدم محاسبه حساب های موقت</label>
+                <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'temporaryJournal');" tabindex="24">
+                    <input id="temporaryJournal" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<fieldset class="group-box group-box-gray mt-3 displaynone" id="treeHeaderReport" tabindex="0">
+    <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+        <i class="fas fa-minus"></i>
+    </button>
+    <legend>ساختار درختی</legend>
+    <div class="slideToggle open">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="treeview_container" class="hummingbird-treeview well h-scroll-large">
+                    <ul id="treeview" class="hummingbird-base area">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset class="group-box group-box-gray mt-3">
+    <legend>پیش نمایش</legend>
+    <div class="pagetable-report" id="mainReport">
+        @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+    </div>
+</fieldset>
+
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-6 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="99">
+                            <option value="101" selected>صورت خلاصه</option>
+                            <option value="102">صورت ریز</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="100"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<!--Modal-->
+<div id="getCsvReportParameter" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="printOrExelModalTitle"></h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-12 col-sm-12 pr-0">
+                    <div class="row mb-3">
+                        <div class="form-group col-4">
+                            <label>نوع گزارش</label>
+                            <div class="col-sm-12 chosen-container-parent">
+                                <select id="reportTypeForPrintAndExel" class="form-control select2" tabindex="30">
+                                    <option value="11">11 - تراز - کل</option>
+                                    <option value="12">12 - تراز - معین</option>
+                                    <option value="13">13 - تراز - تفصیل</option>
+                                    <option value="14">14 - دفتر - کل</option>
+                                    <option value="15">15 - دفتر - معین</option>
+                                    <option value="16">16 - دفتر - تفصیل</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div style="margin-top:24px!important">
+                                <input id="columnTypeForPrintAndExel" type="checkbox" checked data-toggle="toggle" data-on="دو ستونی" data-off="چهارستونی" data-onstyle="success" data-offstyle="info" data-width="100" data-height="27">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>کد کل</label>
+                                <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                    <input id="fromAccountGLIdPrint" maxlength="3" type="text" class="form-control number double-inputsearch" tabindex="31" data-parsley-greaterthanequal="#toAccountGLIdPrint" data-parsley-errors-container="#fromAccountGLIdPrintError" placeholder="از :"/>
+                                    <input id="toAccountGLIdPrint" maxlength="3" type="text" class="form-control number  double-inputsearch" tabindex="32" placeholder="تا :"/>
+                                </div>
+                                <div id="fromAccountGLIdPrintError"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>کد معین</label>
+                                <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                    <input id="fromAccountSGLIdPrint" maxlength="4" type="text" class="form-control number double-inputsearch" tabindex="33" data-parsley-greaterthanequal="#toAccountSGLIdPrint" data-parsley-errors-container="#fromAccountSGLIdPrintError" placeholder="از :"/>
+                                    <input id="toAccountSGLIdPrint" maxlength="4" type="text" class="form-control number double-inputsearch" tabindex="34" placeholder="تا :"/>
+                                </div>
+                                <div id="fromAccountSGLIdPrintError"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>کد تفضیل</label>
+                                <div class="col-sm-12 chosen-container-parent double-inputsearch-box">
+                                    <input id="fromAccountDetailIdPrint" maxlength="8" type="text" class="form-control number double-inputsearch" tabindex="35" data-parsley-greaterthanequal="#toAccountDetailIdPrint" data-parsley-errors-container="#fromAccountDetailIdPrintError" placeholder="از :"/>
+                                    <input id="toAccountDetailIdPrint" maxlength="8" type="text" class="form-control number double-inputsearch" tabindex="36" placeholder="تا :"/>
+                                </div>
+                                <div id="toAccountDetailIdPrintError"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button id="stimul_preview" class="btn btn-success waves-effect waves-light d-none"><i class="fa fa-save"></i>چاپ</button>
+                <button id="exportCSV" onclick="export_JournalTrialSearch_csv()" class="btn btn-success waves-effect waves-light d-none"><i class="fa fa-save"></i>اکسل</button>
+                <button id="modal-close" onclick="modal_close('getCsvReportParameter')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<div id="displayJournalLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" style="height:88%">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش سند حسابداری</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayJournalLine" data-parsley-validate="">
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayJournalLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/Modules/_Report/_SettingReport.js"></script>
+<script type="text/javascript" src="/Modules/FM/Report/JournalTrialBalanceSearchReport.js"></script>
+<script src="/Content/pages/treeview.js"></script>

@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<link href="~/plugins/inputShowPwd/inputShowPwd.css" rel="stylesheet"/>
+
+<div class="wrapper-page">
+    <div class="card card-pages shadow-none glass-card">
+
+        <div class="card-body" id="card-body-login" data-parsley-validate>
+            <div class="text-center m-t-0 m-b-15 logo" id="corpname">
+                @*<img src="/Content/images/favicon.png" alt="" height="30">
+                    <label class="logo-admin">نام کیلنیک</label>*@
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <input class="form-control" title="" id="_username" type="text" maxlength="50" required data-parsley-required-message="پر کردن نام کاربری الزامی است." placeholder="نام کاربری" autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <div class="inputShowPwd">
+                        <input class="form-control" title="" id="_password" type="password" maxlength="10" required data-parsley-required-message="پر کردن رمز ورود الزامی است." placeholder="رمز ورود" autocomplete="off"/>
+                        <span class="showEle"></span>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    <div class="col-12">
+                        <div class="checkbox checkbox-primary">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="rememberpass">
+                                <label class="custom-control-label" for="rememberpass">مرا به خاطر بسپار</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="form-group text-center m-t-20">
+                <div class="col-12">
+                    <a href="javascript:check_login()" class="btn btn-primary btn-block btn-lg waves-effect waves-light">
+                        <div style="margin:0 auto">
+                            <div class="spinner-border text-muted displaynone" style="float:left"></div>
+                            <div style="width:70px;margin:0 auto">ورود</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="form-group m-t-30 m-b-0">
+                <div class="col-sm-7">
+                    <a class="forget-pass" href="javascript:go_forget_password();"><i class="fa fa-lock m-r-5"></i> رمز عبور خود را فراموش کرده اید؟</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/plugins/inputShowPwd/inputShowPwd.js"></script>
+    <script>
+        $("#card-body-login").slideDown()
+    </script>
+    <script src="~/Modules/_Login/Login.js"></script>
+}

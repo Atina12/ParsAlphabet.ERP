@@ -1,0 +1,92 @@
+﻿<div id="roleWorkflowPermissionModal" class="modal fade bs-example-modal-lg col-width-percent-85" data-keyboard="false" tabindex="-1" aria-labelledby="modal_title" role="dialog" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">دسترسی های جریان کار</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="row col-12">
+                    <div class="form-group col-lg-4 col-sm-4 mb-0">
+                        <label class="relational-caption">دسته بندی جریان کار</label>
+                        <select id="workflowCategoryId" class="form-control select2" tabindex="1"></select>
+                    </div>
+                    <div class="form-group col-lg-4 col-sm-4 mb-0">
+                        <label class="relational-caption">شعبه</label>
+                        <select id="branchId" class="form-control select2" tabindex="2"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="modal-body text-right " style="overflow-y:scroll !important;overflow-x:auto!important;height:600px;">
+                    <fieldset class="group-box group-box-blue mb-3">
+                        <legend> جریان کار </legend>
+
+                        <div class="table-responsive " style="height: 250px; min-height:100px; resize: vertical;">
+                            <table class="table table-styles border mb-0 " style="overflow:auto" id="tbWorkflow">
+                                <thead class="table-thead-fixed">
+                                <tr>
+                                    <th class="col-width-percent-1">شناسه</th>
+                                    <th class="col-width-percent-2">نام</th>
+                                    <th class="col-width-percent-1">وضعیت دسترسی</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbWorkflowGet">
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="group-box group-box-blue mb-3">
+                        <legend> مرحله </legend>
+                        <div class="table-responsive " style="height: 200px; min-height: 100px; resize: vertical;">
+                            <table class="table table-styles border mb-0" style="overflow:auto" id="tbStage">
+                                <thead class="table-thead-fixed">
+                                <tr>
+                                    <th class="col-width-percent-1">شناسه</th>
+                                    <th class="col-width-percent-3">نام</th>
+                                    <th class="col-width-percent-2"> بدهکار/بستانکار</th>
+                                    <th class="col-width-percent-4"> طبقه بندی</th>
+                                    <th class="col-width-percent-3"> دسته بندی </th>
+                                    <th class="col-width-percent-1"> وضعیت</th>
+                                    <th class="col-width-percent-2">وضعیت دسترسی</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbStageGet">
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="group-box group-box-blue mb-3">
+                        <legend> گام </legend>
+                        <div class="table-responsive " style=" height: 180px; min-height: 100px; resize: vertical;">
+                            <table class="table table-styles border mb-0" style="overflow:auto" id="tbAction">
+                                <thead class="table-thead-fixed">
+                                <tr>
+                                    <th class="col-width-percent-1 text-center">
+                                        <input id="getActionValAll" onchange="getActionValAll(this,'tbAction')" type="checkbox" autocomplete="off">
+                                    </th>
+                                    <th class="col-width-percent-2">شناسه</th>
+                                    <th class="col-width-percent-12">نام</th>
+                                    <th class="col-width-percent-1">اولویت</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbActionGet">
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="save();" class="btn btn-success waves-effect waves-light" tabindex="30" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('roleWorkflowPermissionModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/GN/RoleWorkflowPermission/RoleWorkflowPermissionIndex.js"></script>

@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "سفارش خرید";
+}
+
+<link href="~/Content/css/FormPlateHeaderLine.css" rel="stylesheet"/>
+<div id="purchasePersonOrderLineDisplayPage">
+    <div class="main-display">
+        <div class="button-items col-md-12">
+            <button title="اولین" id="headerFirst" onclick="display_pagination_display('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-skip-next"></i>
+            </button>
+            <button title="قبلی" id="headerPrevious" onclick="display_pagination_display('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-play"></i>
+            </button>
+            <input id="headerIndex" onkeydown="headerindexChoose_display(event)" type="text" autocomplete="off" class="form-control number col-1 d-inline mr-2 ml-1" maxlength="10" placeholder="شناسه برگه"/>
+            <button title="بعدی" id="headerNext" onclick="display_pagination_display('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-play fa-rotate-180"></i>
+            </button>
+            <button title="آخرین" id="headerLast" onclick="display_pagination_display('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                <i class="mdi mdi-skip-previous"></i>
+            </button>
+        </div>
+        <fieldset class="group-box mt-3 group-box-green">
+            <legend>مشخصات سفارش</legend>
+            <div class="card-body " id="headerDisplay_pagetable">
+                <div class="table-responsive table-responsive-table">
+                    <table class="table">
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="group-box mt-3 group-box-orange">
+            <legend>لیست گردش</legend>
+            <div class="card-body" id="lineDisplay_pagetable">
+                <div class="all">
+                    <div class="table-responsive table-responsive-table" id="parentPageTableBody">
+                        <table class="table table-styles border mb-0 pagetablebody new-page-table">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <input id="personOrderId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+    <input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["stageId"]"/>
+    <input id="workflowId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["workflowId"]"/>
+    <input id="isDefaultCurrency" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["isDefaultCurrency"]"/>
+</div>
+
+<div id="averagePricesModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست نرخ های میانگین</h5>
+                </div>
+            </div>
+
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body" id="lineAveragePricesModal">
+                    <div class="row">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">نرخ میانگین ناخالص</th>
+                                <th class="col-width-percent-10">نرخ میانگین تخفیف</th>
+                                <th class="col-width-percent-10">نرخ میانگین خالص</th>
+                                <th class="col-width-percent-10">نرخ میانگین مالیات</th>
+                                <th class="col-width-percent-10">نرخ میانگین خالص با مالیات</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempAveragePricesRows">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('averagePricesModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/PU/PurchaseOrder/PurchaseOrderDisplay.js"></script>
+@*<script src="~/js/formPlateHeaderLine.js"></script>*@

@@ -1,0 +1,931 @@
+﻿@{
+    ViewBag.Title = "دندانداکتری";
+}
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+
+<div class="content-page displaynone" id="content-page">
+<div class="content" id="mainDentalFormBox">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button id="choiceOfAdmission" type="button" onclick="modal_show('searchAdmissionModal');" class="btn btn-info waves-effect" title="Ctrl + F"><i class="fa fa-user-alt"></i>انتخاب پذیرش</button>
+        <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+        <button id="saveForm" type="button" onclick="saveDentalForm()" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+        <button id="newForm" type="button" onclick="resetFormDental()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+<div class="row displaynone" id="BoxBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="dentalId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            <th>شناسه شباد</th>
+            <th>انقضاء دفترچه</th>
+            <th>داکتر</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+
+<fieldset class="group-box group-box-gray mt-3" id="sendReferFieldset">
+<legend>اطلاعات دندانداکتری</legend>
+
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" id="dentalFormLink" href="#dentalFormBox" role="tab">
+            <span class="d-none d-md-block">مشخصات دندان</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" id="abuseHistoryLink" href="#abuseHistoryBox" role="tab">
+            <span class="d-none d-md-block">مصرف دخانیات</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="familyHistoryLink" href="#familyHistoryBox" role="tab">
+            <span class="d-none d-md-block">سوابق خانوادگی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="drugHistoryLink" href="#drugHistoryBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه دارویی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(5)">
+        <a class="nav-link" data-toggle="tab" id="drugOrderedLink" href="#drugOrderedBox" role="tab">
+            <span class="d-none d-md-block">ویژگی دارو تجویز شده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(6)">
+        <a class="nav-link" data-toggle="tab" id="adverseReactionLink" href="#adverseReactionBox" role="tab">
+            <span class="d-none d-md-block">عوارض جانبی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(7)">
+        <a class="nav-link" data-toggle="tab" id="medicalHistoryLink" href="#medicalHistoryBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه داکتری مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(8)">
+        <a class="nav-link" data-toggle="tab" id="diagLink" href="#diagBox" role="tab">
+            <span class="d-none d-md-block">تشخیص</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+@*START tooth*@
+<div class="tab-pane active p-3" id="dentalFormBox" role="tabpanel">
+    <div class="row tabToggle1" id="dentalForm" data-parsley-validate>
+        <div class="form-group col-lg-2  col-sm-8">
+            <label> دندان کشیدنی</label>
+            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isMissing');" tabindex="10">
+                <input id="isMissing" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>شماره دندان</label>
+            <div>
+                <select id="toothId" class="form-control select2" tabindex="11" required data-parsley-errors-container="#toothNameIdContainer"></select>
+            </div>
+            <div id="toothNameIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>بخش دندان</label>
+            <div>
+                <select id="partId" class="form-control select2" tabindex="12" required data-parsley-errors-container="#partIdContainer"></select>
+            </div>
+            <div id="partIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>سطح دندان</label>
+            <div>
+                <select id="segmentId" class="form-control select2" tabindex="13" required data-parsley-errors-container="#segmentIdContainer"></select>
+            </div>
+            <div id="segmentIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4  col-sm-4">
+            <label>توضیحات</label>
+            <div>
+                <input id="toothComment" type="text" class="form-control" required maxlength="100" tabindex="14"/>
+            </div>
+        </div>
+        @*//*@
+        <div style="visibility:hidden" class="form-group col-lg-1  col-sm-4">
+            <label>تشخیص</label>
+            <div>
+                <input id="hasDiaganosis" type="text" class="form-control" maxlength="100" tabindex="14"/>
+            </div>
+        </div>
+        <div style="visibility:hidden" class="form-group col-lg-1  col-sm-4">
+            <label>خدمت</label>
+            <div>
+                <input id="hasTreatment" type="text" class="form-control" maxlength="100" tabindex="14"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:5px 0 10px 10px;">
+                <button type="button" id="addTooth" class="btn btn-light border-green my-2" tabindex="15"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledTooth" type="button" class="btn btn-light border-green" tabindex="16"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempToothList">
+                <thead>
+                <tr>
+                    <th class="col-width-percent-5">ردیف</th>
+                    <th class="col-width-percent-10">دندان ازدست رفته</th>
+                    <th>شماره دندان</th>
+                    <th>بخش دندان</th>
+                    <th>سطح دندان </th>
+                    <th>توضیحات</th>
+                    <th>تشخیص</th>
+                    <th>خدمات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempTooth">
+                <tr id="emptyRow">
+                    <td colspan="9" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END tooth*@
+
+@*START abuseHistory*@
+<div class="tab-pane p-3" id="abuseHistoryBox" role="tabpanel">
+    <div class="row tabToggle2" id="abuseHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نوع ماده مخدر</label>
+            <div>
+                <select id="substanceTypeId" class="form-control select2" tabindex="17" required data-parsley-errors-container="#substanceTypeIdContainer"></select>
+            </div>
+            <div id="substanceTypeIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>میزان مصرف</label>
+            <div>
+                <input id="amountOfAbuseDosage" type="text" class="form-control number" data-parsley-min="1" maxlength="50" tabindex="18" required/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>واحد ماده مخدر</label>
+            <div>
+                <select id="amountOfAbuseUnitId" class="form-control select2" tabindex="19" required data-parsley-errors-container="#amountOfAbuseUnitIdContainer"></select>
+            </div>
+            <div id="amountOfAbuseUnitIdContainer"></div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-4">
+            <label>مدت زمان مصرف</label>
+            <div>
+                <input id="abuseDuration" type="text" placeholder="سال - ماه - هفته - روز" class="form-control number" maxlength="50" tabindex="20" required/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>واحد مصرف</label>
+            <div>
+                <select id="abuseDurationUnitId" class="form-control select2" tabindex="21" required data-parsley-errors-container="#abuseDurationUnitIdContainer"></select>
+            </div>
+            <div id="abuseDurationUnitIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تاریخ شروع مصرف</label>
+            <div>
+                <input id="startDate" type="text" class="form-control" maxlength="22" required data-parsley-shamsidate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="22"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-2">
+            <label>تاریخ قطع مصرف</label>
+            <div>
+                <input id="quitDate" type="text" class="form-control" maxlength="23" data-parsley-shamsidate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="23"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0;">
+                <button id="addabuseHistory" type="button" class="btn btn-light border-blue" tabindex="24"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledabuseHistory" type="button" class="btn btn-light border-green" tabindex="25"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempabuseHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نوع ماده مخدر</th>
+                    <th>میزان مصرف</th>
+                    <th>واحد ماده مخدر</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد مصرف</th>
+                    <th>تاریخ شروع مصرف</th>
+                    <th>تاریخ قطع مصرف</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempabuseHistory">
+                <tr id="emptyRow">
+                    <td colspan="9" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END abuseHistory*@
+
+@*START familyHistory*@
+<div class="tab-pane  p-3" id="familyHistoryBox" role="tabpanel">
+    <div class="row tabToggle3" id="familyHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>نسبت با بیمار</label>
+            <div>
+                <select id="relatedPersonId" class="form-control select2" tabindex="26" required data-parsley-errors-container="#relatedPersonIdContainer"></select>
+            </div>
+            <div id="relatedPersonIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>نام بیماری</label>
+            <div>
+                <select id="conditionId_familyHistory" class="form-control select2" tabindex="27" required data-parsley-errors-container="#conditionId_familyHistoryContainer"></select>
+            </div>
+            <div id="conditionId_familyHistoryContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>بیماری علت مرگ </label>
+            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isCauseofDeath');" tabindex="28">
+                <input id="isCauseofDeath" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>توضیحات</label>
+            <div>
+                <input id="description_familyHistory" type="text" class="form-control" maxlength="100" tabindex="29"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addfamilyHistory" type="button" class="btn btn-light border-blue" tabindex="30"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledfamilyHistory" type="button" class="btn btn-light border-green" tabindex="31"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempfamilyHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نسبت با بیمار</th>
+                    <th>نام بیماری</th>
+                    <th>بیماری علت مرگ </th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempfamilyHistory">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END familyHistory*@
+
+@*START drugHistory*@
+<div class="tab-pane  p-3" id="drugHistoryBox" role="tabpanel">
+    <div class="row tabToggle4" id="drugHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-3  col-sm-4">
+            <label>نام دارو</label>
+            <div>
+                <select id="medicationId" class="form-control select2" tabindex="32" required data-parsley-errors-container="#medicationIdContainer"></select>
+            </div>
+            <div id="medicationIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-3  col-sm-4">
+            <label>طریقه مصرف</label>
+            <div>
+                <select id="routeId_drugHistory" class="form-control select2" tabindex="33" required data-parsley-errors-container="#routeId_drugHistoryContainer"></select>
+            </div>
+            <div id="routeId_drugHistoryContainer"></div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="adddrugHistory" type="button" class="btn btn-light border-blue" tabindex="34"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceleddrugHistory" type="button" class="btn btn-light border-green" tabindex="35"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام دارو</th>
+                    <th>طریقه مصرف</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugHistory">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugHistory*@
+
+@*START drugOrdered*@
+<div class="tab-pane  p-3" id="drugOrderedBox" role="tabpanel">
+    <div class="row tabToggle5" id="drugOrderedForm" data-parsley-validate>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>کد دارو</label>
+            <div>
+                <select id="productId" class="form-control select2" tabindex="36" required data-parsley-errors-container="#productIdContainer"></select>
+            </div>
+            <div id="productIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نام ژنریک دارو</label>
+            <div>
+                <input id="drugGenericName" type="text" class="form-control" maxlength="50" tabindex="37"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>طریقه مصرف</label>
+            <div>
+                <select id="routeId_drugOrdered" class="form-control select2" tabindex="38" required data-parsley-errors-container="#routeId_drugOrderedContainer"></select>
+            </div>
+            <div id="routeId_drugOrderedContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تواتر مصرف</label>
+            <div>
+                <select id="frequencyId" class="form-control select2" tabindex="39" required data-parsley-errors-container="#frequencyIdContainer"></select>
+            </div>
+            <div id="frequencyIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دوز مصرفی</label>
+            <div>
+                <input id="dosage" type="text" placeholder="میلی گرم - میلی لیتر" class="form-control number" maxlength="50" tabindex="40"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>واحد اندازه گیری</label>
+            <div>
+                <select id="dosageUnitId" class="form-control select2" tabindex="41" data-parsley-errors-container="#dosageUnitIdContainer"></select>
+            </div>
+            <div id="dosageUnitIdContainer"></div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3  col-sm-4">
+            <label>مدت زمان مصرف</label>
+            <div>
+                <input id="longTerm" type="text" placeholder="سال - ماه - روز - دقیقه" class="form-control number" maxlength="50" tabindex="42" required/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>واحد اندازه گیری مدت زمان مصرف</label>
+            <div>
+                <select id="longTermUnitId" class="form-control select2" tabindex="43" required data-parsley-errors-container="#longTermUnitIdContainer"></select>
+            </div>
+            <div id="longTermUnitIdContainer"></div>
+        </div>
+        <div class="form-group col-xxl-1 col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <div>
+                <input id="totalNumber" type="text" class="form-control number" maxlength="50" tabindex="44" required/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-3">
+            <label>تاریخ زمان تجویز</label>
+            <div>
+                <input id="administrationDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="45">
+            </div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-5">
+            <label>توضیح</label>
+            <div>
+                <input id="description_drugOrdered" type="text" class="form-control" maxlength="100" tabindex="46"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="adddrugOrdered" type="button" class="btn btn-light border-blue" tabindex="47"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceleddrugOrdered" type="button" class="btn btn-light border-green" tabindex="48"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugOrderedList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>کد دارو</th>
+                    <th>نام ژنریک دارو</th>
+                    <th>طریقه مصرف</th>
+                    <th>تواتر مصرف</th>
+                    <th>دوز مصرفی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد اندازه گیری مدت زمان مصرف</th>
+                    <th>تعداد</th>
+                    <th>تاریخ زمان تجویز</th>
+                    <th>توضیح</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugOrdered">
+                <tr id="emptyRow">
+                    <td colspan="13" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugOrdered*@
+
+@*START adversReaction*@
+<div class="tab-pane  p-3" id="adverseReactionBox" role="tabpanel">
+    <div class="row tabToggle6" id="adverseReactionForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دسته بندی عامل عارضه</label>
+            <div>
+                <select id="causativeAgentCategoryId" class="form-control select2" required data-parsley-selectvalzero data-parsley-errors-container="#causativeAgentCategoryIdContainer" tabindex="54">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="causativeAgentCategoryIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>عامل ایجاد کننده عارضه</label>
+            <div>
+                <select id="causativeAgentId" class="form-control select2" tabindex="55" required data-parsley-errors-container="#causativeAgentContainer"> </select>
+            </div>
+            <div id="causativeAgentContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دسته بندی عارضه</label>
+            <div>
+                <select id="reactionCategoryId" class="form-control select2" tabindex="56" required data-parsley-selectvalzero data-parsley-errors-container="#reactionCategoryContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="reactionCategoryContainer"></div>
+        </div>
+        <div class="form-group col-xxl-3 col-lg-4 col-sm-6">
+            <label>عارضه</label>
+            <div>
+                <select id="reactionId" class="form-control select2" maxlength="50" tabindex="57" required data-parsley-selectvalzero data-parsley-errors-container="#reactionContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="reactionContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>شدت عارضه</label>
+            <div>
+                <select id="diagnosisSeverityId" class="form-control select2" tabindex="58" required @*data-parsley-selectvalzero*@ data-parsley-errors-container="#diagnosisSeverityIdContainer">
+                    @*<option value="-1">انتخاب کنید</option>*@
+                </select>
+            </div>
+            <div id="diagnosisSeverityIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>شرح</label>
+            <div>
+                <input id="description" class="form-control select2" tabindex="59" maxlength="100"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addadverseReaction" type="button" class="btn btn-light border-blue" tabindex="60"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledadverseReaction" type="button" class="btn btn-light border-green" tabindex="61"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempadverseReactionList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>دسته بندی عامل عارضه</th>
+                    <th>عامل ایجاد کننده عارضه</th>
+                    <th>دسته بندی عارضه </th>
+                    <th>عارضه </th>
+                    <th>شدت عارضه</th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempAdverseReaction">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END adversReaction*@
+
+@*START medicalHistory*@
+<div class="tab-pane  p-3" id="medicalHistoryBox" role="tabpanel">
+    <div class="row tabToggle7" id="medicalHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نام بیماری</label>
+            <div>
+                <select id="conditionId_medicalHistory" class="form-control select2" tabindex="49" required data-parsley-errors-container="#conditionId_medicalHistoryContainer"></select>
+            </div>
+            <div id="conditionId_medicalHistoryContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ شروع بیماری</label>
+            <div>
+                <input id="dateOfOnSet" type="text" class="form-control" maxlength="16" required data-parsley-shamsidatetime placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="50"/>
+            </div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-4">
+            <label>مدت زمان بیماری قبلی</label>
+            <div>
+                <input id="onsetDurationToPresent_medicalHistory" type="text" placeholder="سال - ماه - هفته - روز" class="form-control number" maxlength="50" tabindex="51" required/>
+            </div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-2 col-sm-3">
+            <label>واحد اندازه گیری</label>
+            <div>
+                <select id="onsetDurationToPresentUnitId_medicalHistory" class="form-control select2" tabindex="52" required data-parsley-errors-container="#onsetDurationToPresentUnitId_medicalHistoryContainer"></select>
+            </div>
+            <div id="onsetDurationToPresentUnitId_medicalHistoryContainer"></div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-5">
+            <label>توضیح</label>
+            <div>
+                <input id="description_medicalHistory" type="text" class="form-control" maxlength="100" tabindex="53"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addmedicalHistory" type="button" class="btn btn-light border-blue" tabindex="54"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledmedicalHistory" type="button" class="btn btn-light border-green" tabindex="55"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempmedicalHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری قبلی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیح</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempmedicalHistory">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END medicalHistory*@
+
+@*START diag*@
+<div class="tab-pane p-3" id="diagBox" role="tabpanel">
+    <div id="diagForm" class="row tabToggle8" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>وضعیت تشخیص</label>
+            <div>
+                <select id="statusId" class="form-control select2" tabindex="125" required data-parsley-errors-container="#statusIdContainer"></select>
+            </div>
+            <div id="statusIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>تشخیص</label>
+            <div>
+                <select id="diagnosisResonId" class="form-control select2" tabindex="126" required data-parsley-errors-container="#diagnosisResonIdContainer"></select>
+            </div>
+            <div id="diagnosisResonIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>میزان شدت بیماری</label>
+            <div>
+                <select id="serverityId" class="form-control select2" tabindex="127" required data-parsley-errors-container="#serverityIdContainer"></select>
+            </div>
+            <div id="serverityIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تاریخ و زمان تشخیص</label>
+            <div>
+                <input id="diagnosisDateTime" type="text" class="form-control" data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'"
+                       required data-parsley-errors-container="#diagnosisDateTimeContainer">
+
+            </div>
+            <div id="diagnosisDateTimeContainer"></div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>توضیحات</label>
+            <input id="comment" class="form-control" tabindex="128" maxlength="100"/>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0;">
+                <button type="button" id="addDiagnosis" class="btn btn-light border-green my-2" tabindex="129"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledDiagnosis" type="button" class="btn btn-light border-green" tabindex="130"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdiagnosisList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>وضعیت تشخیص</th>
+                    <th>تشخیص</th>
+                    <th>میزان شدت بیماری </th>
+                    <th>تاریخ و زمان تشخیص</th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempDiag">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END diag*@
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/SearchAdmissionModal/SearchAdmissionModal.cshtml")
+
+@*START diagToothForm*@
+
+<div id="ToothModalC" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">ثبت تشخیص های هر دندان</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="row" id="toothBoxC" data-parsley-validate>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>وضعیت تشخیص</label>
+                        <div>
+                            <select id="toothStatusId" class="form-control select2" tabindex="1" required data-parsley-errors-container="#toothStatusIdCContainer"></select>
+                        </div>
+                        <div id="toothStatusIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>تشخیص</label>
+                        <div>
+                            <select id="toothDiagnosisResonId" class="form-control select2" tabindex="2" required data-parsley-errors-container="#toothDiagnosisResonIdCContainer"></select>
+                        </div>
+                        <div id="toothDiagnosisResonIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>میزان شدت بیماری</label>
+                        <div>
+                            <select id="toothServerityId" class="form-control select2" tabindex="3" required data-parsley-errors-container="#toothServerityIdCContainer"></select>
+                        </div>
+                        <div id="toothServerityIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>تاریخ و زمان تشخیص</label>
+                        <div>
+                            <input id="toothDiagnosisDateTime" type="text" class="form-control" data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'"
+                                   required data-parsley-errors-container="#toothdiagnosisDateTimeContainer">
+
+                        </div>
+                        <div id="toothdiagnosisDateTimeContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>توضیحات</label>
+                        <div>
+                            <input id="toothCommentC" type="text" class="form-control select2" title="" tabindex="4" maxlength="300"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-3 col-sm-4" style="margin-top:5px">
+                        <label></label>
+                        <div class="chosen-container-parent">
+                            <button id="addToothC" type="button" class="btn btn-light border-dark" tabindex="5">ثبت</button>
+                            <button id="canceledToothC" type="button" class="btn btn-light border-green" tabindex="6"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:0 -7px 0 -7px">
+                    <fieldset class="group-box group-box-gray" style="overflow-x:hidden;overflow-y:scroll;height:auto;width:100%">
+                        <legend>تشخیص های دندان</legend>
+                        <div class="table-responsive" style="margin:0 auto;padding-bottom:10px">
+                            <table class="table table-styles border mb-0" id="tempToothListC" style="font-size:10px">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-5">ردیف</th>
+                                    <th class="col-width-percent-20">وضعیت تشخیص</th>
+                                    <th class="col-width-percent-10">تشخیص</th>
+                                    <th class="col-width-percent-10">میزان شدت بیماری</th>
+                                    <th class="col-width-percent-10">تاریخ و زمان تشخیص </th>
+                                    <th class="col-width-percent-10">توضیحات</th>
+                                    <th class="col-width-percent-10">عملیات</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempToothC">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseToothC" class="btn btn-secondary waves-effect "><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="TreatmentModalC" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">ثبت خدمات بیمار</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="row" id="treatmentBoxC" data-parsley-validate>
+                    <div class="form-group col-lg-3 col-sm-4">
+                        <label>نوع خدمت</label>
+                        <div>
+                            <select id="serviceTypeId" class="form-control select2" tabindex="1" required data-parsley-errors-container="#ServiceIdCContainer"></select>
+                        </div>
+                        <div id="ServiceIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-8 col-sm-4">
+                        <label>خدمت ارائه شده</label>
+                        <div>
+                            <select id="serviceId" class="form-control select2" tabindex="2" required data-parsley-errors-container="#serviceTypeIdCContainer"></select>
+                        </div>
+                        <div id="serviceTypeIdCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>تعداد خدمت</label>
+                        <div>
+                            <input id="serviceCount" type="text" class="form-control number" data-parsley-min="1" maxlength="50" tabindex="3" required/>
+                            @*<select id="serviceCount" class="form-control select2" tabindex="101" required data-parsley-errors-container="#serviceCountCContainer"></select>*@
+                        </div>
+                        <div id="serviceCountCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>واحد خدمت</label>
+                        <div>
+                            <select id="serviceCountUnitId" class="form-control select2" tabindex="4" required data-parsley-errors-container="#serviceCountUnitCContainer"></select>
+                        </div>
+                        <div id="serviceCountUnitCContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-3">
+                        <label>تاریخ و زمان شروع</label>
+                        <div>
+                            <input id="startDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="37">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-3">
+                        <label>تاریخ و زمان پایان</label>
+                        <div>
+                            <input id="endDateTime" type="text" class="form-control" required data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="38">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-sm-4" style="margin-top:5px">
+                        <label></label>
+                        <div class="chosen-container-parent">
+                            <button id="addTreatmentC" type="button" class="btn btn-light border-dark" tabindex="5">ثبت</button>
+                            <button id="canceledTreatmentC" type="button" class="btn btn-light border-green" tabindex="6"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:0 -7px 0 -7px">
+                    <fieldset class="group-box group-box-gray" style="overflow-x:hidden;overflow-y:scroll;height:auto;width:100%">
+                        <legend>خدمات بیمار</legend>
+                        <div class="table-responsive" style="margin:0 auto;padding-bottom:10px">
+                            <table class="table table-styles border mb-0" id="tempTreatmentListC" style="font-size:10px">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-5">ردیف</th>
+                                    <th class="col-width-percent-20">نوع خدمت</th>
+                                    <th class="col-width-percent-10">خدمت ارائه شده</th>
+                                    <th class="col-width-percent-10">تعداد خدمت</th>
+                                    <th class="col-width-percent-5">واحد خدمت</th>
+                                    <th class="col-width-percent-5"> تاریخ و زمان شروع</th>
+                                    <th class="col-width-percent-5">تاریخ و زمان پایان </th>
+
+                                    <th class="col-width-percent-10">عملیات</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempTreatmentC">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseTreatmentC" class="btn btn-secondary waves-effect "><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group col-lg-1  col-sm-8" style="visibility:hidden">
+    <label> دندان کشیدنی</label>
+    <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'iSQueriable');" tabindex="10">
+        <input id="iSQueriable" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+    </div>
+</div>
+
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script type="text/javascript" src="/Modules/MC/Dental/DentalForm.js"></script>

@@ -1,0 +1,382 @@
+﻿@{
+    ViewBag.Title = "تخصیص نوبت داکتر";
+}
+
+<style>
+    .header-title span{
+        color: #555;
+        font-weight: 500;
+        font-size: inherit;
+        flex-basis: 30%;
+        line-height: 1.7;
+    }
+
+    #divbasicetailMedicalTimeShift #medicalTimeShiftDays_pagetable #parentPageTableBody {
+        max-height: 250px;
+        min-height: 100px;
+    }
+
+    .attenderTimeSheetLinecssmonth {
+        background-color: #eeeeee;
+        font-size: 10px;
+    }
+
+    .attenderTimeSheetLineAllocatedBlocks {
+        background-color: #bfffbc;
+        font-size: 10px;
+    }
+
+    .tablecss {
+        border-right: 1px solid #dee2e6;
+        border-top: 0;
+        border-bottom: none;
+        color: #444;
+        font-weight: bold;
+        vertical-align: middle;
+        padding: 2px 3px;
+        height: auto;
+        word-break: normal;
+        background-color: #d2d1d1
+    }
+
+    .attenderTimeSheetLineDayItemAllocated {
+        white-space: nowrap;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-bottom: 1px dotted black;
+        width: 100px;
+    }
+
+    .attenderTimeSheetLineDayItem {
+        white-space: nowrap;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    td:has(> .attenderTimeSheetLineDayItem) {
+        cursor: pointer !important;
+    }
+
+    .attenderTimeSheetLineDay {
+        white-space: nowrap;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: red;
+    }
+
+    .isselectedTd {
+        cursor: pointer !important;
+    }
+
+    .cell-selected {
+        border: 1px dashed #000 !important;
+    }
+
+    .isClosed {
+        background-color: #ebebeb;
+    }
+</style>
+<link href="~/Content/css/FormPlateHeaderLine.css?ver=@Guid.NewGuid().ToString().Replace("-", "")" rel="stylesheet"/>
+<input id="attenderId" type="hidden" value="@ViewContext.RouteData.Values["attenderid"]"/>
+<input id="attenderName" type="hidden" value="@ViewContext.RouteData.Values["attendername"]"/>
+<input id="departmentId" type="hidden" value="@ViewContext.RouteData.Values["departmentId"]"/>
+<input id="departmentName" type="hidden" value="@ViewContext.RouteData.Values["departmentName"]"/>
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+<input id="currentYear" type="hidden" value="@PersianDateTime.GetCurrentYear()"/>
+<link href="~/lib/ModulesCss/JournalIndex.css" rel="stylesheet"/>
+
+<link href="~/lib/ModulesCss/AttenderTimeSheetLine.css" rel="stylesheet"/>
+
+<div class="content-page" id="content-page">
+    <div class="content" id="attenderTimeSheetLineForm">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15" id="form">
+                        <div class="header-title d-flex">
+                            <div class="row col-md-5 header-form-box">
+                                <div class="text-right">
+                                    <span style="font-weight:700" id="viewData_form_titleSpan"> </span>
+                                </div>
+                            </div>
+                            <div class="button-items mt-2">
+                                <button title="اولین" id="headerFirst" onclick="display_pagination_display('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-next"></i>
+                                </button>
+                                <button title="قبلی" id="headerPrevious" onclick="display_pagination_display('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play"></i>
+                                </button>
+
+                                <div style="width:250px;display:inline-block;font-size: 10px !important;margin-right: 6px;height: 30px;">
+                                    <select id="attenderChooseId" class="form-control select2 col-1 d-inline mr-2 ml-1 select2" required onchange="headerindexChoose_display(this)"></select>
+                                </div>
+
+                                <button title="بعدی" id="headerNext" onclick="display_pagination_display('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play fa-rotate-180"></i>
+                                </button>
+                                <button title="آخرین" id="headerLast" onclick="display_pagination_display('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-previous"></i>
+                                </button>
+                                <button onclick="showList()" type="button" class="btn blue_1 waves-effect"><i class="far fa-file-alt ml-2"></i>نمایش</button>
+                                <button onclick="backToList_overrided()" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" style="margin-left: 5px">
+
+                                <div class="col-md-3 form-group">
+                                    <label>سال مالی</label>
+                                    <select id="fiscalYearId" type="text" class="form-control select2" tabindex="1">
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>شعبه</label>
+                                    <select id="branchId" type="text" class="form-control select2" tabindex="2">
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+
+                                    <button id="searchShift" onclick="searchShift()" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="3">
+                                        <i class="fa fa-search ml-2"></i>جستجو
+                                    </button>
+                                    <div></div>
+                                </div>
+
+                            </div>
+                            <div class="table-responsive table table-styles border mb-0 pagetablebody new-page-tableV1" id="showMonth">
+                                <table class="table table-styles border mb-0 pagetablebody new-page-table" style="width:auto !important">
+                                </table>
+                            </div>
+
+
+                            <fieldset class="group-box mt-3 group-box-green" id="divbasicetailMedicalTimeShift" style="display:none;">
+                                <legend>اطلاعات شیفت داکتر</legend>
+                                <div id="medicalTimeShiftDays_pagetable" style="max-height:300px; min-height:100px;">
+                                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                </div>
+                            </fieldset>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div id="addAttenderTimesheetLineModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">
+                        <span id="span_AttenderTimesheetLinetitle"></span>
+                    </h5>
+                </div>
+            </div>
+            <div class="modal-body text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div style="overflow-y:scroll !important;overflow-x:auto!important;height:400px" id="tableLine">
+                                <table style="width:100% !important">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:6%">شناسه</th>
+                                        <th style="width:16%">شیفت کاری</th>
+                                        <th style="width:8%">ماه</th>
+                                        <th style="width:14%">روز</th>
+                                        <th style="width:8%">محدودیت غیرحضوری</th>
+                                        <th style="width:9%">تعداد ویزیت غیرحضوری</th>
+                                        <th style="width:8%">محدودیت حضوری</th>
+                                        <th style="width:8%">تعداد ویزیت حضوری</th>
+                                        <th style="width:13%">نوع توزیع</th>
+                                        <th style="width:8%">عملیات</th>
+
+                                    </tr>
+                                    </thead>
+                                    <thead>
+                                    <tr>
+                                        <th style="width:5%" disabled>
+                                            <input id="idNumber" type="text" class="form-control atoz-valid text-center" maxlength="50" title="" disabled>
+                                        </th>
+
+
+                                        <th style="width:16%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <select id="departmentShiftId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="1"></select>
+                                            </div>
+                                        </th>
+                                        <th style="width:8%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <select id="monthId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="2"></select>
+                                            </div>
+                                        </th>
+                                        <th style="width:14%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <select id="dayId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="3"></select>
+                                            </div>
+                                        </th>
+
+                                        <th style="width:9%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <select id="isOnlineBookingUnLimit" class="form-control select2" tabindex="4" title="">
+                                                    <option value="1">غیرفعال</option>
+                                                    <option value="2">محدود</option>
+                                                </select>
+                                            </div>
+                                        </th>
+                                        <th style="width:8%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <input id="numberOnLineAppointment" type="text" class="form-control number" data-parsley-max="300" maxlength="5" tabindex="5" disabled/>
+                                            </div>
+                                        </th>
+
+
+                                        <th style="width:8%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <select id="isOfflineBookingUnLimit" class="form-control select2" tabindex="6" title="">
+                                                    <option value="1">غیرفعال</option>
+                                                    <option value="2">نامحدود</option>
+                                                    <option value="3">محدود</option>
+                                                </select>
+                                            </div>
+                                        </th>
+
+                                        <th style="width:8%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <input id="numberOffLineAppointment" type="text" class="form-control number" maxlength="5" data-parsley-max="500" tabindex="7" disabled/>
+                                            </div>
+                                        </th>
+
+
+                                        <th style="width:13%">
+                                            <div class="col-lg-12 chosen-container-parent">
+                                                <select id="appointmentDistributionTypeId" class="form-control select2" title="" tabindex="8"></select>
+                                            </div>
+                                        </th>
+
+
+                                        <th style="width:8%">
+                                            <div style="display:flex;justify-content:center;width:100%">
+                                                <button id="saveRow" type="button" onclick="saveUpdateRow(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="9">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <button id="resetInputs" type="button" onclick="resetInputsRowUnits(this)" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="10">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="10" style="text-align:center">سطری وجود ندارد</td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_closeAttenderTimesheetLineModal()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/MC/AttenderTimeSheetMedicalShift/AttenderTimeSheetMedicalShiftDisplay.cshtml")
+
+
+<div id="attenderTimeSheetLineModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog  modal-size-xxlg ">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">نمایش روزهای کاری</div>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="w-100 d-flex justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <div class="doctor-info text-right d-flex" id="content">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center">
+
+                        <div>
+                            <button type="button" id="exportCSV" onclick="export_csvGetAttenderTimeSheetLine()" class="btn btn-excel waves-effect" style=" margin :0px 0px 2px 0px"><i class="fa fa-file-excel"></i>اکسل</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body text-right p-0 col-12">
+                <div class="card-body " id="attenderTimeSheetLine_pagetable">
+
+                    @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('attenderTimeSheetLineModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorAttenderTimeSheetList" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">لیست نوبت های رزرو شده</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-15">داکتر</th>
+                                <th class="col-width-percent-12">شناسه غیرحضوری مراجعه کننده</th>
+                                <th class="col-width-percent-10">مراجعه کننده</th>
+                                <th class="col-width-percent-8">نمبر تذکره مراجعه کننده</th>
+                                <th class="col-width-percent-11">شناسه غیرحضوری پذیرش</th>
+                                <th class="col-width-percent-7">شناسه پذیرش</th>
+                                <th class="col-width-percent-12">تاریخ رزرو غیرحضوری پذیرش </th>
+                                <th class="col-width-percent-7">تاریخ رزرو</th>
+                                <th class="col-width-percent-20">شناسه بلاک زمانی</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempErrorAttenderTimeSheetList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="" onclick="modal_close('errorAttenderTimeSheetList')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="/Modules/MC/AttenderTimeSheetLine/AttenderTimeSheetLineIndex.js"></script>

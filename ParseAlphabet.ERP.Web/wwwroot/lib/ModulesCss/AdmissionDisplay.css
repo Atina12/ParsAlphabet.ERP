@@ -1,0 +1,42 @@
+﻿
+.admissionDisplayRequest > table{
+    table-layout : fixed !important;
+    width:100% !important
+}
+
+
+.admissionDisplayRequest {
+    display: block;
+    width: 100%;
+    overflow-x: scroll !important;
+}
+    /* width */
+    .admissionDisplayRequest::-webkit-scrollbar,
+    .admissionDisplayRequest::-webkit-scrollbar {
+        height: 7px;
+    }
+
+    /* Track */
+    .admissionDisplayRequest::-webkit-scrollbar-track,
+    .admissionDisplayRequest::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    .admissionDisplayRequest::-webkit-scrollbar-thumb,
+    .admissionDisplayRequest::-webkit-scrollbar-thumb {
+         background: #888;
+ /*       background: #a7a7a7*/
+    }
+
+#admissionRequestDisplayModal #admissionList .table-responsive {
+    min-height: 58px !important;
+    max-height: 216px !important;
+    width: 100% !important;
+    resize: vertical;
+}
+
+.text-burlywood {
+    background-color: burlywood
+}
+

@@ -1,0 +1,68 @@
+﻿<link href="~/Content/css/jquery-uicss.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card mb-2" id="formplate2HeaderInfo">
+                <div class="card-body">
+                    <div class="row justify-content-between">
+
+                        <div class="col-md-3 form-group mb-0">
+                            <label>داکتران</label>
+                            <select class="form-control select2" id="form_Attender"></select>
+                        </div>
+                        <div class="col-md-3 form-group mb-0">
+                            <label>نوع پذیرش</label>
+                            <select class="form-control select2" id="admissionTypeId">
+                                <option value="2">2 - بهداشت</option>
+                                <option value="3">3 - تامین</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 form-group mb-0">
+                            <label>نوع</label>
+                            <select class="form-control select2" id="kind"></select>
+                        </div>
+                        <div class="col-md-3 form-group mb-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formplate-main">
+                <div class="formplate-item" id="formplate2">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <label></label>
+                            <span class="assigned-title">تخصیص داده شده</span>
+                        </div>
+                        <div class="card-body" id="pagetable2">
+                            @await Html.PartialAsync("/Modules/AllocationPageTable.cshtml")
+                        </div>
+                    </div>
+                    <div class="assigment-controls">
+                        <button class="btn btn-info" onclick="assign_ins()">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn btn-info" onclick="assign_del()">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="formplate-item" id="formplate1">
+                    <div class="card">
+                        <div class="header-title d-flex">
+                            <label class="formPlate2_Title"></label>
+                            <span class="assigned-title">تخصیص داده نشده</span>
+                        </div>
+                        <div class="card-body" id="pagetable1">
+                            @await Html.PartialAsync("/Modules/AllocationPageTable.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/formplate.js"></script>
+<script src="/js/formplate2.js"></script>
+
+<script src="~/Modules/MC/FavoritePrescription/FavoritePrescriptionIndex.js"></script>

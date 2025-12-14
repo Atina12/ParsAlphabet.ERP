@@ -1,0 +1,132 @@
+.keyboard-blackout-background {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(25,25,25,.9)
+}
+
+.keyboard-wrapper {
+    font-size: 18px;
+    line-height: 18px;
+    z-index: 2;
+    width: calc(100vw);
+    color: #555;
+    margin: 0px auto;
+    /*display: block;*/
+    font-family: "iransans";
+    direction: ltr;
+}
+
+.keyboard-row:first-child {
+    margin-top: 0;
+}
+
+.keyboard-wrapper .keyboard-action-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%
+}
+
+    .keyboard-wrapper .keyboard-action-button {
+        font-family: inherit;
+        font-size: inherit;
+        display: inline;
+        width: 10%;
+        height: 40px;
+        margin: 0 5px;
+        padding: 0;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+        margin: auto;
+    }
+
+    .keyboard-wrapper .keyboard-cancel-button {
+        background-color: #e74c3c
+    }
+
+    .keyboard-wrapper .keyboard-accept-button {
+        background-color: #555;
+    }
+
+    .keyboard-wrapper .keyboard-input-field {
+        box-sizing: content-box;
+        width: 80%;
+        height: 40px;
+        max-height: 40px;
+        padding: 0px 10px 0px 10px !important;
+        color: inherit;
+        border: 1px solid #555;
+        border-radius: 4px;
+        outline: none;
+        margin: auto;
+        direction: rtl;
+    }
+
+    .keyboard-row, .keyboard-wrapper .keyboard-input-field {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+.keyboard-row {
+    width: calc(100vw - 40px);
+    height: 50px;
+    margin: 20px 0
+}
+
+.keyboard-key {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    display: inline-block;
+    height: 100%;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+    vertical-align: middle;
+    color: inherit;
+    border: 1px solid;
+    border-radius: 4px;
+    outline: none;
+    background-color: #f9f6e4
+}
+
+    .keyboard-key:focus {
+        outline: none
+    }
+
+.caps-lock-key {
+    position: relative
+}
+
+    .caps-lock-key:before {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 7px;
+        height: 7px;
+        content: "";
+        transition: background-color .05s ease-in-out;
+        border: 1px solid #bdbdbd;
+        border-radius: 50%;
+        background-color: transparent
+    }
+
+.caps-lock-key-active:before {
+    background-color: #3498db
+}
+
+.language-button {
+    overflow: hidden;
+    padding: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}

@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "دستیار سکرتر ";
+}
+
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+
+                            <li class="nav-item waves-effect waves-light" id="physicianToSecretaryType" onclick="changeTabPostingGroup(1)">
+                                <a class="nav-link active" data-toggle="tab" id="physicianToSecretaryLink" href="#physicianToSecretaryBox" role="tab">
+                                    <span class="d-none d-md-block">داکتر به سکرتر </span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-account h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item waves-effect waves-light" id="secretaryToThePhysicianType" onclick="changeTabPostingGroup(2)">
+                                <a class="nav-link" data-toggle="tab" id="secretaryToThePhysicianLink" href="#secretaryToThePhysicianBox" role="tab">
+                                    <span class="d-none d-md-block">سکرتر  به داکتر</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-email h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content group-box group-box-gray">
+
+                            <div class="tab-pane p-3 active" id="physicianToSecretaryBox" role="tabpanel">
+                                <div class="tabToggle1" id="physicianToSecretaryForm" data-parsley-validate>
+                                    <div class="card-body " id="physicianToSecretary">
+                                        @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane p-3" id="secretaryToThePhysicianBox" role="tabpanel">
+                                <div class="tabToggle2" id="secretaryToThePhysicianForm" data-parsley-validate>
+                                    <div class="card-body " id="secretaryToThePhysician">
+                                        @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<!--Modal Attender Assistant-->
+@await Html.PartialAsync("/Modules/MC/Attender_Assistant/Attender_Assistant.cshtml")
+<!--End Modal Attender Assistant-->
+<!--Modal user Assistant-->
+@await Html.PartialAsync("/Modules/MC/Attender_Assistant/User_Assistant.cshtml")
+<!--End Modal user Assistant-->
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="~/Modules/MC/Attender_Assistant/Attender_AssistantIndex.js"></script>

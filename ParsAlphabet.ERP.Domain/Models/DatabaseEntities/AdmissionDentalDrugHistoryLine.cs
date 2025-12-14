@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ParsAlphabet.ERP.Domain.Models.DatabaseEntities;
+
+public partial class AdmissionDentalDrugHistoryLine
+{
+    public int HeaderId { get; set; }
+
+    public byte RowNumber { get; set; }
+
+    /// <summary>
+    /// thrFDOIR
+    /// </summary>
+    public short? MedicationId { get; set; }
+
+    public short? RouteId { get; set; }
+}

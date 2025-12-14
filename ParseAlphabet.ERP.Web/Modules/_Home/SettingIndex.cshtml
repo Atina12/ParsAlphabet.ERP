@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "تنظیمات";
+    Layout = Views.Shared._Layout;
+}
+
+@section PageStyles {
+    <link href="/Content/scss/rtl/Pages/dashboard-rtl.css" rel="stylesheet"/>
+}
+
+<div class="content-page" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mt-0 mb-0">تغییر رمز ورود</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group col-sm-6">
+                                <input type="password" id="newpassword" class="form-control" title=" " maxlength="10" required
+                                       placeholder="رمز ورود جدید" tabindex="13"/>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <input type="password" id="newpasswordconf" class="form-control" title=" " maxlength="10" required
+                                       data-parsley-equalto="#newpassword"
+                                       placeholder="تکرار رمز ورود جدید" tabindex="14"/>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button id="modal-changepass-save" class="btn btn-success waves-effect waves-light float-left" tabindex="15"><i class="fa fa-save ml-1"></i>ذخیره</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+}

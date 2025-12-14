@@ -1,0 +1,40 @@
+﻿#tableLine th, #tableLine td, #tableLineitemCategory th, #tableLineitemCategory td, #tableLineunitId th, #tableLineunitId td, #tableLineitemVendor th, #tableLineitemVendor td {
+    border: 1px solid #dee2e6;
+    height: 20px;
+    /* width: 25%*/
+}
+
+#tableLine th, #tableLineitemCategory th, #tableLineunitId th, #tableLineitemVendor th {
+    background-color: #dee2e6;
+    background: #d2d1d1;
+    padding: 2px
+}
+
+#tableLine td, #tableLineitemCategory td, #tableLineunitId td, #tableLineitemVendor td {
+    padding: 4px;
+    border: 1px solid #dee2e6;
+}
+
+#resetInputs i, #saveRow i {
+    margin-left: 5px
+}
+
+#tableLine .funkyradio {
+    background-color: white
+}
+
+#saveRow i, #resetInputs i {
+    margin-left: 0px !important;
+    padding: 0px 2px 0px 2px
+}
+
+
+#showId {
+    padding: 1px 10px;
+    background-color: #bfbdbd;
+    color: #333;
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+

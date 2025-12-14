@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Websla - Enterprise resource planning</title>
+    <meta content="Responsive admin theme build on top of Bootstrap 4" name="description"/>
+    <meta content="Themesdesign" name="author"/>
+    <link rel="shortcut icon" href="Content/images/favicon.ico">
+
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    @*<link href="/Content/css/metismenu.min.css" rel="stylesheet" type="text/css">*@
+    <link href="/plugins/alertifyjs/css/alertify.rtl.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/alertifyjs/css/themes/default.rtl.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/loader.css" rel="stylesheet"/>
+    <link href="/Content/scss/rtl/style-rtl.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<div class="accountbg"></div>
+<div class="box" id="loader">
+    <img src="/Content/images/heart.png" id="heartbeat"/>
+</div>
+@RenderBody()
+
+<!--<script src="/Content/js/jquery.min.js"></script>
+<script src="/Content/js/bootstrap.bundle.min.js"></script>
+<script src="/Content/js/metismenu.min.js"></script>
+<script src="/Content/js/jquery.slimscroll.js"></script>
+<script src="/Content/js/waves.min.js"></script>
+<script async src="/plugins/alertifyjs/js/alertify.min.js"></script>
+<script src="/Content/js/app.js"></script>
+<script src="~/js/messages.js"></script>
+<script src="/js/constants.js"></script>-->
+
+@*<script src="/plugins/parsleyjs/parsley-rtl.min.js"></script>*@
+<!--<script src="/lib/library-bundle/parsley-rtl.js"></script>
+<script src="/js/site.js"></script>-->
+
+<script src="/Content/js/login.bundle.min.js"></script>
+
+
+@RenderSection("Scripts", false)
+</body>
+</html>

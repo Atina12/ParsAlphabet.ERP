@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "نوع خدمت";
+}
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>عنوان گروه</label>
+                        <div>
+                            <input id="name" type="text" class="form-control" maxlength="50" title="" required tabindex="1" data-parsley-errors-container="#nameErrorContainer">
+                        </div>
+                        <div id="nameErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>عنوان اختصاری</label>
+                        <div>
+                            <input id="nickName" type="text" class="form-control" maxlength="15" title="" tabindex="2">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>مرکز هزینه</label>
+                        <div>
+                            <select id="costCenterId" type="text" class="form-control select2" maxlength="15" title="" tabindex="3" required data-parsley-selectvalzero data-parsley-errors-container="#costCenterIdErrorContainer"></select>
+                        </div>
+                        <div id="costCenterIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نمبر تذکره</label>
+                        <div>
+                            <select id="terminologyId" type="text" class="form-control select2" maxlength="15" title="" tabindex="4"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="5">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> دندان داکتری</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isDental');" tabindex="6">
+                            <input id="isDental" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save();" class="btn btn-success waves-effect waves-light" tabindex="7" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle" title="Esc"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<script src="/Modules/MC/ServiceType/ServiceTypeIndex.js"></script>

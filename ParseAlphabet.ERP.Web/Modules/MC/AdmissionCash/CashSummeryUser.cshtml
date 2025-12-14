@@ -1,0 +1,40 @@
+﻿<fieldset id="CashSummeryUser" class="group-box group-box-green mt-3" style="min-height: 280px;">
+    <legend>مانده خلاصه وجوه دریافت/پرداخت کاربر</legend>
+
+    <div class="">
+
+        <div class="table-responsive">
+            <div id="hasServiceError" class="d-flex justify-content-end align-items-center">
+
+                <button type="button" id="exportCashSummeryUserCsv" onclick="exportCashSummeryUserCsv()" class="btn btn-excel waves-effect waves-light " style=" margin :0px 0px 2px 15px"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+
+            </div>
+            <table class="table table-styles border mb-0">
+                <thead>
+                <tr>
+                    <th class="col-width-percent-11">جریان کار</th>
+                    <th class="col-width-percent-7">مرحله</th>
+                    <th class="col-width-percent-5">نقدی</th>
+                    <th class="col-width-percent-5">کارتخوان</th>
+                    <th class="col-width-percent-5">فیش</th>
+                    <th class="col-width-percent-5">حساب باز</th>
+                    <th class="col-width-percent-11">حساب باز - کسر و اضافه صندوق پرسنل</th>
+                    <th class="col-width-percent-8">حساب باز - خدمات اعتباری بیمار</th>
+                    <th class="col-width-percent-8">حساب باز -حق الزحمهداکتر</th>
+                    <th class="col-width-percent-8">حساب باز - مساعده پرسنل</th>
+                    <th class="col-width-percent-8">حساب باز - مددکاری</th>
+                    <th class="col-width-percent-8">حساب باز - مابه تفاوت بیمه</th>
+                    <th class="col-width-percent-11">حساب باز - خدمات اعتباری داکتر</th>
+                </tr>
+                </thead>
+                <tbody id="tempCashSummeryUser">
+                </tbody>
+                <tbody id="tempSumCashSummeryUser" class="table-summarybody-fixed">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
+
+
+<script src="/Modules/MC/AdmissionCash/CashSummeryUser.js"></script>

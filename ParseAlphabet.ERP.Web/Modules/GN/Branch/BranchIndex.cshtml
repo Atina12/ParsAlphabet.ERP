@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "شعبه";
+}
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mainBody">
+                    <div class="form-group col-sm-6">
+                        <label>نام شعبه</label>
+                        <div>
+                            <input id="name" type="text" data-parsley-phoneno data-parsley-errors-container="#nameError" class="form-control atoz-valid" title=" " required maxlength="50" tabindex="1" autocomplete="nope"/>
+                        </div>
+                        <div id="nameError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نام ولایت </label>
+                        <div class="chosen-container-parent">
+                            <select id="stateId" class="form-control select2" tabindex="2" data-parsley-selectvalzero required data-parsley-errors-container="#stateIdError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="stateIdError"></div>
+                    </div>
+                    <div class="form-group col-sm-6 ">
+                        <label>نام شهر</label>
+                        <div class="chosen-container-parent">
+                            <select id="cityId" class="form-control select2" tabindex="3" data-parsley-selectvalzero required data-parsley-errors-container="#cityIdError">
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="cityIdError"></div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label> وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="4">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>طول جغرافیایی </label>
+                        <div class="chosen-container-parent">
+                            <input id="longitude" type="text" class="form-control " tabindex="5"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 ">
+                        <label>عرض جغرافیایی </label>
+                        <div class="chosen-container-parent">
+                            <input id="latitude" type="text" class="form-control " tabindex="6"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label>آدرس</label>
+                        <div>
+                            <input id="address" type="text" class="form-control " tabindex="7" required/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:300px" id="tableLine">
+                            <table style="width:100% !important">
+                                <thead id="tableLineThead">
+                                <tr>
+                                    <th style="width:10%">سطر</th>
+                                    <th style="width:32%">نوع</th>
+                                    <th style="width:22%">مقدار</th>
+                                    <th style="width:15%">عملیات</th>
+                                </tr>
+                                <tr>
+                                    <th style="width:7%" disabled>
+                                        <input id="idNumber" type="text" class="form-control atoz-valid" maxlength="50" title="" disabled>
+                                    </th>
+                                    <th style="width:20%">
+                                        <div class="chosen-container-parent">
+                                            <select id="lineType" class="form-control select2" tabindex="8" required data-parsley-errors-container="#lineTypeError">
+                                                <option value="0">انتخاب کنید</option>
+                                            </select>
+                                        </div>
+                                        <div id="lineTypeError"></div>
+                                    </th>
+                                    <th style="width:30%">
+                                        <div class="form-group" style="margin-bottom:0">
+                                            <div id="selectInputById">
+                                                <input id="lineValue" type="text" class="form-control" title="" required tabindex="9" maxlength="50" data-parsley-errors-container="#lineValueError"/>
+                                            </div>
+                                            <div id="lineValueError"></div>
+                                        </div>
+                                    </th>
+                                    <th style="width:7%">
+                                        <div style="display:flex;justify-content:center;width:100%">
+                                            <button id="saveRow" type="button" onclick="saveUpdateRow(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="10">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button id="resetInputs" type="button" onclick="resetInputsLine()" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="11">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                </thead>
+                                <thead id="tableLineTheadItems"></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="saveBranch('save');" class="btn btn-success waves-effect waves-light" tabindex="10"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" data-dismiss="modal"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<script src="/Modules/FM/Finanace.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/Modules/FM/getJsonDataAsync.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/Modules/GN/Branch/BranchIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

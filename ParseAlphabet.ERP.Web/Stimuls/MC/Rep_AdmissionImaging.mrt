@@ -1,0 +1,2016 @@
+{
+  "ReportVersion": "2020.2.1.0",
+  "ReportGuid": "05e26517286543e4b85d059f4da43b8e",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(-32400000+0330)/",
+  "ReportChanged": "/Date(1713788919344+0330)/",
+  "EngineVersion": "EngineV2",
+  "CalculationMode": "Interpretation",
+  "ReportUnit": "Inches",
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "Dictionary": {
+    "Variables": {
+      "0": {
+        "Name": "ReportDate",
+        "Alias": "ReportDate",
+        "Type": "System.String",
+        "ReadOnly": true,
+        "Key": "d1766fddb05c4ef99d32ecd884175648"
+      },
+      "1": {
+        "Name": "FromDatePersian",
+        "Alias": "FromDatePersian",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "Key": "47166e7dc5624952be263316db47a98e"
+      },
+      "2": {
+        "Name": "ToDatePersian",
+        "Alias": "ToDatePersian",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "Key": "cd2e40062ce94819bab52ff682e0e642"
+      },
+      "3": {
+        "Value": "False",
+        "Name": "CurrentUserFullName",
+        "Alias": "CurrentUserFullName",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "Key": "681faa564d6443fa8cf7a94b04fc3a9e"
+      },
+      "4": {
+        "Name": "CorpName",
+        "Alias": "CorpName",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "Key": "e7b3cef7e65e4b60a53542639fc64b99"
+      },
+      "5": {
+        "Value": "Spr_AdmissionImaging_ReportPreview.StageId + \"-\" + Spr_AdmissionImaging_ReportPreview.StageName",
+        "Name": "Stage",
+        "Alias": "Stage",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "InitBy": "Expression",
+        "Key": "0f2ac338b8a34f5cba491d5e9443b14f"
+      },
+      "6": {
+        "Value": "Spr_AdmissionImaging_ReportPreview.AttenderId + \"-\" \r\n+Spr_AdmissionImaging_ReportPreview.AttenderFullName",
+        "Name": "Attender",
+        "Alias": "Attender",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "InitBy": "Expression",
+        "Key": "8f07223c0adc4edead120b9c3fadc1a4"
+      },
+      "7": {
+        "Value": "Length(Spr_AdmissionImaging_ReportPreview.ServiceName)>50 \r\n? Substring(Spr_AdmissionImaging_ReportPreview.ServiceName,0,49)\r\n+ \"-\"+Spr_AdmissionImaging_ReportPreview.ServiceId\r\n: ( Spr_AdmissionImaging_ReportPreview.ServiceName\r\n+ \"-\"\r\n+Spr_AdmissionImaging_ReportPreview.ServiceId)",
+        "Name": "Service",
+        "Alias": "Service",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "InitBy": "Expression",
+        "Key": "a18089fa71a549d180ddb3f70ed40b68"
+      },
+      "8": {
+        "Value": "Spr_AdmissionImaging_ReportPreview.PatientId + \"-\"\r\n+ Spr_AdmissionImaging_ReportPreview.PatientFullName",
+        "Name": "Patient",
+        "Alias": "Patient",
+        "Type": "System.String",
+        "RequestFromUser": true,
+        "InitBy": "Expression",
+        "Key": "d2f0469e95574554910a303a4ae6f906"
+      },
+      "9": {
+        "Name": "CorpLogo",
+        "Alias": "CorpLogo",
+        "Type": "System.Drawing.Image",
+        "RequestFromUser": true,
+        "Key": "53331df842134e0f8cb899c17130cd3e"
+      }
+    },
+    "DataSources": {
+      "0": {
+        "Ident": "StiSqlSource",
+        "Name": "Spr_AdmissionImaging_ReportPreview",
+        "Alias": "Spr_AdmissionImaging_ReportPreview",
+        "Key": "cdd5c7e57dca462f9a6118864457d953",
+        "Columns": {
+          "0": {
+            "Name": "Id",
+            "Index": -1,
+            "NameInSource": "Id",
+            "Alias": "Id",
+            "Type": "System.Int32",
+            "Key": "81a079e0c84943afb9bc7eee0ff5d51d"
+          },
+          "1": {
+            "Name": "AdmissionId",
+            "Index": -1,
+            "NameInSource": "AdmissionId",
+            "Alias": "AdmissionId",
+            "Type": "System.Int32",
+            "Key": "19c3dad6f3b440ecacba7bad0c4de66d"
+          },
+          "2": {
+            "Name": "AdmissionMasterId",
+            "Index": -1,
+            "NameInSource": "AdmissionMasterId",
+            "Alias": "AdmissionMasterId",
+            "Type": "System.Int32",
+            "Key": "da0afa534bb7438c9b9b0c6efdd393f0"
+          },
+          "3": {
+            "Name": "BranchId",
+            "Index": -1,
+            "NameInSource": "BranchId",
+            "Alias": "BranchId",
+            "Type": "System.Int16",
+            "Key": "be84eb9b49df47d3be1224bbb90a9c00"
+          },
+          "4": {
+            "Name": "BranchName",
+            "Index": -1,
+            "NameInSource": "BranchName",
+            "Alias": "BranchName",
+            "Type": "System.String",
+            "Key": "fbcb763346fe4727b53edade9225c86f"
+          },
+          "5": {
+            "Name": "WorkflowId",
+            "Index": -1,
+            "NameInSource": "WorkflowId",
+            "Alias": "WorkflowId",
+            "Type": "System.Int32",
+            "Key": "0d7d61fbd8dd48c79d36bc02d4d2f233"
+          },
+          "6": {
+            "Name": "WorkflowName",
+            "Index": -1,
+            "NameInSource": "WorkflowName",
+            "Alias": "WorkflowName",
+            "Type": "System.String",
+            "Key": "a9dfe4b586e84168bdef5a2996fbe08d"
+          },
+          "7": {
+            "Name": "StageId",
+            "Index": -1,
+            "NameInSource": "StageId",
+            "Alias": "StageId",
+            "Type": "System.Int16",
+            "Key": "ab16d480f2174a3ea1998526e470f35a"
+          },
+          "8": {
+            "Name": "StageName",
+            "Index": -1,
+            "NameInSource": "StageName",
+            "Alias": "StageName",
+            "Type": "System.String",
+            "Key": "6e43d06769a846aaba6ab0f538e526db"
+          },
+          "9": {
+            "Name": "ActionId",
+            "Index": -1,
+            "NameInSource": "ActionId",
+            "Alias": "ActionId",
+            "Type": "System.Byte",
+            "Key": "3c41a64e32fb42b8b84b87f2ddbba607"
+          },
+          "10": {
+            "Name": "ActionName",
+            "Index": -1,
+            "NameInSource": "ActionName",
+            "Alias": "ActionName",
+            "Type": "System.String",
+            "Key": "cd5c8a2e0e96447789fa4ec6dd2cd3a7"
+          },
+          "11": {
+            "Name": "CreateDatePersian",
+            "Index": -1,
+            "NameInSource": "CreateDatePersian",
+            "Alias": "CreateDatePersian",
+            "Type": "System.String",
+            "Key": "e210d51f389448f383c718d8cdb571f2"
+          },
+          "12": {
+            "Name": "CreateTimePersian",
+            "Index": -1,
+            "NameInSource": "CreateTimePersian",
+            "Alias": "CreateTimePersian",
+            "Type": "System.String",
+            "Key": "c407e888868c431cae58fdfbef927f7b"
+          },
+          "13": {
+            "Name": "ReserveDatePersian",
+            "Index": -1,
+            "NameInSource": "ReserveDatePersian",
+            "Alias": "ReserveDatePersian",
+            "Type": "System.String",
+            "Key": "d43ca5f2e80c4b1397e678ecf4c39f6f"
+          },
+          "14": {
+            "Name": "PatientId",
+            "Index": -1,
+            "NameInSource": "PatientId",
+            "Alias": "PatientId",
+            "Type": "System.Int32",
+            "Key": "6debac23316d417a96635d70d4afedc3"
+          },
+          "15": {
+            "Name": "PatientFullName",
+            "Index": -1,
+            "NameInSource": "PatientFullName",
+            "Alias": "PatientFullName",
+            "Type": "System.String",
+            "Key": "fc74b54bb2aa4f97ae4b16ece4ae5d23"
+          },
+          "16": {
+            "Name": "PatientNationalCode",
+            "Index": -1,
+            "NameInSource": "PatientNationalCode",
+            "Alias": "PatientNationalCode",
+            "Type": "System.String",
+            "Key": "87629fa5ec084984abc337178ff20768"
+          },
+          "17": {
+            "Name": "AttenderId",
+            "Index": -1,
+            "NameInSource": "AttenderId",
+            "Alias": "AttenderId",
+            "Type": "System.Int32",
+            "Key": "a676a3f7149e40d1a549652e14dc6a90"
+          },
+          "18": {
+            "Name": "AttenderFullName",
+            "Index": -1,
+            "NameInSource": "AttenderFullName",
+            "Alias": "AttenderFullName",
+            "Type": "System.String",
+            "Key": "ce7f1fa87cab47e4b347dcb232742067"
+          },
+          "19": {
+            "Name": "ReferringDoctorId",
+            "Index": -1,
+            "NameInSource": "ReferringDoctorId",
+            "Alias": "ReferringDoctorId",
+            "Type": "System.Int32",
+            "Key": "c126de10f369440a80094283125a19f6"
+          },
+          "20": {
+            "Name": "ReferringDoctorFullName",
+            "Index": -1,
+            "NameInSource": "ReferringDoctorFullName",
+            "Alias": "ReferringDoctorFullName",
+            "Type": "System.String",
+            "Key": "cbcaf55119bd48eeb7e3f709b89938fa"
+          },
+          "21": {
+            "Name": "BasicInsurerExpirationDatePersian",
+            "Index": -1,
+            "NameInSource": "BasicInsurerExpirationDatePersian",
+            "Alias": "BasicInsurerExpirationDatePersian",
+            "Type": "System.String",
+            "Key": "b649ebb4ce4b4a338541cf0d30ef621d"
+          },
+          "22": {
+            "Name": "BasicInsurerNo",
+            "Index": -1,
+            "NameInSource": "BasicInsurerNo",
+            "Alias": "BasicInsurerNo",
+            "Type": "System.String",
+            "Key": "d89ddf75281e4b4fb27f2d53110deb9e"
+          },
+          "23": {
+            "Name": "BasicInsurerBookletPageNo",
+            "Index": -1,
+            "NameInSource": "BasicInsurerBookletPageNo",
+            "Alias": "BasicInsurerBookletPageNo",
+            "Type": "System.String",
+            "Key": "358054885e534edd81ae951a8f9c0f1c"
+          },
+          "24": {
+            "Name": "PrescriptionDate",
+            "Index": -1,
+            "NameInSource": "PrescriptionDate",
+            "Alias": "PrescriptionDate",
+            "Type": "System.String",
+            "Key": "4d637d32df8a4acfa226840a1ba0faeb"
+          },
+          "25": {
+            "Name": "DepartmentId",
+            "Index": -1,
+            "NameInSource": "DepartmentId",
+            "Alias": "DepartmentId",
+            "Type": "System.Int32",
+            "Key": "d4f33735aa1c4cc49ad36d1aeac49508"
+          },
+          "26": {
+            "Name": "DepartmentName",
+            "Index": -1,
+            "NameInSource": "DepartmentName",
+            "Alias": "DepartmentName",
+            "Type": "System.String",
+            "Key": "c8e8b1e26ac64648b110712d275b25f8"
+          },
+          "27": {
+            "Name": "ServiceTypeId",
+            "Index": -1,
+            "NameInSource": "ServiceTypeId",
+            "Alias": "ServiceTypeId",
+            "Type": "System.Int32",
+            "Key": "f93cb7ecf905439c899264931c28bf4e"
+          },
+          "28": {
+            "Name": "ServiceTypeName",
+            "Index": -1,
+            "NameInSource": "ServiceTypeName",
+            "Alias": "ServiceTypeName",
+            "Type": "System.String",
+            "Key": "012b84a1b7a849dfb8316c42cea82ab6"
+          },
+          "29": {
+            "Name": "ServiceNationalCode",
+            "Index": -1,
+            "NameInSource": "ServiceNationalCode",
+            "Alias": "ServiceNationalCode",
+            "Type": "System.Int32",
+            "Key": "bfac087266a14afebd237c426c0a7e4e"
+          },
+          "30": {
+            "Name": "ServiceId",
+            "Index": -1,
+            "NameInSource": "ServiceId",
+            "Alias": "ServiceId",
+            "Type": "System.Int32",
+            "Key": "8dd41d73448f458eb606ba873bd5f8ec"
+          },
+          "31": {
+            "Name": "ServiceName",
+            "Index": -1,
+            "NameInSource": "ServiceName",
+            "Alias": "ServiceName",
+            "Type": "System.String",
+            "Key": "d933a294b4454943a2c170eb0dc6e616"
+          },
+          "32": {
+            "Name": "Quantity",
+            "Index": -1,
+            "NameInSource": "Quantity",
+            "Alias": "Quantity",
+            "Type": "System.Int16",
+            "Key": "cd6165bed3e945c2b3b8ffb996801f53"
+          },
+          "33": {
+            "Name": "ServiceActualAmount",
+            "Index": -1,
+            "NameInSource": "ServiceActualAmount",
+            "Alias": "ServiceActualAmount",
+            "Type": "System.Decimal",
+            "Key": "cbd4adbc139a42de8c81e2297527e2f2"
+          },
+          "34": {
+            "Name": "BasicInsurerId",
+            "Index": -1,
+            "NameInSource": "BasicInsurerId",
+            "Alias": "BasicInsurerId",
+            "Type": "System.Int32",
+            "Key": "c8d39359e8db47239593b00c2427a788"
+          },
+          "35": {
+            "Name": "BasicInsurerName",
+            "Index": -1,
+            "NameInSource": "BasicInsurerName",
+            "Alias": "BasicInsurerName",
+            "Type": "System.String",
+            "Key": "e3d13416c7284589b9e6cf4a733c3850"
+          },
+          "36": {
+            "Name": "BasicInsurerLineId",
+            "Index": -1,
+            "NameInSource": "BasicInsurerLineId",
+            "Alias": "BasicInsurerLineId",
+            "Type": "System.Int16",
+            "Key": "fc9a1b2715b64d9993dcdd68f9dbb22f"
+          },
+          "37": {
+            "Name": "BasicInsurerLineName",
+            "Index": -1,
+            "NameInSource": "BasicInsurerLineName",
+            "Alias": "BasicInsurerLineName",
+            "Type": "System.String",
+            "Key": "ee87f78ea28a44a18a73fbbaf22f5b50"
+          },
+          "38": {
+            "Name": "BasicShareAmount",
+            "Index": -1,
+            "NameInSource": "BasicShareAmount",
+            "Alias": "BasicShareAmount",
+            "Type": "System.Decimal",
+            "Key": "5096d6f1039c487997e23ebb720e59d2"
+          },
+          "39": {
+            "Name": "CompInsurerId",
+            "Index": -1,
+            "NameInSource": "CompInsurerId",
+            "Alias": "CompInsurerId",
+            "Type": "System.Int32",
+            "Key": "2ba49528bb514377a38212e140e889bd"
+          },
+          "40": {
+            "Name": "CompInsurerName",
+            "Index": -1,
+            "NameInSource": "CompInsurerName",
+            "Alias": "CompInsurerName",
+            "Type": "System.String",
+            "Key": "a3bbf751627a4f32a16f0ebb3b17e6fa"
+          },
+          "41": {
+            "Name": "CompInsurerLineId",
+            "Index": -1,
+            "NameInSource": "CompInsurerLineId",
+            "Alias": "CompInsurerLineId",
+            "Type": "System.Int16",
+            "Key": "39a60bb09ab9402e90792b704eed748a"
+          },
+          "42": {
+            "Name": "CompInsurerLineName",
+            "Index": -1,
+            "NameInSource": "CompInsurerLineName",
+            "Alias": "CompInsurerLineName",
+            "Type": "System.String",
+            "Key": "a1e59f62167d40a9acb9a8bb67108676"
+          },
+          "43": {
+            "Name": "CompShareAmount",
+            "Index": -1,
+            "NameInSource": "CompShareAmount",
+            "Alias": "CompShareAmount",
+            "Type": "System.Decimal",
+            "Key": "0b69fbb45a144a4c996dbb0749a28dd5"
+          },
+          "44": {
+            "Name": "ThirdPartyInsurerId",
+            "Index": -1,
+            "NameInSource": "ThirdPartyInsurerId",
+            "Alias": "ThirdPartyInsurerId",
+            "Type": "System.Int32",
+            "Key": "bf96333ae54e459ea2c5d02890d09cf1"
+          },
+          "45": {
+            "Name": "ThridPartyInsurerName",
+            "Index": -1,
+            "NameInSource": "ThridPartyInsurerName",
+            "Alias": "ThridPartyInsurerName",
+            "Type": "System.String",
+            "Key": "1de6eddee31d46098e2277b88feca374"
+          },
+          "46": {
+            "Name": "ThirdPartyAmount",
+            "Index": -1,
+            "NameInSource": "ThirdPartyAmount",
+            "Alias": "ThirdPartyAmount",
+            "Type": "System.Decimal",
+            "Key": "3849484f20a14a8ab7ff25362eb68491"
+          },
+          "47": {
+            "Name": "DiscountInsurerId",
+            "Index": -1,
+            "NameInSource": "DiscountInsurerId",
+            "Alias": "DiscountInsurerId",
+            "Type": "System.Int32",
+            "Key": "d97ed03a706d4dd98d7dcc8c75fb56a5"
+          },
+          "48": {
+            "Name": "DiscountInsurerName",
+            "Index": -1,
+            "NameInSource": "DiscountInsurerName",
+            "Alias": "DiscountInsurerName",
+            "Type": "System.String",
+            "Key": "3af1b32717b2407b999e4c320f350e84"
+          },
+          "49": {
+            "Name": "DiscountAmount",
+            "Index": -1,
+            "NameInSource": "DiscountAmount",
+            "Alias": "DiscountAmount",
+            "Type": "System.Decimal",
+            "Key": "b70e5d2361cd4292b2fcdafdb5e4efd5"
+          },
+          "50": {
+            "Name": "NetAmount",
+            "Index": -1,
+            "NameInSource": "NetAmount",
+            "Alias": "NetAmount",
+            "Type": "System.Decimal",
+            "Key": "8ada53af3b6246e893c2e090f0d0acb8"
+          },
+          "51": {
+            "Name": "CreateUserId",
+            "Index": -1,
+            "NameInSource": "CreateUserId",
+            "Alias": "CreateUserId",
+            "Type": "System.Int32",
+            "Key": "07fd2a48f53d498c986f23828d62e5aa"
+          },
+          "52": {
+            "Name": "CreateUserFullName",
+            "Index": -1,
+            "NameInSource": "CreateUserFullName",
+            "Alias": "CreateUserFullName",
+            "Type": "System.String",
+            "Key": "3b33326c52a0420b8c18cb80a58f6dac"
+          }
+        },
+        "NameInSource": "Connection",
+        "Type": "StoredProcedure",
+        "SqlCommand": "mc.Spr_AdmissionImaging_ReportPreview",
+        "Parameters": {
+          "0": {
+            "Name": "@PageNo",
+            "Type": 8
+          },
+          "1": {
+            "Name": "@PageRowsCount",
+            "Type": 8
+          },
+          "2": {
+            "Name": "@BranchIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "3": {
+            "Name": "@WorkflowIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "4": {
+            "Name": "@StageIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "5": {
+            "Name": "@AdmissionId",
+            "Type": 8
+          },
+          "6": {
+            "Name": "@AdmissionMasterId",
+            "Type": 8
+          },
+          "7": {
+            "Name": "@PatientIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "8": {
+            "Name": "@PatientNationalCode",
+            "Type": 12,
+            "Size": 13
+          },
+          "9": {
+            "Name": "@BasicInsurerIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "10": {
+            "Name": "@BasicInsurerLineIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "11": {
+            "Name": "@CompInsurerIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "12": {
+            "Name": "@CompInsurerLineIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "13": {
+            "Name": "@ThirdPartyInsurerIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "14": {
+            "Name": "@DiscountInsurerIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "15": {
+            "Name": "@FromCreateDate",
+            "Type": 31
+          },
+          "16": {
+            "Name": "@ToCreateDate",
+            "Type": 31
+          },
+          "17": {
+            "Name": "@ActionIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "18": {
+            "Name": "@CreateUserId",
+            "Type": 8
+          },
+          "19": {
+            "Name": "@AttenderIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "20": {
+            "Name": "@DepartmentIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "21": {
+            "Name": "@SpecialtyIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "22": {
+            "Name": "@ServiceTypeIds",
+            "Type": 22,
+            "Size": -1
+          },
+          "23": {
+            "Name": "@ServiceIds",
+            "Type": 22,
+            "Size": -1
+          }
+        }
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiSqlDatabase",
+        "Name": "Connection",
+        "Alias": "Connection",
+        "Key": "9ea8f36869894389bab93d4ab04d0210",
+        "ConnectionStringEncrypted": "9AzDC0h7k4FpSd3cS2ytXtFwmYjGWbsBRmbojcgd9rvEIGkJ5lnC7c0cpaXEdGpn8tx5Ak5ZWQlBZPW9ylSkep5S8ylPA9PwQga1qeUNonv5atnP5FkRyGIaoa15cG03kDRTje9XcXlrRE2ZTkThe/TWT43lVqM="
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "145e8f99c69b49ce94bc48a1743427f4",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiPageHeaderBand",
+          "Name": "PageHeaderBand4",
+          "Guid": "93e0ece3864148b89a544b592eea2414",
+          "ClientRectangle": "0,0.2,10.91,0.7",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": "All;;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text1",
+              "Guid": "ffc65b25a7254a0cb642d48cef174abd",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.7,0.09,0.5,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "تاریخ تهیه:"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": ";0,0,39;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text48",
+              "Guid": "e76c61593b05426c90b2cf709dece673",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.14,0.07,1.4,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ReportDate}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": ";0,0,39;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text50",
+              "Guid": "316374fd55eb4478a9e90af79df39ccc",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.07,0.4,5,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "گزارش ریز خدمات تصویربرداری – به تفکیک نام خدمت"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;Bold;",
+              "Border": ";0,0,39;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text43",
+              "Guid": "0b888a84e0bb4dcba9238f870cff2258",
+              "CanShrink": true,
+              "CanGrow": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.07,0.1,5,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{CorpName}"
+              },
+              "HorAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text44",
+              "Guid": "b7f445e619994d6da6313064e1b53fe8",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.29,0.11,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "تاریخ ثبت:"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": ";0,0,39;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text52",
+              "Guid": "e5af07c8013c4d64805c37e5b8a26b4d",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.5,0.39,0.7,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "کاربر تهیه کننده:"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": ";0,0,39;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text68",
+              "Guid": "5f1d462d181a43a099944f29df0d2f9d",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.13,0.4,1.4,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{CurrentUserFullName}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": ";0,0,39;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "7": {
+              "Ident": "StiImage",
+              "Name": "Image2",
+              "Guid": "6845efbeca3c44838b00f0275aca557c",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10.31,0.07,0.5,0.5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "Stretch": true,
+              "ImageData": {
+                "Value": "{CorpLogo}"
+              }
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text30",
+              "Guid": "08cbab36e6494bd28c72dd699af9900e",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.3,0.1,1.9,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "از  {FromDatePersian}  تا  {ToDatePersian}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": ";0,0,39;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            }
+          }
+        },
+        "1": {
+          "Ident": "StiPageHeaderBand",
+          "Name": "PageHeaderBand1",
+          "ClientRectangle": "0,1.3,10.91,0.3",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text6",
+              "Guid": "49f85a3a251446fcb11b197564880beb",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.69,0,0.62,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "شناسه ثبت\r\n تصویربرداری"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text15",
+              "Guid": "bd09a02fcba642368c7833a4e4264ec0",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.99,0,0.7,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "تاریخ ثبت\r\n/تاریخ رزرو"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text16",
+              "Guid": "12625f00751d47d786ba86f7a116eaac",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.13,0,1.88,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "خدمت"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text3",
+              "Guid": "46343487f659448780d8ac7b405ac344",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.69,0,0.83,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "سهم \r\nبیمه اجباری"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text19",
+              "Guid": "82fab38dd05942238ec0c887329bee29",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.29,0,0.89,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "بیمار"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text40",
+              "Guid": "75ff2c54f1ad43159d7e19bd5a810fdf",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.52,0,0.77,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "مبلغ \r\nواقعی خدمت"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text9",
+              "Guid": "b2bed4d54aaa443f96617abe9c26b05c",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.31,0,1.15,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "مرحله"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text7",
+              "Guid": "d0b0ca3b8a604d7abf1020b78c2e0bba",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.17,0,0.96,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "داکتر"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text37",
+              "Guid": "9c0241931f8847a7a90f56cf6616f326",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10.46,0,0.45,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "ردیف"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text5",
+              "Guid": "8a71783869b84d42813bec7b8d180db7",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.66,0,1.04,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "سهم بیمه\r\nتکمیلی/طرف قرارداد"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text2",
+              "Guid": "dd980140f19c4bb5a24ff8fba0187d3d",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.86,0,0.81,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "سهم تخفیف"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text4",
+              "Guid": "716f7bf2d11c496bb79d05fa41a0ffe1",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,0.87,0.3",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "خالص\r\nسهم بیمار"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            }
+          }
+        },
+        "2": {
+          "Ident": "StiPageFooterBand",
+          "Name": "PageFooterBand1",
+          "ClientRectangle": "0,6.87,10.91,0.62",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text29",
+              "Guid": "ecb9b33a35d44cd39ab1dc45014e0f56",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0.03,0.87,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSum(Spr_AdmissionImaging_ReportPreview.NetAmount)),\"$\",\"\")}\r\n"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text33",
+              "Guid": "2c019bb535cd47919ab145739f78384b",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.66,0.03,1.03,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\", cSum(Spr_AdmissionImaging_ReportPreview.CompInsurerLineId==0?\r\nSpr_AdmissionImaging_ReportPreview.ThirdPartyAmount:\r\nSpr_AdmissionImaging_ReportPreview.CompShareAmount)),\"$\",\"\")}\r\n"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text34",
+              "Guid": "941b5dc1490842c7b9e68d1e0201f43c",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.86,0.23,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSumRunning(Spr_AdmissionImaging_ReportPreview.DiscountAmount)),\"$\",\"\")}\r\n"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text39",
+              "Guid": "fbd4d37cf6a447dfa4c616f03076f46f",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0.23,0.87,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSumRunning(Spr_AdmissionImaging_ReportPreview.NetAmount)),\"$\",\"\")}\r\n"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text45",
+              "Guid": "624b946da4174760843c1323dec375c5",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.66,0.23,1.03,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSumRunning(Spr_AdmissionImaging_ReportPreview.CompInsurerLineId==0?\r\nSpr_AdmissionImaging_ReportPreview.ThirdPartyAmount:\r\nSpr_AdmissionImaging_ReportPreview.CompShareAmount)),\"$\",\"\")}\r\n"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text61",
+              "Guid": "e7cde5e38f05419e9f6a870de45aa0d5",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.69,0.23,0.83,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSumRunning(Spr_AdmissionImaging_ReportPreview.BasicShareAmount)),\"$\",\"\")}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text62",
+              "Guid": "df60505460724d01bc59a3c2fdbbcaf2",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.52,0.03,0.77,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSum(Spr_AdmissionImaging_ReportPreview.ServiceActualAmount)),\"$\",\"\")}\r\n"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text63",
+              "Guid": "1b6b1f7ac074477a8f450be2e4620efc",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.52,0.23,0.77,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSumRunning(Spr_AdmissionImaging_ReportPreview.ServiceActualAmount)),\"$\",\"\")}"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text27",
+              "Guid": "cff3f97c47a14131b53a07fb37f0bdf3",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.29,0.03,6.62,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "جمع صفحه :"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text25",
+              "Guid": "7c3b540a683f4769b13223adfdaf0c96",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.29,0.23,6.62,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "جمع کل تا پایان صفحه:"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;Bold;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:235,241,221",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "Type": "Expression"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text28",
+              "Guid": "bca1cc7168854cc6b89ba2ca84e42596",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.86,0.03,0.8,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSum(Spr_AdmissionImaging_ReportPreview.DiscountAmount)),\"$\",\"\")}\r\n"
+              },
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true,
+                "WordWrap": true
+              },
+              "Margins": {
+                "Left": 0.0,
+                "Right": 5.0,
+                "Top": 0.0,
+                "Bottom": 0.0
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text26",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.69,0.03,0.83,0.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Replace(Format(\"{0:C0}\",cSum(Spr_AdmissionImaging_ReportPreview.BasicShareAmount)),\"$\",\"\")}\r\n"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text25",
+              "Guid": "f43ceb9406594dfe994fa0432e11cac5",
+              "DockStyle": "Bottom",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0.43,10.91,0.19",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "صفحه : {PageNumber.ToString()} از {TotalPageCount.ToString()}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;7;Bold;",
+              "Border": "All;0,0,39;;;;;;solid:Black",
+              "Brush": "solid:White",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "RightToLeft": true
+              },
+              "TextFormat": {
+                "Ident": "StiCustomFormatService",
+                "StringFormat": "##"
+              },
+              "Type": "Expression"
+            }
+          }
+        },
+        "3": {
+          "Ident": "StiDataBand",
+          "Name": "DataBand1",
+          "ClientRectangle": "0,2,10.91,0.52",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Text8",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10.46,0,0.45,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Line}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Text10",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.31,0,1.15,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Stage}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text11",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "8.69,0,0.62,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Spr_AdmissionImaging_ReportPreview.Id}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text12",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.99,0,0.7,0.25",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Spr_AdmissionImaging_ReportPreview.CreateDatePersian}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text13",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "7.99,0.25,0.7,0.27",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Spr_AdmissionImaging_ReportPreview.ReserveDatePersian}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text14",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "5.17,0,0.96,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Attender}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            },
+            "6": {
+              "Ident": "StiText",
+              "Name": "Text18",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "6.13,0,1.88,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Service}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            },
+            "7": {
+              "Ident": "StiText",
+              "Name": "Text17",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.28,0,0.89,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Patient}"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            },
+            "8": {
+              "Ident": "StiText",
+              "Name": "Text20",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "3.52,0,0.77,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HideZeros": true,
+              "Text": {
+                "Value": "{Spr_AdmissionImaging_ReportPreview.ServiceActualAmount}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "9": {
+              "Ident": "StiText",
+              "Name": "Text21",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "2.69,0,0.83,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Spr_AdmissionImaging_ReportPreview.BasicShareAmount}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text22",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1.66,0,1.04,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{(Spr_AdmissionImaging_ReportPreview.CompInsurerLineId==0?\r\nSpr_AdmissionImaging_ReportPreview.ThirdPartyAmount:\r\nSpr_AdmissionImaging_ReportPreview.CompShareAmount)}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text23",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.86,0,0.81,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Spr_AdmissionImaging_ReportPreview.DiscountAmount}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            },
+            "12": {
+              "Ident": "StiText",
+              "Name": "Text24",
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,0.87,0.52",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{Spr_AdmissionImaging_ReportPreview.NetAmount}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": "Microsoft Sans Serif;9;;",
+              "Border": "All;;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 0,
+                "DecimalDigits": 0,
+                "GroupSeparator": ",",
+                "UseLocalSetting": false
+              },
+              "Type": "Expression"
+            }
+          },
+          "DataSourceName": "Spr_AdmissionImaging_ReportPreview"
+        }
+      },
+      "RightToLeft": true,
+      "PaperSize": "A4",
+      "Orientation": "Landscape",
+      "PageWidth": 11.69,
+      "PageHeight": 8.27,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 0.39,
+        "Right": 0.39,
+        "Top": 0.39,
+        "Bottom": 0.39
+      }
+    }
+  }
+}

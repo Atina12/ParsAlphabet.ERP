@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "نقش کاربر";
+}
+<link href="/Content/css/treeview.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="stimul_preview" @*onclick="stimul_preview()"*@ class="btn btn-print waves-effect"><i class="fa fa-print"></i>چاپ</button>
+                                <button type="button" id="readyforadd" onclick="modal_ready_for_add();" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+
+<!--Modal-->
+
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>عنوان</label>
+                        <div>
+                            <input id="name" type="text" class="form-control" title=" " required maxlength="50" tabindex="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="2">
+                            <input id="isActive" type="checkbox" name="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" tabindex="3"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" data-dismiss="modal"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+<!--Modal-->
+<div id="AuthenModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-align-top modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تعیین حدود دسترسی</h5>
+                </div>
+            </div>
+            <div class="modal-body text-right">
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه :</lable>
+                            <span id="modal1_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="checkAll">انتخاب همه</button>
+                <button class="btn btn-danger" id="uncheckAll">عدم انتخاب همه</button>
+                <button class="btn btn-primary" id="collapseAll" style="margin-right:15px">بسته شدن همه</button>
+                <button class="btn btn-danger" id="expandAll">باز شدن همه</button>
+                <div id="treeview_container" class="hummingbird-treeview well h-scroll-large">
+                    <ul id="treeview" class="hummingbird-base area">
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="save_authen(true);" class="btn btn-success waves-effect waves-light"><i class="fa fa-save"></i>ذخیره و خروج</button>
+                <button id="modal-saveIn" onclick="save_authen(false);" class="btn btn-success waves-effect waves-light"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('AuthenModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+@await Html.PartialAsync("/Modules/GN/RoleWorkflowPermission/RoleWorkflowPermissionIndex.cshtml")
+
+
+@await Html.PartialAsync("/Modules/GN/RoleBranchPermission/RoleBranchPermissionIndex.cshtml")
+
+@await Html.PartialAsync("/Modules/GN/RoleFiscalYearPermission/RoleFiscalYearPermissionIndex.cshtml")
+
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+<script src="/Modules/GN/Role/RoleIndex.js"></script>
+<script src="/Content/pages/treeview.js"></script>

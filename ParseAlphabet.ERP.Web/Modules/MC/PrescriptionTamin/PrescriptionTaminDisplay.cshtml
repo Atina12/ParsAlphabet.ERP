@@ -1,0 +1,477 @@
+﻿@{
+    ViewBag.Title = "نسخه نویسی";
+}
+
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/PrescriptionTamin.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/Navigate.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content" id="prescriptionForm">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button title="اولین" id="headerFirst" onclick="display_pagination('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-skip-next"></i>
+        </button>
+        <button title="قبلی" id="headerPrevious" onclick="display_pagination('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-play"></i>
+        </button>
+        <input id="headerIndex" onkeydown="headerindexChoose(event)" type="text" autocomplete="off" class="form-control number col-2 d-inline mr-2 ml-1" placeholder="شناسه نسخه"/>
+        <button title="بعدی" id="headerNext" onclick="display_pagination('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-play fa-rotate-180"></i>
+        </button>
+        <button title="آخرین" id="headerLast" onclick="display_pagination('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-skip-previous"></i>
+        </button>
+        @*<button id="" onclick="navigation_item_click('/MC/PrescriptionTamin','نسخه نویسی')" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>*@
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+
+<div class="row displaynone" id="prescriptionBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>شناسه</label>
+            <div>
+                <input id="prescriptionTaminId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تاریخ ثبت</label>
+            <input id="creatDateTime" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+<fieldset class="group-box group-box-green">
+    <legend>نسخه نویسی</legend>
+    <div class="row" id="headerForm" data-parsley-validate>
+        <div class="form-group col-sm-2">
+            <label>تاریخ اعتبار نسخه</label>
+            <div>
+                <input id="expiryDatePersian" type="text" class="form-control" maxlength="10" data-parsley-shamsidate data-parsley-validdate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="7" disabled/>
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>توضیحات تکمیلی داکتر</label>
+            <div>
+                <input id="note" type="text" class="form-control" required tabindex="8" disabled/>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            @*<th>شناسه شباد</th>*@
+            @*<th>انقضاء دفترچه</th>*@
+            <th>داکتر</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+
+<fieldset id="peracraptionFilset" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist" id="prescriptionTabNav">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(16)">
+        <a class="nav-link active" data-toggle="tab" id="prescriptionLink16" href="#box_16" role="tab">
+            <div class="d-none d-md-block">
+                <span>ویزیت</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink1" href="#box_1" role="tab">
+            <div class="d-none d-md-block">
+                <span>دارویی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(10)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink10" href="#box_17" role="tab">
+            <div class="d-none d-md-block">
+                <span>خدمات جنبی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(12)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink12" href="#box_12" role="tab">
+            <div class="d-none d-md-block">
+                <span>نسخه ارجاعی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink2" href="#box_2" role="tab">
+            <div class="d-none d-md-block">
+                <span>آزمایشگاه</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink3" href="#box_3" role="tab">
+            <div class="d-none d-md-block">
+                <span>رادیولوژی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(5)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink5" href="#box_5" role="tab">
+            <div class="d-none d-md-block">
+                <span>سی تی اسکن</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(6)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink6" href="#box_6" role="tab">
+            <div class="d-none d-md-block">
+                <span>ام آر آی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink4" href="#box_4" role="tab">
+            <div class="d-none d-md-block">
+                <span>سونوگرافی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(8)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink8" href="#box_13" role="tab">
+            <div class="d-none d-md-block">
+                <span>فیزیوتراپی</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(7)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink7" href="#box_7" role="tab">
+            <div class="d-none d-md-block">
+                <span>داکتری هسته ای</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(9)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink9" href="#box_14" role="tab">
+            <div class="d-none d-md-block">
+                <span>سنجش تراکم استخوان</span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<div class="tab-content group-box group-box-gray">
+
+<div class="tab-pane active p-3" id="box_16" role="tabpanel">
+    <div class="row tabToggle16" id="from_16" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <div class="form-group col-sm-4">
+                <label>توضیحات</label>
+                <div class=" col-12 p-0" style="display:inline-grid">
+                    <input id="description" type="text" class="form-control" disabled tabindex="120" autocomplete="off">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_1" role="tabpanel">
+    <div class="row tabToggle1" id="from_1" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_1">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="46">نام دارو</th>
+                    <th width="4">تعداد</th>
+                    <th width="8">زمان مصرف</th>
+                    <th width="8">مقادیر مصرف</th>
+                    <th width="8">طریقه مصرف</th>
+                    <th width="4">دوره تکرار</th>
+                    <th width="6">تاریخ موثر انجام</th>
+                </tr>
+                </thead>
+                <tbody id="temp_1">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_17" role="tabpanel">
+    <div class="row tabToggle17" id="from_17" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_17">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_17">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_12" role="tabpanel">
+    <div class="row tabToggle12" id="from_12" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_12">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_12">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_2" role="tabpanel">
+    <div class="row tabToggle2" id="from_2" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_2">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_2">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_3" role="tabpanel">
+    <div class="row tabToggle3" id="from_3" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_3">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_3">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_4" role="tabpanel">
+    <div class="row tabToggle4" id="from_4" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_4">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_4">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_5" role="tabpanel">
+    <div class="row tabToggle5" id="from_5" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_5">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_5">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_6" role="tabpanel">
+    <div class="row tabToggle6" id="from_6" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_6">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_6">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_13" role="tabpanel">
+    <div class="row tabToggle8" id="from_13" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_13">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="58">عنوان خدمت</th>
+                    <th width="6">تعداد</th>
+                    <th width="6">عنوان اندام</th>
+                    <th width="6">اندامک</th>
+                    <th width="6">نام بیماری</th>
+                    <th width="6">طرح درمان</th>
+                </tr>
+                </thead>
+                <tbody id="temp_13">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_7" role="tabpanel">
+    <div class="row tabToggle7" id="from_7" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_7">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_7">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<div class="tab-pane p-3" id="box_14" role="tabpanel">
+    <div class="row tabToggle9" id="from_14" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;" id="list_14">
+                <thead>
+                <tr>
+                    <th width="6">ردیف</th>
+                    <th width="84">عنوان خدمت</th>
+                    <th width="10">تعداد</th>
+                </tr>
+                </thead>
+                <tbody id="temp_14">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script type="text/javascript" src="/Modules/MC/PrescriptionTamin/PrescriptionTaminDisplay.js"></script>

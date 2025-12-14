@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "حسابداری";
+}
+
+
+<link href="~/plugins/search-modal/search-modal.css" rel="stylesheet"/>
+<link href="~/lib/ModalePrint/PrintCss.css" rel="stylesheet"/>
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+
+<div id="journalLinePage">
+    @await Html.PartialAsync("/Modules/FormPlateHeaderLine.cshtml")
+
+    <input id="journalId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+    <input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly value=""/>
+    <input id="fromType" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["fromType"]"/>
+
+    <div id="stepLogModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="modal_title">لیست گام های ثبت شده</h5>
+                    </div>
+                </div>
+
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body" id="itemPageTable">
+                        <div class="row">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-10">گام</th>
+                                    <th class="col-width-percent-10">کاربر</th>
+                                    <th class="col-width-percent-10">تاریخ</th>
+                                </tr>
+                                </thead>
+                                <tbody id="stepLogRowsJournal">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-close" onclick="close_modal_stepLogs()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="journalTrialBalanceSearchModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش تراز دفاتر</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentJournalTrialBalanceSearch" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('journalTrialBalanceSearchModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="journalSubSystemSearchModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش زیر سیستم</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentJournalSubSystemSearch" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('journalSubSystemSearchModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modela Journal-->
+<div id="PrnJournal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xs">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-2" id="modal_title">چاپ</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate style="padding:0;">
+                <div class="PrnModalId" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption">شناسه : </lable> <span id="modal_keyid_journal_value">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding:0;">
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType1" onclick="clickModalJounal(1) " class="btn btn-default" style="font-weight:bolder;"> چاپ حسابداری مرتب سازی بر اساس تاریخ ثبت <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 1 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType2" onclick="clickModalJounal(2) " class="btn btn-default" style="font-weight:bolder;"> چاپ حسابداری مرتب سازی بر اساس کل - معین - تفصیل <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 2 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType3" onclick="clickModalJounal(3)" class="btn btn-default" style="font-weight:bolder;"> چاپ در سطح معین <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 3 )</sub></a>
+                    </div>
+                    <div class="input-group col-12 PrnModalDiv">
+                        <i class="fa fa-print fa-modal-print"></i>
+                        <a id="PrntType4" onclick="clickModalJounal(4)" class="btn btn-default" style="font-weight:bolder;"> چاپ در سطح تفصیل <sub class="text-gray mr-2 font-11 color-navy">( Ctrl + 4 )</sub></a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:0;">
+                <button id="modal-close" onclick="modal_close('PrnJournal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/FM/Finanace.js?ver=@Guid.NewGuid().ToString().Replace("-", "")" type="text/javascript"></script>
+
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+<script src="~/Modules/FM/JournalLine/JournalLineIndex.js"></script>
+<script src="~/plugins/search-modal/search-modal.js"></script>

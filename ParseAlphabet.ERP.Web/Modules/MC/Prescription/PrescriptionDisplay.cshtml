@@ -1,0 +1,503 @@
+﻿@{
+    ViewBag.Title = "نمایش نسخه نویسی";
+}
+
+<link href="~/lib/ModulesCss/Navigate.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/Prescription.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+<div class="content" id="prescriptionForm">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items col-12">
+        <button title="اولین" id="headerFirst" onclick="display_pagination('first')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-skip-next"></i>
+        </button>
+        <button title="قبلی" id="headerPrevious" onclick="display_pagination('previous')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-play"></i>
+        </button>
+        <input id="headerIndex" onkeydown="headerindexChoose(event)" type="text" autocomplete="off" class="form-control number col-2 d-inline mr-2 ml-1" placeholder="شناسه نسخه"/>
+        <button title="بعدی" id="headerNext" onclick="display_pagination('next')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-play fa-rotate-180"></i>
+        </button>
+        <button title="آخرین" id="headerLast" onclick="display_pagination('last')" type="button" class="header-pagination-btn btn btn-info waves-effect">
+            <i class="mdi mdi-skip-previous"></i>
+        </button>
+
+        @*<button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>*@
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+
+<div class="row displaynone" id="prescriptionBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="prescriptionId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تاریخ ثبت</label>
+            <input id="creatDateTime" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+
+<fieldset class="group-box group-box-green">
+    <legend>نسخه نویسی</legend>
+    <div class="row" id="headerForm" data-parsley-validate>
+        <div class="form-group col-sm-2">
+            <label>تاریخ اعتبار نسخه</label>
+            <div>
+                <input id="expiryDatePersian" type="text" class="form-control" maxlength="10" disabled placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" value="@DateTime.Now.AddDays(15).ToPersianDateString("{0}/{1}/{2}")" tabindex="5"/>
+            </div>
+        </div>
+        <div class="form-group col-sm-2">
+            <label>تعداد تکرار نسخه</label>
+            <div>
+                <input id="repeatCount" type="text" class="form-control number" disabled data-parsley-min="1" value="1" tabindex="6"/>
+            </div>
+        </div>
+        <div id="prescriptionTypeBox" class="form-group col-sm-2 d-none">
+            <label>نوع نسخه</label>
+            <div>
+                <input id="prescriptionTypeName" type="text" class="form-control" tabindex="7" disabled/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>اولویت</label>
+            <div>
+                <input id="priorityId" type="text" class="form-control" tabindex="8" disabled required/>
+            </div>
+            <div id="priorityIdContainer"></div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label>دستور داکتر</label>
+            <div>
+                <input id="note" type="text" class="form-control" disabled required tabindex="9"/>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="group-box group-box-orange mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            <th>شناسه شباد</th>
+            <th>انقضاء دفترچه</th>
+            <th>داکتر</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+<fieldset id="peracraptionFilset">
+<ul class="nav nav-pills nav-justified" role="tablist" id="prescriptionTabNav">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" id="prescriptionLink1" href="#drugBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    دارو
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-home-variant h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link" data-toggle="tab" onclick="focusInput(2)" id="prescriptionLink3" href="#imageBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    تصویربرداری
+
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="prescriptionLink2" href="#labBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    آزمایشگاه
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" id="careActionLink" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="diagLink" href="#diagBox" role="tab">
+            <div class="d-none d-md-block">
+                <span>
+                    تشخیص
+                </span>
+            </div>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+    <div class="tab-pane active p-3" id="drugBox" role="tabpanel">
+        <div class="row tabToggle1" id="drugForm" data-parsley-validate>
+            <div class="table-responsive" style="width:100%;height: 300px;">
+                <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempDrugList">
+                    <thead>
+                    <tr>
+                        <th width="50">ردیف</th>
+                        <th width="50">دارو</th>
+                        <th width="50">شرط استفاده</th>
+                        <th width="50">تعداد</th>
+                        <th width="50">واحد</th>
+                        @*<th width="50">حداکثر تعداد</th>*@
+                        <th width="50">مقدار مصرف</th>
+                        <th width="50">واحد مصرف</th>
+                        <th width="50">تواتر مصرف</th>
+                        <th width="50">طریقه مصرف</th>
+                        <th width="50">روش مصرف</th>
+                        <th width="50">اولویت مصرف</th>
+                        <th width="50">دلیل تجویز</th>
+                        <th width="50">محل استفاده</th>
+                        <th width="50">دارو ترکیبی</th>
+                        <th width="50">دستور العمل</th>
+                        <th width="50">توضیحات</th>
+                        <th width="50">عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempDrug">
+                    <tr id="emptyRow">
+                        <td colspan="17" class="text-center">سطری وجود ندارد</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="imageBox" role="tabpanel">
+        <div id="imageForm" class="row tabToggle2" data-parsley-validate>
+            <div class="table-responsive" style="width:100%;height: 300px;">
+                <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempImageList">
+                    <thead>
+                    <tr>
+                        <th>ردیف</th>
+                        <th>خدمت</th>
+                        <th>محل استفاده</th>
+                        <th>جهت بدن</th>
+                        <th>توضیحات</th>
+                        <th>دستورعمل</th>
+                        <th>جزئیات</th>
+                        <th>عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tempImage">
+                    <tr id="emptyRow">
+                        <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="labBox" role="tabpanel">
+        <div class="row tabToggle3 ml-1 mr-1">
+            <fieldset class="group-box group-box-gray fieldset-lab col-12">
+                <div class="row" id="labHeader" data-parsley-validate>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>هدف آزمایش</label>
+                        <div>
+                            <input id="intentId" type="text" class="form-control" disabled tabindex="35" required/>
+                        </div>
+                        <div id="intentIdContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>کیفیت نمونه</label>
+                        <div>
+                            <input id="adequacyForTestingId" type="text" class="form-control" disabled tabindex="36" required/>
+                        </div>
+                        <div id="adequacyForTestingIdContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>روش جمع آوری نمونه</label>
+                        <div>
+                            <input id="collectionProcedureId" type="text" class="form-control" disabled tabindex="37" required/>
+                        </div>
+                        <div id="collectionProcedureIdContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>تاریخ و زمان جمع آوری نمونه</label>
+                        <div>
+                            <input id="dateTimeCollection" type="text" class="form-control" disabled required maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="38">
+                        </div>
+                        <div id="dateTimeCollectionContainer"></div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>کد نمونه آزمایشگاهی</label>
+                        <div>
+                            <input id="speciementIdentifier" type="text" class="form-control number" disabled maxlength="10" tabindex="39" required/>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-2 col-sm-4">
+                        <label>نوع نمونه جمع آوری شده</label>
+                        <div>
+                            <input id="speciementTissueTypeId" type="text" class="form-control" disabled tabindex="40" required/>
+                        </div>
+                        <div id="speciementTissueTypeIdContainer"></div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="group-box group-box-gray mt-2 fieldset-lab">
+                <div class="table-responsive" style="width:100%;height: 300px;">
+                    <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempLabList">
+                        <thead>
+                        <tr>
+                            <th width="40">ردیف</th>
+                            <th width="100">خدمت</th>
+                            <th width="100">شرایط استفاده</th>
+                            <th width="100">دلیل تجویز</th>
+                            <th width="100">محل استفاده</th>
+                            <th width="70">توضیحات</th>
+                            <th width="70">دستورعمل</th>
+                            <th width="50">عدم انجام</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempLab">
+                        <tr id="emptyRow">
+                            <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="diagBox" role="tabpanel">
+        <div id="diagForm" class="row tabToggle4" data-parsley-validate>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdiagList">
+                <thead>
+                <tr>
+                    <th width="40">ردیف</th>
+                    <th width="100">وضعیت تشخیص</th>
+                    <th width="100">تشخیص</th>
+                    <th width="100">میزان شدت بیماری </th>
+                    <th width="70">توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempDiag">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+<div id="searchAdmissionModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-lg-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتخاب پذیرش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="">
+                    <fieldset class="group-box group-box-green">
+                        <legend>جستجو</legend>
+                        <div class="row">
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>شناسه پذیرش</label>
+                                <div>
+                                    <input id="admissionId" type="text" class="form-control" maxlength="10" tabindex="1">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>نمبر تذکره مراجعه کننده</label>
+                                <div>
+                                    <input id="PatientNationalCode" type="text" class="form-control" maxlength="50" tabindex="2">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>مراجعه کننده</label>
+                                <div>
+                                    <input id="PatientFullName" type="text" class="form-control" maxlength="50" tabindex="3">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>تاریخ ثبت</label>
+                                <div>
+                                    <input id="createDatePersian" type="text" class="form-control" maxlength="10" placeholder="__/__/____  __:__" data-inputmask="'mask':'9999/99/99'" tabindex="3">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-2">
+                                <button id="searchAdmission" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="4"><i class="fa fa-search"></i>جستجو</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="table-responsive table-responsive-thead-fixed" style="white-space: normal !important; width: 100%; height: 300px; margin: auto; margin-top: 10px;">
+                        <table class="table table-styles border mb-0" id="patientListPagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-5">شناسه</th>
+                                <th class="col-width-percent-20">مراجعه کننده</th>
+                                <th class="col-width-percent-8">کدملی</th>
+                                <th class="col-width-percent-10">بیمه پایه</th>
+                                <th class="col-width-percent-10">صندوق بیمه</th>
+                                <th class="col-width-percent-10">بیمه تکمیلی</th>
+                                <th class="col-width-percent-10">شناسه شباد</th>
+                                <th class="col-width-percent-10">تاریخ انقضاء دفترچه</th>
+                                <th class="col-width-percent-12">داکتر</th>
+                                <th class="col-width-percent-5">انتخاب</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempAdmission">
+                            <tr id="emptyRow">
+                                <td colspan="10" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('searchAdmissionModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="DrugModalC" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">داروهای ترکیبی</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+
+                <div class="row" style="margin:0 -7px 0 -7px">
+                    <fieldset class="group-box group-box-gray" style="overflow-x:hidden;overflow-y:scroll;height:auto;width:100%">
+                        <legend>داروهای ترکیبی</legend>
+                        <div class="table-responsive" style="margin:0 auto;padding-bottom:10px">
+                            <table class="table table-styles border mb-0" id="tempDrugListC" style="font-size:10px">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-5">ردیف</th>
+                                    <th class="col-width-percent-20">دارو</th>
+                                    <th class="col-width-percent-10">واحد مصرف</th>
+                                    <th class="col-width-percent-10">تعداد</th>
+                                    <th class="col-width-percent-10">حداکثر تعداد</th>
+                                    <th class="col-width-percent-10">نقش دارو</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempDrugC">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseDrugC" class="btn btn-secondary waves-effect "><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ImageModalC" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title"> جزئیات تصویربرداری</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                @*<div class="row" id="imageBoxC" data-parsley-validate>
+                        <div class="form-group col-lg-8 col-sm-8">
+                            <label>خدمت</label>
+                            <div>
+                                <select id="imageServiceIdC" class="form-control select2" tabindex="201" required data-parsley-errors-container="#imageServiceIdCContainer"></select>
+                            </div>
+                            <div id="imageServiceIdCContainer"></div>
+                        </div>
+                        <div class="col-sm text-right">
+                            <div class="button-items" style="margin-top:23px">
+                                <button id="addImageC" type="button" class="btn btn-light border-blue" tabindex="202"><i class="fa fa-arrow-down"></i>ثبت</button>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="row" style="margin:0 -7px 0 -7px">
+                    <fieldset class="group-box group-box-gray" style="overflow-x:hidden;overflow-y:scroll;height:auto;width:100%">
+                        <legend>جزئیات تصویربرداری</legend>
+                        <div class="table-responsive" style="margin:0 auto;padding-bottom:10px">
+                            <table class="table table-styles border mb-0" id="tempImageListC" style="font-size:10px">
+                                <thead>
+                                <tr>
+                                    <th>ردیف</th>
+                                    <th>خدمت</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempImageC">
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseImageC" class="btn btn-secondary waves-effect "><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/js/formPlateHeaderLine.js"></script>
+<script type="text/javascript" src="/Modules/MC/Prescription/PrescriptionDisplay.js"></script>

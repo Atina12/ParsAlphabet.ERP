@@ -1,0 +1,48 @@
+﻿<div id="stepLogModalItemTransaction" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست گام های ثبت شده</h5>
+                </div>
+            </div>
+
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body" id="itemPageTable">
+                    <div class="row mb-3">
+                        <div class="form-group col-sm-4">
+                            <select class="form-control" id="actionItemTransaction"></select>
+                        </div>
+                        <div class="form-group col-sm-2 pr-0">
+                            <button onclick="update_actionItemTransaction()" id="update_action_btn" type="button" class="btn btn-success ml-2 pa waves-effect" value="">
+                                <i class="fa fa-check-circle"></i>
+                                <span>ثبت گام</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">گام</th>
+                                <th class="col-width-percent-10">کاربر</th>
+                                <th class="col-width-percent-10">تاریخ</th>
+                            </tr>
+                            </thead>
+                            <tbody id="stepLogRowsItemTransaction">
+                            <tr id="emptyRow">
+                                <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('stepLogModalItemTransaction')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Modules/FM/Finanace.js"></script>
+<script src="~/Modules/WH/ItemTransactionCartable/ItemTransactionActionIndex.js"></script>

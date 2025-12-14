@@ -1,0 +1,3 @@
+﻿#tempAdmCloseLine tr:not(.emptyrow) {
+    cursor: pointer
+}

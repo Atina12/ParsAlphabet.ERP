@@ -1,0 +1,105 @@
+﻿.sortIcon-group {
+    float: right !important;
+    width: auto !important;
+    display: flex !important;
+    margin-left: 3px !important;
+}
+
+.sortIcon {
+    color: gray !important;
+    cursor: pointer;
+}
+
+.active-sortIcon {
+    color: black !important;
+}
+
+.headerSorting {
+    cursor: pointer;
+}
+
+.itemLink {
+    cursor: pointer;
+    color: #007bff !important;
+}
+
+div.app-search .selection .select2-selection.select2-selection--single {
+    width: 250px;
+    height: 27px;
+}
+
+.tox-notifications-container {
+    display: none !important;
+}
+
+.selected-list {
+    margin: 0px 17px 0 0;
+    font-size: 12px;
+}
+
+.assigned-title {
+    text-align: left;
+}
+
+.formPlate2_Title {
+    font-size: 14px;
+    margin: 3px 0 0 0;
+}
+
+.doTheFilterItem:focus {
+    background-color: #EEEEEE !important;
+    color: black !important;
+    border: 1px solid black !important
+}
+
+table > tbody > tr:not(.highlight) .fixedColumn {
+    background-color: white !important;
+    position: sticky !important;
+    left: -1px !important;
+    z-index:10
+}
+
+table > tbody > tr.highlight .fixedColumn {
+    background-color: inherit !important;
+    position: sticky !important;
+    left: -1px !important;
+    z-index: 10
+}
+
+.tableLayoutFixed {
+    table-layout: fixed !important;
+    min-width : unset !important
+}
+
+.filterValueSearchBox {
+    width: 230px !important;
+    position: absolute !important;
+    border-radius: 5px !important;
+    background-color: white !important;
+    padding: 3px !important;
+    box-shadow: 0px 0px 4px !important
+}
+
+.doTheFilterItem {
+    width: 30% !important;
+    background-color: #616f80 !important;
+    color: white !important;
+    border: none !important
+}
+
+.deleteFilterItem {
+    width: 30% !important
+}
+
+.deleteFilterItemAll {
+    width: 40% !important;
+    background-color: #da1717 !important;
+    color: white !important
+}
+
+.filterValueSearchBoxClose {
+    color: #da1717 !important;
+    cursor:pointer;
+    width :15px;
+    height:15px;
+}

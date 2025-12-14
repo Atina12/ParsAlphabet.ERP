@@ -1,0 +1,47 @@
+﻿<div class="modal-header">
+    <div class="doctor-info text-right d-flex">
+        <h4 class="font-16 my-2">
+            <span class="text-gray">شناسه : </span><span id="attrId">0000</span>
+        </h4>
+        <div class="border-right mr-2">
+            <p class="d-inline-block pl-2 m-2 border-left">نام داکتر : <span id="attrName">--</span></p>
+            <p class="d-inline-block pr-2 my-2">شماره نظام داکتری : <span id="attrMsc">--</span></p>
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="carousel-inner">
+        <div class="carousel-item-box">
+            <div class="day-slot">
+                <a id="reserve_goto_next" class="carousel-control-next float-left" href="javascript:reserve_goto_next();">
+                    <span class="fas fa-angle-left"></span>
+                </a>
+                <a id="reserve_goto_prev" class="carousel-control-prev float-right" href="javascript:reserve_goto_prev();">
+                    <span class="fas fa-angle-right"></span>
+                </a>
+                <ul id="reserve_weekdays" class="nav nav-pills nav-justified"></ul>
+            </div>
+
+            <div class="row px-3">
+                <div class="text-left px-2">
+                    <span class="guide guide-default"></span>
+                    <span class="guide-title">آزاد</span>
+                </div>
+                <div class="text-left px-2">
+                    <span class="guide guide-yellow"></span>
+                    <span class="guide-title">در حال رزرو</span>
+                </div>
+                <div class="text-left px-2">
+                    <span class="guide guide-green"></span>
+                    <span class="guide-title">رزرو شده</span>
+                </div>
+            </div>
+
+            <div class="time-slot">
+                <div class="attender-scedule" id="attenderScedule">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/Modules/MC/Admission/GetAttenderReserve.js"></script>

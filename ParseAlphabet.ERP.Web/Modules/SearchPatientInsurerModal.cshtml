@@ -1,0 +1,39 @@
+﻿<div id="searchPatientInsurerModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" id="elementInsurerModal">
+        <div class="modal-content" id="addResizer">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">جستجو</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-min-height text-right">
+                <div class="table-responsive">
+                    <table class="table table-styles border mb-0" id="patientInsurerListPagetable">
+                        <thead class="table-thead-fixed">
+                        <tr>
+                            <th class="col-width-percent-3">ردیف</th>
+                            <th class="col-width-percent-9">بیمه اجباری</th>
+                            <th class="col-width-percent-7">صندوق بیمه</th>
+                            <th class="col-width-percent-6">شماره بیمه</th>
+                            <th class="col-width-percent-7">تاریخ انقضاء</th>
+                            <th class="col-width-percent-8">بیمه تکمیلی</th>
+                            <th class="col-width-percent-8">طرف قرارداد</th>
+                            <th class="col-width-percent-8">تخفیف</th>
+                            <th class="col-width-percent-3">انتخاب</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tempPatientI">
+                        <tr id="emptyRow">
+                            <td colspan="9" class="text-center">سطری وجود ندارد</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalRowCountBtn" class="btn btn-secondary" disabled>تعداد سطر : <span id="modalRowCount"> 0 </span></button>
+                <button id="modal-close" onclick="modal_closeAdmission('searchPatientInsurerModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>

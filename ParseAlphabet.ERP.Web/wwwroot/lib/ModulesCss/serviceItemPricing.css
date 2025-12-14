@@ -1,0 +1,4 @@
+﻿#services_pagetable .table-responsive-table,
+#items_pagetable .table-responsive-table {
+    height: calc(100vh - 250px) !important;
+}

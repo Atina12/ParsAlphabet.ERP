@@ -1,0 +1,282 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "کارتابل صورتحساب خرید";
+}
+
+<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/PostingGroupCartable.css" rel="stylesheet"/>
+
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+
+<input id="stageIdPersonInvoiceParameter" type="hidden" class="form-control number" readonly value="@ViewContext.RouteData.Values["stageId"]"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+                                <div id="quickSearchContainer" style="display: contents"></div>
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            <ul id="tabLinkPersonInvoiceBoxes" class="nav nav-pills nav-justified" role="tablist"></ul>
+                            <div id="tabPersonInvoiceBoxes" class="tab-content group-box group-box-gray"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<div id="AddEditModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="hidden" id="actionId"/>
+
+                    <div class="form-group col-sm-6">
+                        <label>شعبه</label>
+                        <div>
+                            <select id="branchId" class="form-control select2"
+                                    requirerd
+                                    data-parsley-selectvalzero
+                                    data-parsley-errors-container="#branchIdErrorContainer"
+                                    tabindex="1">
+                            </select>
+                        </div>
+                        <div id="branchIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>جریان کار</label>
+                        <div>
+                            <select id="workFlowId" class="form-control select2" required data-parsley-selectvalzero tabindex="2" data-parsley-errors-container="#workFlowIdErrorContainer">
+                            </select>
+                        </div>
+                        <div id="workFlowIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>مرحله</label>
+                        <div>
+                            <select id="stageId" class="form-control select2" required data-parsley-errors-container="#stageIdErrorContainer" tabindex="3"></select>
+                        </div>
+                        <div id="stageIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>ماهیت حساب</label>
+                        <div>
+                            <input type="text" id="inOut" class="form-control" maxlength="200" tabindex="4" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12" id="requestIdContainer">
+                        <label>درخواست</label>
+                        <div>
+                            <select disabled id="requestId" class="form-control select2" tabindex="5" data-parsley-validate-if-empty="true" data-parsley-errors-container="#requestIdIdErrorContainer"></select>
+                        </div>
+                        <div id="requestIdIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label>موضوع</label>
+                        <div>
+                            <select disabled id="treasurySubjectId" class="form-control  notFocusSelect select2" tabindex="6" data-parsley-validate-if-empty="true" data-parsley-checkglsglrequied data-parsley-errors-container="#treasurySubjectIdErrorContainer"></select>
+                        </div>
+                        <div id="treasurySubjectIdErrorContainer"></div>
+                    </div>
+
+
+                    <div class="form-group col-sm-6">
+                        <label>کد کل</label>
+                        <div>
+                            <input type="text" id="accountGLId" class="form-control number" tabindex="7" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>کد معین</label>
+                        <div>
+                            <input type="text" id="accountSGLId" class="form-control number" tabindex="8" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>گروه تفصیل</label>
+                        <div>
+                            <select id="noSeriesId" class="form-control select2" tabindex="9" required data-parsley-errors-container="#noSeriesIdErrorContainer" disabled>
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+
+                        </div>
+                        <div id="noSeriesIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label> تفصیل</label>
+                        <div>
+                            <select id="accountDetailId" class="form-control select2" tabindex="10" required data-parsley-errors-container="#accountDetailIdErrorContainer" disabled>
+                                <option value="0">انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div id="accountDetailIdErrorContainer"></div>
+                    </div>
+
+
+                    <div class="form-group col-sm-12" id="returnReason">
+                        <label>دلیل برگشت</label>
+                        <div>
+                            <select id="returnReasonId" class="form-control" tabindex="11">
+                                <option value="0">انتخاب کنید...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نوع سند</label>
+                        <div>
+                            <input type="text" id="documentTypeId" class="form-control" tabindex="12" disabled required data-parsley-validate-if-empty="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>تاریخ صورتحساب</label>
+                        <div>
+                            <input type="text"
+                                   id="orderDatePersian"
+                                   class="form-control  persian-date"
+                                   placeholder="____/__/__"
+                                   data-inputmask="'mask':'9999/99/99'"
+                                   required
+                                   data-parsley-purchasedateissame
+                                   data-parsley-errors-container="#orderDatePersianErrorContainer"
+                                   maxlength="10"
+                                   tabindex="13"/>
+                        </div>
+                        <div id="orderDatePersianErrorContainer"></div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <label>توضیحات</label>
+                        <div>
+                            <input type="text" id="note" class="form-control notFocusSelect" maxlength="200" tabindex="14"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <div>
+                            <fieldset class="group-box group-box-gray mt-3">
+                                <legend>مراحل قبل ( <span class="text-danger currentStage">-</span> )</legend>
+                                <table class="table table-styles border mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-width-percent-20">شناسه</th>
+                                        <th class="col-width-percent-80">نام مرحله</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="stagePreviousList">
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <div>
+                            <fieldset class="group-box group-box-blue mt-3">
+                                <legend>انواع کالا/خدمت ( <span class="text-danger currentStage">-</span> )</legend>
+                                <table class="table table-styles border mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-width-percent-20">شناسه</th>
+                                        <th class="col-width-percent-80">نام کالا/خدمت</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="stageItemTypeList">
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save('AddEditModal',true);" class="btn btn-success waves-effect waves-light" tabindex="15"><i class="fa fa-save"></i>ذخیره و ورود</button>
+                <button id="modal-save" onclick="modal_save('AddEditModal');" class="btn btn-success waves-effect waves-light" tabindex="16" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorPostingGroupResult" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">ارسال سند</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-100">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempPostingGroupError">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfresultmodal-close" onclick="modal_close('errorPostingGroupResult')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="displayPersonInvoiceLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg" style="height:auto">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayPersonInvoiceLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayPersonInvoiceLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/PU/PurchaseInvoiceCartable/PurchaseInvoiceActionIndex.cshtml")
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/js/NewPagetableV1.js"></script>
+
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+<script src="/Modules/PU/PurchaseInvoiceCartable/PurchaseInvoiceCartableIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/Modules/WF/WorkFlow.js"></script>
+<script src="/Modules/PU/Purchase.js"></script>
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="~/Modules/PU/PurchaseOrderSearch/PurchaseOrderQuickSearchIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

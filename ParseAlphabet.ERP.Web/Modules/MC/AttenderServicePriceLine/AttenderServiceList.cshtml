@@ -1,0 +1,58 @@
+﻿<div id="attenderServiceListModal" class="modal fade bs-example-modal-lg col-width-percent-85" data-keyboard="false" role="dialog" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xl pt-0">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0">لیست خدمات</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="row-info text-right d-flex">
+                    <h4 class="font-16 my-2">
+                        <span class="text-gray">شناسه : </span><span id="attrId">0000</span>
+                    </h4>
+                    <div class="border-right mr-2" ondblclick="">
+                        <p class="d-inline-block pl-2 m-2 border-left">نام داکتر : <span id="attrfullName">--</span></p>
+                        <p class="d-inline-block pl-2 m-2 border-left">دپارتمان : <span id="attrServiceCenter">--</span></p>
+                        <p class="d-inline-block pl-2 m-2 border-left">شماره نظام داکتری : <span id="attrMsc">--</span></p>
+                        <p class="d-inline-block pr-2 m-2">تعداد خدمت : <span id="attrCount">--</span></p>
+                    </div>
+                </div>
+                <div class="row-info text-right d-flex">
+                    <button id="exportServiceListCsv" onclick="exportServiceListCsv()" type="button" class="btn btn-excel waves-effect waves-light float-left ml-3"><i class="fa fa-list-ul" style="margin-left:5px"></i>اکسل</button>
+                    <button onclick="print_ServiceList()" type="button" class="btn btn-print waves-effect float-left ml-1"><i class="fa fa-print" style="margin-left:5px"></i>چاپ</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="modal-body text-right " style="height:450px;">
+
+                    <fieldset class="group-box group-box-blue mb-3">
+                        <legend> خدمات </legend>
+
+                        <div class="table-responsive " style="height: 400px; min-height:100px; ">
+                            <table class="table table-styles border mb-0 " style="overflow:auto" id="tbAttenderService">
+                                <thead class="table-thead-fixed">
+                                <tr>
+                                    <th class="col-width-percent-5"> سطر</th>
+                                    <th class="col-width-percent-45"> حق الزحمهداکتر</th>
+                                    <th class="col-width-percent-20"> موضوع درمان</th>
+                                    <th class="col-width-percent-30"> خدمت</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbAttenderServiceList">
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="attenderService_close" onclick="modal_close('attenderServiceListModal');" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/MC/AttenderServicePriceLine/AttenderServiceList.js"></script>

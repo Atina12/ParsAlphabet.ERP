@@ -1,0 +1,36 @@
+﻿<div id="attenderTimesheetLineAssignModals" class="modal fade bs-example-modal-lg" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog  modal-size-xxlg ">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 p-0 text-right">
+                    <div class="mt-0">نمایش بلاک های زمانی</div>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="w-100 d-flex justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <div class="doctor-info text-right d-flex" id="content">
+
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center">
+
+                        <div>
+                            <button type="button" id="updateAttenderScheduleBlockList" onclick="updateAttenderScheduleBlockList_display()" class="btn btn-info waves-effect" style=" margin :0px 0px 2px 0px"><i class="fa fa-file-import ml-2"></i>بروزرسانی</button>
+                            <button type="button" id="exportCSV" onclick="export_csvdisplay()" class="btn btn-excel waves-effect" style=" margin :0px 0px 2px 0px"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @await Html.PartialAsync("/Modules/MC/AttenderTimeSheetMedicalShift/AttenderTimeSheetMedicalShiftIndex.cshtml")
+
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('attenderTimesheetLineAssignModals')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Modules/MC/AttenderTimeSheetMedicalShift/AttenderTimeSheetMedicalShiftDisplay.js"></script>

@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11217.181 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsAlphabet.ERP.Domain", "ParsAlphabet.ERP.Domain\ParsAlphabet.ERP.Domain.csproj", "{9509F230-EDDA-4DBF-A3BF-FA937A7A31F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsAlphabet.ERP.Application", "ParsAlphabet.ERP.Application\ParsAlphabet.ERP.Application.csproj", "{B8A6DF2B-4B5E-4CBD-BC96-F7BF0475E6A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsAlphabet.ERP.Infrastructure", "ParsAlphabet.ERP.Infrastructure\ParsAlphabet.ERP.Infrastructure.csproj", "{D259151D-AC89-4237-8F79-7499735C8A0A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParseAlphabet.ERP.Web", "ParseAlphabet.ERP.Web\ParseAlphabet.ERP.Web.csproj", "{1FF852F9-BC7F-4607-AE33-3FFA6457A596}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsAlphabet.ERP.Sql", "ParsAlphabet.ERP.Sql\ParsAlphabet.ERP.Sql.csproj", "{898D02D9-7F48-460F-9149-3F74525D8072}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsAlphabet.ERP.External", "ParsAlphabet.ERP.External\ParsAlphabet.ERP.External.csproj", "{7C60F4B6-3E2D-4152-A5B0-53478B72E9D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		Des.txt = Des.txt
+		C:\Users\Qudrat\Pictures\Screenshots\قوانین تغییر db.png = C:\Users\Qudrat\Pictures\Screenshots\قوانین تغییر db.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{90944F95-F293-4E95-8FF7-C89C44DD38F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Db", "Db", "{9FA83A5D-4231-4D8F-934A-5C0A60C8D2E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "migrations", "migrations", "{789764F3-89F1-4271-9209-EC7D954FA2A5}"
+	ProjectSection(SolutionItems) = preProject
+		0001_create_schema_migrations.sql = 0001_create_schema_migrations.sql
+		0002_alter_spc_attender_insupd_nationalcode_15.sql = 0002_alter_spc_attender_insupd_nationalcode_15.sql
+		0003_alter_cr.Contact_nationalcode_15.sql = 0003_alter_cr.Contact_nationalcode_15.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "post-deploy", "post-deploy", "{B9199ECB-97D9-456D-AFE9-8575DCFAFBB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rollback", "rollback", "{F099F994-0716-4023-8F19-63791DE4DA33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{ABDA8AE7-EBA6-4CF0-B056-7165D60D7D94}"
+	ProjectSection(SolutionItems) = preProject
+		run-migrations.sql = run-migrations.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9509F230-EDDA-4DBF-A3BF-FA937A7A31F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9509F230-EDDA-4DBF-A3BF-FA937A7A31F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9509F230-EDDA-4DBF-A3BF-FA937A7A31F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9509F230-EDDA-4DBF-A3BF-FA937A7A31F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8A6DF2B-4B5E-4CBD-BC96-F7BF0475E6A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8A6DF2B-4B5E-4CBD-BC96-F7BF0475E6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8A6DF2B-4B5E-4CBD-BC96-F7BF0475E6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8A6DF2B-4B5E-4CBD-BC96-F7BF0475E6A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D259151D-AC89-4237-8F79-7499735C8A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D259151D-AC89-4237-8F79-7499735C8A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D259151D-AC89-4237-8F79-7499735C8A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D259151D-AC89-4237-8F79-7499735C8A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF852F9-BC7F-4607-AE33-3FFA6457A596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF852F9-BC7F-4607-AE33-3FFA6457A596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF852F9-BC7F-4607-AE33-3FFA6457A596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF852F9-BC7F-4607-AE33-3FFA6457A596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{898D02D9-7F48-460F-9149-3F74525D8072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898D02D9-7F48-460F-9149-3F74525D8072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898D02D9-7F48-460F-9149-3F74525D8072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898D02D9-7F48-460F-9149-3F74525D8072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C60F4B6-3E2D-4152-A5B0-53478B72E9D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C60F4B6-3E2D-4152-A5B0-53478B72E9D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C60F4B6-3E2D-4152-A5B0-53478B72E9D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C60F4B6-3E2D-4152-A5B0-53478B72E9D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9509F230-EDDA-4DBF-A3BF-FA937A7A31F8} = {90944F95-F293-4E95-8FF7-C89C44DD38F3}
+		{B8A6DF2B-4B5E-4CBD-BC96-F7BF0475E6A9} = {90944F95-F293-4E95-8FF7-C89C44DD38F3}
+		{D259151D-AC89-4237-8F79-7499735C8A0A} = {90944F95-F293-4E95-8FF7-C89C44DD38F3}
+		{1FF852F9-BC7F-4607-AE33-3FFA6457A596} = {90944F95-F293-4E95-8FF7-C89C44DD38F3}
+		{898D02D9-7F48-460F-9149-3F74525D8072} = {90944F95-F293-4E95-8FF7-C89C44DD38F3}
+		{7C60F4B6-3E2D-4152-A5B0-53478B72E9D6} = {90944F95-F293-4E95-8FF7-C89C44DD38F3}
+		{789764F3-89F1-4271-9209-EC7D954FA2A5} = {9FA83A5D-4231-4D8F-934A-5C0A60C8D2E2}
+		{B9199ECB-97D9-456D-AFE9-8575DCFAFBB8} = {9FA83A5D-4231-4D8F-934A-5C0A60C8D2E2}
+		{F099F994-0716-4023-8F19-63791DE4DA33} = {9FA83A5D-4231-4D8F-934A-5C0A60C8D2E2}
+		{ABDA8AE7-EBA6-4CF0-B056-7165D60D7D94} = {9FA83A5D-4231-4D8F-934A-5C0A60C8D2E2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14EF93CB-78B5-4E13-9289-7B5CF5F68687}
+	EndGlobalSection
+EndGlobal

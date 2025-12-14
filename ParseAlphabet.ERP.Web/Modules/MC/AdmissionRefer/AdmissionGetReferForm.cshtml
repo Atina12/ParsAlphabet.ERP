@@ -1,0 +1,1634 @@
+﻿@{
+    ViewBag.Title = "نظام ارجاع";
+}
+
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/lib/switchCheckbox/switchBox.css" rel="stylesheet"/>
+<link href="~/lib/ModulesCss/AdmissionRefer.css" rel="stylesheet"/>
+
+
+<div class="content-page displaynone" id="content-page">
+<div class="content" id="admissionReferFormBox">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card m-b-30 m-t-15">
+<div class="header-title d-flex">
+    <span>@ViewBag.Title</span>
+    <div class="button-items">
+        <button id="choiceOfAdmission" type="button" onclick="modal_show('searchAdmissionModal');" class="btn btn-info waves-effect"><i class="fa fa-user-alt"></i>انتخاب پذیرش</button>
+        <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+        <button id="saveForm" type="button" onclick="saveAdmissionReferForm()" class="btn btn-success waves-effect"><i class="fa fa-save"></i>ذخیره</button>
+        <button id="newForm" type="button" onclick="resetFormAdmissionRefer()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+    </div>
+</div>
+<div class="card-body" data-parsley-validate>
+<div class="row displaynone" id="AdmissionReferBox">
+    <div class="col-12 d-flex">
+        <div class="form-group col-lg-1 col-sm-2">
+            <label>شناسه</label>
+            <div>
+                <input id="admissionReferId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>ثبت کننده</label>
+            <input id="userFullName" type="text" class="form-control" readonly/>
+        </div>
+        <div class="form-group col-lg-6 col-sm-6">
+            <label>وضعیت ارسال ارجاع</label>
+            <input id="AdmissionSentRerferStatus" style="background-color:red;color:white;" type="text" class="form-control" readonly/>
+        </div>
+    </div>
+</div>
+<fieldset class="group-box group-box-green mt-3">
+    <legend>مراجعه کننده</legend>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>مراجعه کننده</th>
+            <th>کدملی</th>
+            <th>بیمه پایه</th>
+            <th>صندوق</th>
+            <th>بیمه تکمیلی</th>
+            <th>طرف قرارداد</th>
+            <th>شناسه شباد</th>
+            <th>انقضاء دفترچه</th>
+            @*<th>شناسه ارجاع</th>*@
+            <th>داکتر</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody id="admissionSelected">
+        </tbody>
+    </table>
+</fieldset>
+
+<fieldset id="getFeedBackReferbox" class="displaynone group-box group-box-orange mt-3">
+<button type="button" onclick="plusR(this)" class="btn btn-light border-orange plus">
+    <i class="fas fa-plus"></i>
+</button>
+<legend>
+    دریافت بازخورد
+</legend>
+<button id="getFeedBackadmissionRefer" class="btn btn-light border-orange col-lg-3 col-sm-3" style="margin:0 15px 5px 0;">
+    <i></i>
+    دریافت بازخورد
+</button>
+<section class="row " id="referFormT">
+    <div class="form-group col-lg-1 col-sm-2">
+        <label> قابل مشاهده</label>
+        <div class="funkyradio funkyradio-success">
+            <input id="iSQueriableT" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر" disabled/>
+        </div>
+    </div>
+</section>
+<div class="row" data-parsley-validate>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>نام و  تخلص</th>
+            <th>جنسیت</th>
+            <th>شماره تماس</th>
+            <th>آدرس</th>
+            <th>تاریخ تولد</th>
+            <th>ملیت</th>
+            <th>نمبر تذکره</th>
+            <th>وضعیت تاهل</th>
+        </tr>
+        </thead>
+        <tbody id="tempGetfeedBackRefer">
+        </tbody>
+    </table>
+</div>
+<div class="slideToggle get" style="display:none;">
+<ul class="nav nav-pills nav-justified T" role="tablist">
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link active T" data-toggle="tab" href="#admissionFieldBox" role="tab">
+            <span class="d-none d-md-block">پذیرش</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#followupPlanFieldBox" role="tab">
+            <span class="d-none d-md-block">پیگیری انجام شده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#abuseHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">مصرف دخانیات</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#careActionFieldBox" role="tab">
+            <span class="d-none d-md-block">اقدامات درمانی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#clinicalFindingFieldBox" role="tab">
+            <span class="d-none d-md-block">معاینات کلی مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    @*<li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link T" data-toggle="tab" href="#adversReactionFieldbox" role="tab">
+                                                    <span class ="d-none d-md-block">عوارض جانبی</span><span class="d-block d-md-none"><i class="mdi mdi-email h5"></i></span>
+                                                </a>
+                                            </li>*@
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#drugHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه دارویی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#drugOrderedFieldBox" role="tab">
+            <span class="d-none d-md-block">ویژگی دارو تجویز شده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#familyHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">سوابق خانوادگی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#insuranceFieldBox" role="tab">
+            <span class="d-none d-md-block">اطلاعات بیمه</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#pastMedicalHistoryFieldBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه داکتری مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light">
+        <a class="nav-link T" data-toggle="tab" href="#diagnosisFieldBox" role="tab">
+            <span class="d-none d-md-block">تشخیص</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-orange ">
+@*START admissionField*@
+<div class="tab-pane p-3" id="admissionFieldBox" role="tabpanel">
+    <div class="row tabToggle1" id="admissionFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempadmissionFieldList">
+                <thead>
+                <tr>
+                    <th>تاریخ / زمان پذیرش</th>
+                    <th>نوع پذیرش</th>
+                    <th>پذیرنده</th>
+                    <th>داکتر ارجاع دهنده</th>
+                    <th>داکتر داکتر</th>
+                </tr>
+                </thead>
+                <tbody id="tempadmissionField">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END admissionField*@
+@*START abuseHistoryField*@
+<div class="tab-pane active p-3" id="abuseHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle1" id="abuseHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempabuseHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نوع ماده مخدر</th>
+                    <th>میزان مصرف</th>
+                    <th> واحد ماده مخدر </th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد مصرف</th>
+                    <th>تاریخ شروع مصرف</th>
+                    <th>تاریخ قطع مصرف</th>
+                </tr>
+                </thead>
+                <tbody id="tempabuseHistoryField">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END abuseHistoryField*@
+@*START careActionField*@
+<div class="tab-pane  p-3" id="careActionFieldBox" role="tabpanel">
+    <div class="row tabToggle5" id="careActionFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempcareActionFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام اقدام</th>
+                    <th>تاریخ و زمان شروع</th>
+                    <th>تاریخ و زمان پایان</th>
+                    <th>مدت زمان انجام اقدام درمانی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempcareActionField">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END careActionField*@
+@*START clinicalFindingField*@
+<div class="tab-pane  p-3" id="clinicalFindingFieldBox" role="tabpanel">
+    <div class="row tabToggle6" id="clinicalFindingFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempclinicalFindingFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>سن شروع بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری تاکنون</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>علائم نشانه ها و یافته های بالینی</th>
+                    <th>شدت</th>
+                    <th>علائمی که وجود ندارد</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempclinicalFindingField">
+                <tr id="emptyRow">
+                    <td colspan="9" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END clinicalFindingField*@
+@*START diagnosisField*@
+<div class="tab-pane p-3" id="diagnosisFieldBox" role="tabpanel">
+    <div id="diagnosisFieldForm" class="row tabToggle4" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdiagnosisFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>وضعیت تشخیص</th>
+                    <th>تشخیص</th>
+                    <th>میزان شدت بیماری </th>
+                    <th>تاریخ و زمان تشخیص </th>
+                    <th>توضیحات</th>
+
+                </tr>
+                </thead>
+                <tbody id="tempdiagnosisField">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END diagnosisField*@
+@*START drugHistoryField*@
+<div class="tab-pane  p-3" id="drugHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle7" id="drugHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام دارو</th>
+                    <th>طریقه مصرف</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugHistoryField">
+                <tr id="emptyRow">
+                    <td colspan="3" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugHistoryField*@
+@*START drugOrderedField*@
+<div class="tab-pane  p-3" id="drugOrderedFieldBox" role="tabpanel">
+    <div class="row tabToggle8" id="drugOrderedFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugOrderedFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>کد دارو</th>
+                    <th>نام ژنریک دارو</th>
+                    <th>طریقه مصرف</th>
+                    <th>تواتر مصرف</th>
+                    <th>دوز مصرفی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد اندازه گیری مدت زمان مصرف</th>
+                    <th>تعداد</th>
+                    <th>تاریخ و زمان تجویز</th>
+                    <th>توضیح</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugOrderedField">
+                <tr id="emptyRow">
+                    <td colspan="12" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugOrderedField*@
+@*START familyHistoryField*@
+<div class="tab-pane  p-3" id="familyHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle3" id="familyHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempfamilyHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نسبت با بیمار</th>
+                    <th>نام بیماری</th>
+                    <th>بیماری علت مرگ </th>
+                    <th>توضیحات بیماری</th>
+                </tr>
+                </thead>
+                <tbody id="tempfamilyHistoryField">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END familyHistoryField*@
+@*START followupPlanField*@
+<div class="tab-pane  p-3" id="followupPlanFieldBox" role="tabpanel">
+    <div class="row tabToggle3" id="followupPlanFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempfollowupPlanFieldList">
+                <thead>
+                <tr>
+                    <th>نوع مراجعه بعدی</th>
+                    <th>مراجعه بعدی</th>
+                    <th>واحد مراجعه بعدی</th>
+                    <th>تاریخ و زمان مراجعه بعدی</th>
+                    <th>توضیحات</th>
+                </tr>
+                </thead>
+                <tbody id="tempfollowupPlanField">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END followupPlanField*@
+@*START insuranceField*@
+<div class="tab-pane  p-3" id="insuranceFieldBox" role="tabpanel">
+    <div class="row tabToggle3" id="insuranceFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempinsuranceFieldList">
+                <thead>
+                <tr>
+                    <th>بیمه گر</th>
+                    <th>صندوق بیمه</th>
+                    <th>شماره صفحه دفترچه</th>
+                    <th>تاریخ انقضا</th>
+                    <th>شماره بیمه</th>
+                    <th>شباد</th>
+                </tr>
+                </thead>
+                <tbody id="tempinsuranceField">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END insuranceField*@
+@*START pastMedicalHistoryField*@
+<div class="tab-pane  p-3" id="pastMedicalHistoryFieldBox" role="tabpanel">
+    <div class="row tabToggle10" id="pastMedicalHistoryFieldForm" data-parsley-validate>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="temppastMedicalHistoryFieldList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام بیماری</th>
+                    @*<th>سن شروع</th>*@
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری تاکنون</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیح</th>
+                </tr>
+                </thead>
+                <tbody id="temppastMedicalHistoryField">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END pastMedicalHistoryField*@
+</div>
+</div>
+</fieldset>
+
+<fieldset class="group-box group-box-orange mt-3" id="sendReferFieldset" data-parsley-validate>
+    <legend>ارسال ارجاع</legend>
+    <div class="row " id="referForm" data-parsley-validate>
+        <fieldset class="group-box group-box-gray fieldset-lab" style="width: 100%; margin: 15px; border: .5px dashed;">
+            <div class="row col-12">
+                <div class="form-group col-lg-1  col-sm-2">
+                    <label> قابل مشاهده</label>
+                    <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'iSQueriable');" tabindex="10">
+                        <input id="iSQueriable" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2  col-sm-3">
+                    <label> دلیل ارجاع</label>
+                    <div>
+                        <select id="referredReasonId" class="form-control select2" tabindex="11" required data-parsley-selectvalzero data-parsley-errors-container="#referredReasonIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="referredReasonIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-2  col-sm-2">
+                    <label>نوع ارجاع</label>
+                    <div>
+                        <select id="referredTypeId" class="form-control select2" tabindex="12" required data-parsley-selectvalzero data-parsley-errors-container="#referredTypeIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="referredTypeIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-2  col-sm-2">
+                    <label>تاریخ ارجاع</label>
+                    <div>
+                        <input id="referredDateTime" type="text" class="form-control" @*required*@ data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'">
+
+                    </div>
+                    <div id="referredTypeIdContainer"></div>
+                </div>
+                <div class="form-group col-lg-5  col-sm-5">
+                    <label>توضیحات</label>
+                    <div>
+                        <input id="referralDescription" type="text" class="form-control" required maxlength="100" tabindex="13"/>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="group-box group-box-gray fieldset-lab" style="width: 100%; margin: 15px; margin-top:0px; border: .5px dashed;">
+            <legend>اطلاعات داکتر ارجاع گیرنده</legend>
+            <div class="row col-12">
+                <div class="form-group col-lg-3  col-sm-3">
+                    <label>داکتر</label>
+                    <div>
+                        <select id="admitingDoctorId" class="form-control select2 " tabindex="14">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    @*<div id="referringDoctorIdContainer"></div>*@
+                </div>
+                <div class="form-group col-lg-3  col-sm-3">
+                    <label>تخصص</label>
+                    <div>
+                        <select id="specialityId" class="form-control select2" tabindex="15" required data-parsley-selectvalzero data-parsley-errors-container="#specialityIdContainer">
+                            <option value="0">انتخاب کنید</option>
+                        </select>
+                    </div>
+                    <div id="specialityIdContainer"></div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</fieldset>
+<fieldset class="mt-3">
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" id="abuseHistoryLink" href="#abuseHistoryBox" role="tab">
+            <span class="d-none d-md-block">مصرف دخانیات</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-account h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" id="familyHistoryLink" href="#familyHistoryBox" role="tab">
+            <span class="d-none d-md-block">سوابق خانوادگی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" id="bloodPerssureLink" href="#bloodPerssureBox" role="tab">
+            <span class="d-none d-md-block">فشار خون</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(4)">
+        <a class="nav-link" data-toggle="tab" id="careActionLink" href="#careActionBox" role="tab">
+            <span class="d-none d-md-block">اقدامات درمانی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(5)">
+        <a class="nav-link" data-toggle="tab" id="clinicFindingLink" href="#clinicFindingBox" role="tab">
+            <span class="d-none d-md-block">معاینات کلی مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(6)">
+        <a class="nav-link" data-toggle="tab" id="adverseReactionLink" href="#adverseReactionBox" role="tab">
+            <span class="d-none d-md-block">عوارض جانبی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(7)">
+        <a class="nav-link" data-toggle="tab" id="drugHistoryLink" href="#drugHistoryBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه دارویی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(8)">
+        <a class="nav-link" data-toggle="tab" id="drugOrderedLink" href="#drugOrderedBox" role="tab">
+            <span class="d-none d-md-block">ویژگی دارو تجویز شده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(9)">
+        <a class="nav-link" data-toggle="tab" id="heightWeightLink" href="#heightWeightBox" role="tab">
+            <span class="d-none d-md-block">قد و وزن</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(10)">
+        <a class="nav-link" data-toggle="tab" id="medicalHistoryLink" href="#medicalHistoryBox" role="tab">
+            <span class="d-none d-md-block">تاریخچه داکتری مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(11)">
+        <a class="nav-link" data-toggle="tab" id="pulseLink" href="#pulseBox" role="tab">
+            <span class="d-none d-md-block">ضربان</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(12)">
+        <a class="nav-link" data-toggle="tab" id="vitalSingsLink" href="#vitalSingsBox" role="tab">
+            <span class="d-none d-md-block">علائم حیاتی</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(13)">
+        <a class="nav-link" data-toggle="tab" id="waistHipLink" href="#waistHipBox" role="tab">
+            <span class="d-none d-md-block">ابعاد بدن مراجعه کننده</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(14)">
+        <a class="nav-link" data-toggle="tab" id="diagLink" href="#diagBox" role="tab">
+            <span class="d-none d-md-block">تشخیص</span>
+            <span class="d-block d-md-none">
+                <i class="mdi mdi-email h5"></i>
+            </span>
+        </a>
+    </li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content group-box group-box-gray">
+@*START abuseHistory*@
+<div class="tab-pane active p-3" id="abuseHistoryBox" role="tabpanel">
+    <div class="row tabToggle1" id="abuseHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نوع ماده مخدر</label>
+            <div>
+                <select id="substanceTypeId" class="form-control select2" tabindex="15" @*required data-parsley-selectvalzero*@ data-parsley-errors-container="#substanceTypeIdContainer">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            <div id="substanceTypeIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>میزان مصرف</label>
+            <div>
+                <input id="amountOfAbuseDosage" type="text" class="form-control number" data-parsley-min="1" maxlength="50" tabindex="16" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>واحد ماده مخدر</label>
+            <div>
+                <select id="amountOfAbuseUnitId" class="form-control select2" tabindex="17" @*required data-parsley-selectvalzero*@ @*data-parsley-errors-container="#amountOfAbuseUnitIdContainer"*@>
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            @*<div id="amountOfAbuseUnitIdContainer"></div>*@
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-4">
+            <label>مدت زمان مصرف</label>
+            <div>
+                <input id="abuseDuration" type="text" placeholder="سال - ماه - هفته - روز" class="form-control number" maxlength="50" tabindex="18" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>واحد مصرف</label>
+            <div>
+                <select id="abuseDurationUnitId" class="form-control select2" tabindex="19">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تاریخ شروع مصرف</label>
+            <div>
+                <input id="startDate" type="text" class="form-control" maxlength="10" @*required*@ data-parsley-shamsidate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="20"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-2">
+            <label>تاریخ قطع مصرف</label>
+            <div>
+                <input id="quitDate" type="text" class="form-control" maxlength="10" @*required*@ data-parsley-shamsidate placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" tabindex="21"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0;">
+                <button id="addabuseHistory" type="button" class="btn btn-light border-blue" tabindex="22"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledabuseHistory" type="button" class="btn btn-light border-green" tabindex="23"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempabuseHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نوع ماده مخدر</th>
+                    <th>میزان مصرف</th>
+                    <th>واحد ماده مخدر</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد مصرف</th>
+                    <th>تاریخ شروع مصرف</th>
+                    <th>تاریخ قطع مصرف</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempabuseHistory">
+                <tr id="emptyRow">
+                    <td colspan="9" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END abuseHistory*@
+@*START familyHistory*@
+<div class="tab-pane p-3" id="familyHistoryBox" role="tabpanel">
+    <div class="row tabToggle2" id="familyHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>نسبت با بیمار</label>
+            <div>
+                <select id="relatedPersonId" class="form-control select2" tabindex="24" @*required*@ @*data-parsley-selectvalzero data-parsley-errors-container="#relatedPersonIdContainer"*@>
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            @*<div id="relatedPersonIdContainer"></div>*@
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>نام بیماری</label>
+            <div>
+                <select id="conditionId_familyHistory" class="form-control select2" tabindex="25" @*required data-parsley-errors-container="#conditionId_familyHistoryContainer"*@></select>
+            </div>
+            <div id="conditionId_familyHistoryContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>بیماری علت مرگ </label>
+            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isCauseofDeath');" tabindex="26">
+                <input id="isCauseofDeath" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label> توضیحات بیماری</label>
+            <div>
+                <input id="description_familyHistory" type="text" class="form-control" maxlength="100" tabindex="27"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addfamilyHistory" type="button" class="btn btn-light border-blue" tabindex="28"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledfamilyHistory" type="button" class="btn btn-light border-green" tabindex="29"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempfamilyHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نسبت با بیمار</th>
+                    <th>نام بیماری</th>
+                    <th>بیماری علت مرگ </th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempfamilyHistory">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END familyHistory*@
+@*START bloodPerssure*@
+<div class="tab-pane  p-3" id="bloodPerssureBox" role="tabpanel">
+    <div class="row tabToggle3" id="bloodPerssureForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>حالت بیمار</label>
+            <div>
+                <select id="positionId_bloodPerssure" class="form-control select2" tabindex="30">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-3">
+            <label>فشار خون دیاستولیک</label>
+            <div>
+                <input id="diastolicBP" type="text" placeholder="میلی متر" class="form-control number" maxlength="50" tabindex="31" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>فشار خون سیستولیک</label>
+            <div>
+                <input id="systolicBP" type="text" placeholder="میلی متر" class="form-control number" maxlength="50" tabindex="32" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ مشاهده</label>
+            <div>
+                <input id="observationDateTime_bloodPerssure" type="text" class="form-control" @*required*@ data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="33"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addbloodPerssure" type="button" class="btn btn-light border-blue" tabindex="34"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledbloodPerssure" type="button" class="btn btn-light border-green" tabindex="35"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="font-size:10px" id="tempbloodPerssureList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>حالت بیمار</th>
+                    <th>فشار خون دیاستولیک</th>
+                    <th>فشار خون سیستولیک</th>
+                    <th>تاریخ مشاهده</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempbloodPerssure">
+                <tr id="emptyRow">
+                    <td colspan="6" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END bloodPerssure*@
+@*START careAction*@
+<div class="tab-pane  p-3" id="careActionBox" role="tabpanel">
+    <div class="row tabToggle4" id="careActionForm" data-parsley-validate>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>نام اقدام</label>
+            <div>
+                <select id="actionNameId" class="form-control select2" tabindex="36" @*required data-parsley-errors-container="#actionNameIdContainer"*@></select>
+            </div>
+            <div id="actionNameIdContainer"></div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ و زمان شروع</label>
+            <div>
+                <input id="startDateTime" type="text" class="form-control" @*required*@ data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="37">
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ و زمان پایان</label>
+            <div>
+                <input id="endDateTime" type="text" class="form-control" @*required*@ data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="38">
+            </div>
+        </div>
+        <div class="form-group col-xxl-3 col-lg-4 col-sm-6">
+            <label>مدت زمان انجام اقدام درمانی</label>
+            <div>
+                <input id="timeTaken" type="text" placeholder="سال - ماه - هفته - روز - ساعت - دقیقه" class="form-control number" maxlength="50" tabindex="39" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>واحد اندازه گیری</label>
+            <div>
+                <select id="timeTakenUnitId" class="form-control select2" tabindex="40" @*required data-parsley-errors-container="#timeTakenUnitIdContainer"*@></select>
+            </div>
+            @*<div id="timeTakenUnitIdContainer"></div>*@
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>توضیحات اقدامات انجام شده</label>
+            <div>
+                <input id="actionDescription" type="text" class="form-control" maxlength="100" tabindex="41"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addcareAction" type="button" class="btn btn-light border-blue" tabindex="42"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledcareAction" type="button" class="btn btn-light border-green" tabindex="43"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempcareActionList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام اقدام</th>
+                    <th>تاریخ و زمان شروع</th>
+                    <th>تاریخ و زمان پایان</th>
+                    <th>مدت زمان انجام اقدام درمانی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempcareAction">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END careAction*@
+@*START clinicFinding*@
+<div class="tab-pane  p-3" id="clinicFindingBox" role="tabpanel">
+    <div class="row tabToggle5" id="clinicFindingForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>سن شروع بیماری</label>
+            <div>
+                <input id="ageOfOnset" type="text" class="form-control number" maxlength="50" tabindex="44" @*required*@ data-parsley-max="110"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تاریخ شروع بیماری</label>
+            <div>
+                <input id="onSetDateTime" type="text" class="form-control" @*required*@ data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="45">
+            </div>
+            <div id="onSetDateTimeContainer"></div>
+        </div>
+        <div class="form-group col-xxl-3 col-lg-4 col-sm-6">
+            <label>مدت زمان بیماری تاکنون</label>
+            <div>
+                <input id="onsetDurationToPresent_clinicFinding" placeholder="سال - ماه - هفته - روز - ساعت - دقیقه" type="text" class="form-control number" maxlength="50" tabindex="46" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>واحد اندازه گیری</label>
+            <div>
+                <select id="onsetDurationToPresentUnitId_clinicFinding" class="form-control select2" tabindex="47">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>علائم نشانه ها و یافته های بالینی</label>
+            <div>
+                <select id="findingId" class="form-control select2" tabindex="48">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>شدت</label>
+            <div>
+                <select id="severityId" class="form-control select2" tabindex="49">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>علائمی که وجود ندارد</label>
+            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'nillSignificant');" tabindex="50">
+                <input id="nillSignificant" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-6">
+            <label> توضیحات علائم نشانه ها و یافته های بالینی</label>
+            <div>
+                <input id="description_clinicFinding" type="text" class="form-control" maxlength="100" tabindex="51">
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addclinicFinding" type="button" class="btn btn-light border-blue" tabindex="52"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledclinicFinding" type="button" class="btn btn-light border-green" tabindex="53"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempclinicFindingList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>سن شروع بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری تاکنون </th>
+                    <th>واحد اندازه گیری</th>
+                    <th>علائم نشانه ها و یافته های بالینی</th>
+                    <th>شدت</th>
+                    <th>علائمی که وجود ندارد</th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempclinicFinding">
+                <tr id="emptyRow">
+                    <td colspan="10" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END clinicFinding*@
+@*START adversReaction*@
+<div class="tab-pane  p-3" id="adverseReactionBox" role="tabpanel">
+    <div class="row tabToggle6" id="adverseReactionForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دسته بندی عامل عارضه</label>
+            <div>
+                <select id="causativeAgentCategoryId" class="form-control select2" tabindex="54">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>عامل ایجاد کننده عارضه</label>
+            <div>
+                <select id="causativeAgentId" class="form-control select2" tabindex="55"> </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دسته بندی عارضه</label>
+            <div>
+                <select id="reactionCategoryId" class="form-control select2" tabindex="56">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-xxl-3 col-lg-4 col-sm-6">
+            <label>عارضه</label>
+            <div>
+                <select id="reactionId" class="form-control select2" maxlength="50" tabindex="57">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>شدت عارضه</label>
+            <div>
+                <select id="diagnosisSeverityId" class="form-control select2" tabindex="58"></select>
+            </div>
+        </div>
+        <div class="form-group col-lg-4 col-sm-4">
+            <label>شرح</label>
+            <div>
+                <input id="description" class="form-control select2" tabindex="59" maxlength="100"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addadverseReaction" type="button" class="btn btn-light border-blue" tabindex="60"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledadverseReaction" type="button" class="btn btn-light border-green" tabindex="61"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempadverseReactionList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>دسته بندی عامل عارضه</th>
+                    <th>عامل ایجاد کننده عارضه</th>
+                    <th>دسته بندی عارضه </th>
+                    <th>عارضه </th>
+                    <th>شدت عارضه</th>
+                    <th>توضیحات</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempAdverseReaction">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END adversReaction*@
+@*START drugHistory*@
+<div class="tab-pane  p-3" id="drugHistoryBox" role="tabpanel">
+    <div class="row tabToggle7" id="drugHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-3  col-sm-4">
+            <label>نام دارو</label>
+            <div>
+                <select id="medicationId" class="form-control select2" tabindex="62" @*required data-parsley-errors-container="#medicationIdContainer"*@></select>
+            </div>
+            @*<div id="medicationIdContainer"></div>*@
+        </div>
+        <div class="form-group col-lg-3  col-sm-4">
+            <label>طریقه مصرف</label>
+            <div>
+                <select id="routeId_drugHistory" class="form-control select2" tabindex="63">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="adddrugHistory" type="button" class="btn btn-light border-blue" tabindex="64"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceleddrugHistory" type="button" class="btn btn-light border-green" tabindex="65"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام دارو</th>
+                    <th>طریقه مصرف</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugHistory">
+                <tr id="emptyRow">
+                    <td colspan="4" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugHistory*@
+@*START drugOrdered*@
+<div class="tab-pane  p-3" id="drugOrderedBox" role="tabpanel">
+    <div class="row tabToggle8" id="drugOrderedForm" data-parsley-validate>
+        <div class="form-group col-lg-2  col-sm-4">
+            <label>کد دارو</label>
+            <div>
+                <select id="productId" class="form-control select2" tabindex="66" @*required data-parsley-errors-container="#productIdContainer"*@></select>
+            </div>
+            @*<div id="productIdContainer"></div>*@
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نام ژنریک دارو</label>
+            <div>
+                <input id="drugGenericName" type="text" class="form-control" maxlength="50" tabindex="67" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>طریقه مصرف</label>
+            <div>
+                <select id="routeId_drugOrdered" class="form-control select2" tabindex="68">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>تواتر مصرف</label>
+            <div>
+                <select id="frequencyId" class="form-control select2" tabindex="69">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>دوز مصرفی</label>
+            <div>
+                <input id="dosage" type="text" placeholder="میلی گرم - میلی لیتر" class="form-control number" maxlength="50" tabindex="70" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>واحد اندازه گیری</label>
+            <div>
+                <select id="dosageUnitId" class="form-control select2" tabindex="71" @*required data-parsley-selectvalzero*@ @*data-parsley-errors-container="#dosageUnitIdContainer"*@>
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+            @*<div id="dosageUnitIdContainer"></div>*@
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3  col-sm-4">
+            <label>مدت زمان مصرف</label>
+            <div>
+                <input id="longTerm" type="text" placeholder="سال - ماه - روز - دقیقه" class="form-control number" maxlength="50" tabindex="72" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>واحد اندازه گیری مدت زمان مصرف</label>
+            <div>
+                <select id="longTermUnitId" class="form-control select2" tabindex="73">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-xxl-1 col-lg-2 col-sm-4">
+            <label>تعداد</label>
+            <div>
+                <input id="totalNumber" type="text" class="form-control number" maxlength="50" tabindex="74" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2  col-sm-3">
+            <label>تاریخ و زمان تجویز</label>
+            <div>
+                <input id="administrationDateTime" type="text" class="form-control" @*required*@ data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="75">
+            </div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-5">
+            <label> توضیحات داروهای تجویز شده</label>
+            <div>
+                <input id="description_drugOrdered" type="text" class="form-control" maxlength="100" tabindex="76"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="adddrugOrdered" type="button" class="btn btn-light border-blue" tabindex="77"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceleddrugOrdered" type="button" class="btn btn-light border-green" tabindex="78"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempdrugOrderedList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>کد دارو</th>
+                    <th>نام ژنریک دارو</th>
+                    <th>طریقه مصرف</th>
+                    <th>تواتر مصرف</th>
+                    <th>دوز مصرفی</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>مدت زمان مصرف</th>
+                    <th>واحد اندازه گیری مدت زمان مصرف</th>
+                    <th>تعداد</th>
+                    <th>تاریخ و زمان تجویز</th>
+                    <th>توضیح</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempdrugOrdered">
+                <tr id="emptyRow">
+                    <td colspan="13" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END drugOrdered*@
+@*START heightWeight*@
+<div class="tab-pane  p-3" id="heightWeightBox" role="tabpanel">
+    <div class="row tabToggle9" id="heightWeightForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>قد</label>
+            <div>
+                <input id="height" type="text" placeholder="سانتی متر" class="form-control float number" maxlength="50" tabindex="79" @*required*@/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>وزن</label>
+            <div>
+                <input id="weight" type="text" placeholder="کیلو گرم" class="form-control float number" maxlength="50" tabindex="80"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ مشاهده</label>
+            <div>
+                <input id="observationDateTime_heightWeight" type="text" class="form-control" data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="81">
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addheightWeight" type="button" class="btn btn-light border-blue" tabindex="82"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledheightWeight" type="button" class="btn btn-light border-green" tabindex="83"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempheightWeightList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>قد</th>
+                    <th>وزن</th>
+                    <th>تاریخ مشاهده</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempheightWeight">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END heightWeight*@
+@*START medicalHistory*@
+<div class="tab-pane  p-3" id="medicalHistoryBox" role="tabpanel">
+    <div class="row tabToggle10" id="medicalHistoryForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>نام بیماری</label>
+            <div>
+                <select id="conditionId_medicalHistory" class="form-control select2" tabindex="84" @*required data-parsley-errors-container="#conditionId_medicalHistoryContainer"*@></select>
+            </div>
+            @*<div id="conditionId_medicalHistoryContainer"></div>*@
+        </div>
+        <div class="form-group col-lg-2 col-sm-4">
+            <label>سن شروع بیماری</label>
+            <div>
+                <input id="ageOfOnset_medicalHistory" type="text" class="form-control number" @*data-parsley-errors-container="#ageofOnset_medicalHistoryContainer"*@ tabindex="85"/>
+            </div>
+            @*<div id="ageofOnset_medicalHistoryContainer"></div>*@
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ شروع بیماری</label>
+            <div>
+                <input id="dateOfOnSet" type="text" class="form-control" maxlength="16" @*required*@ data-parsley-shamsidatetime placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="86"/>
+            </div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-4">
+            <label>مدت زمان بیماری تاکنون</label>
+            <div>
+                <input id="onsetDurationToPresent_medicalHistory" type="text" placeholder="سال - ماه - هفته - روز" class="form-control number" maxlength="50" tabindex="87"/>
+            </div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-2 col-sm-3">
+            <label>واحد اندازه گیری</label>
+            <div>
+                <select id="onsetDurationToPresentUnitId_medicalHistory" class="form-control select2" tabindex="88">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-xxl-2 col-lg-3 col-sm-5">
+            <label>توضیحات سابقه داکتری</label>
+            <div>
+                <input id="description_medicalHistory" type="text" class="form-control" maxlength="100" tabindex="89"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addmedicalHistory" type="button" class="btn btn-light border-blue" tabindex="90"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledmedicalHistory" type="button" class="btn btn-light border-green" tabindex="91"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempmedicalHistoryList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام بیماری</th>
+                    <th>سن شروع بیماری</th>
+                    <th>تاریخ شروع بیماری</th>
+                    <th>مدت زمان بیماری تاکنون</th>
+                    <th>واحد اندازه گیری</th>
+                    <th>توضیح</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempmedicalHistory">
+                <tr id="emptyRow">
+                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END medicalHistory*@
+@*START pulse*@
+<div class="tab-pane  p-3" id="pulseBox" role="tabpanel">
+    <div class="row tabToggle11" id="pulseForm" data-parsley-validate>
+        @*<div class="form-group col-lg-2 col-sm-3">
+                                                    <label>حالت بیمار</label>
+                                                    <div>
+                                                        <select id="positionId_pulse" class="form-control select2" tabindex="97" required data-parsley-errors-container="#positionId_pulseContainer"></select>
+                                                    </div>
+                                                    <div id="positionId_pulseContainer"></div>
+                                                </div>*@
+        <div class="form-group col-lg-2 col-sm-2">
+            <label>تعداد ضربان </label>
+            <div>
+                <input id="pulseRate_pulse" type="text" placeholder="در دقیقه" class="form-control number" maxlength="50" tabindex="92"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>وجود / عدم وجود نبض</label>
+            <div>
+                <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isPulsePresent');" tabindex="93">
+                    <input id="isPulsePresent" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر" checked/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-4">
+            <label>روش اندازه گیری</label>
+            <div>
+                <select id="methodId" class="form-control select2" tabindex="94">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>محل نبض</label>
+            <div>
+                <select id="locationOfMeasurment" class="form-control select2" tabindex="95">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>ویژگی نبض</label>
+            <div>
+                <select id="characterId" class="form-control select2" tabindex="96">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>حجم و قدرت نبض</label>
+            <div>
+                <select id="volumeId" class="form-control select2" tabindex="97">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>ریتم و نظم نبض</label>
+            <div>
+                <select id="regularityId" class="form-control select2" tabindex="98"></select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ مشاهده</label>
+            <div>
+                <input id="observationDateTime_pulse" type="text" class="form-control" data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="99">
+            </div>
+        </div>
+        <div class="form-group col-lg-3 col-sm-5">
+            <label>شرح بالینی ضربان</label>
+            <div>
+                <input id="clinicalDescription" type="text" class="form-control" maxlength="100" tabindex="100"/>
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addpulse" type="button" class="btn btn-light border-blue" tabindex="101"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledpulse" type="button" class="btn btn-light border-green" tabindex="102"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="temppulseList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    @*<th>حالت بیمار</th>*@
+                    <th>تعداد ضربان </th>
+                    <th>وجود / عدم وجود نبض</th>
+                    <th>روش اندازه گیری</th>
+                    <th>محل نبض</th>
+                    <th>ویژگی نبض</th>
+                    <th>حجم و قدرت نبض</th>
+                    <th>ریتم و نظم نبض</th>
+                    <th>تاریخ مشاهده</th>
+                    <th>شرح بالینی ضربان</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="temppulse">
+                <tr id="emptyRow">
+                    <td colspan="11" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END pulse*@
+@*START vitalSings*@
+<div class="tab-pane  p-3" id="vitalSingsBox" role="tabpanel">
+    <div class="row tabToggle12" id="vitalSingsForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تعداد ضربان</label>
+            <div>
+                <input id="pulseRate_vitalSings" placeholder="در دقیقه" type="text" class="form-control number" maxlength="50" tabindex="100"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تعداد تنفس</label>
+            <div>
+                <input id="respiratoryRate" type="text" placeholder="در دقیقه" class="form-control number" maxlength="50" tabindex="101"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>دمای بدن</label>
+            <div>
+                <input id="temperature" type="text" placeholder="سلسیوس" class="form-control decimal" maxlength="50" tabindex="102"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>محل اخذ دما</label>
+            <div>
+                <select id="temperatureLocationId" class="form-control select2" tabindex="103">
+                    <option value="0">انتخاب کنید</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ مشاهده</label>
+            <div>
+                <input id="observationDateTime_vitalSings" type="text" class="form-control" data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="104">
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addvitalSings" type="button" class="btn btn-light border-blue" tabindex="105"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledvitalSings" type="button" class="btn btn-light border-green" tabindex="106"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempvitalSingsList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>تعداد ضربان </th>
+                    <th>تعداد تنفس </th>
+                    <th>دمای بدن</th>
+                    <th>محل اخذ دما</th>
+                    <th>تاریخ مشاهده</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempvitalSings">
+                <tr id="emptyRow">
+                    <td colspan="7" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END vitalSings*@
+@*START waistHip*@
+<div class="tab-pane  p-3" id="waistHipBox" role="tabpanel">
+    <div class="row tabToggle13" id="waistHipForm" data-parsley-validate>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>اندازه دور ران</label>
+            <div>
+                <input id="hipCircumference" type="text" placeholder="سانتی متر" class="form-control float number" maxlength="50" tabindex="107"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>اندازه دور کمر</label>
+            <div>
+                <input id="waistCircumference" type="text" placeholder="سانتی متر" class="form-control float number" maxlength="50" tabindex="108"/>
+            </div>
+        </div>
+        <div class="form-group col-lg-2 col-sm-3">
+            <label>تاریخ مشاهده</label>
+            <div>
+                <input id="observationDateTime_waistHip" type="text" class="form-control" data-parsley-shamsidatetime maxlength="16" placeholder="____/__/__ __:__" data-inputmask="'mask':'9999/99/99 99:99'" tabindex="109">
+            </div>
+        </div>
+        <div class="col-sm text-right">
+            <div class="button-items" style="margin:20px 0 10px 0">
+                <button id="addwaistHip" type="button" class="btn btn-light border-blue" tabindex="110"><i class="fa fa-arrow-down"></i>ثبت</button>
+                <button id="canceledwaistHip" type="button" class="btn btn-light border-green" tabindex="111"><i class="fa fa-times"></i>&nbsp;&nbsp;انصراف</button>
+            </div>
+        </div>
+        <div class="table-responsive" style="width:100%;height: 300px;">
+            <table class="table table-styles border mb-0" style="table-layout:fixed;font-size:10px" id="tempwaistHipList">
+                <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>اندازه دور ران</th>
+                    <th>اندازه دور کمر</th>
+                    <th>تاریخ مشاهده</th>
+                    <th>عملیات</th>
+                </tr>
+                </thead>
+                <tbody id="tempwaistHip">
+                <tr id="emptyRow">
+                    <td colspan="5" class="text-center">سطری وجود ندارد</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*END waistHip*@
+@*START diag*@
+@await Html.PartialAsync("/Modules/MC/AdmissionDiagnosis/DiagnosisSection.cshtml")
+@*END diag*@
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+</div>
+</div> <!-- end col -->
+</div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/SearchAdmissionModal/SearchAdmissionModal.cshtml")
+
+@await Html.PartialAsync("/Modules/MC/AdmissionDisplay/AdmissionDisplay.cshtml")
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<script type="text/javascript" class="main-script" src="/Modules/MC/AdmissionRefer/AdmissionGetReferForm.js"></script>

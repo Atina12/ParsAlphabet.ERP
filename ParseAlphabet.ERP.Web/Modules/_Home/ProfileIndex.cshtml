@@ -1,0 +1,112 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "پروفایل";
+}
+<link href="/Content/scss/rtl/Pages/dashboard-rtl.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!--<div class="col-sm-3">
+                <div class="card">
+                <div class="card-header">
+                    <h5 class="mt-0 mb-0">پروفایل کاربری</h5>
+                </div>
+                <div class="card-body">-->
+                @*<div class="profile-image text-center">
+                                <img class="img-thumbnail" alt="150x150" id="picture" src="/content/images/blank-person.png" width="150" height="150" data-holder-rendered="true" />
+                            </div>*@
+                <!--<div class="text-center">
+                    <h5 id="fullName">نام و  تخلص</h5>
+                    <p id="roleTitle" class="text-muted">-</p>
+                </div>
+                </div>
+                <div class="card-footer uploadfrm">
+                    <span class="btn btn-print-outline btn-file mt-0">
+                        آپلود تصویر جدید <input type="file" accept="image/jpg,image/jpeg,image/png" onchange="readPictureFromURL(this);">
+                    </span>
+                </div>
+                </div>
+                </div>-->
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mt-0 mb-0">اطلاعات کاربری</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label>نام</label>
+                                    <input id="firstName" type="text" class="form-control" value="" readonly/>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label> تخلص</label>
+                                    <input id="lastName" type="text" class="form-control" value="" readonly/>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label>نمبر تذکره</label>
+                                    <input id="nationalCode" type="text" class="form-control str-number" value="" readonly/>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label>نقش</label>
+                                    <input id="roleName" type="text" class="form-control" value="" readonly/>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label>نام کاربری</label>
+                                    <input id="userName" type="text" class="form-control" value="" readonly/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>ایمیل</label>
+                                    <input id="email" type="text" class="form-control" value="" readonly/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>آی پی</label>
+                                    <input id="ip" type="text" class="form-control" value="" readonly/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>سیستم عامل</label>
+                                    <input id="operatingSystem" type="text" class="form-control" value="" readonly/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>مرورگر</label>
+                                    <input id="browser" type="text" class="form-control" value="" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <h5 class="mt-0 mb-0">تغییر رمز ورود</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="changePassForm" data-parsley-validate>
+                                <div class="form-group col-sm-6">
+                                    <input type="password" id="newpassword" class="form-control" title=" " maxlength="10" required
+                                           placeholder="رمز ورود جدید" tabindex="13" data-parsley-errors-container="#newpasswordContainer"/>
+                                    <div id="newpasswordContainer"></div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input type="password" id="newpasswordconf" class="form-control" title=" " maxlength="10" required
+                                           data-parsley-equalto="#newpassword"
+                                           placeholder="تکرار رمز ورود جدید" tabindex="14" data-parsley-errors-container="#newpasswordconfContainer"/>
+                                    <div id="newpasswordconfContainer"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button id="modalChangePassSave" onclick="changepass()" class="btn btn-success waves-effect waves-light float-left" tabindex="15"><i class="fa fa-save ml-1"></i>ذخیره</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/Modules/_Home/ProfileIndex.js"></script>
+<script>
+    var profileUserId=@User.FindFirstValue("UserId");
+</script>

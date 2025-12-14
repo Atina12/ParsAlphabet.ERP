@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "بیمه ها";
+}
+
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right pr-0">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>نام بیمه</label>
+                        <div>
+                            <input id="name" type="text" class="form-control" title="" required tabindex="1"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نوع بیمه</label>
+                        <div>
+                            <select id="insurerTypeId" class="form-control" title="" required tabindex="2" data-parsley-selectvalzero data-parsley-errors-container="#insurerTypeIdErrorContainer">
+                            </select>
+                        </div>
+                        <div id="insurerTypeIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>ترمینولوژی</label>
+                        <div>
+                            <select id="insurerTerminologyId" class="form-control" title="" tabindex="3" data-parsley-selectvalzero data-parsley-errors-container="#InsurerTerminologyIdErrorContainer">
+                            </select>
+                        </div>
+                        <div id="InsurerTerminologyIdErrorContainer"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="4">
+                            <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                        <div id="insuranceBoxIdErrorContainer"></div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">صندوق بیمه</h5>
+                </div>
+                <div class="row" id="divBox">
+                    <div class="col-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:400px" id="tableLine">
+                            <table style="width:100% !important">
+                                <thead>
+                                <tr>
+                                    <th style="width:6%">سطر</th>
+                                    <th style="width:31%">نام</th>
+                                    <th style="width:31%">ترمینولوژی</th>
+                                    <th style="width:22%">وضعیت</th>
+                                    <th style="width:10%">عملیات</th>
+                                </tr>
+                                <tr>
+                                    <th style="width:6%" disabled>
+                                        <input id="rowNumber" type="text" class="form-control atoz-valid text-center" maxlength="50" title="" disabled>
+                                    </th>
+                                    <th style="width:31%">
+                                        <div id="boxNameDiv">
+                                            <input id="boxName" type="text" class="form-control atoz0t9-dash-underline-valid" title="" maxlength="50" tabindex="5"/>
+                                        </div>
+                                    </th>
+                                    <th style="width:31%">
+                                        <div class="form-group" style="margin-bottom:0px">
+                                            <select id="insuranceBoxTerminologyId" class="form-control select2" tabindex="6"></select>
+                                        </div>
+                                    </th>
+                                    <th style="width:22%">
+                                        <div class="form-group w-100 " style="margin-bottom:0px">
+                                            @*<label> وضعیت</label>*@
+                                            <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActiveBox');" tabindex="7">
+                                                <input id="isActiveBox" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th style="width:10%">
+                                        <div style="display:flex;justify-content:center;width:100%">
+                                            <button id="saveRow" type="button" onclick="saveUpdateRow(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="8">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button id="resetInputs" type="button" onclick="resetInputsBox()" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="9">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="5" style="text-align:center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveForm" type="button" onclick="saveInsurance()" class="btn btn-success waves-effect" title="Ctrl + S" tabindex="10"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle" tabindex="11"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<div id="insuranceBoxModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">لیست صندوق</h5>
+                </div>
+            </div>
+            <div class="modal-header">
+                <div class="row-info text-right d-flex">
+                    <h4 class="font-16 my-2">
+                        <span class="text-gray">شناسه : </span><span id="insurerId">-</span>
+                    </h4>
+                    <div class="border-right mr-2" ondblclick="">
+                        <p class="d-inline-block pl-2 m-2">عنوان بیمه : <span id="insurerName">-</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="row">
+                    <div class="table-responsive" style="width:98%;margin:0 auto;padding-bottom:10px">
+                        <table class="table table-styles border mb-0" id="insuranceBoxPagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-10">شناسه صندوق</th>
+                                <th class="col-width-percent-30">نام </th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempInsuranceBox">
+                            <tr id="emptyRow">
+                                <td colspan="2" class="text-center">سطری وجود ندارد</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('insuranceBoxModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/MC/InsurerPatient/InsurerPatient.cshtml")
+
+
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="/Modules/FM/getJsonDataAsync.js"></script>
+<script src="~/Modules/MC/Insurance/InsuranceIndex.js"></script>

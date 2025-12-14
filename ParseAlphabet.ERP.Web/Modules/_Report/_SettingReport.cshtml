@@ -1,0 +1,47 @@
+﻿<button id="resetfilds" class="btn green_2 waves-effect waves-light"><i class="fa fa-undo-alt ml-1"></i>بازنشانی</button>
+<button id="showSettingModal" class="btn btn-secondary waves-effect"><i class="fa fa-cog ml-1"></i>تنظیمات پیش نمایش</button>
+<!--Modal-->
+<div id="reportSettingModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-12 text-right">
+                    <h5 class="modal-title mt-0">تنظیمات پیش نمایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label> نمایش هر گروه در صفحه جدید</label>
+                        <div class="funkyradio funkyradio-success" id="fk_newPageAfter" onkeydown="funkyradio_keydown(event,'setNewPageAfter');" tabindex="21">
+                            <input id="setNewPageAfter" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label> بازنشانی شماره صفحه برای هر گروه</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'setPageNumberReset');" tabindex="22">
+                            <input id="setPageNumberReset" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label> نمایش لوگو</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'setShowLogo');" tabindex="23">
+                            <input id="setShowLogo" type="checkbox" onchange="funkyradio_onchange(this)" checked switch-value="بلی,خیر"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label> نمایش تاریخ تهیه</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'setReportDate');" tabindex="24">
+                            <input id="setReportDate" type="checkbox" onchange="funkyradio_onchange(this)" checked switch-value="بلی,خیر"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="settingReport" class="btn btn-success waves-effect waves-light" tabindex="500"><i class="fa fa-save"></i>اعمال</button>
+                <button id="closeSettingModal" class="btn btn-secondary waves-effect" data-dismiss="modal"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>

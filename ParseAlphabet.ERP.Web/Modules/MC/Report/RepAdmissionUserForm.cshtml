@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "گزارش کاربران";
+}
+
+<div class="content-page  displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="button-items">
+                                <button id="getReport" class="btn green_2 waves-effect waves-light"><i class="fas fa-sticky-note ml-1"></i>پیش نمایش</button>
+                                <button id="showReport" type="button" class="btn btn-warning"><i class="fas fa-file-import ml-1"></i>تهیه گزارش</button>
+                                @await Html.PartialAsync("/Modules/_Report/_SettingReport.cshtml")
+                                <button type="button" id="exportCSV" onclick="export_AdmissionCashReport_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel ml-2"></i>اکسل</button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <fieldset class="group-box group-box-gray">
+                                <button type="button" onclick="plus(this)" class="btn btn-light border-dark plus">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <legend>فیلتر</legend>
+                                <div class="row slideToggle open">
+                                    <div class="row col-12" id="AdmissionUserReport" data-parsley-validate>
+
+                                        <div class="form-group col-lg-3  col-sm-4">
+                                            <label>تاریخ ثبت</label>
+                                            <div class="double-input-box">
+                                                <div class="double-input">
+                                                    <input type="text" id="fromDate"
+                                                           class="form-control number persian-date persian-datepicker"
+                                                           placeholder="____/__/__"
+                                                           value="@DateTime.Now.ToPersianDateString(" {0} /{1}/{2}")"
+                                                           data-inputmask="'mask':'9999/99/99'"
+                                                           data-parsley-compareshamsidateyear="toDate"
+                                                           data-parsley-shamsidate
+                                                           data-parsley-errors-container="#fromDateErrorContainer"
+                                                           data-parsley-comparedate="toDate"
+                                                           data-parsley-dateisonemonth="toDate"
+                                                           maxlength="10" tabindex="1"/>
+                                                </div>
+                                                <div class="double-input">
+                                                    <input type="text" id="toDate"
+                                                           class="form-control number persian-date persian-datepicker"
+                                                           placeholder="____/__/__"
+                                                           value="@DateTime.Now.ToPersianDateString(" {0} /{1}/{2}")"
+                                                           data-inputmask="'mask':'9999/99/99'"
+                                                           data-parsley-shamsidate
+                                                           data-parsley-errors-container="#toDateErrorContainer"
+                                                           maxlength="10" tabindex="2"/>
+                                                </div>
+                                            </div>
+                                            <div class="double-input-box">
+                                                <div class="double-input" id="fromDateErrorContainer"></div>
+                                                <div class="double-input" id="toDateErrorContainer"></div>
+                                            </div>
+                                        </div>
+
+                                        <div id="branchContainer" class="form-group col-lg-2 col-sm-4 mb-0">
+                                            <label>شعبه</label>
+                                            <select id="branchId" class="form-control select2" multiple="multiple" name="branch[]" tabindex="3"></select>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>نوع آیتم</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="itemType" class="select2 select2-quick-access" tabindex="4">
+                                                    <option value="1">1 - کالا</option>
+                                                    <option value="2">2 - خدمت</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>جریان کار</label>
+                                            <select id="workflowId" class="form-control select2" multiple="multiple" tabindex="5"></select>
+                                        </div>
+                                        <div class="form-group col-lg-3 col-sm-4 mb-0">
+                                            <label>مرحله</label>
+                                            <select id="stageId" class="form-control select2" multiple="multiple" name="stage[]" tabindex="6"></select>
+                                        </div>
+
+
+                                        <div class="form-group col-lg-2 col-sm-2 mb-0">
+                                            <div class="form-group">
+                                                <label>گام</label>
+                                                <div>
+                                                    <select class="form-control select2" id="actionId" name="action[]" multiple tabindex="7"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4">
+                                            <label>کاربر ثبت کننده سربرگ</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="userId" class="select2 select2-quick-access" multiple name="er[]" tabindex="8">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-sm-4" id="vendorContainer">
+                                            <label>تامین کننده</label>
+                                            <div class="col-12 chosen-container-parent">
+                                                <select class="form-control select2" id="vendorId" name="vendor[]" multiple tabindex="9"></select>
+                                            </div>
+                                        </div>
+                                        <div id="attenderContainer" class="form-group col-lg-2 col-sm-4 displaynone">
+                                            <label>داکتر</label>
+                                            <div class="col-sm-12 chosen-container-parent">
+                                                <select data-placeholder="انتخاب کنید" id="attenderId" required class="select2" data-parsley-errors-container="#attenderIdError" tabindex="10">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div id="attenderIdError"></div>
+
+                                        <div id="departmentContainer" class="form-group col-lg-2 col-sm-4 mb-0 displaynone">
+                                            <label>دپارتمان</label>
+                                            <div>
+                                                <select id="departmentId" class="form-control select2" multiple="multiple" tabindex="11">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <fieldset class="group-box group-box-gray mt-3">
+                            <legend>پیش نمایش</legend>
+                            <div class="pagetable-report" id="mainReport">
+                                @await Html.PartialAsync("/Modules/PageTableReport.cshtml")
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+<!--Modal-->
+<div id="previewReportModal" class="modal fade" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">تهیه گزارش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="col-lg-12 col-sm-12 pr-0">
+                    <div class="form-group">
+                        <label>شکل گزارش</label>
+                        <select class="form-control" id="reportType" tabindex="20">
+                            <option class="servicePreview" value="4">گزارش پذیرش به تفکیک داکتر - کاربران</option>
+                            <option class="servicePreview" value="2">گزارش ریز پذیرش به تفکیک تاریخ و داکتر - کاربران</option>
+                            <option class="salePreview" value="3">گزارش کالا به تفکیک تاریخ و تامین کننده - کاربران</option>
+                            <option class="salePreview" value="1">گزارش کالا به تفکیک تامین کننده - کاربران</option>
+                            <option class="admissionUser" value="5">گزارش خلاصه وضعیت عملکرد کاربران</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-previewReport" class="btn btn-success waves-effect waves-light" tabindex="21"><i class="fa fa-save"></i>تهیه گزارش</button>
+                <button id="modal-close" onclick="modal_closePreviewRepor('previewReportModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<script type="text/javascript" src="/Modules/MC/Report/RepAdmissionUserForm.js"></script>

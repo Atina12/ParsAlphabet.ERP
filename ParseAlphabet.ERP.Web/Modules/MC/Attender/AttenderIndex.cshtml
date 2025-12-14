@@ -1,0 +1,320 @@
+﻿@{
+    ViewBag.Title = "داکتران";
+}
+
+<link href="~/lib/ModulesCss/Attender.css" rel="stylesheet"/>
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+<div class="modal-dialog modal-size-lg">
+<div class="modal-content">
+<div class="modal-header bg-header">
+    <div class="text-right">
+        <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+    </div>
+</div>
+<div class="modal-body modal-max-height text-right over-visible" id="AddEditModalBody" data-parsley-validate>
+<ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(1)">
+        <a class="nav-link active" data-toggle="tab" href="#personalBox" role="tab" id="firstTab">
+            <span class="d-none d-md-block">اطلاعات فردی</span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(2)">
+        <a class="nav-link" data-toggle="tab" href="#professionalBox" role="tab">
+            <span class="d-none d-md-block">اطلاعات تخصصی</span>
+        </a>
+    </li>
+    <li class="nav-item waves-effect waves-light" onclick="focusInput(3)">
+        <a class="nav-link" data-toggle="tab" href="#perscrptionBox" role="tab">
+            <span class="d-none d-md-block">دسترسی نسخه</span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content group-box group-box-gray text-right">
+    <div class="tab-pane active p-3 " id="personalBox" role="tabpanel" data-parsley-validate>
+        <div class="form-group row tabToggle1">
+            <div class="form-group col-12">
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label>نام </label>
+                <div>
+                    <input id="firstName" type="text" class="form-control atoz-valid" required oninput="checkAttenderInput(event)" maxlength="50" tabindex="1"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label> تخلص </label>
+                <div>
+                    <input id="lastName" type="text" class="form-control atoz-valid" required oninput="checkAttenderInput(event)" maxlength="50" tabindex="2"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>جنسیت</label>
+                <div>
+                    <select id="genderId" class="form-control select2" title="" required oninput="checkAttenderInput(event)" tabindex="3" data-parsley-errors-container="#genderIdError">
+                        <option value="1">مرد</option>
+                        <option value="2">زن</option>
+                    </select>
+                </div>
+                <div id="genderIdError"></div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>نام پدر </label>
+                <div>
+                    <input id="fatherName" type="text" class="form-control atoz-valid" maxlength="50" tabindex="4"/>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-4">
+                <label>شماره موبایل </label>
+                <div>
+                    <input id="mobileNo" type="text" class="form-control str-number" required oninput="checkAttenderInput(event)" data-parsley-mobileno data-parsley-errors-container="#mobilenoCodeError" maxlength="11" tabindex="5"/>
+                </div>
+                <div id="mobilenoCodeError"></div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>شماره تلفن </label>
+                <div>
+                    <input id="phoneNo" type="text" class="form-control str-number" data-parsley-phoneno data-parsley-errors-container="#phoneNoCodeError" maxlength="11" tabindex="6"/>
+                </div>
+                <div id="phoneNoCodeError"></div>
+            </div>
+
+          @*   <div class="form-group col-sm-4">
+                <label>شماره شناسنامه </label>
+                <div>
+                    <input id="idNumber" type="text" class="form-control str-number"  oninput="checkAttenderInput(event)" maxlength="10" tabindex="7"/>
+                </div>
+            </div> *@
+            <div class="form-group col-sm-4">
+                <label>نمبر تذکره</label>
+                <div>
+                    <input id="nationalCode" type="text"
+                           class="form-control str-number"
+                           placeholder="____-____-_____"
+                           data-parsley-validate-if-empty="true"
+                           data-parsley-nationalcitizen data-parsley-nationalcode=""
+                           data-inputmask="'mask':'9999-9999-99999'"
+                           tabindex="8"
+                           required
+                           data-parsley-errors-container="#nationalCodeError"/>
+                </div>
+                <div id="nationalCodeError"></div>
+
+            </div>
+            <div class="form-group col-sm-4">
+                <label>تاریخ تولد</label>
+                <div>
+                    <input id="birthDatePersian" type="text" class="form-control persian-date" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate maxlength="10" tabindex="9"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>مالیات</label>
+                <div>
+                    <input id="attenderTaxPer" type="text" class="form-control number"  oninput="checkAttenderInput(event)" maxlength="3" data-parsley-max="99" value="10" tabindex="10"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>ولایت</label>
+                <div>
+                    <select id="locStateId" class="form-control select2" tabindex="11" required oninput="checkAttenderInput(event)" data-parsley-selectvalzero data-parsley-errors-container="#LocStateIdContainer">
+                        <option value="0" selected>انتخاب کنید</option>
+                    </select>
+                </div>
+                <div id="LocStateIdContainer"></div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>شهر</label>
+                <div>
+                    <select id="locCityId" class="form-control select2" tabindex="12" required oninput="checkAttenderInput(event)" data-parsley-selectvalzero data-parsley-errors-container="#LocCityIdContainer">
+                        <option value="0">انتخاب کنید</option>
+                    </select>
+                </div>
+                <div id="LocCityIdContainer"></div>
+            </div>
+            <div class="form-group col-sm-8">
+                <label>آدرس</label>
+                <div>
+                    <input id="address" type="text" class="form-control" tabindex="13"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label> وضعیت</label>
+                <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActive');" tabindex="14">
+                    <input id="isActive" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="professionalBox" role="tabpanel">
+        <div class="form-group row tabToggle2" data-parsley-validate>
+            <div class="form-group col-sm-4">
+                <label>دپارتمان</label>
+                <div>
+                    <select id="departmentId" class="form-control select2" title="" required oninput="checkAttenderInput(event)" tabindex="20" data-parsley-errors-container="#serviceDepartmentIdError"></select>
+                </div>
+                <div id="serviceDepartmentIdError">
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>تخصص</label>
+                <div>
+                    <select id="specialityId" titleId="specialityName" class="form-control select2" title="" tabindex="21" required oninput="checkAttenderInput(event)" data-parsley-errors-container="#SpecialityIdErrorContainer"></select>
+                </div>
+                <div id="SpecialityIdErrorContainer">
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>نقش</label>
+                <div>
+                    <select id="roleId" class="form-control select2" title="" tabindex="22" required="" oninput="checkAttenderInput(event)" data-parsley-errors-container="#roleIdErrorContainer"></select>
+                </div>
+                <div id="roleIdErrorContainer">
+                </div>
+            </div>
+           @*  <div class="form-group col-sm-4">
+                <label>نوع نظام داکتری</label>
+                <div>
+                    <select id="msC_TypeId" type="text" class="form-control select2" title="" tabindex="23" data-parsley-selectvalzero="" required="" oninput="checkAttenderInput(event)" data-parsley-errors-container="#msC_TypeIdErrorContainer"></select>
+                </div>
+                <div id="msC_TypeIdErrorContainer">
+                </div>
+            </div> *@
+            <div class="form-group col-sm-4">
+                <label>شماره مجوز</label>
+                <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                    <input id="msc" type="text" class="form-control atoz0t9-valid" title="" maxlength="10" tabindex="24"  data-parsley-errors-container="#msCErrorContainer"/>
+                </div>
+                <div id="msCErrorContainer">
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>تاریخ اعتبار مجوز</label>
+                <div>
+                    <input id="msC_ExpDatePersian" type="text" class="form-control persian-date"  oninput="checkAttenderInput(event)" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate maxlength="10" tabindex="25"/>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>نوع قرارداد</label>
+                <div>
+                    <select id="contractType" type="text" class="form-control select2" title="" tabindex="26" data-parsley-selectvalzero="" required="" oninput="checkAttenderInput(event)" data-parsley-errors-container="#contractTypeIdErrorContainer">
+                        <option value="1" selected>خدمات طبی</option>
+                        <option value="2">مشارکت مدنی</option>
+                    </select>
+                </div>
+                <div id="contractTypeIdErrorContainer">
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>نسخه پیچی تامین پاراکلینیک</label>
+                <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'acceptableParaclinic');" tabindex="27">
+                    <input id="acceptableParaclinic" type="checkbox" onchange="funkyradio_onchange(this)" switch-value="بلی,خیر"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane p-3" id="perscrptionBox" role="tabpanel">
+        <div class="form-group row tabToggle3" data-parsley-validate>
+            <div class="list-max-height row col-12 pr-5" id="fillPrescription"></div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="modal-footer">
+    <button id="modal-save" onclick="modal_saveAttender();" class="btn btn-success waves-effect waves-light" tabindex="28" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+    <button id="modal-close" onclick="modal_close()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+</div>
+</div>
+</div>
+</div>
+<!--Modal-->
+<div id="AttenterScheduleModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-responsive">
+        <div class="modal-content" style="height:100%">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">زمان بندی طبابین</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height  modal-body-responsive">
+                <div class="text-right filter-group-box">
+                    <fieldset class="group-box group-box-orange mt-3 col-12">
+                        <legend>موارد فیلتر</legend>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>داکتر</label>
+                                <div>
+                                    <select id="filterAttender" class="form-control select2 select2-selection" tabindex="998">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>تخصص</label>
+                                <div>
+                                    <select id="filterSpeciality" class="form-control select2 select2-selection" tabindex="999">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="table-Schedule-responsive">
+                    <table class="table table-styles mb-0" style="width:100% !important;">
+                        <thead class="schedule-head">
+                        <tr class="schedule-head-tr">
+                            <th class="thAttSchedule">شنبه</th>
+                            <th class="thAttSchedule">یک شنبه</th>
+                            <th class="thAttSchedule">دو شنبه</th>
+                            <th class="thAttSchedule">سه شنبه</th>
+                            <th class="thAttSchedule">چهارشنبه</th>
+                            <th class="thAttSchedule">پنج شنبه</th>
+                            <th class="thAttSchedule">جمعه</th>
+                        </tr>
+                        </thead>
+                        <tbody class="schedule-body" id="AttenterSchedulebody">
+                        <tr class="schedule-body-tr">
+                            <td id="AttSchedule_1" class="tdAttSchedule"></td>
+                            <td id="AttSchedule_2" class="tdAttSchedule"></td>
+                            <td id="AttSchedule_3" class="tdAttSchedule"></td>
+                            <td id="AttSchedule_4" class="tdAttSchedule"></td>
+                            <td id="AttSchedule_5" class="tdAttSchedule"></td>
+                            <td id="AttSchedule_6" class="tdAttSchedule"></td>
+                            <td id="AttSchedule_7" class="tdAttSchedule"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tooltip bs-tooltip-top" role="tooltip">
+                <div class="arrow"></div>
+                <div class="tooltip-inner">
+                </div>
+            </div>
+            <div class="modal-footer modal-footer-responsive">
+                <button id="modal-close" onclick="modal_close('AttenterScheduleModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/Modules/FM/getJsonDataAsync.js"></script>
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="/Modules/MC/Attender/AttenderIndex.js"></script>
+
+<script>
+        $(document).ready(function () {
+        $('#nationalCode').inputmask();
+    });
+</script>

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "نرخ تسعیر ارز";
+}
+
+<link href="~/lib/ModulesCss/CurrencyExchangeIndex.css" rel="stylesheet"/>
+
+@await Html.PartialAsync("/Modules/newFormPlate1V1.cshtml")
+
+
+<!--Modal-->
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-align-top modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right  over-visible" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>نام ارز</label>
+                        <div>
+                            <select id="currencyId" class="form-control" title="" required tabindex="1"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نرخ فروش</label>
+                        <div>
+                            <input id="purchaseRate" type="text" class="form-control money" title="" required tabindex="2" maxlength="10"/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>تاریخ بروزرسانی</label>
+                        <div>
+                            <input id="updateDatePersian" type="text" class="form-control persian-date" required data-parsley-errors-container="#updateDatePersianError" placeholder="____/__/__" data-inputmask="'mask':'9999/99/99'" data-parsley-shamsidate maxlength="10" tabindex="3"/>
+                        </div>
+                        <div id="updateDatePersianError"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>نرخ خرید</label>
+                        <div>
+                            <input id="salesRate" type="text" class="form-control money" title="" required tabindex="4" maxlength="10"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_save('AddEditModal','pagetable');" class="btn btn-success waves-effect waves-light" tabindex="5"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('AddEditModal');" class="btn btn-secondary waves-effect" data-dismiss="modal" tabindex="6"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+<script src="/Modules/GN/CurrencyExchange/CurrencyExchangeIndex.js"></script>

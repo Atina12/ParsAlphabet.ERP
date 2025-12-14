@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="wrapper-page">
+    <div class="card card-pages shadow-none">
+
+        <div class="card-body" id="card-body-getactive" data-parsley-validate>
+            <div class="text-center m-t-0 m-b-15 logo" id="corpname">
+                <img src="~/Content/images/favicon.png" alt="" height="30">
+                <label class="logo-admin">نام کیلنیک</label>
+            </div>
+
+            <h5 class="font-18 text-center">اعتبار سنجی</h5>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <input style="display:none" id="_username" value="@ViewData["Username"]"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <input id="actcode" data-parsley-type="number" type="text" class="form-control" title=" " maxlength="5" required placeholder="کد اعتبار سنجی"/>
+                </div>
+            </div>
+
+            <div class="form-group text-center m-t-20">
+                <div class="col-12">
+                    <a href="javascript:check_actiovationcode();" class="btn btn-primary btn-block btn-lg waves-effect waves-light">ارسال</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Modules/_Login/Login.js"></script>
+}

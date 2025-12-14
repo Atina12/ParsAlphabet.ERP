@@ -1,0 +1,147 @@
+﻿<link href="~/lib/ModulesCss/AdmissionWebService.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="col-12">
+                <div class="card m-b-30 m-t-15">
+                    <div class="card-body" id="webSreviceFrom">
+                        <ul class="nav nav-pills nav-justified" role="tablist">
+                            <li class="nav-item waves-effect waves-light" onclick="selectTab(3,'requestEPresctionPageTable')">
+                                <a class="nav-link active" data-toggle="tab" href="#requestEPrescriptionTamin" role="tab">
+                                    <span class="d-none d-md-block">نسخه نویسی</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-account h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light" onclick="selectTab(2,'delRquestEPrescriptionPageTable')">
+                                <a class="nav-link" data-toggle="tab" href="#delRquestEPrescriptionTamin" role="tab">
+                                    <span class="d-none d-md-block">حذف نسخه پیچی</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-account h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light" onclick="selectTab(1,'eprescriptionPageTable')">
+                                <a class="nav-link" data-toggle="tab" href="#ePrescriptionTamin" role="tab">
+                                    <span class="d-none d-md-block">نسخه پیچی</span>
+                                    <span class="d-block d-md-none">
+                                        <i class="mdi mdi-home-variant h5"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content group-box group-box-gray" style="display:none">
+                            <div class="tab-pane active pr-3 pl-3 pb-3 pt-0" id="requestEPrescriptionTamin" role="tabpanel">
+                                <div class="row tabToggle3">
+                                    <div class="col-12">
+                                        <div class="header-title d-flex pb-4">
+                                            <span>نسخه نویسی</span>
+                                            <div class="button-items">
+                                                <button type="button" id="sendRequestEPrescription" class="btn btn-orange waves-effect"><i id="sendRequestEPrescriptionLoading" class="fa fa-save"></i>ارسال</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body " id="requestEPresctionPageTable">
+                                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="delRquestEPrescriptionTamin" role="tabpanel">
+                                <div class="row tabToggle2">
+                                    <div class="col-12">
+                                        <div class="header-title d-flex pb-4">
+                                            <span>حذف نسخه پیچی</span>
+                                            <div class="button-items">
+                                                <button type="button" id="sendDelRequestEPrescription" class="btn maroon waves-effect"><i id="sendDelRequestEPrescriptionLoading" class="fas fa-times"></i>ارسال</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body " id="delRquestEPrescriptionPageTable">
+                                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane pr-3 pl-3 pb-3 pt-0" id="ePrescriptionTamin" role="tabpanel">
+                                <div class="row tabToggle1" data-parsley-validate>
+                                    <div class="col-12">
+                                        <div class="header-title d-flex pb-4">
+                                            <span>نسخه پیچی</span>
+                                            <div class="button-items">
+                                                <button type="button" id="sendEPrescriptionBtn" class="btn green_4 waves-effect"><i id="sendEPrescriptionBtnLoading" class="fa fa-save"></i>ارسال</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body " id="eprescriptionPageTable">
+                                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wcf_tamin_error_result" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">نتیجه عملیات</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" style="table-layout:fixed" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-20">شناسه نسخه الکترونیک</th>
+                                <th class="col-width-percent-80">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="result_row">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfresultmodal-close" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="displayFormModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" style="height:88%">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش </h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayForm" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayFormModal')" class="btn btn-secondary waves-effect"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*@await Html.PartialAsync("/Modules/MC/AdmissionServiceTamin/AdmissionTaminRequestDisplay.cshtml")*@
+@await Html.PartialAsync("/Modules/MC/AdmissionServiceTamin/PrescriptionInfoModal.cshtml")
+@await Html.PartialAsync("/Modules/MC/AdmissionDisplay/AdmissionDisplay.cshtml")
+<script src="/js/formplate.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/js/admission.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/lib/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<script src="~/Modules/MC/AdmissionTaminWebService/AdmissionTaminWebServiceIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="/Modules/MC/AdmissionServiceTamin/taminError.json"></script>

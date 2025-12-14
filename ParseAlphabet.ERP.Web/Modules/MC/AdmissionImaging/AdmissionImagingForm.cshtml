@@ -1,0 +1,266 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "تصویر برداری";
+}
+
+<link href="~/lib/ModulesCss/Navigate.css" rel="stylesheet"/>
+<link href="~/lib/jquery-ui/css/jquery-ui.css" rel="stylesheet"/>
+<link href="~/Content/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+<style>
+    .preloader {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+    }
+
+    .hidePreloader {
+        display: none !important;
+    }
+
+    #searchAdmissionModal_pagetable .table-responsive-table {
+        height: calc(100vh - 400px) !important;
+    }
+</style>
+
+<div class="content-page displaynone" id="content-page">
+    <div class="content" id="admissionImagingForm">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card m-b-30 m-t-15">
+                        <div class="header-title d-flex">
+                            <span>@ViewBag.Title</span>
+                            <div class="preloader d-flex justify-content-center align-items-center">صفحه در حال بارگذاری است، لطفا چند لحظه صبر کنید.</div>
+                            <div class="button-items">
+                                <button title="اولین" id="headerFirst" onclick="display_pagination('first')" type="button" class="displaynone header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-next"></i>
+                                </button>
+                                <button title="قبلی" id="headerPrevious" onclick="display_pagination('previous')" type="button" class="displaynone header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play"></i>
+                                </button>
+                                <input id="headerIndex" onkeydown="headerindexChoose(event)" type="text" autocomplete="off" class="displaynone form-control number col-2 d-inline mr-2 ml-1" placeholder="شناسه تصویربرداری"/>
+                                <button title="بعدی" id="headerNext" onclick="display_pagination('next')" type="button" class="displaynone header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-play fa-rotate-180"></i>
+                                </button>
+                                <button title="آخرین" id="headerLast" onclick="display_pagination('last')" type="button" class="displaynone header-pagination-btn btn btn-info waves-effect">
+                                    <i class="mdi mdi-skip-previous"></i>
+                                </button>
+
+                                <button id="choiceOfAdmission" type="button" onclick="modal_show('searchAdmissionModal');" class="btn btn-info waves-effect" title="Ctrl + F"><i class="fa fa-user-alt"></i>انتخاب پذیرش</button>
+                                <button id="list_adm" type="button" class="btn btn_green_1 waves-effect"><i class="fa fa-list-ul"></i>لیست</button>
+                                <button id="saveForm" type="button" onclick="saveAdmissionImagingForm()" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                                <button id="saveForm" type="button" onclick="saveAdmissionImagingForm('saveAndPrint')" class="btn btn-success waves-effect" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره و چاپ</button>
+                                <button id="newForm" type="button" onclick="resetFormAdmissionImaging()" class="btn btn-info waves-effect"><i class="fa fa-plus-circle"></i>جدید</button>
+                            </div>
+                        </div>
+                        <div class="card-body" data-parsley-validate>
+                            <div class="row col-12">
+                                <div class="col-12 d-flex displaynone" id="admissionImagingBox">
+                                    <div class="form-group col-lg-2">
+                                        <label>شناسه</label>
+                                        <div>
+                                            <input id="admissionImagingId" type="text" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        <label>ثبت کننده</label>
+                                        <div>
+                                            <input id="userFullName" type="text" class="form-control" maxlength="10" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        <label>تاریخ ثبت</label>
+                                        <div>
+                                            <input id="createDateTime" type="text" class="form-control" maxlength="10" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-12">
+                                <div class="col-12 d-flex">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>قالب</label>
+                                            <div>
+                                                <select id="templateId" class="form-control select2" tabindex="1">
+                                                    <option value="0">انتخاب کنید</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <div class="button-items d-flex" style="margin:24px 0 0px 0">
+                                                <button id="choosePattern" type="button" class="btn btn-light border-blue" tabindex="2" style="height: 29px;"><i class="fa fa-arrow-down"></i>جای گذاری</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <fieldset class="group-box group-box-orange mt-3">
+                                <legend>مراجعه کننده</legend>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>شناسه پذیرش</th>
+                                        <th>مراجعه کننده</th>
+                                        <th>جریان کار</th>
+                                        <th>مرحله</th>
+                                        <th>رادیولوژیست</th>
+                                        <th>داکتر ارجاع دهنده</th>
+                                        <th>تاریخ نسخه</th>
+                                        <th>کدملی</th>
+                                        <th>بیمه پایه</th>
+                                        <th>صندوق</th>
+                                        <th>بیمه تکمیلی</th>
+                                        <th>طرف قرارداد</th>
+                                        <th>شناسه شباد</th>
+                                        <th>انقضاء دفترچه</th>
+                                        <th>گام</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="admissionSelected">
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                            <fieldset class="tab-content group-box group-box-gray mt-3">
+                                <div class="app-text-countiner">
+                                    <textarea id="attenderInstruction"></textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<div id="searchAdmissionModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-lg-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">انتخاب پذیرش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right">
+                <div class="">
+                    <fieldset class="group-box group-box-green">
+                        <legend>جستجو</legend>
+                        <div class="row">
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>شناسه پذیرش</label>
+                                <div>
+                                    <input id="admissionId" type="text" class="form-control" maxlength="10" tabindex="1">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>نمبر تذکره مراجعه کننده</label>
+                                <div>
+                                    <input id="PatientNationalCode" type="text" class="form-control" maxlength="50" tabindex="2">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>مراجعه کننده</label>
+                                <div>
+                                    <input id="PatientFullName" type="text" class="form-control" maxlength="50" tabindex="3">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                <label>جریان کار</label>
+                                <select id="workflowId" class="form-control select2" tabindex="4"></select>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                <label>مرحله</label>
+                                <select id="stageId" class="form-control select2" tabindex="5"></select>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4 mb-0">
+                                <label>گام</label>
+                                <select id="actionId" class="form-control select2" tabindex="6"></select>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>رادیولوژیست</label>
+                                <div>
+                                    <select class="form-control select2" id="attenderId" tabindex="7"></select>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-4">
+                                <label>تاریخ رزرو نوبت</label>
+                                <div>
+                                    <input id="reserveDate" type="text" class="form-control" maxlength="10" placeholder="__/__/____" data-inputmask="'mask':'9999/99/99'" tabindex="8">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2 col-sm-2">
+                                <button id="searchAdmission" type="button" class="btn btn-light border-green" style="margin-top:22.5px" tabindex="9"><i class="fa fa-search"></i>جستجو</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="card" id="searchAdmissionModal_pagetable">
+                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('searchAdmissionModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addPictureModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-md">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-lg-6 text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن عکس</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right">
+                <div class="">
+                    <fieldset class="group-box group-box-green">
+                        <legend>انتخاب عکس</legend>
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-sm-4">
+                                <div class="form-group col-lg-6 col-sm-4">
+                                    <input type="file" id="fileTest" multiple/>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="displaynone group-box group-box-green">
+                        <legend>مشاهده عکس</legend>
+                        <div class="row">
+                            <div class="form-group col-lg-12 col-sm-4">
+                                <div id="imageholder"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <button id="modal-save" onclick="modal_save()" class="btn btn-success waves-effect waves-light" tabindex="106" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                        <button id="modal-close" onclick="modal_close('addPictureModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("/Modules/MC/AdmissionDisplay/AdmissionDisplay.cshtml")
+
+<script>
+    var userId = @User.FindFirstValue("UserId");
+    var username = `@User.FindFirstValue("FullName")`
+</script>
+
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="/js/tiny.js"></script>
+<script type="text/javascript" src="/Modules/MC/AdmissionImaging/AdmissionImagingForm.js"></script>

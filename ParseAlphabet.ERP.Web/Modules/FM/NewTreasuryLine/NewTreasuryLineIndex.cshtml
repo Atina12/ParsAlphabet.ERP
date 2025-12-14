@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "خزانه";
+}
+
+<link href="~/lib/ModulesCss/NewTreasuryLine.css" rel="stylesheet"/>
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+
+<div id="treasuryLinePage">
+    @await Html.PartialAsync("/Modules/FormPlateHeaderLine.cshtml")
+
+    <input id="treasuryId" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["id"]"/>
+    <input id="stageId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="workFlowId" type="hidden" class="form-control number" maxlength="10" readonly"/>
+    <input id="isDefaultCurrency" type="hidden" class="form-control number" maxlength="10" readonly value="@ViewContext.RouteData.Values["isDefaultCurrency"]"/>
+
+    <div id="previousStageTreasuryLines" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-xxlg">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="modal_title">لیست درخواستها</h5>
+                    </div>
+                </div>
+                <div class="modal-body text-right" data-parsley-validate>
+                    <div class="card-body" id="previousStagePageTable">
+                        @await Html.PartialAsync("/Modules/NewPageTable.cshtml")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="insertPreviousStageLine" class="btn btn-success waves-effect waves-light" tabindex="11"><i class="fa fa-save"></i>ذخیره</button>
+                    <button id="modal-close" onclick="close_modal_previousStageRequests()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="stepLogModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="modal_title">لیست گام های ثبت شده</h5>
+                    </div>
+                </div>
+
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body" id="itemPageTable">
+                        <div class="row">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-10">گام</th>
+                                    <th class="col-width-percent-10">کاربر</th>
+                                    <th class="col-width-percent-10">تاریخ</th>
+                                </tr>
+                                </thead>
+                                <tbody id="stepLogRowsTreasury">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-close" onclick="close_modal_stepLogs()" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="treasuryLineDetailModal" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+        <div class="modal-dialog modal-size-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-header">
+                    <div class="text-right">
+                        <h5 class="modal-title mt-0" id="modal_title">جزئیات</h5>
+                    </div>
+                </div>
+
+                <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                    <div class="card-body" id="itemPageTable">
+                        <div class="row">
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-styles border mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="col-width-percent-10">بانک صادر کننده</th>
+                                    <th class="col-width-percent-10">شماره حساب صادر کننده</th>
+                                    <th class="col-width-percent-10">تاریخ سر رسید چک</th>
+                                </tr>
+                                </thead>
+                                <tbody id="treasuryDetailRows">
+                                <tr id="emptyRow">
+                                    <td colspan="8" class="text-center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-close" onclick="modal_close('treasuryLineDetailModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="displayJournalLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg" style="height:auto">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 class="modal-title mt-0">نمایش سند حسابداری</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayJournalLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayJournalLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorPostingGroupResult" class="modal fade" tabindex="-1" data-keyboard="false" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="">ارسال سند</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-styles border mb-0" id="pagetable">
+                            <thead>
+                            <tr>
+                                <th class="col-width-percent-100">پیغام</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tempPostingGroupError">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="wcfresultmodal-close" onclick="modal_close('errorPostingGroupResult')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/formplate.js"></script>
+<script src="/js/formplate1.js"></script>
+<script src="~/js/NewPagetable.js"></script>
+<script src="~/Modules/FM/Finanace.js?ver=@Guid.NewGuid().ToString().Replace("-", "")" type="text/javascript"></script>
+<script src="~/Modules/FM/getJsonDataAsync.js?ver=@Guid.NewGuid().ToString().Replace("-", "")" type="text/javascript"></script>
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+<script src="~/Modules/FM/NewTreasuryLine/NewTreasuryLineIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

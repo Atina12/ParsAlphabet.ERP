@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Implantation\MC\AdmissionServiceTamin\taminError.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Implantation\MC\AdmissionServiceTamin\taminError.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<PackageReference Include="Dapper" Version="2.1.35" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+		<PackageReference Include="NReco.PdfGenerator" Version="1.2.1" />
+		<PackageReference Include="ParsAlphabet.Central.ObjectModel" Version="1.2.60" />
+		<PackageReference Include="ParsAlphabet.WebService.Api.Model" Version="1.0.0" />
+		<PackageReference Include="ParsAlphabetServicesModels" Version="1.1.79" />
+		<PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ParsAlphabet.ERP.Application\ParsAlphabet.ERP.Application.csproj" />
+		<ProjectReference Include="..\ParsAlphabet.ERP.Domain\ParsAlphabet.ERP.Domain.csproj" />
+		<ProjectReference Include="..\ParsAlphabet.ERP.External\ParsAlphabet.ERP.External.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Implantation\Redis\" />
+		<Folder Include="Implantation\WebServices\NewFolder\" />
+		<Folder Include="Implantation\_Invalid\" />
+		<Folder Include="Implantation\_PcPos\" />
+		<Folder Include="Implantation\_Report\" />
+	</ItemGroup>
+
+</Project>

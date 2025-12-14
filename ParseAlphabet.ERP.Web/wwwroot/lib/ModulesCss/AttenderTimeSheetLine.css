@@ -1,0 +1,5 @@
+﻿#attenderScheduleBlockModals .table-responsive,
+#attenderTimesheetLineModals .table-responsive {
+    max-height: 500px
+}
+

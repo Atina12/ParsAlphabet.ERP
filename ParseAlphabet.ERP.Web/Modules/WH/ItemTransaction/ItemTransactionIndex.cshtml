@@ -1,0 +1,65 @@
+﻿@using System.Security.Claims
+@{
+    ViewBag.Title = "اسناد انبار";
+}
+<link href="~/plugins/SuggestBox/SuggestBox.css" rel="stylesheet"/>
+
+<div class="content-page displaynone" id="content-page" style="height:auto">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="header-title">
+                            <div class="button-items col-md-12">
+                                <span class="float-right">@ViewBag.Title</span>
+
+                                <input id="userType" type="checkbox" checked data-toggle="toggle" data-on="ثبت کننده - @User.FindFirstValue("FullName")" data-off="همه ثبت کنندگان" data-onstyle="success" data-offstyle="info" data-width="180" data-height="27">
+                                <div id="quickSearchContainer" style="display: contents"></div>
+                                <button type="button" id="exportCSV" onclick="export_csv()" class="btn btn-excel waves-effect"><i class="fa fa-file-excel"></i>اکسل</button>
+                                <button type="button" id="addItemTransaction" class="btn btn-info waves-effect waves-light"><i class="fa fa-plus-circle"></i>افزودن</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="pagetable">
+                            @await Html.PartialAsync("/Modules/NewPageTableV1.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplate.js"></script>
+<script src="~/js/formplate1.js"></script>
+
+<script src="~/plugins/SuggestBox/SuggestBox.js"></script>
+
+
+<!--Modal-->
+@await Html.PartialAsync("/Modules/WH/ItemTransaction/ItemTransactionAddEdit.cshtml")
+
+
+<div id="displayItemTransactionLineModel" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="col-sm-6 text-right">
+                    <h5 id="titledisplayItemTransactionLineModel" class="modal-title mt-0"></h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height-lg text-right p-0" id="contentdisplayItemTransactionLine" data-parsley-validate="">
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close" onclick="modal_close('displayItemTransactionLineModel')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("/Modules/WH/ItemTransactionCartable/ItemTransactionActionIndex.cshtml")
+<script src="/Modules/FM/Finanace.js"></script>
+<script src="~/Modules/WH/Warehouse.js" type="text/javascript"></script>
+<script src="~/Modules/WH/ItemTransaction/ItemTransactionIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>
+<script src="~/Modules/WH/WarehouseTransactionSearch/WarehouseTransactionQuickSearchIndex.js?ver=@Guid.NewGuid().ToString().Replace("-", "")"></script>

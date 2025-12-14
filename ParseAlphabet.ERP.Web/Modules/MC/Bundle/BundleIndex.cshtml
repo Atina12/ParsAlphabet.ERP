@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "کالا و خدمات کیوسک";
+}
+
+@await Html.PartialAsync("/Modules/NewFormPlate1V1.cshtml")
+
+<!--Modal-->
+
+
+<div id="AddEditModal" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-xxlg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption"></lable>
+                            <span id="modal_keyid_value"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-sm-2">
+                        <label>شعبه</label>
+                        <div>
+                            <select id="branchId" class="form-control select2" tabindex="1"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label>نام</label>
+                        <div>
+                            <input id="name" type="text" class="form-control" maxlength="50" title="" tabindex="2">
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label>صندوق</label>
+                        <div>
+                            <select id="cashierId" class="form-control select2" tabindex="3">
+
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label>نوع</label>
+                        <div>
+                            <select id="type" class="form-control select2" tabindex="4">
+
+                                <option value="0">انتخاب کنید</option>
+                                <option value="1">1 - آقایان</option>
+                                <option value="2">2 - بانوان</option>
+                                <option value="3">3 - عمومی</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label>وضعیت</label>
+                        <div class="funkyradio funkyradio-success" onkeydown="funkyradio_keydown(event,'isActiveHeader');" tabindex="5">
+                            <input id="isActiveHeader" type="checkbox" name="checkbox" onchange="funkyradio_onchange(this)" switch-value="فعال,غیرفعال"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:300px" id="tableLine">
+                            <table style="width:100% !important">
+                                <thead>
+                                <tr>
+                                    <th style="width:6%">سطر</th>
+                                    <th style="width:9%">نوع آیتم</th>
+                                    <th style="width:23%">آیتم</th>
+                                    <th style="width:22%">صفت</th>
+                                    <th style="width:12%">واحد شمارش </th>
+                                    <th style="width:6%">ضریب</th>
+                                    <th style="width:6%">تعداد</th>
+                                    <th style="width:6%">تعداد کل</th>
+                                    <th style="width:10%">عملیات</th>
+                                </tr>
+                                </thead>
+                                <thead>
+                                <tr>
+                                    <th style="width:6%" disabled>
+                                        <input id="idNumber" type="text" class="form-control atoz-valid text-center" maxlength="50" title="" disabled>
+                                        <input id="idNumberReal" type="text" class="form-control atoz-valid d-none" maxlength="50" title="" disabled>
+                                    </th>
+                                    <th style="width:9%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="itemTypeId" class="form-control select2" tabindex="6" title="" disabled>
+                                                <option value="0">انتخاب کنید</option>
+                                                <option value="1">1 - کالا</option>
+                                                <option value="2">2 - خدمت درمان</option>
+                                            </select>
+                                        </div>
+                                    </th>
+                                    <th style="width:23%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="itemId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="7" disabled></select>
+                                        </div>
+                                    </th>
+                                    <th style="width:22%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="attributeIds" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="8" disabled></select>
+                                        </div>
+                                    </th>
+
+                                    <th style="width:12%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="subUnitId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="9" disabled></select>
+                                        </div>
+                                    </th>
+                                    <th style="width:6%">
+                                        <input id="ratio" type="text" class="form-control decimal mask" data-inputmask="'mask':'9{1,5}/9{1,3}','radixPoint':'/'" maxlength="9" title="" tabindex="10" disabled>
+                                    </th>
+                                    <th style="width:6%">
+                                        <input id="quntity" type="text" class="form-control number " maxlength="9" title="" tabindex="11" onkeydown="getratio()" disabled>
+                                    </th>
+                                    <th style="width:6%">
+                                        <input id="totalQuntity" type="text" class="form-control number " maxlength="9" title="" tabindex="12" disabled>
+                                    </th>
+                                    <th style="width:10%">
+                                        <div style="display:flex;justify-content:center;width:100%">
+                                            <button id="saveRow" type="button" onclick="saveUpdateRow(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="13" disabled>
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button id="resetInputs" type="button" onclick="resetInputsRowUnits(this)" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="14" disabled>
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="tempBundelList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal-save" onclick="modal_saveBundel('AddEditModal');" class="btn btn-success waves-effect waves-light" tabindex="16" title="Ctrl + S"><i class="fa fa-save"></i>ذخیره</button>
+                <button id="modal-close" onclick="modal_close('AddEditModal')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->
+
+
+<link href="~/lib/ModulesCss/ItemTableLine.css" rel="stylesheet"/>
+<script src="/Modules/MC/Bundle/BundleIndex.js"></script>

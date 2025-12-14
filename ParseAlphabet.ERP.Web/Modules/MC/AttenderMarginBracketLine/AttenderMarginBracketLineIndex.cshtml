@@ -1,0 +1,96 @@
+﻿@using System.Security.Claims
+<div id="AddEditModalItems" class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true" onkeydown="modal_onkeydown(event, this)">
+    <div class="modal-dialog modal-size-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-header">
+                <div class="text-right">
+                    <h5 class="modal-title mt-0" id="modal_title">افزودن ویرایش</h5>
+                </div>
+            </div>
+            <div class="modal-body modal-max-height text-right" data-parsley-validate>
+                <div class="row" id="rowKeyId">
+                    <div class="d-block w-100 text-right mb-2 pr-3">
+                        <div class="key_id">
+                            <lable id="modal_keyid_caption_item"></lable>
+                            <span id="modal_keyid_value_item"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div style="overflow-y:scroll !important;overflow-x:auto!important;height:500px" id="tableLine">
+                            <table style="width:100% !important">
+                                <thead>
+                                <tr>
+                                    <th style="width:5%">سطر</th>
+                                    <th style="width:6%">شناسه</th>
+                                    <th style="width:13%">مبلغ شروع</th>
+                                    <th style="width:13%">مبلغ پایانی</th>
+                                    <th style="width:14%">مبنای نرخ</th>
+                                    <th style="width:11%">درصد</th>
+                                    <th style="width:12%">تاریخ و زمان ثبت </th>
+                                    <th style="width:15%">کاربر ثبت کننده</th>
+                                    <th style="width:10%">عملیات</th>
+                                </tr>
+                                </thead>
+                                <thead>
+                                <tr>
+                                    <th style="width:5%" disabled>
+                                        <input id="rowNumber" type="text" class="form-control atoz-valid text-center" maxlength="5" title="" disabled>
+                                    </th>
+                                    <th style="width:6%" disabled>
+                                        <input id="rowId" type="text" class="form-control atoz-valid text-center" maxlength="5" title="" disabled>
+                                    </th>
+                                    <th style="width:14%">
+                                        <input id="startAmount" type="text" class="form-control money" maxlength="11" title="" tabindex="1" disabled>
+                                    </th>
+                                    <th style="width:14%">
+                                        <input id="endAmount" type="text" class="form-control money" maxlength="11" title="" tabindex="2">
+                                    </th>
+                                    <th style="width:10%">
+                                        <div class="col-lg-12 chosen-container-parent">
+                                            <select id="priceTypeId" data-placeholder="انتخاب کنید" class="form-control select2" tabindex="3">
+                                            </select>
+                                        </div>
+                                    </th>
+                                    <th style="width:7%">
+                                        <input id="attenderCommissionValue" type="text" class="form-control money" @*data-inputmask="'mask':'9{1,2}/9{1,2}','radixPoint':'/'" decimal mask*@ maxlength="3" tabindex="4" autocomplete="off" inputmode="text">
+                                    </th>
+                                    <th style="width:18%">
+                                        <input id="createDateTimePersian" type="text" class="form-control persian-date dir-ltr" disabled value="@DateTime.Now.ToPersianDateString()">
+                                    </th>
+                                    <th style="width:15%">
+                                        <input id="createUserFullName" type="text" class="form-control" disabled value="@User.FindFirstValue("UserId") - @User.FindFirstValue("FullName")">
+                                    </th>
+                                    <th style="width:10%">
+                                        <div style="display:flex;justify-content:center;width:100%">
+                                            <button id="saveRow" type="button" onclick="saveUpdateRow(this)" class="btn blue_outline_1 pa float-sm-right" style="word-break:initial" tabindex="5">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button id="resetInputs" type="button" onclick="resetBracketInputs(this)" class="btn btn-outline-danger pa mr-2 float-sm-right" tabindex="6">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="7" style="text-align:center">سطری وجود ندارد</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button id="modal-save" onclick="NewModal_saveAddEditModal('AddEditModalItems');" class="btn btn-success waves-effect waves-light" tabindex="9"><i class="fa fa-save"></i>ذخیره</button>*@
+                <button id="modal-close" onclick="modal_close('AddEditModalItems')" class="btn btn-secondary waves-effect" title="Esc"><i class="fa fa-times-circle"></i>انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/Modules/MC/AttenderMarginBracketLine/AttenderMarginBracketLineIndex.js"></script>

@@ -1,0 +1,64 @@
+﻿<link href="~/Content/css/PageTable.css" rel="stylesheet"/>
+<div class="row">
+    <div class="col-lg-3 col-md-3 displaynone relationalbox mr-1">
+        <div class="form-group d-flex">
+            <label class="relational-caption">کپشن فیلتر</label>
+            <div class="chosen-container-parent form_keyvalue" style="float: right !important ">
+                <select data-placeholder="انتخاب کنید..." class="select2" id="form_keyvalue">
+                    <option value="0">انتخاب کنید...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7 filterBox">
+        <div class="btn-group float-right mb-2">
+            <button type="button" class="btn btn-default btnfilter" data-id="" data-type="8" data-size="0" data-toggle="dropdown">
+                مورد فیلتر
+            </button>
+            <button type="button" id="btnOpenFilter" class="btn btn-secondary dropdown-toggle dropdown-toggle-split btnOpenFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <button type="button" id="btnRemoveFilter" class="btn btn-secondary remove-filter d-none btnRemoveFilter" onclick="removeFilter(this)"></button>
+            <div class="dropdown-menu min-width-140 filteritems">
+            </div>
+        </div>
+        <div class="form-group mt-0 float-right mb-2 app-search">
+            <input type="text" class="form-control filtervalue" onkeypress="filtervalue_onkeypress(event, this)" title="" placeholder="عبارت فیلتر">
+            <a onclick="filtervalue_onsearchclick(this)">
+                <i class="fa fa-search"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-styles border scroll mb-0 pagetablebody">
+        @**@
+    </table>
+</div>
+<div class="footer-card">
+    <div class="row">
+        <div class="col-sm-12 col-md-3 pagetablefooterinfo">
+            @**@
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <ul class="pagination justify-content-center mb-0">
+                @**@
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <div class="btn-group pagerowscount dropup float-left">
+                <button type="button" class="btn btn-default" data-toggle="dropdown">15</button>
+                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">-</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" onclick="pagetable_change_pagerowscount(15,this); return false;">15</a>
+                    <a class="dropdown-item" onclick="pagetable_change_pagerowscount(25,this); return false;">25</a>
+                    <a class="dropdown-item" onclick="pagetable_change_pagerowscount(50,this); return false;">50</a>
+                    <a class="dropdown-item" onclick="pagetable_change_pagerowscount(100,this); return false;">100</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/pagetable.js"></script>

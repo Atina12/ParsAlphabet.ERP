@@ -1,0 +1,305 @@
+﻿@import "dashboard-rtl.css";
+@font-face {
+  font-family: iransans;
+  font-style: normal;
+  font-weight: normal;
+  src: url("/Content/fonts/eot/IRANSansXFaNum-Regular.eot");
+  src: url("/Content/fonts/eot/IRANSansXFaNum-Regular.eot?#iefix") format("embedded-opentype"), url("/Content/fonts/woff2/IRANSansXFaNum-Regular.woff2") format("woff2"), url("/Content/fonts/woff/IRANSansXFaNum-Regular.woff") format("woff"), url("/Content/fonts/ttf/IRANSansXFaNum-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "BTitr";
+  src: url("/Content/fonts/ttf/BTitr.ttf");
+}
+@font-face {
+  font-family: "BLotus";
+  src: url("/Content/fonts/ttf/BLotus.ttf");
+}
+@media print {
+  #plugin {
+    background-color: red !important;
+  }
+}
+.card-border {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+}
+
+/*----- Profile -----*/
+.profile-image img {
+  border-radius: 500px;
+  border: 5px solid #f7f7f7;
+}
+
+/*----- Calendar -----*/
+.calendar-dashboard {
+  /*----- Weather -----*/
+  /*----- Kpi -----*/
+}
+.calendar-dashboard .calendar-title {
+  min-height: 20px;
+  padding: 10px;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  margin-bottom: 0px;
+}
+.calendar-dashboard .table-style {
+  margin-bottom: 0px;
+}
+.calendar-dashboard .table-style .today {
+  background: #4F5B69;
+  color: #ffffff;
+}
+.calendar-dashboard .table-style .holiday {
+  color: red;
+}
+.calendar-dashboard .table-style tr {
+  border-bottom: 1px solid #ddd;
+}
+.calendar-dashboard .table-style tr:first-child th {
+  text-align: center !important;
+  font-size: 12px;
+}
+.calendar-dashboard .table-style tr:first-child th a {
+  color: #30419b;
+}
+.calendar-dashboard .table-style tr:first-child th a span {
+  font-size: 20px;
+}
+.calendar-dashboard .table-style tr th {
+  padding: 3px;
+  text-align: center !important;
+  border-right: 1px solid #ddd;
+  border-bottom: none;
+}
+.calendar-dashboard .table-style tr th:first-child {
+  border-right: none;
+}
+.calendar-dashboard .table-style tr td {
+  padding: 3px;
+  text-align: center !important;
+  border-right: 1px solid #ddd;
+  border-bottom: none;
+}
+.calendar-dashboard .table-style tr td:first-child {
+  border-right: none;
+}
+.calendar-dashboard .forecast-header {
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 400;
+}
+.calendar-dashboard .forecast-header .day {
+  text-align: right;
+}
+.calendar-dashboard .forecast-content {
+  padding: 5px;
+}
+.calendar-dashboard .forecast-content .location {
+  width: 33.3%;
+}
+.calendar-dashboard .forecast-content .location p {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+  line-height: 20px;
+}
+.calendar-dashboard .forecast-content .location p:first-child {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.calendar-dashboard .forecast-content .forecast-icon {
+  width: 33.3%;
+  text-align: center;
+}
+.calendar-dashboard .forecast-content .forecast-icon img {
+  margin-top: 2%;
+}
+.calendar-dashboard .forecast-content .degree {
+  color: #30419b;
+  font-weight: 600;
+  margin-top: 5px;
+  text-align: center;
+  line-height: 20px;
+  width: 33.3%;
+}
+.calendar-dashboard .forecast-content .degree .num {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 5px;
+}
+.calendar-dashboard .forecast-content .degree p {
+  font-size: 12px;
+  font-weight: 300;
+  margin: 0;
+}
+.calendar-dashboard .forecast-footer {
+  margin-top: 30px;
+  font-size: 13px;
+}
+.calendar-dashboard .forecast-footer .num span {
+  cursor: default;
+  font-size: 13px;
+  font-family: "iransans";
+}
+.calendar-dashboard .tooltip {
+  font-size: 12px;
+  font-weight: normal;
+}
+.calendar-dashboard .ti-arrow-up:before {
+  font-family: "themify";
+}
+.calendar-dashboard .ti-arrow-down:before {
+  font-family: "themify";
+}
+.calendar-dashboard .cash-desk .cash-item {
+  flex-basis: 20%;
+}
+.calendar-dashboard .cash-desk .cash-item span {
+  font-size: 30px;
+}
+.calendar-dashboard .card .card-heading .mini-stat-icon i {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 25px;
+}
+.calendar-dashboard .card .card-heading > div h5 {
+  position: relative;
+  right: 15px;
+  top: 5px;
+}
+.calendar-dashboard .green {
+  background: #39B27C;
+}
+.calendar-dashboard .blue {
+  background: #1a7bb9;
+}
+.calendar-dashboard .yellow {
+  background: #f8d347;
+}
+.calendar-dashboard .header-title i {
+  margin-left: 5px;
+}
+
+/*----- Weather -----*/
+.forecast-header {
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 400;
+}
+.forecast-header .day {
+  text-align: right;
+}
+
+.forecast-content {
+  padding: 5px;
+}
+.forecast-content .location {
+  width: 33.3%;
+}
+.forecast-content .location p {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+  line-height: 20px;
+}
+.forecast-content .location p:first-child {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.forecast-content .forecast-icon {
+  width: 33.3%;
+  text-align: center;
+}
+.forecast-content .forecast-icon img {
+  margin-top: 2%;
+}
+.forecast-content .degree {
+  color: #30419b;
+  font-weight: 600;
+  margin-top: 5px;
+  text-align: center;
+  line-height: 20px;
+  width: 33.3%;
+}
+.forecast-content .degree .num {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 5px;
+}
+.forecast-content .degree p {
+  font-size: 12px;
+  font-weight: 300;
+  margin: 0;
+}
+
+.forecast-footer {
+  margin-top: 30px;
+  font-size: 13px;
+}
+.forecast-footer .num span {
+  cursor: default;
+  font-size: 13px;
+  font-family: "iransans";
+}
+
+.tooltip {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.ti-arrow-up:before {
+  font-family: "themify";
+}
+
+.ti-arrow-down:before {
+  font-family: "themify";
+}
+
+/*----- Kpi -----*/
+.chart-guid {
+  padding: 15px 22px 0;
+  position: relative;
+  top: 25px;
+}
+.chart-guid ul {
+  list-style: none;
+}
+.chart-guid ul li {
+  display: inline-block;
+  margin-left: 15px;
+}
+.chart-guid ul li span {
+  float: right;
+  width: 40px;
+  height: 15px;
+  margin-left: 5px;
+  position: relative;
+  top: 1px;
+}
+
+.chartWrapper {
+  position: relative;
+}
+
+.chartWrapperCharts {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  font-weight: bolder;
+  transition: all 0.15s linear;
+  border: 0.5px solid #d3d3d3;
+  border-width: 0px 1px 1px 0px;
+  padding-right: 3px;
+  max-width: 65px;
+}
+
+.chartAreaWrapper {
+  overflow-x: scroll;
+  direction: ltr;
+}
