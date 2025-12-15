@@ -36,7 +36,8 @@ public class GetPrescription : CompanyViewModel
     }
 
     public string ReasonEncounter { get; set; }
-
+    public short? StageId { get; set; }
+    public int? WorkflowId { get; set; }
     public short DiagnosisStatus { get; set; } = -99;
     public List<AdmissionDiagnosisModel> PrescriptionDiagnoses { get; set; }
 

@@ -1572,6 +1572,7 @@ public class AdmissionServiceRepository(
             using var conn = Connection;
             var sQuery = "[mc].[Spc_AdmissionService_Search]";
             conn.Open();
+            
             var data = await conn.QueryAsync<SearchAdmission>(sQuery,
                 new
                 {
@@ -1592,13 +1593,16 @@ public class AdmissionServiceRepository(
                         ? "mc.PrescriptionTamin"
                         : model.HeaderTableName,
                     model.CompanyId
-                }, commandType: CommandType.StoredProcedure);
+                },
+            commandType: CommandType.StoredProcedure,
+            commandTimeout: 120
+                );
             conn.Close();
 
             result.Data = data.AsList();
             return result;
         }
-        catch (Exception)
+        catch (Exception e)
         {
 
             throw;

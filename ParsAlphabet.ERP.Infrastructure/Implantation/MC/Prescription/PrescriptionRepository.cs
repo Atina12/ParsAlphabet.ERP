@@ -627,6 +627,7 @@ public class PrescriptionRepository : IPrescriptionRepository
 
     public async Task<IEnumerable<MyDropDownViewModel>> DosageUnitId(string term)
     {
+        //میلی گرم-MilliGram [SI Mass Units]
         using (var conn = Connection)
         {
             var sQuery = "pb.Spc_Tables_GetList";
@@ -666,6 +667,14 @@ public class PrescriptionRepository : IPrescriptionRepository
 
     public async Task<IEnumerable<MyDropDownViewModel>> FrequencyId(string term)
     {
+
+        //SELECT TOP 50 Id, Code, Name, Description, IsFrequency, IsActive
+        //    FROM mc.thrSNOMEDCT
+        //WHERE IsFrequency = 1
+        //AND ISNULL(IsActive,1)= 1
+        //AND(Name LIKE N'%Two to three times a week (qualifier value)%' OR Description LIKE N'%typ%');
+
+
         using (var conn = Connection)
         {
             var sQuery = "pb.Spc_Tables_GetList";
@@ -706,6 +715,7 @@ public class PrescriptionRepository : IPrescriptionRepository
 
     public async Task<IEnumerable<MyDropDownViewModel>> RouteId(string term)
     {
+        //Administration of drug or medicament via otic route (procedure)
         using (var conn = Connection)
         {
             var sQuery = "pb.Spc_Tables_GetList";
@@ -726,6 +736,7 @@ public class PrescriptionRepository : IPrescriptionRepository
 
     public async Task<IEnumerable<MyDropDownViewModel>> MethodId(string term)
     {
+        //Finding of pulse taking by auscultation (finding)
         using (var conn = Connection)
         {
             var sQuery = "pb.Spc_Tables_GetList";
@@ -787,6 +798,7 @@ public class PrescriptionRepository : IPrescriptionRepository
 
     public async Task<IEnumerable<MyDropDownViewModel>> ReasonId(string term)
     {
+        //Falling, lying or running before or into moving object, undetermined intent ,Street and highway,While engaged in other specified activities
         using (var conn = Connection)
         {
             var sQuery = "pb.Spc_Tables_GetList";
@@ -807,6 +819,7 @@ public class PrescriptionRepository : IPrescriptionRepository
 
     public async Task<IEnumerable<MyDropDownViewModel>> BodySiteId(string term)
     {
+        //Structure of dorsal surface of toe (body structure)
         using (var conn = Connection)
         {
             var sQuery = "pb.Spc_Tables_GetList";
@@ -1075,34 +1088,43 @@ public class PrescriptionRepository : IPrescriptionRepository
 
     private async Task<MyResultStatus> InsertDrugPrescription(GetPrescription model)
     {
-        var result = new MyResultStatus();
-
-        using (var conn = Connection)
+        try
         {
-            var sQuery = "[mc].[Spc_PrescriptionDrug_InsUpd]";
-            conn.Open();
+            var result = new MyResultStatus();
 
-            result = await conn.QueryFirstAsync<MyResultStatus>(sQuery, new
+            using (var conn = Connection)
             {
-                Opr = model.PrescriptionDrugId == 0 ? "Ins" : "Upd",
-                Id = model.PrescriptionDrugId,
-                model.CreateDateTime,
-                model.CreateUserId,
-                model.AdmissionId,
-                model.ExpiryDate,
-                model.RepeatCount,
-                model.ReasonEncounter,
-                PrescriptionDrugLineJSON = JsonConvert.SerializeObject(model.PrescriptionDrugLineList),
-                PrescriptionDrugLineDetailJSON = JsonConvert.SerializeObject(model.PrescriptionDrugLineDetailList),
-                model.CompanyId
-            }, commandType: CommandType.StoredProcedure);
-            conn.Close();
-            result.DateTime = model.CreateDateTime;
-            result.StatusMessage = result.StatusMessage;
+                var sQuery = "[mc].[Spc_PrescriptionDrug_InsUpd]";
+                conn.Open();
 
-            result.Successfull = result.Status == 0;
+                result = await conn.QueryFirstAsync<MyResultStatus>(sQuery, new
+                {
+                    Id = model.PrescriptionDrugId,
+                    model.CreateDateTime,
+                    model.CreateUserId,
+                    model.ExpiryDate,
+                    model.AdmissionId,
+                    model.RepeatCount,
+                    model.ReasonEncounter,
+                    model.CompanyId,
+                    model.StageId,
+                    model.WorkflowId,
+                    PrescriptionDrugLineJSON = JsonConvert.SerializeObject(model.PrescriptionDrugLineList),
+                    PrescriptionDrugLineDetailJSON = JsonConvert.SerializeObject(model.PrescriptionDrugLineDetailList),
+                }, commandType: CommandType.StoredProcedure);
+                conn.Close();
+                result.DateTime = model.CreateDateTime;
+                result.StatusMessage = result.StatusMessage;
 
-            return result;
+                result.Successfull = result.Status == 0;
+
+                return result;
+            }
+        }
+        catch (Exception e)
+        {
+
+            throw;
         }
     }
 
