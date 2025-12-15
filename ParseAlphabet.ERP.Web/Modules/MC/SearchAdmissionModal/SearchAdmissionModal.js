@@ -224,4 +224,4 @@ document.onkeydown = function (e) {
         modal_show('searchAdmissionModal')
     }
 }
-initSearchAdmissionModal()
+initSearchAdmissionModal();

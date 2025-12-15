@@ -1579,7 +1579,9 @@ public class AdmissionServiceRepository(
                     model.UserId,
                     RoleId = roleId,
                     model.AttenderId,
-                    HeaderTableName = "mc.PrescriptionTamin",
+                    HeaderTableName = string.IsNullOrWhiteSpace(model.HeaderTableName)
+                        ? "mc.PrescriptionTamin"
+                        : model.HeaderTableName,
                     model.CompanyId
                 }, commandType: CommandType.StoredProcedure);
             conn.Close();
