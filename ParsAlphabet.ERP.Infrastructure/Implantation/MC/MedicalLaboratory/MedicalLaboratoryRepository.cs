@@ -265,249 +265,304 @@ public class MedicalLaboratoryRepository : IMedicalLaboratoryRepository
     public async Task<MyResultStatus> SaveMedicalLaboratory(
         Application.Dtos.MC.MedicalLaboratory.MedicalLaboratory model)
     {
-        var resultMedicalLaboratory = new MyResultStatus();
-
-        using (var conn = Connection)
+        try
         {
-            #region save medicalLaboratory
+            var resultMedicalLaboratory = new MyResultStatus();
 
-            conn.Open();
-            var sQuery = "[mc].[Spc_MedicalLaboratory_InsUpd]";
-            resultMedicalLaboratory = await conn.QueryFirstAsync<MyResultStatus>(sQuery, new
+            using (var conn = Connection)
             {
-                model.Opr,
-                model.Id,
-                model.AdmissionId,
-                model.CompanyId,
-                model.ReferringDoctorId,
-                ReferringDoctorMscId = "",
-                CreateDateTime = DateTime.Now,
-                model.CreateUserId,
-                RelatedHID = model.RelatedHID == null ? "" : model.RelatedHID,
-                AbuseHistoryLineJSON = JsonConvert.SerializeObject(model.MedicalLaboratoryAbuseHistoryLineList)
-            }, commandType: CommandType.StoredProcedure);
-            conn.Close();
-            resultMedicalLaboratory.Successfull = resultMedicalLaboratory.Status == 100;
+                #region save medicalLaboratory
 
-            #endregion
+                try
+                {
+                    conn.Open();
 
-            #region save medicalDiagnosis
+                    var sQuery = "[mc].[Spc_MedicalLaboratory_InsUpd]";
 
-            if (resultMedicalLaboratory.Successfull)
-            {
-                var saveDiagnosisResult = await SaveMedicalLaboratoryDiagnosis(
-                    model.MedicalLaboratoryDiagnosises.Where(a => !a.IsRemoved).ToList(), resultMedicalLaboratory.Id);
-                if (!saveDiagnosisResult.Successfull)
-                    resultMedicalLaboratory = saveDiagnosisResult;
-            }
-
-            #endregion save medicalDiagnosis
-
-            #region save MedicalLaboratoryRequest
-
-            if (resultMedicalLaboratory.Successfull)
-                foreach (var requestItem in model.MedicalLaboratoryRequests)
-                    if (requestItem.IsRemoved && !requestItem.IsAdded)
-                    {
-                        #region delete medicalLaboratoryRequest
-
-                        var deleteRequestResult =
-                            await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryRequest", requestItem.Id);
-                        if (deleteRequestResult.Successfull)
+                    resultMedicalLaboratory = await conn.QueryFirstAsync<MyResultStatus>(
+                        sQuery,
+                        new
                         {
-                            var requestMethods = requestItem.MedicalLaboratoryRequestMethods != null
-                                ? requestItem.MedicalLaboratoryRequestMethods
-                                : new List<MedicalLaboratoryRequestMethod>();
-                            ;
-                            if (requestMethods.Any())
-                                foreach (var requestMethod in requestMethods)
-                                {
-                                    var deleteRequestMethod =
-                                        await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryRequestMethod",
-                                            requestMethod.Id);
-                                    if (deleteRequestMethod.Successfull)
+                            // دقیقاً مطابق SP
+                            Id = model.Id,                               // برای Insert بهتره null باشد (و SP هم Id nullable شود)
+                            AdmissionId = model.AdmissionId,
+
+                            WorkflowId = model.WorkflowId,
+                            StageId = (short)model.StageId,
+                            ActionId = (byte)model.ActionId,
+
+                            LifeCycleStateId = (byte)model.LifeCycleStateId,
+                            IsQueriable = model.IsQueriable,
+
+                            ReferringDoctorId = model.ReferringDoctorId,
+
+                            CompositionUID = model.CompositionUID,       // string
+                            MessageUID = model.MessageUID,               // string
+                            PersonUID = model.PersonUID,                 // string
+
+                            CreateDateTime = DateTime.Now,
+                            CreateUserId = model.CreateUserId,
+
+                            IsCompSent = model.IsCompSent,
+                            SentResult = (byte)model.SentResult,
+                            SentDateTime = model.SentDateTime,
+
+                            ReferralId = model.ReferralId,
+                            RelatedHID = model.RelatedHID,
+
+                            Category = model.Category,
+                            ResultDateTime = model.ResultDateTime,
+
+                            Note = model.Note
+                        },
+                        commandType: CommandType.StoredProcedure
+                    );
+
+                    conn.Close();
+                    resultMedicalLaboratory.Successfull = resultMedicalLaboratory.Status == 100;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+                #endregion
+
+                #region save medicalDiagnosis
+
+                if (resultMedicalLaboratory.Successfull)
+                {
+                    var saveDiagnosisResult = await SaveMedicalLaboratoryDiagnosis(
+                        model.MedicalLaboratoryDiagnosises.Where(a => !a.IsRemoved).ToList(),
+                        resultMedicalLaboratory.Id);
+                    if (!saveDiagnosisResult.Successfull)
+                        resultMedicalLaboratory = saveDiagnosisResult;
+                }
+
+                #endregion save medicalDiagnosis
+
+                #region save MedicalLaboratoryRequest
+
+                if (resultMedicalLaboratory.Successfull)
+                    foreach (var requestItem in model.MedicalLaboratoryRequests)
+                        if (requestItem.IsRemoved && !requestItem.IsAdded)
+                        {
+                            #region delete medicalLaboratoryRequest
+
+                            var deleteRequestResult =
+                                await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryRequest", requestItem.Id);
+                            if (deleteRequestResult.Successfull)
+                            {
+                                var requestMethods = requestItem.MedicalLaboratoryRequestMethods != null
+                                    ? requestItem.MedicalLaboratoryRequestMethods
+                                    : new List<MedicalLaboratoryRequestMethod>();
+                                ;
+                                if (requestMethods.Any())
+                                    foreach (var requestMethod in requestMethods)
                                     {
-                                        var resultItems = requestMethod.MedicalLaboratoryResults != null
-                                            ? requestMethod.MedicalLaboratoryResults
-                                            : new List<MedicalLaboratoryResult>();
-                                        if (resultItems.Any())
-                                            foreach (var resultItem in resultItems)
-                                            {
-                                                var deleteResultItem =
-                                                    await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryResult",
-                                                        resultItem.Id);
-                                                if (deleteResultItem.Successfull)
+                                        var deleteRequestMethod =
+                                            await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryRequestMethod",
+                                                requestMethod.Id);
+                                        if (deleteRequestMethod.Successfull)
+                                        {
+                                            var resultItems = requestMethod.MedicalLaboratoryResults != null
+                                                ? requestMethod.MedicalLaboratoryResults
+                                                : new List<MedicalLaboratoryResult>();
+                                            if (resultItems.Any())
+                                                foreach (var resultItem in resultItems)
                                                 {
-                                                    var referenceItems = resultItem.MedicalLaboratoryReferences != null
-                                                        ? resultItem.MedicalLaboratoryReferences
-                                                        : new List<
-                                                            MedicalLaboratoryReference>();
-                                                    if (referenceItems.Any())
-                                                        foreach (var referenceItem in referenceItems)
-                                                        {
-                                                            var deleteReferenceItem =
-                                                                await DeleteMedicalLaboratoryDetails(
-                                                                    "mc.MedicalLaboratoryReference", referenceItem.Id);
-                                                        }
+                                                    var deleteResultItem =
+                                                        await DeleteMedicalLaboratoryDetails(
+                                                            "mc.MedicalLaboratoryResult",
+                                                            resultItem.Id);
+                                                    if (deleteResultItem.Successfull)
+                                                    {
+                                                        var referenceItems =
+                                                            resultItem.MedicalLaboratoryReferences != null
+                                                                ? resultItem.MedicalLaboratoryReferences
+                                                                : new List<
+                                                                    MedicalLaboratoryReference>();
+                                                        if (referenceItems.Any())
+                                                            foreach (var referenceItem in referenceItems)
+                                                            {
+                                                                var deleteReferenceItem =
+                                                                    await DeleteMedicalLaboratoryDetails(
+                                                                        "mc.MedicalLaboratoryReference",
+                                                                        referenceItem.Id);
+                                                            }
+                                                    }
                                                 }
-                                            }
+                                        }
                                     }
-                                }
+                            }
+
+                            #endregion delete medicalLaboratoryRequest
+                        }
+                        else
+                        {
+                            requestItem.MedicalLaboratoryId = resultMedicalLaboratory.Id;
+                            var newRequestItem = await SaveMedicalLaboratoryRequest(requestItem, model.Pathology);
+                            newRequestItem.Successfull = newRequestItem.Status == 100;
+
+                            #region save medicalLaboratoryRequestMethod
+
+                            if (newRequestItem.Successfull && requestItem.MedicalLaboratoryRequestMethods != null)
+                                foreach (var requestMethodItem in requestItem.MedicalLaboratoryRequestMethods)
+                                    if (requestMethodItem.IsRemoved && !requestMethodItem.IsAdded)
+                                    {
+                                        #region delete medicalLaboratoryRequestMethod
+
+                                        var deleteRequestMethod =
+                                            await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryRequestMethod",
+                                                requestMethodItem.Id);
+                                        if (deleteRequestMethod.Successfull)
+                                        {
+                                            var resultItems = requestMethodItem.MedicalLaboratoryResults != null
+                                                ? requestMethodItem.MedicalLaboratoryResults.Where(a => a.IsRemoved)
+                                                    .ToList()
+                                                : new List<MedicalLaboratoryResult>();
+                                            if (resultItems.Any())
+                                                foreach (var resultItem in resultItems)
+                                                {
+                                                    var deleteResultItem =
+                                                        await DeleteMedicalLaboratoryDetails(
+                                                            "mc.MedicalLaboratoryResult",
+                                                            resultItem.Id);
+                                                    if (deleteResultItem.Successfull)
+                                                    {
+                                                        var referenceItems =
+                                                            resultItem.MedicalLaboratoryReferences != null
+                                                                ? resultItem.MedicalLaboratoryReferences
+                                                                    .Where(a => a.IsRemoved)
+                                                                    .ToList()
+                                                                : new List<
+                                                                    MedicalLaboratoryReference>();
+                                                        if (referenceItems.Any())
+                                                            foreach (var referenceItem in referenceItems)
+                                                            {
+                                                                var deleteReferenceItem =
+                                                                    await DeleteMedicalLaboratoryDetails(
+                                                                        "mc.MedicalLaboratoryReference",
+                                                                        referenceItem.Id);
+                                                            }
+                                                    }
+                                                }
+                                        }
+
+                                        #endregion delete medicalLaboratoryRequestMethod
+                                    }
+                                    else
+                                    {
+                                        requestMethodItem.MedicalLaboratoryRequestId = newRequestItem.Id;
+                                        var newRequestMethodItem =
+                                            await SaveMedicalLaboratoryRequestMethod(requestMethodItem);
+                                        newRequestMethodItem.Successfull = newRequestMethodItem.Status == 100;
+
+                                        #region save medicalLaboratoryResult
+
+                                        if (newRequestMethodItem.Successfull &&
+                                            requestMethodItem.MedicalLaboratoryResults != null)
+                                            foreach (var requestResultItem in
+                                                     requestMethodItem.MedicalLaboratoryResults)
+                                            {
+                                                if (requestResultItem.IsRemoved && !requestResultItem.IsAdded)
+                                                {
+                                                    #region delete medicalLaboratoryResult
+
+                                                    var deleteResultItem =
+                                                        await DeleteMedicalLaboratoryDetails(
+                                                            "mc.MedicalLaboratoryResult",
+                                                            requestResultItem.Id);
+                                                    if (deleteResultItem.Successfull)
+                                                    {
+                                                        var referenceItems =
+                                                            requestResultItem.MedicalLaboratoryReferences != null
+                                                                ? requestResultItem.MedicalLaboratoryReferences
+                                                                : new List<
+                                                                    MedicalLaboratoryReference>();
+                                                        if (referenceItems.Any())
+                                                            foreach (var referenceItem in referenceItems)
+                                                            {
+                                                                var deleteReferenceItem =
+                                                                    await DeleteMedicalLaboratoryDetails(
+                                                                        "mc.MedicalLaboratoryReference",
+                                                                        referenceItem.Id);
+                                                            }
+                                                    }
+
+                                                    #endregion delete medicalLaboratoryResult
+                                                }
+                                                else
+                                                {
+                                                    requestResultItem.MedicalLaboratoryRequestMethodId =
+                                                        newRequestMethodItem.Id;
+                                                    var newResultItem =
+                                                        await SaveMedicalLaboratoryResult(requestResultItem);
+                                                    newResultItem.Successfull = newResultItem.Status == 100;
+
+                                                    #region save medicalLaboratoryReference
+
+                                                    if (newResultItem.Successfull &&
+                                                        requestResultItem.MedicalLaboratoryReferences != null)
+                                                        foreach (var requestRederenceItem in requestResultItem
+                                                                     .MedicalLaboratoryReferences)
+                                                            if (requestRederenceItem.IsRemoved &&
+                                                                !requestRederenceItem.IsAdded)
+                                                            {
+                                                                #region delete medicalLaboratoryReference
+
+                                                                var deleteReferenceItem =
+                                                                    await DeleteMedicalLaboratoryDetails(
+                                                                        "mc.MedicalLaboratoryReference",
+                                                                        requestRederenceItem.Id);
+
+                                                                #endregion delete medicalLaboratoryReference
+                                                            }
+                                                            else
+                                                            {
+                                                                requestRederenceItem.MedicalLaboratoryResultId =
+                                                                    newResultItem.Id;
+                                                                var newReferenceItem =
+                                                                    await SaveMedicalLaboratoryReference(
+                                                                        requestRederenceItem);
+                                                                newReferenceItem.Successfull =
+                                                                    newReferenceItem.Status == 100;
+                                                                if (!newReferenceItem.Successfull)
+                                                                    resultMedicalLaboratory = newReferenceItem;
+                                                            }
+                                                    else
+                                                        resultMedicalLaboratory = newResultItem;
+                                                }
+
+                                                #endregion save medicalLaboratoryReference
+                                            }
+                                        else
+                                            resultMedicalLaboratory = newRequestMethodItem;
+
+                                        #endregion save medicalLaboratoryResult
+                                    }
+                            else
+                                resultMedicalLaboratory = newRequestItem;
+
+                            #endregion save medicalLaboratoryRequestMethod
                         }
 
-                        #endregion delete medicalLaboratoryRequest
-                    }
-                    else
-                    {
-                        requestItem.MedicalLaboratoryId = resultMedicalLaboratory.Id;
-                        var newRequestItem = await SaveMedicalLaboratoryRequest(requestItem, model.Pathology);
-                        newRequestItem.Successfull = newRequestItem.Status == 100;
+                #endregion save MedicalLaboratoryRequest
+            }
 
-                        #region save medicalLaboratoryRequestMethod
+            if (resultMedicalLaboratory.Successfull)
+                resultMedicalLaboratory.StatusMessage = "عملیات با موفقیت انجام شد";
+            else
+                resultMedicalLaboratory.StatusMessage = "مشکلی در انجام عملیات وجود دارد";
 
-                        if (newRequestItem.Successfull && requestItem.MedicalLaboratoryRequestMethods != null)
-                            foreach (var requestMethodItem in requestItem.MedicalLaboratoryRequestMethods)
-                                if (requestMethodItem.IsRemoved && !requestMethodItem.IsAdded)
-                                {
-                                    #region delete medicalLaboratoryRequestMethod
-
-                                    var deleteRequestMethod =
-                                        await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryRequestMethod",
-                                            requestMethodItem.Id);
-                                    if (deleteRequestMethod.Successfull)
-                                    {
-                                        var resultItems = requestMethodItem.MedicalLaboratoryResults != null
-                                            ? requestMethodItem.MedicalLaboratoryResults.Where(a => a.IsRemoved)
-                                                .ToList()
-                                            : new List<MedicalLaboratoryResult>();
-                                        if (resultItems.Any())
-                                            foreach (var resultItem in resultItems)
-                                            {
-                                                var deleteResultItem =
-                                                    await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryResult",
-                                                        resultItem.Id);
-                                                if (deleteResultItem.Successfull)
-                                                {
-                                                    var referenceItems = resultItem.MedicalLaboratoryReferences != null
-                                                        ? resultItem.MedicalLaboratoryReferences.Where(a => a.IsRemoved)
-                                                            .ToList()
-                                                        : new List<
-                                                            MedicalLaboratoryReference>();
-                                                    if (referenceItems.Any())
-                                                        foreach (var referenceItem in referenceItems)
-                                                        {
-                                                            var deleteReferenceItem =
-                                                                await DeleteMedicalLaboratoryDetails(
-                                                                    "mc.MedicalLaboratoryReference", referenceItem.Id);
-                                                        }
-                                                }
-                                            }
-                                    }
-
-                                    #endregion delete medicalLaboratoryRequestMethod
-                                }
-                                else
-                                {
-                                    requestMethodItem.MedicalLaboratoryRequestId = newRequestItem.Id;
-                                    var newRequestMethodItem =
-                                        await SaveMedicalLaboratoryRequestMethod(requestMethodItem);
-                                    newRequestMethodItem.Successfull = newRequestMethodItem.Status == 100;
-
-                                    #region save medicalLaboratoryResult
-
-                                    if (newRequestMethodItem.Successfull &&
-                                        requestMethodItem.MedicalLaboratoryResults != null)
-                                        foreach (var requestResultItem in requestMethodItem.MedicalLaboratoryResults)
-                                        {
-                                            if (requestResultItem.IsRemoved && !requestResultItem.IsAdded)
-                                            {
-                                                #region delete medicalLaboratoryResult
-
-                                                var deleteResultItem =
-                                                    await DeleteMedicalLaboratoryDetails("mc.MedicalLaboratoryResult",
-                                                        requestResultItem.Id);
-                                                if (deleteResultItem.Successfull)
-                                                {
-                                                    var referenceItems =
-                                                        requestResultItem.MedicalLaboratoryReferences != null
-                                                            ? requestResultItem.MedicalLaboratoryReferences
-                                                            : new List<
-                                                                MedicalLaboratoryReference>();
-                                                    if (referenceItems.Any())
-                                                        foreach (var referenceItem in referenceItems)
-                                                        {
-                                                            var deleteReferenceItem =
-                                                                await DeleteMedicalLaboratoryDetails(
-                                                                    "mc.MedicalLaboratoryReference", referenceItem.Id);
-                                                        }
-                                                }
-
-                                                #endregion delete medicalLaboratoryResult
-                                            }
-                                            else
-                                            {
-                                                requestResultItem.MedicalLaboratoryRequestMethodId =
-                                                    newRequestMethodItem.Id;
-                                                var newResultItem =
-                                                    await SaveMedicalLaboratoryResult(requestResultItem);
-                                                newResultItem.Successfull = newResultItem.Status == 100;
-
-                                                #region save medicalLaboratoryReference
-
-                                                if (newResultItem.Successfull &&
-                                                    requestResultItem.MedicalLaboratoryReferences != null)
-                                                    foreach (var requestRederenceItem in requestResultItem
-                                                                 .MedicalLaboratoryReferences)
-                                                        if (requestRederenceItem.IsRemoved &&
-                                                            !requestRederenceItem.IsAdded)
-                                                        {
-                                                            #region delete medicalLaboratoryReference
-
-                                                            var deleteReferenceItem =
-                                                                await DeleteMedicalLaboratoryDetails(
-                                                                    "mc.MedicalLaboratoryReference",
-                                                                    requestRederenceItem.Id);
-
-                                                            #endregion delete medicalLaboratoryReference
-                                                        }
-                                                        else
-                                                        {
-                                                            requestRederenceItem.MedicalLaboratoryResultId =
-                                                                newResultItem.Id;
-                                                            var newReferenceItem =
-                                                                await SaveMedicalLaboratoryReference(
-                                                                    requestRederenceItem);
-                                                            newReferenceItem.Successfull =
-                                                                newReferenceItem.Status == 100;
-                                                            if (!newReferenceItem.Successfull)
-                                                                resultMedicalLaboratory = newReferenceItem;
-                                                        }
-                                                else
-                                                    resultMedicalLaboratory = newResultItem;
-                                            }
-
-                                            #endregion save medicalLaboratoryReference
-                                        }
-                                    else
-                                        resultMedicalLaboratory = newRequestMethodItem;
-
-                                    #endregion save medicalLaboratoryResult
-                                }
-                        else
-                            resultMedicalLaboratory = newRequestItem;
-
-                        #endregion save medicalLaboratoryRequestMethod
-                    }
-
-            #endregion save MedicalLaboratoryRequest
+            return resultMedicalLaboratory;
         }
-
-        if (resultMedicalLaboratory.Successfull)
-            resultMedicalLaboratory.StatusMessage = "عملیات با موفقیت انجام شد";
-        else
-            resultMedicalLaboratory.StatusMessage = "مشکلی در انجام عملیات وجود دارد";
-
-        return resultMedicalLaboratory;
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public async Task<IEnumerable<MyDropDownViewModel>> CodedTypeId(string term)
@@ -1118,7 +1173,7 @@ public class MedicalLaboratoryRepository : IMedicalLaboratoryRepository
                 model.Opr,
                 model.Id,
                 model.MedicalLaboratoryId,
-                model.SpecimenCode,
+                SpecimenCode=model.SpecimenCode.ToString(),
                 model.SpecimenDateTime,
                 model.SpecimenTypeId,
                 model.AdequacyForTestingId,

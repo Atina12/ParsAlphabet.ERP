@@ -36,11 +36,13 @@ public class StandardTimeSheetPerMonthApiController : ControllerBase
     }
 
     [HttpGet]
-    [Route("getstandardtimesheetpermonth/{id}/{monthId?}")]
+    [Route("getstandardtimesheetpermonth/{id}/{monthId}")]
     [Authenticate(Operation.VIW, "StandardTimeSheet")]
     public async Task<List<StandardTimeSheetPerMonthGetRecord>> StandardTimeSheetPerMonthGetRecord(int id,
-        byte? monthId = null)
+        string monthId = null)
     {
-        return await _standardTimeSheetPerMonthRepository.GetStandardTimeSheetPerMonth(id, monthId);
+        object parseMonthId = monthId == "null" ? null : monthId;
+        
+        return await _standardTimeSheetPerMonthRepository.GetStandardTimeSheetPerMonth(id, (byte?)parseMonthId);
     }
 }

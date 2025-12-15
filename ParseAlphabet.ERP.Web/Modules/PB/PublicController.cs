@@ -135,9 +135,11 @@ public class PublicApiController(PublicRepository publicRepository) : Controller
 
     [HttpGet]
     [Route("monthgetdropdown/{id?}")]
-    public List<MyDropDownViewModel> MounthGetDropDown(int? id)
+    public List<MyDropDownViewModel> MounthGetDropDown(string id=null)
     {
-        var result = _publicRepository.MonthGetDropDown(id);
+        object parseMonthId = id == "null" ? null : id;
+
+        var result = _publicRepository.MonthGetDropDown((int?)parseMonthId);
         return result;
     }
 

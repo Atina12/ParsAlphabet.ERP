@@ -404,10 +404,8 @@ public class AdmissionApiController(
     public async Task<MyResultPage<List<SearchAdmission>>> SearchAdmission([FromBody] GetSearchAdmission model)
     {
         model.UserId = UserClaims.GetUserId();
-        ;
         model.CompanyId = UserClaims.GetCompanyId();
         var roleId = UserClaims.GetRoleId();
-        ;
         return await admissionServiceRepository.SearchAdmissionInbound(model, roleId);
     }
 

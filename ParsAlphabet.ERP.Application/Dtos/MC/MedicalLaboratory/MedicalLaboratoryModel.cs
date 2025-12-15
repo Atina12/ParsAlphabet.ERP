@@ -24,6 +24,39 @@ public class MedicalLaboratoryHeader : CompanyViewModel
 /// </summary>
 public class MedicalLaboratory : MedicalLaboratoryHeader
 {
+    // ===== SP Required Fields =====
+    public int? Id { get; set; }                     // @Id  (برای Insert = null)
+    public int AdmissionId { get; set; }              // @AdmissionId
+
+    public int WorkflowId { get; set; }               // @WorkflowId
+    public short StageId { get; set; }                // @StageId
+    public byte ActionId { get; set; }                // @ActionId
+
+    public byte LifeCycleStateId { get; set; }        // @LifeCycleStateId
+    public bool IsQueriable { get; set; }             // @IsQueriable
+
+    public int ReferringDoctorId { get; set; }        // @ReferringDoctorId
+
+    public string CompositionUID { get; set; }        // @CompositionUID (VARCHAR)
+    public string MessageUID { get; set; }            // @MessageUID (VARCHAR)
+    public string PersonUID { get; set; }             // @PersonUID (VARCHAR)
+
+    public DateTime CreateDateTime { get; set; }      // @CreateDateTime
+    public int CreateUserId { get; set; }             // @CreateUserId
+
+    public bool IsCompSent { get; set; }               // @IsCompSent
+    public byte SentResult { get; set; }               // @SentResult
+    public DateTime? SentDateTime { get; set; }       // @SentDateTime
+
+    public string ReferralId { get; set; }            // @ReferralId
+    public string RelatedHID { get; set; }            // @RelatedHID
+
+    public int Category { get; set; }                  // @Category
+    public DateTime? ResultDateTime { get; set; }     // @ResultDateTime
+
+    public string Note { get; set; }                   // @Note
+
+    // ===== JSON / Child Objects (برای SPهای دیگر) =====
     public List<MedicalLaboratoryAbuseHistoryLineList> MedicalLaboratoryAbuseHistoryLineList { get; set; }
     public List<MedicalLaboratoryRequest> MedicalLaboratoryRequests { get; set; }
     public List<MedicalLaboratoryDiagnosis> MedicalLaboratoryDiagnosises { get; set; }
@@ -111,7 +144,7 @@ public class MedicalLaboratoryRequest
 
     public int Id { get; set; }
     public int MedicalLaboratoryId { get; set; }
-    public string SpecimenCode { get; set; }
+    public int SpecimenCode { get; set; }
     public DateTime? SpecimenDateTime { get; set; }
 
     [NotMapped]

@@ -830,80 +830,92 @@ public class AdmissionsRepository(
 
     public async Task<MyResultPage<List<MedicalTimeShiftDisplay>>> DisplayScheduleBlock(NewGetPageViewModel model)
     {
-        var attenderTimeSheetIds = model.Form_KeyValue[0]?.ToString() != null ? model.Form_KeyValue[0]?.ToString() : null;
-        var medicalShiftTimeSheetIds =
-            model.Form_KeyValue[1]?.ToString() != null ? model.Form_KeyValue[1]?.ToString() : null;
-        var standardTimeSheetIds = model.Form_KeyValue[2] != null ? model.Form_KeyValue[2]?.ToString() : null;
-        var departmentTimeShiftIds =
-            model.Form_KeyValue[3]?.ToString() != null ? model.Form_KeyValue[3]?.ToString() : null;
-        var attenderIds = model.Form_KeyValue[4]?.ToString() != null ? model.Form_KeyValue[4]?.ToString() : null;
-        var fiscalYearId = model.Form_KeyValue[5]?.ToString() != null ? model.Form_KeyValue[5]?.ToString() : null;
-        var branchId = model.Form_KeyValue[6]?.ToString() != null ? model.Form_KeyValue[6]?.ToString() : null;
-        var dayInWeek = model.Form_KeyValue[7]?.ToString() != null ? model.Form_KeyValue[7]?.ToString() : null;
-
-        int.TryParse((model.Form_KeyValue[8]?.ToString()) ?? null, out int hasPatient);
-
-        var fromAppointmentDate =
-            Convert.ToDateTime(model.Form_KeyValue[9]?.ToString() != null ? model.Form_KeyValue[9]?.ToString() : null);
-        var toAppointmentDate =
-            Convert.ToDateTime(model.Form_KeyValue[10]?.ToString() != null ? model.Form_KeyValue[10]?.ToString() : null);
-        var departmentId = model.Form_KeyValue[11]?.ToString() != null ? model.Form_KeyValue[11]?.ToString() : null;
-        var fromTime = model.Form_KeyValue[12]?.ToString() != null ? model.Form_KeyValue[12]?.ToString() : null;
-        var formType = model.Form_KeyValue[13]?.ToString() != null ? model.Form_KeyValue[13]?.ToString() : null;
-
-        var result = new MyResultPage<List<MedicalTimeShiftDisplay>>();
-
-        byte? dayInWeekFilter = null;
-
-        if (model.Filters.Any(x => x.Name == "dayName"))
-            dayInWeekFilter =
-                DayOfWeekToMiladi(Convert.ToByte(model.Filters.FirstOrDefault(x => x.Name == "dayName").Value));
-
-        dayInWeek = Convert.ToString(dayInWeekFilter != null ? dayInWeekFilter : dayInWeek);
-
-        if (model.Filters.Any(x => x.Name == "appointmentDatePersian"))
+        try
         {
-            fromAppointmentDate =
-                (DateTime)model.Filters.FirstOrDefault(x => x.Name == "appointmentDatePersian").Value.Split('-')[0]
-                    .ToMiladiDateTime();
-            toAppointmentDate =
-                (DateTime)model.Filters.FirstOrDefault(x => x.Name == "appointmentDatePersian").Value.Split('-')[1]
-                    .ToMiladiDateTime();
-        }
+            var attenderTimeSheetIds =
+                model.Form_KeyValue[0]?.ToString() != null ? model.Form_KeyValue[0]?.ToString() : null;
+            var medicalShiftTimeSheetIds =
+                model.Form_KeyValue[1]?.ToString() != null ? model.Form_KeyValue[1]?.ToString() : null;
+            var standardTimeSheetIds = model.Form_KeyValue[2] != null ? model.Form_KeyValue[2]?.ToString() : null;
+            var departmentTimeShiftIds =
+                model.Form_KeyValue[3]?.ToString() != null ? model.Form_KeyValue[3]?.ToString() : null;
+            var attenderIds = model.Form_KeyValue[4]?.ToString() != null ? model.Form_KeyValue[4]?.ToString() : null;
+            var fiscalYearId = model.Form_KeyValue[5]?.ToString() != null ? model.Form_KeyValue[5]?.ToString() : null;
+            var branchId = model.Form_KeyValue[6]?.ToString() != null ? model.Form_KeyValue[6]?.ToString() : null;
+            var dayInWeek = model.Form_KeyValue[7]?.ToString() != null ? model.Form_KeyValue[7]?.ToString() : null;
 
+            int.TryParse((model.Form_KeyValue[8]?.ToString()) ?? null, out int hasPatient);
 
-        if (model.Filters.Any(x => x.Name == "hasPatient"))
-            switch (model.Filters.FirstOrDefault(x => x.Name == "hasPatient").Value.ToString())
+            var fromAppointmentDate =
+                Convert.ToDateTime(model.Form_KeyValue[9]?.ToString() != null
+                    ? model.Form_KeyValue[9]?.ToString()
+                    : null);
+
+            DateTime? toAppointmentDate = null;
+            var toStr = model.Form_KeyValue[10]?.ToString();
+
+            if (!string.IsNullOrWhiteSpace(toStr) && DateTime.TryParse(toStr, out var td))
+                toAppointmentDate = td;
+
+            if (toAppointmentDate.HasValue && toAppointmentDate.Value < new DateTime(1753, 1, 1))
+                toAppointmentDate = null;
+
+            var departmentId = model.Form_KeyValue[11]?.ToString() != null ? model.Form_KeyValue[11]?.ToString() : null;
+            var fromTime = model.Form_KeyValue[12]?.ToString() != null ? model.Form_KeyValue[12]?.ToString() : null;
+            var formType = model.Form_KeyValue[13]?.ToString() != null ? model.Form_KeyValue[13]?.ToString() : null;
+
+            var result = new MyResultPage<List<MedicalTimeShiftDisplay>>();
+
+            byte? dayInWeekFilter = null;
+
+            if (model.Filters.Any(x => x.Name == "dayName"))
+                dayInWeekFilter =
+                    DayOfWeekToMiladi(Convert.ToByte(model.Filters.FirstOrDefault(x => x.Name == "dayName").Value));
+
+            dayInWeek = Convert.ToString(dayInWeekFilter != null ? dayInWeekFilter : dayInWeek);
+
+            if (model.Filters.Any(x => x.Name == "appointmentDatePersian"))
             {
-                case "1":
-                    hasPatient = 1;
-                    break;
-                case "2":
-                    hasPatient = 0;
-                    break;
-                case "3":
-                    //hasPatient = null;
-                    hasPatient = 0;
-                    break;
+                fromAppointmentDate =
+                    (DateTime)model.Filters.FirstOrDefault(x => x.Name == "appointmentDatePersian").Value.Split('-')[0]
+                        .ToMiladiDateTime();
+                toAppointmentDate =
+                    (DateTime)model.Filters.FirstOrDefault(x => x.Name == "appointmentDatePersian").Value.Split('-')[1]
+                        .ToMiladiDateTime();
             }
 
-        var toTime = "";
 
-        if (model.Filters.Any(x => x.Name == "time"))
-        {
-            fromTime = model.Filters.FirstOrDefault(x => x.Name == "time").Value.Split('-')[0];
-            toTime = model.Filters.FirstOrDefault(x => x.Name == "time").Value.Split('-')[1];
-        }
+            if (model.Filters.Any(x => x.Name == "hasPatient"))
+                switch (model.Filters.FirstOrDefault(x => x.Name == "hasPatient").Value.ToString())
+                {
+                    case "1":
+                        hasPatient = 1;
+                        break;
+                    case "2":
+                        hasPatient = 0;
+                        break;
+                    case "3":
+                        //hasPatient = null;
+                        hasPatient = 0;
+                        break;
+                }
 
-        bool? isOnline = null;
+            var toTime = "";
 
-        if (model.Filters.Any(x => x.Name == "appointmentTypeName"))
-            //1-"آنلاین" ->sp:1
-            //2- "حضوری"->sp:0
-            isOnline = model.Filters.FirstOrDefault(x => x.Name == "appointmentTypeName").Value == "1";
+            if (model.Filters.Any(x => x.Name == "time"))
+            {
+                fromTime = model.Filters.FirstOrDefault(x => x.Name == "time").Value.Split('-')[0];
+                toTime = model.Filters.FirstOrDefault(x => x.Name == "time").Value.Split('-')[1];
+            }
 
-        using (var conn = Connection)
-        {
+            bool? isOnline = null;
+
+            if (model.Filters.Any(x => x.Name == "appointmentTypeName"))
+                //1-"آنلاین" ->sp:1
+                //2- "حضوری"->sp:0
+                isOnline = model.Filters.FirstOrDefault(x => x.Name == "appointmentTypeName").Value == "1";
+
+            using var conn = Connection;
             var sQuery = "[mc].[Spc_AttenderScheduleBlock_Filter_GetPage]";
 
             var parameters = new DynamicParameters();
@@ -928,6 +940,7 @@ public class AdmissionsRepository(
             parameters.Add("ShiftName");
             parameters.Add("FromAppointmentDate", fromAppointmentDate);
             parameters.Add("ToAppointmentDate", toAppointmentDate);
+
             parameters.Add("FromTime", fromTime);
             parameters.Add("ToTime", toTime == "" ? null : toTime);
             parameters.Add("IsOnline", isOnline);
@@ -952,9 +965,14 @@ public class AdmissionsRepository(
                     commandType: CommandType.StoredProcedure)).ToList();
 
             conn.Close();
-        }
 
-        return result;
+            return result;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public async Task<List<ConvertAttenderScheduleBlockFromCentral>> ConvertAttenderScheduleBlockFromCentral(

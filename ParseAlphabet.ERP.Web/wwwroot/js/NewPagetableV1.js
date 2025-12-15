@@ -28,7 +28,7 @@ var after_getPageTableCallBack = undefined,
 
 
 function get_NewPageTableV1(pg_id = null, isInsert = false, callBack = undefined) {
-
+    debugger
     if (pg_id == null)
         pg_id = "pagetable";
 
@@ -105,7 +105,8 @@ function get_NewPageTableV1(pg_id = null, isInsert = false, callBack = undefined
         contentType: "application/json",
         cache: false,
         success: function (result) {
-
+            debugger
+            console.log('نتیجه',result)
             if (pagetable_currentpage == 1)
                 fillOptionV1(result, pg_id);
 
@@ -212,7 +213,7 @@ function createPageCountersV1(pg_id = null) {
 }
 
 function fill_NewPageTableV1(result, pageId = null, callBack = undefined) {
-
+    debugger
     if (pageId == null)
         pageId = "pagetable";
 

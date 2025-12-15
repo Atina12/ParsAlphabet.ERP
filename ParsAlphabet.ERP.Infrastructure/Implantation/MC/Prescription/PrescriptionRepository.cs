@@ -255,8 +255,8 @@ public class PrescriptionRepository : IPrescriptionRepository
 
 
         var checkAccessViewAll = await _loginRepository.GetAuthenticate(checkAuthenticate);
-
-        if (int.Parse(model.Form_KeyValue[1]?.ToString()) == 0)
+     
+        if (model.Form_KeyValue[0]?.ToString() == "0")
         {
             if (!checkAccessViewAll.Successfull)
                 parameters.Add("CreateUserId", 0);

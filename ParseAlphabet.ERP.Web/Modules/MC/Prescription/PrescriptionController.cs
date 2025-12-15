@@ -211,7 +211,7 @@ public class PrescriptionApiController(
 
         model.CompanyId = UserClaims.GetCompanyId();
         var userId = UserClaims.GetUserId();
-        ;
+        
         return await prescriptionRepository.GetPage(model, userId);
     }
 

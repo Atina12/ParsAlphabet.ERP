@@ -1528,39 +1528,48 @@ public class AdmissionServiceRepository(
 
     public async Task<AdmissionSearch> GetAdmission(GetAdmissionSearch model)
     {
-        using (var conn = Connection)
+        try
         {
-            var sQuery = "[mc].[Spc_Admission_Search]";
-            conn.Open();
-            var result = await conn.QueryFirstOrDefaultAsync<AdmissionSearch>(sQuery,
-                new
-                {
-                    model.StageId,
-                    model.ActionId,
-                    model.WorkflowId,
-                    model.Id,
-                    CreateDate = model.CreateDatePersian == "" ? null : model.CreateDatePersian,
-                    PatientFullName = model.PatientFullName.ConvertArabicAlphabet(),
-                    model.PatientNationalCode,
-                    model.AttenderId,
-                    model.CompanyId
-                }, commandType: CommandType.StoredProcedure);
-            conn.Close();
-            return result;
+            using (var conn = Connection)
+            {
+                var sQuery = "[mc].[Spc_Admission_Search]";
+                conn.Open();
+                var result = await conn.QueryFirstOrDefaultAsync<AdmissionSearch>(sQuery,
+                    new
+                    {
+                        model.StageId,
+                        model.ActionId,
+                        model.WorkflowId,
+                        model.Id,
+                        CreateDate = model.CreateDatePersian == "" ? null : model.CreateDatePersian,
+                        PatientFullName = model.PatientFullName.ConvertArabicAlphabet(),
+                        model.PatientNationalCode,
+                        model.AttenderId,
+                        model.CompanyId
+                    }, commandType: CommandType.StoredProcedure);
+                conn.Close();
+                return result;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
     }
 
     public async Task<MyResultPage<List<SearchAdmission>>> SearchAdmissionInbound(GetSearchAdmission model, byte roleId)
     {
-        var result = new MyResultPage<List<SearchAdmission>>
+        try
         {
-            Data = new List<SearchAdmission>()
-        };
+            var result = new MyResultPage<List<SearchAdmission>>
+            {
+                Data = new List<SearchAdmission>()
+            };
 
-        result.Columns = GetColumnsSearchInbound();
+            result.Columns = GetColumnsSearchInbound();
 
-        using (var conn = Connection)
-        {
+            using var conn = Connection;
             var sQuery = "[mc].[Spc_AdmissionService_Search]";
             conn.Open();
             var data = await conn.QueryAsync<SearchAdmission>(sQuery,
@@ -1586,6 +1595,11 @@ public class AdmissionServiceRepository(
 
             result.Data = data.AsList();
             return result;
+        }
+        catch (Exception)
+        {
+
+            throw;
         }
     }
 

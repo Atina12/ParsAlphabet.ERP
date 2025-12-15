@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11217.181 d18.0
+VisualStudioVersion = 18.0.11217.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsAlphabet.ERP.Domain", "ParsAlphabet.ERP.Domain\ParsAlphabet.ERP.Domain.csproj", "{9509F230-EDDA-4DBF-A3BF-FA937A7A31F8}"
 EndProject
@@ -30,11 +30,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "migrations", "migrations", 
 		0001_create_schema_migrations.sql = 0001_create_schema_migrations.sql
 		0002_alter_spc_attender_insupd_nationalcode_15.sql = 0002_alter_spc_attender_insupd_nationalcode_15.sql
 		0003_alter_cr.Contact_nationalcode_15.sql = 0003_alter_cr.Contact_nationalcode_15.sql
+		0003_alter_mc.Spc_Admission_Search.sql = 0003_alter_mc.Spc_Admission_Search.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "post-deploy", "post-deploy", "{B9199ECB-97D9-456D-AFE9-8575DCFAFBB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rollback", "rollback", "{F099F994-0716-4023-8F19-63791DE4DA33}"
+	ProjectSection(SolutionItems) = preProject
+		0001_mc_Spc_Admission_Search.sql = 0001_mc_Spc_Admission_Search.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{ABDA8AE7-EBA6-4CF0-B056-7165D60D7D94}"
 	ProjectSection(SolutionItems) = preProject

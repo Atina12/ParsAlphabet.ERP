@@ -1225,10 +1225,10 @@ function checkInsurerTamin(referralTypeId) {
         if (insurerId === 8000)
             $("#nationalCode").attr("maxlength", "16");
         else
-            $("#nationalCode").attr("maxlength", "10");
+            $("#nationalCode").attr("maxlength", "15");
     }
     else if (referralTypeId === 2)
-        $("#nationalCode").attr("maxlength", "10");
+        $("#nationalCode").attr("maxlength", "15");
     else
         $("#nationalCode").attr("maxlength", "13");
 }
@@ -2808,11 +2808,16 @@ document.onkeydown = function (e) {
 };
 
 window.Parsley._validatorRegistry.validators.nationalcodeadmission = undefined
+
 window.Parsley.addValidator('nationalcodeadmission', {
     validateString: function (value) {
 
-        if (+$("#referralTypeId").val() === 5 || +$("#referralTypeId").val() === 4 || +$("#referralTypeId").val() === 6)
+        if ([4, 5, 6].includes(+$("#referralTypeId").val()))
             return true;
+
+        if (!value) return true;
+
+      
 
         return isValidIranianNationalCode(value);
     },
