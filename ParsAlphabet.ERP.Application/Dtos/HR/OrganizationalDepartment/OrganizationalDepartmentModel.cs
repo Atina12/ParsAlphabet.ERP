@@ -18,6 +18,6 @@ public class OrganizationalDepartmentModel : CompanyViewModel
     public string NameEng { get; set; }
 
     public bool IsActive { get; set; }
-
+    public int? ParentId { get; set; }
     [NotMapped] public string Opr => Id == 0 ? "Ins" : "Upd";
 }

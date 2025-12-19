@@ -22,8 +22,8 @@ public class DepartmentTimeShiftLineModel
     public int Id { get; set; }
     public int HeaderId { get; set; }
     public byte DayInWeek { get; set; }
-    public TimeSpan StartTime { get; set; }
-    public TimeSpan EndTime { get; set; }
+    public string StartTime { get; set; }
+    public string EndTime { get; set; }
     public int CreateUserId { get; set; }
     public DateTime CreateDateTime { get; set; } = DateTime.Now;
     public DateTime CurrentDateTime { get; set; } = DateTime.Now;

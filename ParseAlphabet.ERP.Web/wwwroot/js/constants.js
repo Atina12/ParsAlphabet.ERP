@@ -203,19 +203,19 @@ Object.freeze(maxValue);
 
 const admissionStage = {
 
-    admissionService: { id: 52, name: "پذیرش بهداشت" },
+    admissionService: { id: 52, name: "پذیرش صحت" },
     admissionSaleItem: { id: 54, name: "سفارش کالا" },
     admissionTaminPrescription: { id: 64, name: "پذیرش نسخه نویسی تامین اجتماعی" },
     admissionTaminParaClinic: { id: 65, name: "پذیرش نسخه پیچی تصویربرداری تامین اجتماعی" },
     admissionTaminLaboratory: { id: 211, name: "پذیرش نسخه پیچی آزمایشگاه تامین اجتماعی" },
 
-    admissionServiceMaster: {id: 219, name: "پذیرش نسخه نویسی و نسخه پیچی طرح درمان بهداشت" },
+    admissionServiceMaster: {id: 219, name: "پذیرش نسخه نویسی و نسخه پیچی طرح درمان صحت" },
     admissionSaleItemMaster: {id: 222, name: "سفارش کالا طرح  درمان" },
 
     admissionCashRecieve: { id: 66, name: "دریافت وجه درمان" },
     admissionCashPayment: { id: 67, name: "پرداخت وجه درمان" },
 
-    prescription: { id: 165, name: "نسخه نویسی بهداشت" },
+    prescription: { id: 165, name: "نسخه نویسی صحت" },
     prescriptionTamin: { id: 166, name: "نسخه نویسی تامین اجتماعی" },
     admissionImaging: { id: 169, name: "نسخه پیچی تصویربرداری" },
     refer: { id: 69, name: "ارجاع" },
@@ -292,7 +292,7 @@ const admissionTypesArray = [
     },
     {
         id: 2,
-        name: "خدمت / بهداشت",
+        name: "خدمت / صحت",
         color: "#ff89ba"
     },
     {

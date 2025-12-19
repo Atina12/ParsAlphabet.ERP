@@ -236,7 +236,7 @@
               <Name>Text9</Name>
               <Page isRef="4" />
               <Parent isRef="5" />
-              <Text>کدملی : </Text>
+              <Text>نمبرتذکره : </Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
               <Type>Expression</Type>

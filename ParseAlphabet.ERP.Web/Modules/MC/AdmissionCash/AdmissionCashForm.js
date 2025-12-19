@@ -142,7 +142,7 @@ function saveForm() {
                             modal_show(`printAdmissionModal`);
 
                         //else
-                        //navigation_item_click("/MC/Admission", "لیست پذیرش بهداشت");
+                        //navigation_item_click("/MC/Admission", "لیست پذیرش صحت");
                     }
                     //سفارش کالا
                     else if (admissionMasterType == 1) {
@@ -407,7 +407,7 @@ $("#printAdmissionModal").on("hidden.bs.modal", function (ev) {
     if (printUrl !== "")
         adm_print(admissionCashDetail.admissionId, admissionCashDetail.admissionMasterId, printUrl);
 
-    navigation_item_click("/MC/Admission", "لیست پذیرش بهداشت");
+    navigation_item_click("/MC/Admission", "لیست پذیرش صحت");
 
 });
 
@@ -590,7 +590,7 @@ function getStrRequest(request) {
         $("#emptyRow").remove();
     }
 
-    //ردیف - شناسه - کدملی - نام خانواگی - جریان کار - مرحله - قابل دریافت پرداخت - عملیات
+    //ردیف - شناسه - نمبرتذکره - نام خانواگی - جریان کار - مرحله - قابل دریافت پرداخت - عملیات
     requestStr += `
         <td id="col_${0}_${index}">${index + 1}</td>
         <td id="col_${1}_${index}" >${request.id}</td >
@@ -1153,7 +1153,7 @@ function buildAdmissionListForm(admissions, admissionMasterId) {
                     <tr>
                         <th class="col-width-percent-3">ردیف</th>
                         <th class="col-width-percent-6">شناسه</th>
-                        <th class="col-width-percent-8">کدملی</th>
+                        <th class="col-width-percent-8">نمبرتذکره</th>
                         <th class="col-width-percent-10">نام و  تخلص</th>
                         <th class="col-width-percent-19">جریان کار</th>
                         <th class="col-width-percent-18">مرحله</th>

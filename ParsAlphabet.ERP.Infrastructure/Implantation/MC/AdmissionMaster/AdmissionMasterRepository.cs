@@ -357,9 +357,9 @@ public class AdmissionMasterRepository(
                 };
 
 
-                var stageResultLog = await stageActionLogRepository.StageActionLogInsert(updateStepModel);
+                await stageActionLogRepository.StageActionLogInsert(updateStepModel);
 
-                var updateResult = await UpdateLastActionMaster(result.Id, stageAction.ActionId);
+                 await UpdateLastActionMaster(result.Id, stageAction.ActionId);
             }
         }
         else

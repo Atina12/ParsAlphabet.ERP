@@ -136,7 +136,7 @@ $("#partnerTypeIdCu").on("change", function () {
         $(($("#idDatePersianCu").parent().parent().children())[0]).text("تاریخ تولد");
         $("#idDatePersianCu").val("");
 
-        $(($("#idNumberCu").parent().parent().children())[0]).text("شماره شناسنامه");
+        $(($("#idNumberCu").parent().parent().children())[0]).text("تذکره کاغذی");
         $("#idNumberCu").parent().parent().addClass("displaynone");
 
        

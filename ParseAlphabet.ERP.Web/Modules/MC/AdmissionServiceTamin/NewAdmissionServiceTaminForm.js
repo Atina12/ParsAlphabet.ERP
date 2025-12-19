@@ -1698,7 +1698,7 @@ $("#searchPatient").on("click", function () {
                    <th class="col-width-percent-3">ردیف</th>
                                 <th class="col-width-percent-8">نوع مراجعه</th>
                                 <th class="col-width-percent-4">شناسه</th>
-                                <th class="col-width-percent-7">کدملی</th>
+                                <th class="col-width-percent-7">نمبرتذکره</th>
                                 <th class="col-width-percent-5">نام</th>
                                 <th class="col-width-percent-8"> تخلص</th>
                                 <th class="col-width-percent-4">تاریخ تولد</th>
@@ -2608,7 +2608,7 @@ function buildAdmissionListForm(admissions) {
                     <tr>
                         <th class="col-width-percent-3">ردیف</th>
                         <th class="col-width-percent-6">شناسه</th>
-                        <th class="col-width-percent-8">کدملی</th>
+                        <th class="col-width-percent-8">نمبرتذکره</th>
                         <th class="col-width-percent-18">نام و  تخلص</th>
                         <th class="col-width-percent-25">جریان کار</th>
                         <th class="col-width-percent-25">مرحله</th>
@@ -2860,7 +2860,7 @@ function buildAdmissionMasterInfo(request) {
         $("#emptyRow").remove();
     }
 
-    //ردیف - شناسه - کدملی - نام خانواگی - جریان کار - مرحله - قابل دریافت پرداخت - عملیات
+    //ردیف - شناسه - نمبرتذکره - نام خانواگی - جریان کار - مرحله - قابل دریافت پرداخت - عملیات
     requestStr += `
         <td id="col_${0}_${index}">${index + 1}</td>
         <td id="col_${1}_${index}" >${request.id}</td >

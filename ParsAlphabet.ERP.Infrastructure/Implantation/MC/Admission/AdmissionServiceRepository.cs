@@ -1063,7 +1063,7 @@ public class AdmissionServiceRepository(
                         CompanyId = model.CompanyId,
                         UserId = model.CreateUserId
                     };
-                    var resultLog = await stageActionLogRepository.StageActionLogInsert(stageActionModel);
+                    await stageActionLogRepository.StageActionLogInsert(stageActionModel);
 
                     var updateResult = await UpdateLastAction(model.AdmissionMasterId, result.Data.Id, 0,
                         stageAction.ActionId, model.PatientId, model.CreateUserId, model.CreateDateTime);

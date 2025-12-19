@@ -261,7 +261,7 @@
               <Name>Text6</Name>
               <Page isRef="4" />
               <Parent isRef="14" />
-              <Text>کدپستی</Text>
+              <Text>نمبرخانه(postalCode)</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
               <Type>Expression</Type>

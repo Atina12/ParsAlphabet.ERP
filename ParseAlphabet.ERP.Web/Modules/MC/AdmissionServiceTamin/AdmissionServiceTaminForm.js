@@ -1829,7 +1829,7 @@ async function getPatientByDeserveInfo(nationalCode) {
         return;
     }
     if (nationalCode.length < 10) {
-        linerAlertify("کدملی کمتر از 10 کاراکتر نمی تواند باشد", "warning");
+        linerAlertify("نمبرتذکره کمتر از 10 کاراکتر نمی تواند باشد", "warning");
         loadingAsync(false, "getDeserveInfo", "fas fa-users");
         $("#nationalCode").focus()
         return;
@@ -2161,7 +2161,7 @@ $("#searchPatient").on("click", function () {
                    <th class="col-width-percent-3">ردیف</th>
                                 <th class="col-width-percent-8">نوع مراجعه</th>
                                 <th class="col-width-percent-4">شناسه</th>
-                                <th class="col-width-percent-7">کدملی</th>
+                                <th class="col-width-percent-7">نمبرتذکره</th>
                                 <th class="col-width-percent-5">نام</th>
                                 <th class="col-width-percent-8"> تخلص</th>
                                 <th class="col-width-percent-4">تاریخ تولد</th>

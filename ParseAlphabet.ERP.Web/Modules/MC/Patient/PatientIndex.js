@@ -563,7 +563,7 @@ window.Parsley.addValidator("nationalcitizen", {
         return !(nationalCode == "" && citizenCode == "");
     },
     messages: {
-        en: 'نمبر تابعیت (خارجی ) یا کدملی نمی تواند خالی بماند'
+        en: 'نمبر تابعیت (خارجی ) یا نمبرتذکره نمی تواند خالی بماند'
     }
 });
 

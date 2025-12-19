@@ -134,8 +134,6 @@ public class AdmissionCounterApiController : ControllerBase
     public async Task<IEnumerable<AdmissionCounterPosDropDown>> AdmissionCounterPosGetDropDown()
     {
         var userId = UserClaims.GetUserId();
-        ;
-
         var result = await _admissionCounterRepository.AdmissionCounterPosGetDropDown(userId);
 
         return result;

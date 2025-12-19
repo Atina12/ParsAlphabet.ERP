@@ -1511,7 +1511,7 @@ public class AdmissionsRepository(
 
             model.CompanyId = UserClaims.GetCompanyId();
             model.CreateUserId = UserClaims.GetUserId();
-            ;
+        
 
             var counter = await admissionCounter.GetRecordByUserId(model.CreateUserId, model.CompanyId);
             model.BranchId = counter.Data.BranchId;
@@ -1571,7 +1571,7 @@ public class AdmissionsRepository(
                     OperatingSystem = userAgent.OS.NameAndVersion
                 };
 
-                var resultHistory = await history.Insert(historyModel);
+                await history.Insert(historyModel);
             }
 
 

@@ -76,12 +76,12 @@ public class DepartmentTimeShiftLineDelModel
     public int Id { get; set; }
     public int DepartmentShiftId { get; set; }
     public int UserId { get; set; }
-    public DateTime FromAppointmentDate { get; set; }
-    public DateTime ToAppointmentDate { get; set; }
+    public string FromAppointmentDate { get; set; }
+    public string ToAppointmentDate { get; set; }
     public TimeSpan FromTime { get; set; }
     public byte DayInWeek { get; set; }
     public string FormType { get; set; }
-    public bool IsLock { get; set; }
+    public bool? IsLock { get; set; }
 
     public int CreateUserId { get; set; }
     public DateTime CreateDateTime => DateTime.Now;

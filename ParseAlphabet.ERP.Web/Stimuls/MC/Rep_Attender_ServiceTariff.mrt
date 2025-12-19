@@ -290,7 +290,7 @@
               <Name>Text16</Name>
               <Page isRef="4" />
               <Parent isRef="13" />
-              <Text>کدملی خدمت</Text>
+              <Text>نمبرتذکره خدمت</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
               <Type>Expression</Type>

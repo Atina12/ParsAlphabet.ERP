@@ -999,20 +999,17 @@ public class AttenderRepository :
     public async Task<MyDropDownViewModel> GetAttenderMsc(int id, int CompanyId)
     {
         var sQuery = "pb.Spc_Tables_GetList";
-        var result = new MyDropDownViewModel();
-        using (var conn = Connection)
-        {
-            conn.Open();
-            result = await Connection.QueryFirstOrDefaultAsync<MyDropDownViewModel>(sQuery,
-                new
-                {
-                    TableName = "mc.Attender",
-                    IdColumnName = "MSC_TypeId",
-                    TitleColumnName = "MSC",
-                    Filter = $"Id={id} AND CompanyId={CompanyId}"
-                }, commandType: CommandType.StoredProcedure);
-            conn.Close();
-        }
+        using var conn = Connection;
+        conn.Open();
+        var result = await Connection.QueryFirstOrDefaultAsync<MyDropDownViewModel>(sQuery,
+            new
+            {
+                TableName = "mc.Attender",
+                IdColumnName = "MSC_TypeId",
+                TitleColumnName = "MSC",
+                Filter = $"Id={id} AND CompanyId={CompanyId}"
+            }, commandType: CommandType.StoredProcedure);
+        conn.Close();
 
         return result;
     }

@@ -82,7 +82,7 @@ $("#partnerTypeIdVe").on("change", function () {
         $(($("#idDatePersianVe").parent().parent().children())[0]).text("تاریخ تولد");
         $("#idDatePersianVe").val("");
 
-        $(($("#idNumberVe").parent().parent().children())[0]).text("شماره شناسنامه");
+        $(($("#idNumberVe").parent().parent().children())[0]).text("تذکره کاغذی");
         $("#idNumberVe").parent().parent().addClass("displaynone");
 
         $("#jobTitleVeContainer").removeClass("displaynone");

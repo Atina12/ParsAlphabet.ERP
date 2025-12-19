@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ParsAlphabet.ERP.Domain.Entities;
+
+public partial class AdmissionDiagnosis
+{
+    public int HeaderId { get; set; }
+
+    public byte RowNumber { get; set; }
+
+    public byte? StatusId { get; set; }
+
+    public int? DiagnosisResonId { get; set; }
+
+    public byte? ServerityId { get; set; }
+
+    public string Comment { get; set; }
+
+    public DateTime? CreateDateTime { get; set; }
+}

@@ -1,1 +1,1 @@
-Scaffold-DbContext "Server=.;Database=ERP;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/DatabaseEntities -ContextDir Data -Context ERPContext -f
+Scaffold-DbContext "Server=.;Database=ERP;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -ContextDir Data -Context ERPContext -f

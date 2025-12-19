@@ -38,6 +38,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rollback", "rollback", "{F099F994-0716-4023-8F19-63791DE4DA33}"
 	ProjectSection(SolutionItems) = preProject
 		0001_mc_Spc_Admission_Search.sql = 0001_mc_Spc_Admission_Search.sql
+		0002_Spc_AdmissionService_GetPage.sql = 0002_Spc_AdmissionService_GetPage.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{ABDA8AE7-EBA6-4CF0-B056-7165D60D7D94}"

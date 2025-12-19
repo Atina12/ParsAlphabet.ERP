@@ -148,7 +148,7 @@
               <Name>Text7</Name>
               <Page isRef="4" />
               <Parent isRef="5" />
-              <Text>صورتحساب پرونده مراجعه کننده (بهداشت)</Text>
+              <Text>صورتحساب پرونده مراجعه کننده (صحت)</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>

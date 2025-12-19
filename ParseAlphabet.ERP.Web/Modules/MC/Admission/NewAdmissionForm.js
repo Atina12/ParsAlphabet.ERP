@@ -467,7 +467,7 @@ function saveAdmission() {
 
 
     if (isActivePatient == false) {
-        msg_s = alertify.warning("وضعیت این کدملی غیر فعال می باشد ، امکان ذخیره وجود ندارد.");
+        msg_s = alertify.warning("وضعیت این نمبرتذکره غیر فعال می باشد ، امکان ذخیره وجود ندارد.");
         msg_s.delay(admission.delay);
         return;
     }
@@ -3498,7 +3498,7 @@ function buildAdmissionMasterInfo(request) {
         $("#emptyRow").remove();
     }
 
-    //ردیف - شناسه - کدملی - نام خانواگی - جریان کار - مرحله - قابل دریافت پرداخت - عملیات
+    //ردیف - شناسه - نمبرتذکره - نام خانواگی - جریان کار - مرحله - قابل دریافت پرداخت - عملیات
     requestStr += `
         <td id="col_${0}_${index}">${index + 1}</td>
         <td id="col_${1}_${index}" >${request.id}</td >
@@ -4014,7 +4014,7 @@ function buildAdmissionListForm(admissions) {
                     <tr>
                         <th class="col-width-percent-3">ردیف</th>
                         <th class="col-width-percent-6">شناسه</th>
-                        <th class="col-width-percent-8">کدملی</th>
+                        <th class="col-width-percent-8">نمبرتذکره</th>
                         <th class="col-width-percent-18">نام و  تخلص</th>
                         <th class="col-width-percent-25">جریان کار</th>
                         <th class="col-width-percent-25">مرحله</th>

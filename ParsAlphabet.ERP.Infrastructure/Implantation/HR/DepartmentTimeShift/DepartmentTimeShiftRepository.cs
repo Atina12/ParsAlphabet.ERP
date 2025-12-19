@@ -550,8 +550,8 @@ public class DepartmentTimeShiftRepository :
             {
                 model.Id,
                 DepartmentTimeShiftId = model.HeaderId,
-                model.StartTime,
-                model.EndTime,
+                StartTime=TimeSpan.Parse(model.StartTime),
+                EndTime=TimeSpan.Parse(model.EndTime),
                 model.DayInWeek,
                 model.CreateUserId,
                 model.CreateDateTime,
@@ -587,8 +587,8 @@ public class DepartmentTimeShiftRepository :
                     select new UpdateRangeTimeScheduleBlock
                     {
                         CentralId = s.CentralId.Value,
-                        StartTime = model.StartTime,
-                        EndTime = model.EndTime
+                        StartTime =TimeSpan.Parse(model.StartTime),
+                        EndTime =TimeSpan.Parse(model.EndTime)
                     }).ToList();
 
             if (Extensions.ListHasRow(updateModel))
@@ -902,8 +902,8 @@ public class DepartmentTimeShiftRepository :
             null,
             model.DayInWeek,
             null,
-            model.FromAppointmentDate,
-            model.ToAppointmentDate,
+            DateTime.Parse(model.FromAppointmentDate),
+            DateTime.Parse(model.ToAppointmentDate),
             null,
             model.FromTime,
             model.FormType
@@ -971,7 +971,7 @@ public class DepartmentTimeShiftRepository :
                 var centralIds = string.Join(',', centralIdList);
                 var centralModel = new ChangeLockScheduleBlock();
                 centralModel.CentralIds = centralIds;
-                centralModel.Locked = !model.IsLock;
+                centralModel.Locked = !model.IsLock??false;
                 centralModel.LockDateTime = DateTime.Now;
 
                 await _attenderScheduleBlockServiceCentral.ChangeLock(centralModel);

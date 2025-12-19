@@ -314,7 +314,7 @@
               <Name>Text19</Name>
               <Page isRef="4" />
               <Parent isRef="14" />
-              <Text>کدپستی</Text>
+              <Text>نمبرخانه(postalCode)</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=True, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
               <Type>Expression</Type>

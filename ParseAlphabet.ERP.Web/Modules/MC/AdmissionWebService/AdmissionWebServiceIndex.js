@@ -1456,7 +1456,7 @@ var fillTableInsurerreimbursement = (arr_Insurerre) => {
         else if (typeInsuerre == "ihio")
             typeInsuerre = "بیمه سلامت ";
         else
-            typeInsuerre = "کد های تخصیص داده شده از سوی وزارت بهداشت";
+            typeInsuerre = "کد های تخصیص داده شده از سوی وزارت صحت";
 
         var emptyRow = $("#tempInsurerreimbursementList").find("#emptyRow");
 

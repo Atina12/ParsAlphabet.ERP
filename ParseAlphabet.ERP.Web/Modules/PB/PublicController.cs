@@ -139,7 +139,7 @@ public class PublicApiController(PublicRepository publicRepository) : Controller
     {
         object parseMonthId = id == "null" ? null : id;
 
-        var result = _publicRepository.MonthGetDropDown((int?)parseMonthId);
+        var result = _publicRepository.MonthGetDropDown(int.Parse((string)parseMonthId));
         return result;
     }
 

@@ -197,7 +197,7 @@ function requestServiceOrItemBuild(result) {
                             <th style="width:17rem">نوع مراجعه</th>
                             <th style="width:20rem">بیمه اجباری</th>
                             <th style="width:20rem">صندوق بیمه اجباری</th>
-                            <th style="width:10rem">کدملی/نمبر تابعیت (خارجی )</th>
+                            <th style="width:10rem">نمبرتذکره/نمبر تابعیت (خارجی )</th>
                             <th style="width:20rem">بیمه تکمیلی</th>
                             <th style="width:20rem">صندوق بیمه تکمیلی</th>
                             <th style="width:20rem">طرف قرارداد</th>
@@ -243,7 +243,7 @@ function requestServiceOrServiceBuild(result) {
                             <th style="width:8rem">تاریخ نسخه</th>                        
                             <th style="width:25rem">بیمه اجباری</th>
                             <th style="width:25rem">صندوق بیمه اجباری</th>
-                            <th style="width:10rem">کدملی/نمبر تابعیت (خارجی )</th>
+                            <th style="width:10rem">نمبرتذکره/نمبر تابعیت (خارجی )</th>
                             <th style="width:25rem">بیمه تکمیلی</th>
                             <th style="width:25rem">صندوق بیمه تکمیلی</th>
                             <th style="width:25rem">طرف قرارداد</th>
@@ -306,7 +306,7 @@ function requestServiceOrServiceTaminBuild(result) {
                             <th style="width:7rem">زمان رزرو</th>
                             <th style="width:25rem">بیمه اجباری</th>
                             <th style="width:25rem">صندوق بیمه اجباری</th>
-                            <th style="width:10rem">کدملی/نمبر تابعیت (خارجی )</th>
+                            <th style="width:10rem">نمبرتذکره/نمبر تابعیت (خارجی )</th>
                             <th style="width:25rem">بیمه تکمیلی</th>
                             <th style="width:25rem">صندوق بیمه تکمیلی</th>
                             <th style="width:25rem">طرف قرارداد</th>
@@ -360,7 +360,7 @@ function requestServiceOrServiceTaminPrescriptionBuild(result) {
                             <th style="width:7rem">زمان رزرو</th>
                             <th style="width:25rem">بیمه اجباری</th>
                             <th style="width:25rem">صندوق بیمه اجباری</th>
-                            <th style="width:10rem">کدملی/نمبر تابعیت (خارجی )</th>
+                            <th style="width:10rem">نمبرتذکره/نمبر تابعیت (خارجی )</th>
                             <th style="width:25rem">بیمه تکمیلی</th>
                             <th style="width:25rem">صندوق بیمه تکمیلی</th>
                             <th style="width:25rem">طرف قرارداد</th>

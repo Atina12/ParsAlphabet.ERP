@@ -390,20 +390,18 @@ public class AdmissionCashRepository :
     public async Task<IEnumerable<AdmissionCashGrouByFundType>> GetAdmissionCashGroupByFundType(
         GetAdmissionCashGrouByFundType model)
     {
-        using (var conn = Connection)
-        {
-            var sQuery = "[mc].[Spc_AdmissionCashGroupByFundType]";
-            conn.Open();
-            var result = await conn.QueryAsync<AdmissionCashGrouByFundType>(sQuery,
-                new
-                {
-                    model.CreateDate,
-                    model.UserId
-                }, commandType: CommandType.StoredProcedure);
-            conn.Close();
+        using var conn = Connection;
+        var sQuery = "[mc].[Spc_AdmissionCashGroupByFundType]";
+        conn.Open();
+        var result = await conn.QueryAsync<AdmissionCashGrouByFundType>(sQuery,
+            new
+            {
+                model.CreateDate,
+                model.UserId
+            }, commandType: CommandType.StoredProcedure);
+        conn.Close();
 
-            return result;
-        }
+        return result;
     }
 
 

@@ -96,7 +96,7 @@
               <Name>Text7</Name>
               <Page isRef="4" />
               <Parent isRef="5" />
-              <Text>پذیرش مراجعه کننده - {IIF(Spc_Admission_Print_Compress.AdmissionTypeId==2,"بهداشت",IIF(Spc_Admission_Print_Compress.AdmissionTypeId==3,"تامین",""))}</Text>
+              <Text>پذیرش مراجعه کننده - {IIF(Spc_Admission_Print_Compress.AdmissionTypeId==2,"صحت",IIF(Spc_Admission_Print_Compress.AdmissionTypeId==3,"تامین",""))}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -166,7 +166,7 @@
               <Name>Text31</Name>
               <Page isRef="4" />
               <Parent isRef="5" />
-              <Text>پذیرش مراجعه کننده - {IIF(Spc_Admission_Print_Compress.AdmissionTypeId==2,"بهداشت",IIF(Spc_Admission_Print_Compress.AdmissionTypeId==3,"تامین",""))}</Text>
+              <Text>پذیرش مراجعه کننده - {IIF(Spc_Admission_Print_Compress.AdmissionTypeId==2,"صحت",IIF(Spc_Admission_Print_Compress.AdmissionTypeId==3,"تامین",""))}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>

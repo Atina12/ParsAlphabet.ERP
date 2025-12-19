@@ -146,7 +146,7 @@
               <Name>Text50</Name>
               <Page isRef="4" />
               <Parent isRef="5" />
-              <Text>پذیرش مراجعه کننده - {IIF(Spc_Admission_Print.AdmissionTypeId==2,"بهداشت",IIF(Spc_Admission_Print.AdmissionTypeId==3,"تامین",""))}</Text>
+              <Text>پذیرش مراجعه کننده - {IIF(Spc_Admission_Print.AdmissionTypeId==2,"صحت",IIF(Spc_Admission_Print.AdmissionTypeId==3,"تامین",""))}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>

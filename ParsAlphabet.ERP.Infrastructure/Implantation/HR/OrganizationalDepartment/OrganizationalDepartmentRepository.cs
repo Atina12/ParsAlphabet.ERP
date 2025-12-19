@@ -158,22 +158,31 @@ public class OrganizationalDepartmentRepository :
 
     public async Task<MyResultQuery> Insert(OrganizationalDepartmentModel model)
     {
-        var result = new MyResultQuery();
-        using (var conn = Connection)
+        try
         {
-            var sQuery = "hr.Spc_OrganizationalDepartment_InsUpd";
-            conn.Open();
-            await conn.ExecuteAsync(sQuery, new
+            var result = new MyResultQuery();
+            using (var conn = Connection)
             {
-                Opr = "Ins",
-                Id = 0,
-                model.Name,
-                // model.NameEng,
-                model.IsActive,
-                model.CompanyId
-            }, commandType: CommandType.StoredProcedure);
-            result.Successfull = true;
-            return result;
+                var sQuery = "hr.Spc_OrganizationalDepartment_InsUpd";
+                conn.Open();
+                await conn.ExecuteAsync(sQuery, new
+                {
+                    Opr = "Ins",
+                    Id = 0,
+                    model.Name,
+                    model.ParentId,
+                    // model.NameEng,
+                    model.IsActive,
+                    model.CompanyId
+                }, commandType: CommandType.StoredProcedure);
+                result.Successfull = true;
+                return result;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
     }
 

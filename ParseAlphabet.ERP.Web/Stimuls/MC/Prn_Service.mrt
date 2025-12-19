@@ -260,7 +260,7 @@
               <Name>Text24</Name>
               <Page isRef="4" />
               <Parent isRef="14" />
-              <Text>کدملی</Text>
+              <Text>نمبرتذکره</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
               <Type>Expression</Type>
@@ -452,7 +452,7 @@
               <Name>Text19</Name>
               <Page isRef="4" />
               <Parent isRef="14" />
-              <Text>کدملی تامین اجتماعی</Text>
+              <Text>نمبرتذکره تامین اجتماعی</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,RightToLeft=True,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>

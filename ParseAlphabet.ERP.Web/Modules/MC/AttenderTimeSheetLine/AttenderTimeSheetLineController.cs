@@ -47,7 +47,6 @@ public class AttenderTimeSheetLineApiController(AttenderTimeSheetLineRepository 
         [FromBody] AttenderTimeSheetSaveViewModel model)
     {
         model.CreateUserId = UserClaims.GetUserId();
-        ;
         model.CompanyId = UserClaims.GetCompanyId();
         return await attenderTimeSheetLineRepository.SaveV1(model);
     }
