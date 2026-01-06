@@ -848,7 +848,7 @@ function fillAdmission(ad) {
     $("#educationLevelId").val(ad.educationLevelId).trigger("change")
     $("#fatherFirstName").val(ad.patientFatherFirstName)
 
-    debugger
+    
     if (checkResponse(ad.responsibleNationalCode))
         patientInsurer.responsibleNationalCode = ad.responsibleNationalCode
 
@@ -1284,7 +1284,7 @@ async function loadingAsync(loading, elementId, iconClass) {
 }
 
 function fillPatientByDeserveInfo(result, nationalCode) {
-    debugger
+    
     let isTamin = result.hasHealthDeserve;
     inqueryID = result.trackingCode;
     isGetDeserveInfo = true;
@@ -1358,7 +1358,7 @@ function addTempServiceAdm() {
     }
 
     if (!isGetDeserveInfo) {
-        debugger
+        
         console.log("مقدار", isGetDeserveInfo)
         msg_s = alertify.warning("استحقاق درمان انجام نشده");
         msg_s.delay(admission.delay);
@@ -2056,7 +2056,7 @@ $("#nationalCode").on("blur", function (eb) {
 });
 
 $("#nationalCode").on("input", function () {
-    debugger
+    
     $("#patientId").val("");
     $("#firstName").val("");
     $("#lastName").val("");
@@ -2072,7 +2072,7 @@ $("#nationalCode").on("input", function () {
     $("#maritalStatusId").val(-1).trigger("change");
     $("#educationLevelId").val(-1).trigger("change");
     $("#fatherFirstName").val("");
-    debugger
+    
     console.log("مقدار دیز", $(this));
     if ($(this).val() == "")
         isGetDeserveInfo = false;

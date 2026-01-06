@@ -181,7 +181,7 @@ public static class Enum
     {
         [Display(Name = "بدون دسته")] None = 99,
 
-        [Display(Name = "کارتخوان")] Pos = 100
+        [Display(Name = "دستگاه پوز")] Pos = 100
     }
 
     public enum IdentityTypePostingGroup : byte

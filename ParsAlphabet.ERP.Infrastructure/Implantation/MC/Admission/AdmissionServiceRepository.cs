@@ -1261,7 +1261,7 @@ public class AdmissionServiceRepository(
                 {
                     var patientInfo = await GetPatientInfo(id);
                     var sendSms = Sms.SendSMS(patientInfo.MobileNo,
-                        $"بیمار محترم آقای/خانم  {patientInfo.PatientFullName} {Environment.NewLine} نوبت شما به شماره پیگیری {patientInfo.TrackingCode}  در تاریخ {patientInfo.ReturnDateTimePersian} با موفقیت مرجوع گردید {Environment.NewLine} سیستم نوبت دهی وبسلا.");
+                        $"بیمار محترم آقای/خانم  {patientInfo.PatientFullName} {Environment.NewLine} نوبت شما به شماره پیگیری {patientInfo.TrackingCode}  در تاریخ {patientInfo.ReturnDateTimePersian} با موفقیت مرجوع گردید {Environment.NewLine} سیستم نوبت دهی ای اف کد.");
                 }
             }
 

@@ -487,7 +487,7 @@
               <Name>Text9</Name>
               <Page isRef="4" />
               <Parent isRef="15" />
-              <Text>کارتخوان</Text>
+              <Text>دستگاه پوز</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,RightToLeft=True,,,A=0</TextOptions>
               <Type>Expression</Type>

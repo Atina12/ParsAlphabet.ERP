@@ -1,4 +1,4 @@
-﻿const serviceProviderFullTitle = "سیستم برنامه ریزی منابع سازمانی وبسلا";
+﻿const serviceProviderFullTitle = "سیستم برنامه ریزی منابع سازمانی ای اف کد";
 
 const viewData_baseUrl_MC = "/api/MC";
 const viewData_baseUrl_GN = "/api/GN";

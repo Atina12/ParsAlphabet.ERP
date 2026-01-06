@@ -1891,7 +1891,7 @@
                             console.info(ILogger.LogLevel[logLevel] + ": " + message);
                             break;
                         default:
-                            // console.debug only goes to attached debuggers in Node, so we use console.log for Trace and Debug
+                            // console.debug only goes to attached s in Node, so we use console.log for Trace and Debug
                             console.log(ILogger.LogLevel[logLevel] + ": " + message);
                             break;
                     }
