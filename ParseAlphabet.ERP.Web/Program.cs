@@ -186,7 +186,7 @@ app.UseStaticFiles(new StaticFileOptions
     },
 
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(app.Environment.ContentRootPath, "Modules")),
+        Path.Combine(app.Environment.WebRootPath, "Modules")),
     RequestPath = "/Modules",
     ContentTypeProvider = new FileExtensionContentTypeProvider(
         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
