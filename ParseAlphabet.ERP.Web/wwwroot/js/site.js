@@ -971,7 +971,7 @@ function controller_check_authorize(controllerName, oprType, withAlert = true) {
         cache: false,
         data: JSON.stringify({ controllername: controllerName, oprtype: oprType }),
         success: function (result) {
-
+            debugger
             if (result.statusMessage == "LoginExpired") {
                 var msg = alertify.error(msg_loginexp_error);
                 msg.delay(alertify_delay);
@@ -981,11 +981,13 @@ function controller_check_authorize(controllerName, oprType, withAlert = true) {
             }
             else {
                 if (!result.successfull) {
+                    debugger
                     if (oprType == "VIWALL") {
                         withAlert = false;
                         check = false;
                     }
                     if (withAlert) {
+                        debugger
                         var msg = alertify.error(msg_access_error);
                         msg.delay(alertify_delay);
                     }
@@ -995,9 +997,11 @@ function controller_check_authorize(controllerName, oprType, withAlert = true) {
             }
         },
         error: function (xhr) {
+            debugger
             error_handler(xhr, p_url)
         }
     });
+    debugger
     return check;
 }
 

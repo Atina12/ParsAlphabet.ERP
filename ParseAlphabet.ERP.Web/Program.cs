@@ -14,6 +14,7 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using ParseAlphabet.ERP.Web.Redis;
 using DayOfWeek = System.DayOfWeek;
+using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -89,6 +90,10 @@ builder.Services.AddAuthentication(o =>
     o.ExpireTimeSpan = TimeSpan.FromDays(30);
     o.SlidingExpiration = true;
 });
+
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, "App_Data", "DataProtectionKeys")))
+    .SetApplicationName("ParseAlphabet.ERP.Web");
 
 //حل مشکل فارسی در ViewData[]
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));

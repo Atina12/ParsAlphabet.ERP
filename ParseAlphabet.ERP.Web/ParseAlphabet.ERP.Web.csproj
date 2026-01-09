@@ -1,101 +1,66 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Nullable>disable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Remove="Modules\SM\SalesPersonLine\**" />
-	  <Content Remove="Modules\SM\SalesPersonLine\**" />
-	  <EmbeddedResource Remove="Modules\SM\SalesPersonLine\**" />
-	  <None Remove="Modules\SM\SalesPersonLine\**" />
-	</ItemGroup>
+  <!-- اگر یک فولدر را کامل می‌خواهی حذف باشد (هم Build هم Publish) -->
+  <ItemGroup>
+    <Compile Remove="Modules\SM\SalesPersonLine\**" />
+    <Content Remove="Modules\SM\SalesPersonLine\**" />
+    <EmbeddedResource Remove="Modules\SM\SalesPersonLine\**" />
+    <None Remove="Modules\SM\SalesPersonLine\**" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Features" Version="8.0.3" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="ParsAlphabet.WebService.Api.Model" Version="1.0.0" />
-		<PackageReference Include="ParsAlphabetServicesModels" Version="1.1.79" />
-		<PackageReference Include="StackExchange.Redis" Version="2.7.33" />
-		<PackageReference Include="Stimulsoft.Reports.Web.NetCore" Version="2020.2.1" />
-		<PackageReference Include="Swagger-Net" Version="8.5.12.1" />
-		<PackageReference Include="WebMarkupMin.Core" Version="2.16.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
-		
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
 
-	</ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
-	<ItemGroup>
-		<ProjectReference Include="..\ParsAlphabet.ERP.Application\ParsAlphabet.ERP.Application.csproj" />
-		<ProjectReference Include="..\ParsAlphabet.ERP.Domain\ParsAlphabet.ERP.Domain.csproj" />
-		<ProjectReference Include="..\ParsAlphabet.ERP.External\ParsAlphabet.ERP.External.csproj" />
-		<ProjectReference Include="..\ParsAlphabet.ERP.Infrastructure\ParsAlphabet.ERP.Infrastructure.csproj" />
-	</ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
 
-	<ItemGroup>
-	  <Folder Include="Modules\GN\SendHistory\" />
-	  <Folder Include="Modules\MC\Insurer\" />
-	</ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Features" Version="8.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ParsAlphabet.WebService.Api.Model" Version="1.0.0" />
+    <PackageReference Include="ParsAlphabetServicesModels" Version="1.1.79" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+    <PackageReference Include="Stimulsoft.Reports.Web.NetCore" Version="2020.2.1" />
+    <PackageReference Include="Swagger-Net" Version="8.5.12.1" />
+    <PackageReference Include="WebMarkupMin.Core" Version="2.16.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <None Include="Modules\WH\ItemAttribute\ItemAttributeIndex.cshtml" />
-	  <None Include="Modules\WH\ItemBarcode\ItemBarcodeIndex.cshtml" />
-	  <None Include="Modules\WH\ItemCategoryAttribute\ItemCategoryAttributeIndex.cshtml" />
-	  <None Include="Modules\WH\ItemCategory\ItemCategoryIndex.cshtml" />
-	  <None Include="Modules\WH\ItemRequestCartable\ItemRequestCartableIndex.cshtml" />
-	  <None Include="Modules\WH\ItemRequestLine\ItemRequestLineIndex.cshtml" />
-	  <None Include="Modules\WH\ItemRequest\ItemRequestAddEdit.cshtml" />
-	  <None Include="Modules\WH\ItemRequest\ItemRequestDisplay.cshtml" />
-	  <None Include="Modules\WH\ItemRequest\ItemRequestIndex.cshtml" />
-	  <None Include="Modules\WH\ItemTransactionCartable\ItemTransactionActionIndex.cshtml" />
-	  <None Include="Modules\WH\ItemTransactionCartable\ItemTransactionCartableIndex.cshtml" />
-	  <None Include="Modules\WH\ItemTransactionLine\ItemTransactionLineIndex.cshtml" />
-	  <None Include="Modules\WH\ItemTransaction\ItemTransactionAddEdit.cshtml" />
-	  <None Include="Modules\WH\ItemTransaction\ItemTransactionDisplay.cshtml" />
-	  <None Include="Modules\WH\ItemTransaction\ItemTransactionIndex.cshtml" />
-	  <None Include="Modules\WH\ItemUnit\ItemUnitIndex.cshtml" />
-	  <None Include="Modules\WH\Item\ItemIndex.cshtml" />
-	  <None Include="Modules\WH\Item_WarehouseLine\Item_WarehouseLineIndex.cshtml" />
-	  <None Include="Modules\WH\Item_Warehouse\Item_WarehouseIndex.cshtml" />
-	  <None Include="Modules\WH\Report\ItemTransactionReport\ItemTransactionReportIndex.cshtml" />
-	  <None Include="Modules\WH\Report\ItemTransactionTrialBalancesReport\ItemTransactionTrialBalancesReportIndex.cshtml" />
-	  <None Include="Modules\WH\UnitCostCalculationLine\UnitCostCalculationLineIndex.cshtml" />
-	  <None Include="Modules\WH\UnitCostCalculation\UnitCostCalculationIndex.cshtml" />
-	  <None Include="Modules\WH\User_WarehouseLine\User_WarehouseLineIndex.cshtml" />
-	  <None Include="Modules\WH\User_Warehouse\User_WarehouseIndex.cshtml" />
-	  <None Include="Modules\WH\WareHouseDescription\WareHouseDescriptionIndex.cshtml" />
-	  <None Include="Modules\WH\WarehouseStageAction\WarehouseStageActionIndex.cshtml" />
-	  <None Include="Modules\WH\WarehouseStageItemType\WarehouseStageItemTypeIndex.cshtml" />
-	  <None Include="Modules\WH\WarehouseStage\WarehouseStageIndex.cshtml" />
-	  <None Include="Modules\WH\WarehouseTransactionSearch\WarehouseTransactionQuickSearchIndex.cshtml" />
-	  <None Include="Modules\WH\WarehouseTransactionSearch\_WarehouseTransactionQuickSearchIndex.cshtml" />
-	  <None Include="Modules\WH\WarehouseTransaction\WarehouseTransactionActionIndex.cshtml" />
-	  <None Include="Modules\WH\Warehouse\WarehouseIndex.cshtml" />
-	  <None Include="Modules\WH\WBin\BinIndex.cshtml" />
-	  <None Include="Modules\WH\Zone\ZoneIndex.cshtml" />
-	  <None Include="Views\Shared\Error.cshtml" />
-	  <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
-	  <None Include="Views\Shared\_Layout.cshtml" />
-	  <None Include="Views\Shared\_LoginLayout.cshtml" />
-	  <None Include="Views\Shared\_LoginLayout_Eng.cshtml" />
-	  <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-	  <None Include="Views\test\testIndex.cshtml" />
-	  <None Include="Views\_ViewImports.cshtml" />
-	  <None Include="Views\_ViewStart.cshtml" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParsAlphabet.ERP.Application\ParsAlphabet.ERP.Application.csproj" />
+    <ProjectReference Include="..\ParsAlphabet.ERP.Domain\ParsAlphabet.ERP.Domain.csproj" />
+    <ProjectReference Include="..\ParsAlphabet.ERP.External\ParsAlphabet.ERP.External.csproj" />
+    <ProjectReference Include="..\ParsAlphabet.ERP.Infrastructure\ParsAlphabet.ERP.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- پوشه Modules را هم در Debug/Run و هم در Publish کپی کن -->
+  <ItemGroup>
+    <!-- اگر فایل‌هایی داخل Modules به صورت Content باشند -->
+    <Content Update="Modules\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+
+    <!-- اگر فایل‌هایی داخل Modules به صورت None باشند (خیلی مهم) -->
+    <None Update="Modules\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
